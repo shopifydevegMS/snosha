@@ -1,0 +1,58 @@
+/*
+ * snosha.css — global project styles for session "snosha".
+ * Loaded once from snippets/stylesheets.liquid (after base.css).
+ * Every rule is anchored on a .snosha-* class that layout/theme.liquid adds to <body>
+ * only when the matching Theme setting is enabled, so the base theme is untouched otherwise.
+ * Values come from --snosha-* variables emitted in snippets/theme-styles-variables.liquid
+ * and snippets/color-palette.liquid — no hardcoded colors, fonts or sizes here.
+ */
+
+/* ==== snosha-page-width — global page width & margins (Theme settings → Page layout) ==== */
+/* --snosha-page-width is the total layout width including the page margins, which is what
+   Horizon's --page-width means. Content width = page width − 2 × desktop margin, so the
+   desktop margin is subtracted exactly once. The doubled class out-ranks base.css .page-width-*. */
+.snosha-page-width.snosha-page-width {
+  --page-margin: max(
+    var(--snosha-page-margin-mobile),
+    var(--safe-area-inset-left, 0px),
+    var(--safe-area-inset-right, 0px)
+  );
+  --page-content-width: calc(var(--snosha-page-width) - (var(--snosha-page-margin-desktop) * 2));
+}
+
+/* Native narrow-content containers (e.g. main-page .page-width-content) keep their own
+   content width and only follow the project margins. */
+.snosha-page-width .page-width-content {
+  --page-margin: max(
+    var(--snosha-page-margin-mobile),
+    var(--safe-area-inset-left, 0px),
+    var(--safe-area-inset-right, 0px)
+  );
+}
+
+@media screen and (min-width: 750px) {
+  .snosha-page-width.snosha-page-width,
+  .snosha-page-width .page-width-content {
+    --page-margin: max(
+      var(--snosha-page-margin-desktop),
+      var(--safe-area-inset-left, 0px),
+      var(--safe-area-inset-right, 0px)
+    );
+  }
+}
+
+/* ==== snosha-button-hover-shadow — primary button hover shadow (Theme settings → Buttons) ==== */
+/* Keeps the native inset border shadow and adds the configured drop shadow on hover.
+   Transparent icon buttons that reuse .button are excluded; disabled buttons keep native styling. */
+.snosha-button-hover-shadow
+  .button:not(
+    .button-secondary,
+    .button-unstyled,
+    .close-button,
+    .menu-drawer__back-button,
+    .variant-item__remove,
+    :disabled,
+    [aria-disabled='true']
+  ):hover {
+  box-shadow: inset 0 0 0 var(--button-border-width) var(--button-border-color), var(--snosha-button-hover-shadow);
+}

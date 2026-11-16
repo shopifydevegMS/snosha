@@ -35,6 +35,10 @@
   capture effective_primary_button_hover_background
     render 'util-palette-hover-shift', color: settings.palette_primary_button_background
   endcapture
+  # snosha: optional fixed hover background; empty keeps the automatic hover shift above
+  if settings.snosha_primary_button_hover_background != blank
+    assign effective_primary_button_hover_background = settings.snosha_primary_button_hover_background
+  endif
   if settings.palette_primary_button_background.alpha == 1
     assign primary_hover_background_has_alpha = false
   else
@@ -184,6 +188,9 @@
     --color-primary-button-hover-text: rgb({{ effective_primary_button_hover_text.rgba }});
     --color-primary-button-hover-background: {{ effective_primary_button_hover_background }};
     --color-primary-button-hover-border: {{ effective_primary_button_hover_border }};
+    {%- if settings.snosha_primary_button_hover_shadow_color != blank %}
+    --snosha-button-hover-shadow: 0 {{ settings.snosha_primary_button_hover_shadow_offset }}px {{ settings.snosha_primary_button_hover_shadow_blur }}px rgb({{ settings.snosha_primary_button_hover_shadow_color.rgba }});
+    {%- endif %}
 
     --color-secondary-button-text: rgb({{ settings.palette_secondary_button_text.rgba }});
     --color-secondary-button-background: rgb({{ settings.palette_secondary_button_background.rgba }});

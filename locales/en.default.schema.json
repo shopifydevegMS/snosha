@@ -1239,5 +1239,61 @@
     "when_will_order_arrive": "When will I get my order?",
     "where_are_products_made": "Where are your products manufactured?",
     "disclosures": "Disclosures"
+  },
+  "snosha_settings": {
+    "headers": {
+      "mobile_typography": "Mobile typography",
+      "page_width": "Custom page width",
+      "button_size": "Button size",
+      "button_hover": "Primary button hover"
+    },
+    "labels": {
+      "custom_font_enabled": "Use custom font",
+      "custom_font_url": "Google Fonts link",
+      "custom_font_family": "Font family",
+      "body_weight": "Body weight",
+      "subheading_weight": "Subheading weight",
+      "heading_weight": "Heading weight",
+      "accent_weight": "Accent weight",
+      "line_height_custom": "Custom line height",
+      "mobile_typography": "Use separate mobile sizes",
+      "paragraph_size": "Paragraph size",
+      "paragraph_line_height": "Paragraph line height",
+      "h1_size": "H1 size",
+      "h1_line_height": "H1 line height",
+      "h2_size": "H2 size",
+      "h2_line_height": "H2 line height",
+      "h3_size": "H3 size",
+      "h3_line_height": "H3 line height",
+      "h4_size": "H4 size",
+      "h4_line_height": "H4 line height",
+      "h5_size": "H5 size",
+      "h5_line_height": "H5 line height",
+      "h6_size": "H6 size",
+      "h6_line_height": "H6 line height",
+      "page_width_enabled": "Use custom page width",
+      "page_width": "Page width",
+      "page_margin_mobile": "Page margin on mobile",
+      "page_margin_desktop": "Page margin on tablet and desktop",
+      "button_padding_block": "Vertical padding",
+      "button_padding_inline": "Horizontal padding",
+      "hover_background": "Hover background",
+      "hover_shadow_color": "Hover shadow color",
+      "hover_shadow_offset": "Hover shadow offset",
+      "hover_shadow_blur": "Hover shadow blur"
+    },
+    "options": {
+      "custom": "Custom"
+    },
+    "info": {
+      "custom_font_enabled": "Loads one font from Google Fonts for all text and hides the font pickers. Turn off to use Shopify's font pickers again.",
+      "custom_font_url": "Paste the stylesheet link from Google Fonts, for example https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap",
+      "custom_font_family": "Paste the CSS rule from Google Fonts, for example font-family: \"Cairo\", sans-serif;",
+      "mobile_typography": "Applies below 750px. Tablet and desktop keep the preset sizes and line heights above.",
+      "page_width": "Total layout width including the page margins. Content width is the page width minus 2 × the tablet and desktop margin.",
+      "button_padding": "Applies to primary and secondary buttons. With mobile typography on, mobile vertical padding adjusts so buttons keep their desktop height. Default: 16px vertical and 24px horizontal.",
+      "hover_background": "Leave empty to use the automatic hover color.",
+      "hover_shadow": "Leave the color empty for no shadow."
+    }
   }
 }

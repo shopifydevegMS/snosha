@@ -12,6 +12,7 @@ Theme-specific details for each area are in the theme file under the T-heading n
 - Don't add settings with no merchant value. Reuse the theme's section scaffold (theme file → T8) instead of inventing new systems.
 - **Localization:** merchant-edited content needs no locale keys. Theme-owned UI strings use `{{ '<session>_ns.key' | t }}` — add **your own `<session>_` keys only**, to `en.default.json` first, then every peer locale with the identical path (missing peer → default-language fallback; a key only in a non-default locale never shows). Edits follow 05 §4–§5.
 - **Schema labels:** match the file you're editing (plain text vs `"t:"` keys); never reference a `t:` key that doesn't exist.
+- **Schema locale files (developer decision):** add or change `<session>_` schema keys **only** in `locales/en.default.schema.json` and `locales/ar.schema.json`. Never edit any other `locales/*.schema.json` file — other admin languages fall back to English. `MatchingTranslations` results from `shopify theme check` for those other schema locales are expected: report them, don't fix them.
 
 ## 2. Breakpoints and responsive
 

@@ -1132,5 +1132,61 @@
     "when_will_order_arrive": "متى سأستلم طلبي؟",
     "where_are_products_made": "أين تُصنع منتجاتكم؟",
     "disclosures": "الإفصاحات"
+  },
+  "snosha_settings": {
+    "headers": {
+      "mobile_typography": "الخطوط على الجوال",
+      "page_width": "عرض صفحة مخصص",
+      "button_size": "حجم الأزرار",
+      "button_hover": "تمرير المؤشر على الزر الأساسي"
+    },
+    "labels": {
+      "custom_font_enabled": "استخدام خط مخصص",
+      "custom_font_url": "رابط Google Fonts",
+      "custom_font_family": "عائلة الخط",
+      "body_weight": "وزن خط النص",
+      "subheading_weight": "وزن خط العنوان الفرعي",
+      "heading_weight": "وزن خط العناوين",
+      "accent_weight": "وزن الخط المميز",
+      "line_height_custom": "ارتفاع سطر مخصص",
+      "mobile_typography": "استخدام أحجام منفصلة للجوال",
+      "paragraph_size": "حجم الفقرة",
+      "paragraph_line_height": "ارتفاع سطر الفقرة",
+      "h1_size": "حجم H1",
+      "h1_line_height": "ارتفاع سطر H1",
+      "h2_size": "حجم H2",
+      "h2_line_height": "ارتفاع سطر H2",
+      "h3_size": "حجم H3",
+      "h3_line_height": "ارتفاع سطر H3",
+      "h4_size": "حجم H4",
+      "h4_line_height": "ارتفاع سطر H4",
+      "h5_size": "حجم H5",
+      "h5_line_height": "ارتفاع سطر H5",
+      "h6_size": "حجم H6",
+      "h6_line_height": "ارتفاع سطر H6",
+      "page_width_enabled": "استخدام عرض صفحة مخصص",
+      "page_width": "عرض الصفحة",
+      "page_margin_mobile": "هامش الصفحة على الجوال",
+      "page_margin_desktop": "هامش الصفحة على الجهاز اللوحي وسطح المكتب",
+      "button_padding_block": "الحشو الرأسي",
+      "button_padding_inline": "الحشو الأفقي",
+      "hover_background": "الخلفية عند التمرير",
+      "hover_shadow_color": "لون الظل عند التمرير",
+      "hover_shadow_offset": "إزاحة الظل عند التمرير",
+      "hover_shadow_blur": "تمويه الظل عند التمرير"
+    },
+    "options": {
+      "custom": "مخصص"
+    },
+    "info": {
+      "custom_font_enabled": "يحمّل خطًا واحدًا من Google Fonts لكل النصوص ويُخفي منتقيات الخطوط. أوقفه للعودة إلى منتقيات خطوط Shopify.",
+      "custom_font_url": "الصق رابط ملف الأنماط من Google Fonts، مثل https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap",
+      "custom_font_family": "الصق قاعدة CSS من Google Fonts، مثل font-family: \"Cairo\", sans-serif;",
+      "mobile_typography": "يُطبَّق على الشاشات الأصغر من 750px. يحتفظ الجهاز اللوحي وسطح المكتب بالأحجام وارتفاعات الأسطر أعلاه.",
+      "page_width": "العرض الكلي للتخطيط شاملًا هوامش الصفحة. عرض المحتوى يساوي عرض الصفحة ناقص ضعف هامش الجهاز اللوحي وسطح المكتب.",
+      "button_padding": "يُطبَّق على الأزرار الأساسية والثانوية. عند تفعيل خطوط الجوال، يتعدّل الحشو الرأسي على الجوال ليحتفظ الزر بارتفاعه على سطح المكتب. الافتراضي: 16px رأسيًا و24px أفقيًا.",
+      "hover_background": "اتركه فارغًا لاستخدام لون التمرير التلقائي.",
+      "hover_shadow": "اترك اللون فارغًا لإلغاء الظل."
+    }
   }
 }

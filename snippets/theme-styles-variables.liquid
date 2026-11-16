@@ -138,6 +138,12 @@
     --narrow-page-width: 90rem;
     --normal-page-width: 120rem;
     --wide-page-width: 150rem;
+    {%- if settings.snosha_page_width_enabled %}
+    /* snosha: custom page width = total layout width incl. page margins (applied in assets/snosha.css) */
+    --snosha-page-width: {{ settings.snosha_page_width }}px;
+    --snosha-page-margin-mobile: {{ settings.snosha_page_margin_mobile }}px;
+    --snosha-page-margin-desktop: {{ settings.snosha_page_margin_desktop }}px;
+    {%- endif %}
 
     /* Section Heights */
     --section-height-small: 15rem;
@@ -172,6 +178,26 @@
     --font-accent--family: {{ settings.type_accent_font.family }}, {{ settings.type_accent_font.fallback_families }};
     --font-accent--style: {{ settings.type_accent_font.style }};
     --font-accent--weight: {{ settings.type_accent_font.weight }};
+    {%- liquid
+      # snosha: full CSS value as copied from Google Fonts, e.g. font-family: "Cairo", sans-serif;
+      # the "font-family:" prefix and trailing ";" are optional; braces and angle brackets are stripped for safety
+      assign snosha_font_family = settings.snosha_custom_font_family | remove: 'font-family:' | remove: ';' | remove: '{' | remove: '}' | remove: '<' | remove: '>' | strip
+    -%}
+    {%- if settings.snosha_custom_font_enabled and snosha_font_family != blank %}
+    /* snosha: custom Google Font (link loaded in snippets/stylesheets.liquid) replaces the four picker fonts */
+    --font-body--family: {{ snosha_font_family }};
+    --font-body--style: normal;
+    --font-body--weight: {{ settings.snosha_custom_font_weight_body }};
+    --font-subheading--family: {{ snosha_font_family }};
+    --font-subheading--style: normal;
+    --font-subheading--weight: {{ settings.snosha_custom_font_weight_subheading }};
+    --font-heading--family: {{ snosha_font_family }};
+    --font-heading--style: normal;
+    --font-heading--weight: {{ settings.snosha_custom_font_weight_heading }};
+    --font-accent--family: {{ snosha_font_family }};
+    --font-accent--style: normal;
+    --font-accent--weight: {{ settings.snosha_custom_font_weight_accent }};
+    {%- endif %}
 
     /* Margin sizes */
     --font-heading--spacing: 0.25em;
@@ -343,9 +369,35 @@
         echo '--font-[preset_name]--family: var([preset_font]);' | replace: '[preset_name]', preset_name | replace: '[preset_font]', preset_font
         echo '--font-[preset_name]--style: var([preset_style]);' | replace: '[preset_name]', preset_name | replace: '[preset_style]', preset_style
         echo '--font-[preset_name]--case: [preset_case];' | replace: '[preset_name]', preset_name | replace: '[preset_case]', settings[preset_case]
-        echo '--font-[preset_name]--line-height: var(--line-height--[preset_line_height]);' | replace: '[preset_name]', preset_name | replace: '[preset_line_height]', settings[preset_line_height]
+        if settings[preset_line_height] == 'snosha-custom'
+          # snosha: custom line height in px from 'snosha_type_line_height_<preset>', output as a unitless ratio of the preset size
+          assign snosha_size_id = 'type_size_[preset_name]' | replace: '[preset_name]', preset_name
+          assign snosha_line_height_id = 'snosha_type_line_height_[preset_name]' | replace: '[preset_name]', preset_name
+          assign snosha_size = settings[snosha_size_id] | times: 1.0
+          # rounded up (never down) so the rendered line box is not snapped below the px value
+          assign snosha_line_height = settings[snosha_line_height_id] | times: 1.0 | divided_by: snosha_size | plus: 0.00005 | round: 4 | append: ''
+          echo '--font-[preset_name]--line-height: [value];' | replace: '[preset_name]', preset_name | replace: '[value]', snosha_line_height
+        else
+          echo '--font-[preset_name]--line-height: var(--line-height--[preset_line_height]);' | replace: '[preset_name]', preset_name | replace: '[preset_line_height]', settings[preset_line_height]
+        endif
       endfor
     %}
+    {%- if settings.snosha_mobile_typography %}
+    /* snosha: separate mobile sizes and line heights below 750px (tablet and desktop keep the presets above) */
+    @media screen and (max-width: 749px) {
+      {%- liquid
+        for preset_name in type_presets
+          assign snosha_mobile_size_id = 'snosha_type_size_[preset_name]_mobile' | replace: '[preset_name]', preset_name
+          assign snosha_mobile_line_height_id = 'snosha_type_line_height_[preset_name]_mobile' | replace: '[preset_name]', preset_name
+          assign snosha_mobile_size = settings[snosha_mobile_size_id] | times: 1.0
+          assign snosha_mobile_size_rem = snosha_mobile_size | divided_by: 16.0 | round: 4 | append: ''
+          assign snosha_mobile_line_height = settings[snosha_mobile_line_height_id] | times: 1.0 | divided_by: snosha_mobile_size | plus: 0.00005 | round: 4 | append: ''
+          echo '--font-size--[preset_name]: [value]rem;' | replace: '[preset_name]', preset_name | replace: '[value]', snosha_mobile_size_rem
+          echo '--font-[preset_name]--line-height: [value];' | replace: '[preset_name]', preset_name | replace: '[value]', snosha_mobile_line_height
+        endfor
+      -%}
+    }
+    {%- endif %}
 
     /* Hardcoded font sizes */
     --font-size--3xs: 0.625rem;
@@ -562,8 +614,31 @@
     /* Button size */
     --button-size-md: 36px;
     --button-size: var(--minimum-touch-target);
-    --button-padding-inline: 24px;
-    --button-padding-block: 16px;
+    --button-padding-inline: {{ settings.snosha_button_padding_inline | default: 24 }}px;
+    --button-padding-block: {{ settings.snosha_button_padding_block | default: 16 }}px;
+    {%- if settings.snosha_mobile_typography %}
+    {%- liquid
+      # snosha: buttons use the paragraph line box, so keep their desktop height on mobile by moving
+      # the line-box difference into the vertical padding (same "Vertical padding" control).
+      # Declared after the base value so this nested block wins the cascade.
+      assign snosha_paragraph_size = settings.type_size_paragraph | times: 1.0
+      case settings.type_line_height_paragraph
+        when 'snosha-custom'
+          assign snosha_paragraph_box = settings.snosha_type_line_height_paragraph | times: 1.0
+        when 'body-tight'
+          assign snosha_paragraph_box = snosha_paragraph_size | times: 1.2
+        when 'body-normal'
+          assign snosha_paragraph_box = snosha_paragraph_size | times: 1.4
+        else
+          assign snosha_paragraph_box = snosha_paragraph_size | times: 1.6
+      endcase
+      assign snosha_paragraph_box_mobile = settings.snosha_type_line_height_paragraph_mobile | times: 1.0
+      assign snosha_button_padding_mobile = snosha_paragraph_box | minus: snosha_paragraph_box_mobile | divided_by: 2.0 | plus: settings.snosha_button_padding_block | at_least: 0 | round: 2 | append: ''
+    -%}
+    @media screen and (max-width: 749px) {
+      --button-padding-block: {{ snosha_button_padding_mobile }}px;
+    }
+    {%- endif %}
 
     /* Button font: the accent font brings its own style and weight; body buttons keep the paragraph style and weight */
     {%- liquid
