@@ -1730,6 +1730,1271 @@
         "dev4_padding_bottom_mobile": 40,
         "dev4_shadow_color": "#0f64a81a"
       }
+    },
+    "dev1_reels": {
+      "type": "carousel",
+      "blocks": {
+        "static-header": {
+          "type": "group",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "center",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "dev1_reels_heading": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>اكتشف عالم SNOSHA</h2>",
+                "type_preset": "h2",
+                "font": "var(--font-body--family)",
+                "wrap": "pretty",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "text_color": "{{ settings.color_palette.snosha_deep_blue }}"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dev1_reels_heading"
+          ]
+        },
+        "static-carousel-content": {
+          "type": "_carousel-content",
+          "name": "t:names.carousel_content",
+          "static": true,
+          "settings": {
+            "position": "top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0,
+            "height": "fit"
+          },
+          "blocks": {
+            "dev1_reel_1": {
+              "type": "_card",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 12,
+                "background_media": "none",
+                "aspect_ratio": "adapt",
+                "toggle_overlay": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev1_reel_1_video": {
+                  "type": "video",
+                  "settings": {
+                    "source": "uploaded",
+                    "video_autoplay": false,
+                    "video_loop": false,
+                    "custom_width": 100,
+                    "custom_width_mobile": 100,
+                    "border": "none",
+                    "border_radius": 18
+                  },
+                  "blocks": {}
+                },
+                "dev1_reel_1_product": {
+                  "type": "reel-product",
+                  "settings": {
+                    "product": "snosha-n2",
+                    "title_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                    "price_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                    "thumbnail_border": "{{ settings.color_palette.color2 }}"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "dev1_reel_1_video",
+                "dev1_reel_1_product"
+              ]
+            },
+            "dev1_reel_2": {
+              "type": "_card",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 12,
+                "background_media": "none",
+                "aspect_ratio": "adapt",
+                "toggle_overlay": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev1_reel_2_video": {
+                  "type": "video",
+                  "settings": {
+                    "source": "uploaded",
+                    "video_autoplay": false,
+                    "video_loop": false,
+                    "custom_width": 100,
+                    "custom_width_mobile": 100,
+                    "border": "none",
+                    "border_radius": 18
+                  },
+                  "blocks": {}
+                },
+                "dev1_reel_2_product": {
+                  "type": "reel-product",
+                  "settings": {
+                    "product": "snosha-n2",
+                    "title_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                    "price_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                    "thumbnail_border": "{{ settings.color_palette.color2 }}"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "dev1_reel_2_video",
+                "dev1_reel_2_product"
+              ]
+            },
+            "dev1_reel_3": {
+              "type": "_card",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 12,
+                "background_media": "none",
+                "aspect_ratio": "adapt",
+                "toggle_overlay": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev1_reel_3_video": {
+                  "type": "video",
+                  "settings": {
+                    "source": "uploaded",
+                    "video_autoplay": false,
+                    "video_loop": false,
+                    "custom_width": 100,
+                    "custom_width_mobile": 100,
+                    "border": "none",
+                    "border_radius": 18
+                  },
+                  "blocks": {}
+                },
+                "dev1_reel_3_product": {
+                  "type": "reel-product",
+                  "settings": {
+                    "product": "snosha-f1",
+                    "title_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                    "price_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                    "thumbnail_border": "{{ settings.color_palette.color2 }}"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "dev1_reel_3_video",
+                "dev1_reel_3_product"
+              ]
+            },
+            "dev1_reel_4": {
+              "type": "_card",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 12,
+                "background_media": "none",
+                "aspect_ratio": "adapt",
+                "toggle_overlay": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev1_reel_4_video": {
+                  "type": "video",
+                  "settings": {
+                    "source": "uploaded",
+                    "video_autoplay": false,
+                    "video_loop": false,
+                    "custom_width": 100,
+                    "custom_width_mobile": 100,
+                    "border": "none",
+                    "border_radius": 18
+                  },
+                  "blocks": {}
+                },
+                "dev1_reel_4_product": {
+                  "type": "reel-product",
+                  "settings": {
+                    "product": "snosha-n2",
+                    "title_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                    "price_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                    "thumbnail_border": "{{ settings.color_palette.color2 }}"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "dev1_reel_4_video",
+                "dev1_reel_4_product"
+              ]
+            },
+            "dev1_reel_5": {
+              "type": "_card",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 12,
+                "background_media": "none",
+                "aspect_ratio": "adapt",
+                "toggle_overlay": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev1_reel_5_video": {
+                  "type": "video",
+                  "settings": {
+                    "source": "uploaded",
+                    "video_autoplay": false,
+                    "video_loop": false,
+                    "custom_width": 100,
+                    "custom_width_mobile": 100,
+                    "border": "none",
+                    "border_radius": 18
+                  },
+                  "blocks": {}
+                },
+                "dev1_reel_5_product": {
+                  "type": "reel-product",
+                  "settings": {
+                    "product": "snosha-f1",
+                    "title_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                    "price_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                    "thumbnail_border": "{{ settings.color_palette.color2 }}"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "dev1_reel_5_video",
+                "dev1_reel_5_product"
+              ]
+            }
+          },
+          "block_order": [
+            "dev1_reel_1",
+            "dev1_reel_2",
+            "dev1_reel_3",
+            "dev1_reel_4",
+            "dev1_reel_5"
+          ]
+        }
+      },
+      "name": "t:names.carousel",
+      "settings": {
+        "design": "dev1",
+        "columns": 5,
+        "mobile_columns": "1",
+        "section_width": "page-width",
+        "columns_gap": 24,
+        "background_color": "{{ settings.color_palette.background }}",
+        "icons_style": "none",
+        "icons_shape": "none",
+        "padding-block-start": 60,
+        "padding-block-end": 60,
+        "dev1_columns_tablet": 3,
+        "dev1_padding_mobile_top": 48,
+        "dev1_padding_mobile_bottom": 40,
+        "dev1_progress_track": "{{ settings.color_palette.color2 }}",
+        "dev1_progress_start": "{{ settings.color_palette.snosha_gradient_start }}",
+        "dev1_progress_end": "{{ settings.color_palette.snosha_gradient_end }}"
+      }
+    },
+    "dev3_bundle": {
+      "type": "section",
+      "blocks": {
+        "dev3_bundle_visual": {
+          "type": "bundle-visual",
+          "settings": {
+            "image": "",
+            "image_mobile": ""
+          },
+          "blocks": {
+            "dev3_bundle_hotspot_1": {
+              "type": "_bundle-hotspot",
+              "settings": {
+                "title": "Hotspot 1",
+                "enabled": true,
+                "x": 22,
+                "y": 64,
+                "x_mobile": 25,
+                "y_mobile": 68
+              },
+              "blocks": {}
+            },
+            "dev3_bundle_hotspot_2": {
+              "type": "_bundle-hotspot",
+              "settings": {
+                "title": "Hotspot 2",
+                "enabled": true,
+                "x": 51,
+                "y": 54,
+                "x_mobile": 53,
+                "y_mobile": 57
+              },
+              "blocks": {}
+            },
+            "dev3_bundle_hotspot_3": {
+              "type": "_bundle-hotspot",
+              "settings": {
+                "title": "Hotspot 3",
+                "enabled": true,
+                "x": 77,
+                "y": 68,
+                "x_mobile": 80,
+                "y_mobile": 71
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dev3_bundle_hotspot_1",
+            "dev3_bundle_hotspot_2",
+            "dev3_bundle_hotspot_3"
+          ]
+        },
+        "dev3_bundle_content": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 18,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "dev3_bundle_heading": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h2>باقات العناية المناسبة لروتينك</h2>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "h2",
+                "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                "background": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "dev3_bundle_description": {
+              "type": "text",
+              "settings": {
+                "text": "<p>كمّل روتينك في باقة واحدة بسعر أفضل، اختيارات متكاملة للعناية اليومية.</p>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "h5",
+                "text_color": "{{ settings.color_palette.color1 }}",
+                "background": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "dev3_bundle_items": {
+              "type": "group",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 0,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 8,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev3_bundle_item_1": {
+                  "type": "bundle-item",
+                  "settings": {
+                    "product": "",
+                    "subtitle": "فرشاة أسنان كهربائية بتقنية Sonic"
+                  },
+                  "blocks": {}
+                },
+                "dev3_bundle_item_2": {
+                  "type": "bundle-item",
+                  "settings": {
+                    "product": "",
+                    "subtitle": "جهاز تنظيف الأسنان بالماء"
+                  },
+                  "blocks": {}
+                },
+                "dev3_bundle_item_3": {
+                  "type": "bundle-item",
+                  "settings": {
+                    "product": "",
+                    "subtitle": "فرشاة أسنان كهربائية للأطفال"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "dev3_bundle_item_1",
+                "dev3_bundle_item_2",
+                "dev3_bundle_item_3"
+              ]
+            },
+            "dev3_bundle_offer": {
+              "type": "bundle-offer",
+              "settings": {
+                "product": "",
+                "total_label": "إجمالي الباندل",
+                "discount_label": "خصم [percent]%",
+                "button_label": "أضف الباندل للسلة"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dev3_bundle_heading",
+            "dev3_bundle_description",
+            "dev3_bundle_items",
+            "dev3_bundle_offer"
+          ]
+        }
+      },
+      "block_order": [
+        "dev3_bundle_visual",
+        "dev3_bundle_content"
+      ],
+      "name": "t:names.section",
+      "settings": {
+        "design": "dev3",
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 56,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 60,
+        "padding-block-end": 60,
+        "dev3_padding_top_mobile": 56,
+        "dev3_padding_bottom_mobile": 40
+      }
+    },
+    "dev4_blog": {
+      "type": "featured-blog-posts",
+      "name": "نصائح أذكى للعناية بفمك",
+      "blocks": {
+        "static-blog-title": {
+          "type": "_featured-blog-posts-title",
+          "static": true,
+          "settings": {
+            "text": "<h2>نصائح أذكى للعناية بفمك</h2>",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "center",
+            "type_preset": "h2",
+            "font": "var(--font-accent--family)",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "background": false,
+            "padding-block-start": 0,
+            "padding-block-end": 6,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          }
+        },
+        "static-blog-post-card": {
+          "type": "_featured-blog-posts-card",
+          "static": true,
+          "settings": {
+            "alignment": "left",
+            "gap": 8,
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "image": {
+              "type": "_featured-blog-posts-image",
+              "static": true,
+              "settings": {
+                "image_ratio": "landscape",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 16
+              }
+            },
+            "title": {
+              "type": "_heading",
+              "static": true,
+              "settings": {
+                "text": "<h4>{{ closest.article.title }}</h4>",
+                "type_preset": "h4",
+                "font": "var(--font-accent--family)",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                "show_alignment": false
+              }
+            },
+            "blog-post-info-text": {
+              "type": "_blog-post-info-text",
+              "static": true,
+              "settings": {
+                "show_date": true,
+                "show_author": false,
+                "type_preset": "h6",
+                "text_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                "show_alignment": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            },
+            "blog-post-description": {
+              "type": "_blog-post-description",
+              "static": true,
+              "settings": {
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.color1 }}",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              }
+            }
+          }
+        }
+      },
+      "settings": {
+        "design": "dev4",
+        "layout_type": "carousel",
+        "carousel_on_mobile": true,
+        "post_limit": 6,
+        "columns": 3,
+        "mobile_columns": "1",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 24,
+        "rows_gap": 24,
+        "icons_style": "chevron",
+        "icons_shape": "circle",
+        "section_width": "page-width",
+        "gap": 40,
+        "background_color": "",
+        "padding-block-start": 60,
+        "padding-block-end": 60,
+        "dev4_subtitle": "محتوى تعليمي عن العناية بالفم",
+        "dev4_read_more_label": "اقرأ المزيد",
+        "dev4_view_all_label": "عرض الكل",
+        "dev4_arrow_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19 12H5M11 18L5 12L11 6\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+        "dev4_columns_tablet": 2,
+        "dev4_padding_top_mobile": 56,
+        "dev4_padding_bottom_mobile": 40,
+        "dev4_title_color": "{{ settings.color_palette.snosha_deep_blue }}",
+        "dev4_subtitle_color": "{{ settings.color_palette.color1 }}",
+        "dev4_link_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+        "dev4_progress_track": "{{ settings.color_palette.color2 }}",
+        "dev4_progress_start": "{{ settings.color_palette.snosha_gradient_start }}",
+        "dev4_progress_end": "{{ settings.color_palette.snosha_gradient_end }}"
+      }
+    },
+    "dev2_choose_care": {
+      "type": "carousel",
+      "blocks": {
+        "static-header": {
+          "type": "group",
+          "static": true,
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "center",
+            "vertical_alignment": "center",
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 6,
+            "width": "fill",
+            "width_mobile": "fill",
+            "height": "fit",
+            "background_media": "none",
+            "border": "none",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "dev2_care_heading": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>اختار العناية المناسبة لاحتياجاتك</h2>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "center",
+                "type_preset": "h2",
+                "text_color": "{{ settings.color_palette.snosha_deep_blue }}"
+              },
+              "blocks": {}
+            },
+            "dev2_care_subtitle": {
+              "type": "text",
+              "settings": {
+                "text": "<p>ثلاث منتجات لروتين متكامل , اختار اللي يناسب احتياجك.</p>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "center",
+                "type_preset": "h5",
+                "text_color": "{{ settings.color_palette.color1 }}"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dev2_care_heading",
+            "dev2_care_subtitle"
+          ]
+        },
+        "static-carousel-content": {
+          "type": "_carousel-content",
+          "static": true,
+          "settings": {
+            "height": "fit",
+            "position": "center",
+            "border": "none",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "dev2_care_card_tongue": {
+              "type": "_card",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 0,
+                "background_media": "none",
+                "aspect_ratio": "adapt",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev2_care_tongue_product": {
+                  "type": "product-card",
+                  "settings": {
+                    "product": "snosha-tongue-cleaner",
+                    "product_card_gap": 16,
+                    "width": "fill",
+                    "width_mobile": "fill",
+                    "background_color": "{{ settings.color_palette.background }}",
+                    "border": "none",
+                    "border_radius": 24,
+                    "padding-block-start": 24,
+                    "padding-block-end": 24,
+                    "padding-inline-start": 24,
+                    "padding-inline-end": 24,
+                    "dev2_badge": "الأكثر مبيعًا"
+                  },
+                  "blocks": {
+                    "dev2_care_tongue_gallery": {
+                      "type": "_product-card-gallery",
+                      "settings": {
+                        "image_ratio": "landscape",
+                        "border": "solid",
+                        "border_width": 1,
+                        "border_opacity": 100,
+                        "border_color": "{{ settings.color_palette.color2 }}",
+                        "border_radius": 16
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_tongue_title": {
+                      "type": "product-title",
+                      "settings": {
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "text_color": "{{ settings.color_palette.foreground }}"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_tongue_description": {
+                      "type": "text",
+                      "settings": {
+                        "text": "{{ closest.product.description }}",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "text_color": "{{ settings.color_palette.color1 }}"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_tongue_spec_1": {
+                      "type": "spec-badge",
+                      "settings": {
+                        "layout": "row",
+                        "label": "يزيل مصدر 90% من رائحة الفم",
+                        "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z\"/><path d=\"M19 17L19.7 18.8L21.5 19.5L19.7 20.2L19 22L18.3 20.2L16.5 19.5L18.3 18.8L19 17Z\"/></svg>"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_tongue_spec_2": {
+                      "type": "spec-badge",
+                      "settings": {
+                        "layout": "row",
+                        "label": "فولاذ مقاوم للصدأ 420J2",
+                        "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(2 2)\" stroke-width=\"1.7\"><path d=\"M10 2.08L16.25 4.58V8.92C16.25 13.42 13.08 16.42 10 17.5C6.92 16.42 3.75 13.42 3.75 8.92V4.58L10 2.08Z\"/><path d=\"M7.17 9.92L9.17 11.92L13 7.92\"/></g></svg>"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_tongue_spec_3": {
+                      "type": "spec-badge",
+                      "settings": {
+                        "layout": "row",
+                        "label": "تصميم مزدوج: فرشاة + مكشطة",
+                        "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><defs><path id=\"spec-brush-head-shape\" d=\"M0.01 3.71L0.02 5.74C0.02 5.83 0.06 5.91 0.12 5.97C0.18 6.04 0.26 6.07 0.35 6.07L9.61 6.03C9.64 6.03 9.67 6.04 9.7 6.05L11.13 6.72C11.52 6.91 11.95 7 12.38 7L23.67 6.95C23.75 6.95 23.84 6.91 23.9 6.85C23.96 6.79 24 6.7 24 6.62L23.99 4.58C23.99 4.4 23.84 4.25 23.65 4.25H22.81L22.79 0.33C22.79 0.15 22.64 0 22.45 0L18.41 0.02L16.22 0.03L13.76 0.04C13.57 0.04 13.42 0.19 13.42 0.38L13.44 4.3H12.36C12.33 4.3 12.3 4.3 12.27 4.28L10.84 3.61C10.45 3.43 10.02 3.33 9.59 3.33L0.33 3.37C0.15 3.37 0 3.53 0 3.71L0.01 3.71ZM15.89 0.7L15.9 2.74C15.9 2.83 15.94 2.91 16 2.97C16.06 3.04 16.14 3.07 16.24 3.07C16.42 3.07 16.57 2.92 16.57 2.73L16.56 0.69H18.08L18.09 2.73C18.09 2.82 18.13 2.9 18.19 2.96C18.25 3.03 18.33 3.06 18.42 3.06C18.61 3.06 18.76 2.91 18.76 2.72L18.75 0.68H20.27L20.28 2.72C20.28 2.81 20.31 2.89 20.37 2.95C20.44 3.02 20.52 3.05 20.61 3.05C20.79 3.05 20.94 2.9 20.94 2.71L20.93 0.67H22.12L22.13 4.25L14.11 4.29L14.09 0.7L15.88 0.69L15.89 0.7ZM9.61 4C9.94 4 10.27 4.07 10.57 4.22L12 4.89C12.12 4.94 12.25 4.97 12.37 4.97L23.33 4.92V6.28L12.38 6.33C12.06 6.33 11.72 6.26 11.42 6.12L9.99 5.45C9.87 5.39 9.75 5.36 9.62 5.36L0.69 5.41V4.05L9.61 4.01L9.61 4Z\"/><mask id=\"spec-brush-head-mask\"><use href=\"#spec-brush-head-shape\" fill=\"#fff\"/></mask></defs><g transform=\"translate(0 8.5)\"><use href=\"#spec-brush-head-shape\"/><use href=\"#spec-brush-head-shape\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" mask=\"url(#spec-brush-head-mask)\"/></g></svg>"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_tongue_spec_4": {
+                      "type": "spec-badge",
+                      "settings": {
+                        "layout": "row",
+                        "label": "حافظة سفر + ضمان سنة",
+                        "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g transform=\"translate(2 2)\" stroke-width=\"1.7\"><path d=\"M3.33 6.83L10 3.75L16.67 6.83V13.42L10 16.5L3.33 13.42V6.83Z\"/><path d=\"M3.33 6.83L10 9.83L16.67 6.83\"/><path d=\"M10 9.83V16.42\"/><path d=\"M16.5 2.17L17 3.42L18.25 3.92L17 4.42L16.5 5.67L16 4.42L14.75 3.92L16 3.42L16.5 2.17Z\" fill=\"#60C1E1\" stroke=\"none\"/></g></svg>"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_tongue_price": {
+                      "type": "price",
+                      "settings": {
+                        "show_sale_price_first": true,
+                        "show_installments": false,
+                        "show_tax_info": false,
+                        "width": "100%",
+                        "alignment": "left",
+                        "text_color": "{{ settings.color_palette.foreground }}",
+                        "dev1_show_discount": true,
+                        "dev1_discount_background": "{{ settings.color_palette.snosha_pale_tint }}",
+                        "dev1_discount_border": "{{ settings.color_palette.color2 }}",
+                        "dev1_discount_text": "{{ settings.color_palette.snosha_secondary_blue }}"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_tongue_link": {
+                      "type": "_product-card-link",
+                      "settings": {
+                        "label": "عرض المنتج"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "dev2_care_tongue_gallery",
+                    "dev2_care_tongue_title",
+                    "dev2_care_tongue_description",
+                    "dev2_care_tongue_spec_1",
+                    "dev2_care_tongue_spec_2",
+                    "dev2_care_tongue_spec_3",
+                    "dev2_care_tongue_spec_4",
+                    "dev2_care_tongue_price",
+                    "dev2_care_tongue_link"
+                  ]
+                }
+              },
+              "block_order": [
+                "dev2_care_tongue_product"
+              ]
+            },
+            "dev2_care_card_n2": {
+              "type": "_card",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 0,
+                "background_media": "none",
+                "aspect_ratio": "adapt",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev2_care_n2_product": {
+                  "type": "product-card",
+                  "settings": {
+                    "product": "snosha-n2",
+                    "product_card_gap": 16,
+                    "width": "fill",
+                    "width_mobile": "fill",
+                    "background_color": "{{ settings.color_palette.background }}",
+                    "border": "none",
+                    "border_radius": 24,
+                    "padding-block-start": 24,
+                    "padding-block-end": 24,
+                    "padding-inline-start": 24,
+                    "padding-inline-end": 24,
+                    "dev2_badge": "الأكثر مبيعًا"
+                  },
+                  "blocks": {
+                    "dev2_care_n2_gallery": {
+                      "type": "_product-card-gallery",
+                      "settings": {
+                        "image_ratio": "landscape",
+                        "border": "solid",
+                        "border_width": 1,
+                        "border_opacity": 100,
+                        "border_color": "{{ settings.color_palette.color2 }}",
+                        "border_radius": 16
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_n2_title": {
+                      "type": "product-title",
+                      "settings": {
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "text_color": "{{ settings.color_palette.foreground }}"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_n2_description": {
+                      "type": "text",
+                      "settings": {
+                        "text": "{{ closest.product.description }}",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "text_color": "{{ settings.color_palette.color1 }}"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_n2_spec_1": {
+                      "type": "spec-badge",
+                      "settings": {
+                        "layout": "row",
+                        "label": "حتى 42,000 حركة/دقيقة",
+                        "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6.5 13.5C7.33 13.5 8 12.83 8 12C8 11.17 7.33 10.5 6.5 10.5C5.67 10.5 5 11.17 5 12C5 12.83 5.67 13.5 6.5 13.5Z\" fill=\"currentColor\" stroke=\"none\"/><path d=\"M10.5 8.5C11.42 9.43 11.93 10.69 11.93 12C11.93 13.31 11.42 14.57 10.5 15.5\"/><path d=\"M14 5.5C15.65 7.26 16.57 9.59 16.57 12C16.57 14.41 15.65 16.74 14 18.5\"/></svg>"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_n2_spec_2": {
+                      "type": "spec-badge",
+                      "settings": {
+                        "layout": "row",
+                        "label": "5 أوضاع تنظيف",
+                        "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 7H14M18 7H20M4 17H8M12 17H20\"/><path d=\"M18 7C18 8.1 17.1 9 16 9C14.9 9 14 8.1 14 7C14 5.9 14.9 5 16 5C17.1 5 18 5.9 18 7Z\"/><path d=\"M12 17C12 18.1 11.1 19 10 19C8.9 19 8 18.1 8 17C8 15.9 8.9 15 10 15C11.1 15 12 15.9 12 17Z\"/></svg>"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_n2_spec_3": {
+                      "type": "spec-badge",
+                      "settings": {
+                        "layout": "row",
+                        "label": "بطارية حتى 120 يوم بالشحنة",
+                        "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M5.5 7H16.5C17.88 7 19 8.12 19 9.5V14.5C19 15.88 17.88 17 16.5 17H5.5C4.12 17 3 15.88 3 14.5V9.5C3 8.12 4.12 7 5.5 7Z\"/><path d=\"M21.5 10.5V13.5\"/><path d=\"M6.5 10.5V13.5M10 10.5V13.5M13.5 10.5V13.5\"/></svg>"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_n2_spec_4": {
+                      "type": "spec-badge",
+                      "settings": {
+                        "layout": "row",
+                        "label": "مقاوم للماء IPX7",
+                        "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3C12 3 18 9.5 18 14C18 15.59 17.37 17.12 16.24 18.24C15.12 19.37 13.59 20 12 20C10.41 20 8.88 19.37 7.76 18.24C6.63 17.12 6 15.59 6 14C6 9.5 12 3 12 3Z\"/><path d=\"M9.5 14.5C9.5 15.16 9.76 15.8 10.23 16.27C10.7 16.74 11.34 17 12 17\"/></svg>"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_n2_spec_5": {
+                      "type": "spec-badge",
+                      "settings": {
+                        "layout": "row",
+                        "label": "8 رؤوس DuPont",
+                        "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><defs><path id=\"spec-brush-head-shape\" d=\"M0.01 3.71L0.02 5.74C0.02 5.83 0.06 5.91 0.12 5.97C0.18 6.04 0.26 6.07 0.35 6.07L9.61 6.03C9.64 6.03 9.67 6.04 9.7 6.05L11.13 6.72C11.52 6.91 11.95 7 12.38 7L23.67 6.95C23.75 6.95 23.84 6.91 23.9 6.85C23.96 6.79 24 6.7 24 6.62L23.99 4.58C23.99 4.4 23.84 4.25 23.65 4.25H22.81L22.79 0.33C22.79 0.15 22.64 0 22.45 0L18.41 0.02L16.22 0.03L13.76 0.04C13.57 0.04 13.42 0.19 13.42 0.38L13.44 4.3H12.36C12.33 4.3 12.3 4.3 12.27 4.28L10.84 3.61C10.45 3.43 10.02 3.33 9.59 3.33L0.33 3.37C0.15 3.37 0 3.53 0 3.71L0.01 3.71ZM15.89 0.7L15.9 2.74C15.9 2.83 15.94 2.91 16 2.97C16.06 3.04 16.14 3.07 16.24 3.07C16.42 3.07 16.57 2.92 16.57 2.73L16.56 0.69H18.08L18.09 2.73C18.09 2.82 18.13 2.9 18.19 2.96C18.25 3.03 18.33 3.06 18.42 3.06C18.61 3.06 18.76 2.91 18.76 2.72L18.75 0.68H20.27L20.28 2.72C20.28 2.81 20.31 2.89 20.37 2.95C20.44 3.02 20.52 3.05 20.61 3.05C20.79 3.05 20.94 2.9 20.94 2.71L20.93 0.67H22.12L22.13 4.25L14.11 4.29L14.09 0.7L15.88 0.69L15.89 0.7ZM9.61 4C9.94 4 10.27 4.07 10.57 4.22L12 4.89C12.12 4.94 12.25 4.97 12.37 4.97L23.33 4.92V6.28L12.38 6.33C12.06 6.33 11.72 6.26 11.42 6.12L9.99 5.45C9.87 5.39 9.75 5.36 9.62 5.36L0.69 5.41V4.05L9.61 4.01L9.61 4Z\"/><mask id=\"spec-brush-head-mask\"><use href=\"#spec-brush-head-shape\" fill=\"#fff\"/></mask></defs><g transform=\"translate(0 8.5)\"><use href=\"#spec-brush-head-shape\"/><use href=\"#spec-brush-head-shape\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" mask=\"url(#spec-brush-head-mask)\"/></g></svg>"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_n2_spec_6": {
+                      "type": "spec-badge",
+                      "settings": {
+                        "layout": "row",
+                        "label": "مؤقت ذكي دقيقتان",
+                        "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M19.5 13C19.5 17.14 16.14 20.5 12 20.5C7.86 20.5 4.5 17.14 4.5 13C4.5 8.86 7.86 5.5 12 5.5C16.14 5.5 19.5 8.86 19.5 13Z\"/><path d=\"M12 9.5V13L14.5 14.5\"/><path d=\"M10 3H14M12 3V5.5\"/></svg>"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_n2_price": {
+                      "type": "price",
+                      "settings": {
+                        "show_sale_price_first": true,
+                        "show_installments": false,
+                        "show_tax_info": false,
+                        "width": "100%",
+                        "alignment": "left",
+                        "text_color": "{{ settings.color_palette.foreground }}",
+                        "dev1_show_discount": true,
+                        "dev1_discount_background": "{{ settings.color_palette.snosha_pale_tint }}",
+                        "dev1_discount_border": "{{ settings.color_palette.color2 }}",
+                        "dev1_discount_text": "{{ settings.color_palette.snosha_secondary_blue }}"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_n2_link": {
+                      "type": "_product-card-link",
+                      "settings": {
+                        "label": "عرض المنتج"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "dev2_care_n2_gallery",
+                    "dev2_care_n2_title",
+                    "dev2_care_n2_description",
+                    "dev2_care_n2_spec_1",
+                    "dev2_care_n2_spec_2",
+                    "dev2_care_n2_spec_3",
+                    "dev2_care_n2_spec_4",
+                    "dev2_care_n2_spec_5",
+                    "dev2_care_n2_spec_6",
+                    "dev2_care_n2_price",
+                    "dev2_care_n2_link"
+                  ]
+                }
+              },
+              "block_order": [
+                "dev2_care_n2_product"
+              ]
+            },
+            "dev2_care_card_f1": {
+              "type": "_card",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 0,
+                "background_media": "none",
+                "aspect_ratio": "adapt",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev2_care_f1_product": {
+                  "type": "product-card",
+                  "settings": {
+                    "product": "snosha-f1",
+                    "product_card_gap": 16,
+                    "width": "fill",
+                    "width_mobile": "fill",
+                    "background_color": "{{ settings.color_palette.background }}",
+                    "border": "none",
+                    "border_radius": 24,
+                    "padding-block-start": 24,
+                    "padding-block-end": 24,
+                    "padding-inline-start": 24,
+                    "padding-inline-end": 24,
+                    "dev2_badge": ""
+                  },
+                  "blocks": {
+                    "dev2_care_f1_gallery": {
+                      "type": "_product-card-gallery",
+                      "settings": {
+                        "image_ratio": "landscape",
+                        "border": "solid",
+                        "border_width": 1,
+                        "border_opacity": 100,
+                        "border_color": "{{ settings.color_palette.color2 }}",
+                        "border_radius": 16
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_f1_title": {
+                      "type": "product-title",
+                      "settings": {
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "text_color": "{{ settings.color_palette.foreground }}"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_f1_description": {
+                      "type": "text",
+                      "settings": {
+                        "text": "{{ closest.product.description }}",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "text_color": "{{ settings.color_palette.color1 }}"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_f1_spec_1": {
+                      "type": "spec-badge",
+                      "settings": {
+                        "layout": "row",
+                        "label": "خزان ماء 330 مل",
+                        "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8.5 3H15.5V6.5C15.95 6.86 16.32 7.32 16.58 7.84C16.84 8.35 16.98 8.92 17 9.5V19C17 19.53 16.79 20.04 16.41 20.41C16.04 20.79 15.53 21 15 21H9C8.47 21 7.96 20.79 7.59 20.41C7.21 20.04 7 19.53 7 19V9.5C7.02 8.92 7.16 8.35 7.42 7.84C7.68 7.32 8.05 6.86 8.5 6.5V3Z\"/><path d=\"M7 14H17\"/></svg>"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_f1_spec_2": {
+                      "type": "spec-badge",
+                      "settings": {
+                        "layout": "row",
+                        "label": "4 أوضاع تنظيف",
+                        "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 7H14M18 7H20M4 17H8M12 17H20\"/><path d=\"M18 7C18 8.1 17.1 9 16 9C14.9 9 14 8.1 14 7C14 5.9 14.9 5 16 5C17.1 5 18 5.9 18 7Z\"/><path d=\"M12 17C12 18.1 11.1 19 10 19C8.9 19 8 18.1 8 17C8 15.9 8.9 15 10 15C11.1 15 12 15.9 12 17Z\"/></svg>"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_f1_spec_3": {
+                      "type": "spec-badge",
+                      "settings": {
+                        "layout": "row",
+                        "label": "4 رؤوس متخصصة",
+                        "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><defs><path id=\"spec-brush-head-shape\" d=\"M0.01 3.71L0.02 5.74C0.02 5.83 0.06 5.91 0.12 5.97C0.18 6.04 0.26 6.07 0.35 6.07L9.61 6.03C9.64 6.03 9.67 6.04 9.7 6.05L11.13 6.72C11.52 6.91 11.95 7 12.38 7L23.67 6.95C23.75 6.95 23.84 6.91 23.9 6.85C23.96 6.79 24 6.7 24 6.62L23.99 4.58C23.99 4.4 23.84 4.25 23.65 4.25H22.81L22.79 0.33C22.79 0.15 22.64 0 22.45 0L18.41 0.02L16.22 0.03L13.76 0.04C13.57 0.04 13.42 0.19 13.42 0.38L13.44 4.3H12.36C12.33 4.3 12.3 4.3 12.27 4.28L10.84 3.61C10.45 3.43 10.02 3.33 9.59 3.33L0.33 3.37C0.15 3.37 0 3.53 0 3.71L0.01 3.71ZM15.89 0.7L15.9 2.74C15.9 2.83 15.94 2.91 16 2.97C16.06 3.04 16.14 3.07 16.24 3.07C16.42 3.07 16.57 2.92 16.57 2.73L16.56 0.69H18.08L18.09 2.73C18.09 2.82 18.13 2.9 18.19 2.96C18.25 3.03 18.33 3.06 18.42 3.06C18.61 3.06 18.76 2.91 18.76 2.72L18.75 0.68H20.27L20.28 2.72C20.28 2.81 20.31 2.89 20.37 2.95C20.44 3.02 20.52 3.05 20.61 3.05C20.79 3.05 20.94 2.9 20.94 2.71L20.93 0.67H22.12L22.13 4.25L14.11 4.29L14.09 0.7L15.88 0.69L15.89 0.7ZM9.61 4C9.94 4 10.27 4.07 10.57 4.22L12 4.89C12.12 4.94 12.25 4.97 12.37 4.97L23.33 4.92V6.28L12.38 6.33C12.06 6.33 11.72 6.26 11.42 6.12L9.99 5.45C9.87 5.39 9.75 5.36 9.62 5.36L0.69 5.41V4.05L9.61 4.01L9.61 4Z\"/><mask id=\"spec-brush-head-mask\"><use href=\"#spec-brush-head-shape\" fill=\"#fff\"/></mask></defs><g transform=\"translate(0 8.5)\"><use href=\"#spec-brush-head-shape\"/><use href=\"#spec-brush-head-shape\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" mask=\"url(#spec-brush-head-mask)\"/></g></svg>"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_f1_spec_4": {
+                      "type": "spec-badge",
+                      "settings": {
+                        "layout": "row",
+                        "label": "ضغط ماء 30–120 PSI",
+                        "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><g transform=\"translate(3 3)\"><path d=\"M9.06 1.2C9.02 1.15 8.95 1.11 8.87 1.11C8.79 1.11 8.72 1.14 8.67 1.19C8.56 1.32 5.87 4.22 5.87 6.48C5.87 8.15 7.21 9.51 8.86 9.51C10.51 9.51 11.86 8.15 11.86 6.48C11.86 4.44 9.18 1.33 9.06 1.2ZM8.86 8.98C7.51 8.98 6.41 7.86 6.41 6.49C6.41 4.77 8.24 2.51 8.86 1.79C9.11 2.09 9.56 2.68 10.01 3.35C10.87 4.65 11.32 5.74 11.32 6.49C11.32 7.86 10.22 8.98 8.86 8.98Z\"/><path d=\"M10.01 3.35C9.56 2.67 9.11 2.09 8.86 1.78C8.24 2.5 6.41 4.77 6.41 6.48C6.41 7.86 7.51 8.97 8.86 8.97C10.22 8.97 11.32 7.85 11.32 6.48C11.32 5.73 10.87 4.65 10.01 3.35ZM8.67 8.49H8.64C7.73 8.39 6.99 7.64 6.89 6.73C6.87 6.58 6.97 6.44 7.12 6.43C7.27 6.41 7.4 6.52 7.42 6.66C7.5 7.34 8.03 7.88 8.7 7.96C8.84 7.97 8.95 8.11 8.93 8.26C8.92 8.39 8.8 8.49 8.67 8.49H8.67Z\"/><path d=\"M5.16 7.48C5.25 7.48 5.34 7.48 5.42 7.47C5.57 7.45 5.68 7.32 5.66 7.18C5.65 7.03 5.51 6.92 5.37 6.94C5.3 6.95 5.23 6.95 5.16 6.95C3.98 6.95 3.02 5.98 3.02 4.78C3.02 3.3 4.58 1.34 5.15 0.68C5.47 1.07 6.13 1.92 6.63 2.82C6.7 2.95 6.87 3 6.99 2.93C7.12 2.85 7.17 2.69 7.1 2.56C6.38 1.27 5.4 0.14 5.36 0.09C5.31 0.04 5.24 0 5.16 0C5.09 0 5.02 0.03 4.97 0.08C4.87 0.19 2.48 2.77 2.48 4.78C2.48 6.27 3.68 7.49 5.16 7.49V7.48Z\"/><path d=\"M10.82 2.92C10.94 3 11.11 2.95 11.18 2.83C11.66 2 12.26 1.27 12.56 0.92C12.78 1.2 13.17 1.69 13.55 2.27C14.31 3.42 14.71 4.37 14.71 5.03C14.71 6.22 13.74 7.2 12.56 7.2C12.49 7.2 12.41 7.19 12.34 7.18C12.19 7.17 12.06 7.27 12.04 7.42C12.03 7.57 12.13 7.7 12.28 7.72C12.38 7.73 12.47 7.73 12.57 7.73C14.04 7.73 15.24 6.52 15.24 5.03C15.24 3.21 12.87 0.46 12.77 0.34C12.72 0.28 12.65 0.25 12.57 0.25C12.5 0.25 12.43 0.28 12.38 0.33C12.34 0.37 11.43 1.35 10.73 2.56C10.65 2.69 10.69 2.85 10.82 2.93L10.82 2.92Z\"/><path d=\"M17.72 16.67L16.06 9.25C16.04 9.13 15.93 9.05 15.8 9.05H14.1C13.95 9.05 13.83 9.17 13.83 9.31C13.83 9.46 13.95 9.58 14.1 9.58H15.59L17.13 16.46H0.6L2.14 9.58H3.63C3.78 9.58 3.9 9.46 3.9 9.31C3.9 9.17 3.78 9.05 3.63 9.05H1.93C1.8 9.05 1.69 9.13 1.66 9.25L0.01 16.67C-0.01 16.75 0.01 16.84 0.06 16.9C0.11 16.96 0.18 17 0.26 17H17.46C17.54 17 17.62 16.96 17.67 16.9C17.72 16.84 17.74 16.75 17.72 16.67H17.72Z\"/><path d=\"M4.96 9.53C4.81 9.53 4.69 9.65 4.69 9.8V12.86L3.89 11.87C3.8 11.76 3.63 11.74 3.51 11.83C3.4 11.93 3.38 12.1 3.47 12.21L4.75 13.79C4.8 13.85 4.88 13.89 4.96 13.89C5.04 13.89 5.11 13.85 5.16 13.79L6.44 12.21C6.53 12.1 6.52 11.93 6.4 11.83C6.29 11.74 6.12 11.76 6.02 11.87L5.22 12.86V9.8C5.22 9.65 5.11 9.53 4.96 9.53Z\"/><path d=\"M8.86 10.95C8.72 10.95 8.6 11.07 8.6 11.21V14.27L7.79 13.28C7.7 13.17 7.53 13.15 7.42 13.24C7.3 13.33 7.28 13.51 7.38 13.62L8.66 15.2C8.71 15.26 8.78 15.3 8.86 15.3C8.94 15.3 9.02 15.26 9.07 15.2L10.35 13.62C10.44 13.51 10.43 13.34 10.31 13.24C10.2 13.15 10.03 13.17 9.93 13.28L9.13 14.27V11.21C9.13 11.07 9.01 10.95 8.86 10.95Z\"/><path d=\"M12.77 9.53C12.62 9.53 12.5 9.65 12.5 9.8V12.87L11.69 11.87C11.59 11.76 11.43 11.74 11.31 11.84C11.19 11.93 11.18 12.1 11.27 12.22L12.56 13.79C12.61 13.85 12.69 13.89 12.77 13.89C12.85 13.89 12.93 13.85 12.98 13.79L14.27 12.22C14.36 12.1 14.35 11.93 14.23 11.84C14.11 11.74 13.95 11.76 13.85 11.87L13.04 12.87V9.8C13.04 9.65 12.92 9.53 12.77 9.53Z\"/></g></svg>"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_f1_price": {
+                      "type": "price",
+                      "settings": {
+                        "show_sale_price_first": true,
+                        "show_installments": false,
+                        "show_tax_info": false,
+                        "width": "100%",
+                        "alignment": "left",
+                        "text_color": "{{ settings.color_palette.foreground }}",
+                        "dev1_show_discount": true,
+                        "dev1_discount_background": "{{ settings.color_palette.snosha_pale_tint }}",
+                        "dev1_discount_border": "{{ settings.color_palette.color2 }}",
+                        "dev1_discount_text": "{{ settings.color_palette.snosha_secondary_blue }}"
+                      },
+                      "blocks": {}
+                    },
+                    "dev2_care_f1_link": {
+                      "type": "_product-card-link",
+                      "settings": {
+                        "label": "عرض المنتج"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "dev2_care_f1_gallery",
+                    "dev2_care_f1_title",
+                    "dev2_care_f1_description",
+                    "dev2_care_f1_spec_1",
+                    "dev2_care_f1_spec_2",
+                    "dev2_care_f1_spec_3",
+                    "dev2_care_f1_spec_4",
+                    "dev2_care_f1_price",
+                    "dev2_care_f1_link"
+                  ]
+                }
+              },
+              "block_order": [
+                "dev2_care_f1_product"
+              ]
+            }
+          },
+          "block_order": [
+            "dev2_care_card_tongue",
+            "dev2_care_card_n2",
+            "dev2_care_card_f1"
+          ]
+        }
+      },
+      "settings": {
+        "design": "dev2",
+        "columns": 3,
+        "mobile_columns": "1",
+        "section_width": "page-width",
+        "columns_gap": 40,
+        "background_color": "{{ settings.color_palette.snosha_off_white }}",
+        "icons_style": "none",
+        "padding-block-start": 60,
+        "padding-block-end": 60,
+        "dev2_featured_product": "snosha-n2",
+        "dev2_accent_start": "{{ settings.color_palette.snosha_gradient_start }}",
+        "dev2_accent_end": "{{ settings.color_palette.snosha_gradient_end }}",
+        "dev2_background_end": "{{ settings.color_palette.color2 }}"
+      }
     }
   },
   "order": [
@@ -1738,6 +3003,10 @@
     "product_list_fa6P9H",
     "dev2_f1_banner",
     "dev3_featured_bundles",
-    "dev4_before_after"
+    "dev4_before_after",
+    "dev1_reels",
+    "dev2_choose_care",
+    "dev3_bundle",
+    "dev4_blog"
   ]
 }

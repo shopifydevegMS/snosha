@@ -1232,7 +1232,17 @@
     "padding_mobile_info": "للشاشات الأصغر من 750px. القيمة 0 تُبقي المسافة التلقائية للقالب على الجوال.",
     "discount_header": "شارة الخصم",
     "show_discount": "إظهار شارة الخصم",
-    "show_discount_info": "في بطاقات المنتجات فقط. تظهر عندما يكون سعر المقارنة أعلى من السعر."
+    "show_discount_info": "في بطاقات المنتجات فقط. تظهر عندما يكون سعر المقارنة أعلى من السعر.",
+    "design_2": "Design 2",
+    "design_2_header": "Design 2",
+    "colors_header_2": "ألوان Design 2",
+    "poster_image": "صورة الغلاف",
+    "poster_image_info": "تظهر قبل تشغيل الفيديو. اتركها فارغة لاستخدام صورة المعاينة الخاصة بالفيديو.",
+    "reel_product": "منتج الريل",
+    "product": "المنتج",
+    "title_color": "لون العنوان",
+    "price_color": "لون السعر",
+    "thumbnail_border": "حدود الصورة المصغرة"
   },
   "dev2_settings": {
     "design": "التصميم",
@@ -1265,7 +1275,19 @@
     "border_color": "الحد",
     "icon_background_start": "بداية خلفية الأيقونة",
     "icon_background_end": "نهاية خلفية الأيقونة",
-    "colors_default_info": "اتركه فارغًا لاستخدام ألوان القسم."
+    "colors_default_info": "اتركه فارغًا لاستخدام ألوان القسم.",
+    "design_3": "Design 3",
+    "care_header": "Design 3 — بطاقات المنتجات",
+    "featured_product": "المنتج المميز",
+    "featured_product_info": "تحصل بطاقة هذا المنتج على الإطار المميز، وتبقى مع المنتج عند إعادة ترتيب البطاقات. تُضبط شارة كل بطاقة من إعداد الشارة في بطاقة المنتج نفسها.",
+    "background_end": "نهاية تدرّج الخلفية",
+    "background_end_info": "يتدرّج لون خلفية القسم إلى هذا اللون.",
+    "spec_layout": "التخطيط",
+    "spec_layout_badge": "شارة",
+    "spec_layout_row": "صف",
+    "icon_color": "لون الأيقونة",
+    "card_badge": "الشارة",
+    "card_badge_info": "في قسم الكاروسيل بالتصميم Design 3 فقط: تظهر على صورة هذه البطاقة. اتركها فارغة لإخفاء الشارة."
   },
   "dev4_settings": {
     "design": "التصميم",
@@ -1305,7 +1327,17 @@
     "icon_color": "لون الأيقونة",
     "tile_color": "لون خلفية الأيقونة",
     "tile_border_color": "إطار خلفية الأيقونة",
-    "description_color": "لون الوصف"
+    "description_color": "لون الوصف",
+    "blog_subtitle": "العنوان الفرعي",
+    "view_all_label": "نص رابط عرض الكل",
+    "view_all_info": "يفتح المدونة المختارة. يظهر بجانب العنوان على سطح المكتب وأسفل العرض على الجوال.",
+    "read_more_label": "نص اقرأ المزيد",
+    "arrow_svg": "أيقونة السهم (كود SVG)",
+    "arrow_svg_info": "الصق كود SVG. اتركه فارغًا لإخفاء السهم. يُستخدم في رابطي اقرأ المزيد وعرض الكل.",
+    "link_color": "لون الروابط",
+    "subtitle_color": "لون العنوان الفرعي",
+    "title_color": "لون العناوين",
+    "title_color_info": "عنوان القسم وعناوين المقالات."
   },
   "dev3_settings": {
     "design": "التصميم",
@@ -1313,6 +1345,10 @@
     "design_dev3": "Design 1",
     "background": "تدرج الخلفية",
     "background_mobile": "تدرج الخلفية على الجوال",
-    "background_mobile_info": "يُستخدم على الشاشات الأصغر من 990px. اتركه فارغًا لاستخدام تدرج الخلفية."
+    "background_mobile_info": "يُستخدم على الشاشات الأصغر من 990px. اتركه فارغًا لاستخدام تدرج الخلفية.",
+    "design_2": "Design 2",
+    "design_2_header": "Design 2",
+    "padding_top_mobile": "المسافة العلوية على الجوال",
+    "padding_bottom_mobile": "المسافة السفلية على الجوال"
   }
 }

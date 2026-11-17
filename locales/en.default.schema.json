@@ -1339,7 +1339,17 @@
     "padding_mobile_info": "Below 750px. 0 keeps the theme's automatic mobile padding.",
     "discount_header": "Discount badge",
     "show_discount": "Show discount badge",
-    "show_discount_info": "Product cards only. Shown when the compare-at price is higher than the price."
+    "show_discount_info": "Product cards only. Shown when the compare-at price is higher than the price.",
+    "design_2": "Design 2",
+    "design_2_header": "Design 2",
+    "colors_header_2": "Design 2 colors",
+    "poster_image": "Poster image",
+    "poster_image_info": "Shown before the video plays. Leave empty to use the video's own preview image.",
+    "reel_product": "Reel product",
+    "product": "Product",
+    "title_color": "Title color",
+    "price_color": "Price color",
+    "thumbnail_border": "Thumbnail border"
   },
   "dev2_settings": {
     "design": "Design",
@@ -1372,7 +1382,19 @@
     "border_color": "Border",
     "icon_background_start": "Icon background start",
     "icon_background_end": "Icon background end",
-    "colors_default_info": "Leave empty to use the section colors."
+    "colors_default_info": "Leave empty to use the section colors.",
+    "design_3": "Design 3",
+    "care_header": "Design 3 — product cards",
+    "featured_product": "Featured product",
+    "featured_product_info": "The card showing this product gets the highlighted frame. It stays with the product when cards are reordered. Each card's badge is set in that product card's Badge setting.",
+    "background_end": "Background gradient end",
+    "background_end_info": "The section background color fades into this color.",
+    "spec_layout": "Layout",
+    "spec_layout_badge": "Badge",
+    "spec_layout_row": "Row",
+    "icon_color": "Icon color",
+    "card_badge": "Badge",
+    "card_badge_info": "Carousel section, Design 3 only: shown on this card's image. Leave empty to hide the badge."
   },
   "dev4_settings": {
     "design": "Design",
@@ -1412,7 +1434,17 @@
     "icon_color": "Icon color",
     "tile_color": "Icon tile color",
     "tile_border_color": "Icon tile border",
-    "description_color": "Description color"
+    "description_color": "Description color",
+    "blog_subtitle": "Subtitle",
+    "view_all_label": "View all label",
+    "view_all_info": "Links to the selected blog. Shown beside the heading on desktop and below the carousel on mobile.",
+    "read_more_label": "Read more label",
+    "arrow_svg": "Arrow icon (SVG code)",
+    "arrow_svg_info": "Paste SVG code. Leave empty to hide the arrow. Used by the read more and view all links.",
+    "link_color": "Link color",
+    "subtitle_color": "Subtitle color",
+    "title_color": "Title color",
+    "title_color_info": "Section heading and article titles."
   },
   "dev3_settings": {
     "design": "Design",
@@ -1420,6 +1452,10 @@
     "design_dev3": "Design 1",
     "background": "Background gradient",
     "background_mobile": "Mobile background gradient",
-    "background_mobile_info": "Used below 990px. Leave empty to use the background gradient."
+    "background_mobile_info": "Used below 990px. Leave empty to use the background gradient.",
+    "design_2": "Design 2",
+    "design_2_header": "Design 2",
+    "padding_top_mobile": "Mobile top padding",
+    "padding_bottom_mobile": "Mobile bottom padding"
   }
 }

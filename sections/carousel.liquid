@@ -37,6 +37,29 @@
     }
   {%- endstyle -%}
   <script src="{{ 'dev4.js' | asset_url }}" type="module"></script>
+{%- endif -%}{% if section.settings.design == 'dev1' %}
+  {%- comment -%} dev1: "Design 2" (12 Reels) — per-instance values for assets/dev1.css {%- endcomment -%}
+  {% style %}
+    #shopify-section-{{ section.id }} {
+      --dev1-columns-tablet: {{ section.settings.dev1_columns_tablet }};
+      {%- if section.settings.dev1_padding_mobile_top > 0 %} --dev1-padding-mobile-top: {{ section.settings.dev1_padding_mobile_top }}px;{% endif %}
+      {%- if section.settings.dev1_padding_mobile_bottom > 0 %} --dev1-padding-mobile-bottom: {{ section.settings.dev1_padding_mobile_bottom }}px;{% endif %}
+      {%- if section.settings.dev1_progress_track != blank %} --dev1-progress-track: {{ section.settings.dev1_progress_track }};{% endif %}
+      {%- if section.settings.dev1_progress_start != blank %} --dev1-progress-start: {{ section.settings.dev1_progress_start }};{% endif %}
+      {%- if section.settings.dev1_progress_end != blank %} --dev1-progress-end: {{ section.settings.dev1_progress_end }};{% endif %}
+    }
+  {% endstyle %}
+  <script src="{{ 'dev1.js' | asset_url }}" type="module"></script>
+{%- endif -%}{% if section.settings.design == 'dev2' %}
+  {%- comment -%} dev2: "Design 3" (08 Choose your care) — per-instance colors for assets/dev2.css {%- endcomment -%}
+  {% style %}
+    #shopify-section-{{ section.id }} {
+      {%- if section.settings.dev2_accent_start != blank %} --dev2-care-accent-start: {{ section.settings.dev2_accent_start }};{% endif %}
+      {%- if section.settings.dev2_accent_end != blank %} --dev2-care-accent-end: {{ section.settings.dev2_accent_end }};{% endif %}
+      {%- if section.settings.dev2_background_end != blank %} --dev2-care-background-end: {{ section.settings.dev2_background_end }};{% endif %}
+    }
+  {% endstyle %}
+  <script src="{{ 'dev2.js' | asset_url }}" type="module"></script>
 {%- endif -%}
 
 <div
@@ -50,7 +73,7 @@
     section-carousel
     spacing-style
     gap-style
-    {% if section.settings.design == 'dev4' %}dev4-collections{% endif %}
+    {% if section.settings.design == 'dev4' %}dev4-collections{% endif %}{% if section.settings.design == 'dev1' %}dev1-reels{% endif %}{% if section.settings.design == 'dev2' %}dev2-care{% endif %}
   "
   style="
     {% render 'spacing-style', settings: section.settings %}
@@ -67,6 +90,16 @@
     <dev4-carousel-progress class="dev4-collections__progress" aria-hidden="true">
       <span class="dev4-collections__progress-fill"></span>
     </dev4-carousel-progress>
+  {%- endif -%}{% if section.settings.design == 'dev1' %}
+    {%- comment -%} dev1: visual-only mobile progress for the native carousel (assets/dev1.js) {%- endcomment -%}
+    <dev1-carousel-progress class="dev1-featured__progress hidden--desktop" aria-hidden="true">
+      <span class="dev1-featured__progress-fill"></span>
+    </dev1-carousel-progress>
+  {%- endif -%}{% if section.settings.design == 'dev2' %}
+    {%- comment -%} dev2: visual-only scroll indicator below 990px (assets/dev2.js) {%- endcomment -%}
+    <dev2-carousel-progress class="dev2-care__progress" aria-hidden="true">
+      <span class="dev2-care__progress-fill"></span>
+    </dev2-carousel-progress>
   {%- endif -%}
 </div>
 
@@ -89,6 +122,14 @@
         {
           "value": "dev4",
           "label": "t:dev4_settings.design_dev4"
+        },
+        {
+          "value": "dev1",
+          "label": "t:dev1_settings.design_2"
+        },
+        {
+          "value": "dev2",
+          "label": "t:dev2_settings.design_3"
         }
       ],
       "default": "default"
@@ -339,6 +380,102 @@
       "label": "t:dev4_settings.progress_end",
       "placeholder": "t:settings.default",
       "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:dev1_settings.design_2_header",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev1_columns_tablet",
+      "label": "t:dev1_settings.columns_tablet",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 3,
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev1_padding_mobile_top",
+      "label": "t:dev1_settings.padding_mobile_top",
+      "info": "t:dev1_settings.padding_mobile_info",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev1_padding_mobile_bottom",
+      "label": "t:dev1_settings.padding_mobile_bottom",
+      "info": "t:dev1_settings.padding_mobile_info",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:dev1_settings.colors_header_2",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_progress_track",
+      "label": "t:dev1_settings.progress_track",
+      "default": "{{ settings.color_palette.color2 }}",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_progress_start",
+      "label": "t:dev1_settings.progress_start",
+      "default": "{{ settings.color_palette.snosha_gradient_start }}",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_progress_end",
+      "label": "t:dev1_settings.progress_end",
+      "default": "{{ settings.color_palette.snosha_gradient_end }}",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:dev2_settings.care_header",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "product",
+      "id": "dev2_featured_product",
+      "label": "t:dev2_settings.featured_product",
+      "info": "t:dev2_settings.featured_product_info",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_accent_start",
+      "label": "t:dev2_settings.accent_start",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_accent_end",
+      "label": "t:dev2_settings.accent_end",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_background_end",
+      "label": "t:dev2_settings.background_end",
+      "info": "t:dev2_settings.background_end_info",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
     }
   ],
   "presets": [
