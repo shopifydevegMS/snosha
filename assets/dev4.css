@@ -155,3 +155,261 @@
     --dev4-columns: var(--dev4-columns-tablet, 3);
   }
 }
+
+/* ==== dev4-benefit — icon + title + description row (blocks/benefit-item.liquid) ==== */
+
+/* Arabic content: the row is its own direction boundary, so the icon tile sits on the right in every locale. */
+.dev4-benefit {
+  --dev4-benefit-tile-size: 40px;
+  --dev4-benefit-icon-size: 22px;
+
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-md);
+  inline-size: 100%;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.dev4-benefit__tile {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--dev4-benefit-tile-size);
+  block-size: var(--dev4-benefit-tile-size);
+  border-radius: 13px;
+  color: var(--dev4-benefit-icon, var(--color-foreground));
+  background-image: linear-gradient(
+    to bottom,
+    var(--color-background),
+    var(--dev4-benefit-tile, var(--color-background))
+  );
+  /* Hairline as an inset shadow so the 40px tile stays 40px. */
+  box-shadow: inset 0 0 0 1px var(--dev4-benefit-tile-border, var(--color-border));
+}
+
+.dev4-benefit__icon,
+.dev4-benefit__icon-image {
+  display: block;
+  inline-size: var(--dev4-benefit-icon-size);
+  block-size: var(--dev4-benefit-icon-size);
+  pointer-events: none;
+}
+
+.dev4-benefit__icon svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.dev4-benefit__icon-image {
+  object-fit: contain;
+}
+
+.dev4-benefit__text {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: var(--gap-3xs);
+  min-inline-size: 0;
+  overflow-wrap: break-word;
+}
+
+/* Figma: title 16/27 semibold, description 14/24 regular (line heights as Figma ratios — no token matches). */
+.dev4-benefit__title {
+  margin: 0;
+  font-family: var(--font-accent--family);
+  font-style: var(--font-accent--style);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--md);
+  line-height: calc(27 / 16);
+  color: var(--color-foreground);
+}
+
+.dev4-benefit__description {
+  margin: 0;
+  font-family: var(--font-body--family);
+  font-style: var(--font-body--style);
+  font-weight: var(--font-body--weight);
+  font-size: var(--font-size--sm);
+  line-height: calc(24 / 14);
+  color: var(--dev4-benefit-description, var(--color-foreground));
+}
+
+/* ==== dev4-before-after — "09 Before After" (sections/section.liquid, Design 1) ==== */
+
+.dev4-before-after {
+  --dev4-ba-shadow: 0 12px 32px var(--dev4-ba-shadow-color, transparent);
+  --dev4-ba-chip-inset: var(--padding-lg);
+}
+
+/* Arabic content column: one direction boundary; the slider stays a geometry-only element. */
+.dev4-before-after .section-content-wrapper > .group-block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+dev4-comparison-slider {
+  display: block;
+}
+
+/* Comparison viewport ratio from Figma (774 × 535 desktop, 342 × 248 mobile); both layers fill it with the same crop. */
+.dev4-before-after.dev4-before-after .comparison-slider {
+  aspect-ratio: 774 / 535;
+}
+
+.dev4-before-after.dev4-before-after .comparison-slider :is(.before-image, .after-image, .comparison-slider__placeholder) {
+  aspect-ratio: auto;
+  height: 100%;
+}
+
+/* Optional mobile images (blocks/comparison-slider.liquid): the <picture> must not add a box. */
+.dev4-cs-picture {
+  display: contents;
+}
+
+/* Before on the right, After on the left (Figma), in every page direction.
+   The range input is pinned to LTR so its value is always the divider's distance from the left edge. */
+.dev4-before-after.dev4-before-after [data-orientation='horizontal'] .comparison-slider__layer--before {
+  clip-path: inset(0 0 0 calc(var(--compare) * 1%));
+}
+
+.dev4-before-after.dev4-before-after [data-orientation='horizontal'] .comparison-slider__layer--after {
+  clip-path: inset(0 calc((100 - var(--compare)) * 1%) 0 0);
+}
+
+.dev4-before-after.dev4-before-after .cs-slider {
+  direction: ltr;
+  /* Horizontal drags move the divider; vertical swipes keep scrolling the page. */
+  touch-action: pan-y;
+}
+
+/* Divider: 3px, no shadow. */
+.dev4-before-after.dev4-before-after .comparison-slider__media-wrapper[data-orientation='horizontal']::after {
+  width: 3px;
+  box-shadow: none;
+}
+
+/* Handle: white pill with three grip lines (drawn in CSS; the native chevrons are hidden). */
+.dev4-before-after.dev4-before-after .cs-slider__handle {
+  width: 34px;
+  height: 58px;
+  padding: 0;
+  gap: 0;
+  border-radius: 17px;
+  background: var(--color-background);
+  box-shadow: var(--dev4-ba-shadow);
+}
+
+.dev4-before-after.dev4-before-after .cs-slider__chevron {
+  display: none;
+}
+
+.dev4-before-after.dev4-before-after .cs-slider__handle::before {
+  --dev4-grip: rgb(var(--color-foreground-rgb) / 0.85);
+
+  content: '';
+  width: 2px;
+  height: 16px;
+  border-radius: 1px;
+  background: var(--dev4-grip);
+  box-shadow:
+    -6px 0 0 var(--dev4-grip),
+    6px 0 0 var(--dev4-grip);
+}
+
+/* Keyboard focus on the (invisible) range input shows on the handle. */
+.dev4-before-after.dev4-before-after .comparison-slider__media-wrapper:has(.cs-slider:focus-visible) .cs-slider__handle {
+  outline: var(--focus-outline-width) solid var(--color-foreground);
+  outline-offset: var(--focus-outline-offset);
+}
+
+/* Labels: Before chip top-right, After chip top-left (physical on purpose — they name physically placed images). */
+.dev4-before-after.dev4-before-after .comparison-slider__text {
+  top: var(--dev4-ba-chip-inset);
+  bottom: auto;
+  padding: 6px var(--padding-lg);
+  box-shadow: var(--dev4-ba-shadow);
+  white-space: nowrap;
+}
+
+.dev4-before-after.dev4-before-after .comparison-slider__text--before {
+  right: var(--dev4-ba-chip-inset);
+  left: auto;
+}
+
+.dev4-before-after.dev4-before-after .comparison-slider__text--after {
+  left: var(--dev4-ba-chip-inset);
+  right: auto;
+}
+
+.dev4-before-after.dev4-before-after .comparison-slider__text > div {
+  font-size: var(--font-size--xs);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dev4-before-after.dev4-before-after .comparison-slider__layer,
+  .dev4-before-after.dev4-before-after .cs-slider__handle,
+  .dev4-before-after.dev4-before-after .comparison-slider__media-wrapper::after {
+    transition: none;
+  }
+}
+
+/* Desktop row: slider physically left, content right (Figma) in every locale. The row is geometry-only;
+   the content column restores rtl above, and the slider pins its own input to ltr. */
+@media screen and (min-width: 990px) {
+  .dev4-before-after.dev4-before-after .section-content-wrapper {
+    direction: ltr;
+  }
+}
+
+/* Tablet and mobile: one stacked column (slider, then content) — same DOM, no squeezed columns. */
+@media screen and (max-width: 989px) {
+  .dev4-before-after.dev4-before-after .section-content-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    row-gap: var(--gap-xl);
+  }
+
+  .dev4-before-after.dev4-before-after .section-content-wrapper > * {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .dev4-before-after.dev4-before-after .section-content-wrapper {
+    padding-block-start: var(--dev4-padding-top-mobile);
+    padding-block-end: var(--dev4-padding-bottom-mobile);
+  }
+
+  .dev4-before-after .section-content-wrapper > .group-block > .group-block-content {
+    gap: var(--gap-md);
+  }
+
+  /* Figma mobile description stays 18/32 (the theme's mobile h5 is smaller). */
+  .dev4-before-after.dev4-before-after .section-content-wrapper > .group-block .text-block.h5 > * {
+    font-size: var(--font-size--lg);
+    line-height: calc(32 / 18);
+  }
+
+  .dev4-before-after.dev4-before-after .comparison-slider {
+    aspect-ratio: 342 / 248;
+    border-radius: 24px;
+  }
+
+  .dev4-before-after.dev4-before-after .cs-slider__handle {
+    width: 29px;
+    height: 48px;
+  }
+
+  .dev4-before-after.dev4-before-after .comparison-slider__text {
+    top: var(--padding-sm);
+    padding: var(--gap-3xs) var(--padding-sm);
+    border-radius: 20px;
+  }
+
+  .dev4-before-after.dev4-before-after .comparison-slider__text > div {
+    font-size: var(--font-size--2xs);
+  }
+}

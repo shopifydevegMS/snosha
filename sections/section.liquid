@@ -4,11 +4,34 @@
   {% content_for 'blocks' %}
 {% endcapture %}
 
+{%- liquid
+  # dev4: Design 1 scope class for assets/dev4.css; empty = native output
+  assign section_class = ''
+  if section.settings.design == 'dev4'
+    assign section_class = 'dev4-before-after'
+  endif
+-%}
+
+{%- if section.settings.design == 'dev4' -%}
+  {%- comment -%} dev4: per-instance values for assets/dev4.css (Design 1 only) {%- endcomment -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} {
+      --dev4-padding-top-mobile: {{ section.settings.dev4_padding_top_mobile }}px;
+      --dev4-padding-bottom-mobile: {{ section.settings.dev4_padding_bottom_mobile }}px;
+      {%- if section.settings.dev4_shadow_color != blank %}
+        --dev4-ba-shadow-color: rgb({{ section.settings.dev4_shadow_color.rgba }});
+      {%- endif %}
+    }
+  {%- endstyle -%}
+  <script src="{{ 'dev4.js' | asset_url }}" type="module"></script>
+{%- endif -%}
+
 {% render 'section',
   section: section,
   children: children,
   section_id: section.id,
-  background_color: section.settings.background_color
+  background_color: section.settings.background_color,
+  class: section_class
 %}
 
 {% schema %}
@@ -30,6 +53,22 @@
     "groups": ["header"]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "t:dev4_settings.design",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:dev4_settings.design_default"
+        },
+        {
+          "value": "dev4",
+          "label": "t:dev4_settings.design_dev4"
+        }
+      ],
+      "default": "default"
+    },
     {
       "type": "header",
       "content": "t:content.layout"
@@ -435,6 +474,53 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:dev4_settings.dev4_design_header",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev4_compare_start",
+      "label": "t:dev4_settings.compare_start",
+      "info": "t:dev4_settings.compare_start_info",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50,
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev4_padding_top_mobile",
+      "label": "t:dev4_settings.padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 56,
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev4_padding_bottom_mobile",
+      "label": "t:dev4_settings.padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 40,
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_shadow_color",
+      "label": "t:dev4_settings.shadow_color",
+      "alpha": true,
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
     }
   ],
   "presets": [

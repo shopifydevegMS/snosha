@@ -5,6 +5,7 @@
   @param {string} children - The children of the section
   @param {string} section_id - The ID of the section
   @param {string} background_color - The background color of the section
+  @param {string} [class] - dev4: extra class on the section wrapper (a design-option scope class; omit for native output)
 {%- enddoc -%}
 
 {% liquid
@@ -21,7 +22,7 @@
 
 <div class="section-background color-custom-{{ section_id }}"></div>
 <div
-  class="section section--{{ section.settings.section_width }} color-custom-{{ section_id }}"
+  class="section section--{{ section.settings.section_width }} color-custom-{{ section_id }}{% if class != blank %} {{ class }}{% endif %}"
   data-testid="ui-test-section"
 
   {% if request.visual_preview_mode %}

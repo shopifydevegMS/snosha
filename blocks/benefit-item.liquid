@@ -1,0 +1,115 @@
+<!-- benefit-item.liquid -->
+{%- comment -%}
+  dev4: one benefit row — icon tile, title and description (styles: assets/dev4.css → dev4-benefit).
+  Icon = SVG code (empty = no icon); an optional image replaces it.
+{%- endcomment -%}
+
+{%- liquid
+  assign block_settings = block.settings
+  assign icon_svg = block_settings.icon_svg | strip
+  assign icon_image = block_settings.icon_image
+  assign title = block_settings.title | strip
+  assign text = block_settings.text | strip
+-%}
+
+<div
+  class="dev4-benefit"
+  style="
+    {%- if block_settings.icon_color != blank %}--dev4-benefit-icon: {{ block_settings.icon_color }};{% endif -%}
+    {%- if block_settings.tile_color != blank %}--dev4-benefit-tile: {{ block_settings.tile_color }};{% endif -%}
+    {%- if block_settings.tile_border_color != blank %}--dev4-benefit-tile-border: {{ block_settings.tile_border_color }};{% endif -%}
+    {%- if block_settings.description_color != blank %}--dev4-benefit-description: {{ block_settings.description_color }};{% endif -%}
+  "
+  {{ block.shopify_attributes }}
+>
+  {%- if icon_image != blank or icon_svg != blank -%}
+    <span class="dev4-benefit__tile" aria-hidden="true">
+      {%- if icon_image != blank -%}
+        {{
+          icon_image
+          | image_url: width: 88
+          | image_tag: class: 'dev4-benefit__icon-image', width: 22, height: 22, alt: '', loading: 'lazy'
+        }}
+      {%- else -%}
+        <span class="dev4-benefit__icon">{{ icon_svg }}</span>
+      {%- endif -%}
+    </span>
+  {%- endif -%}
+
+  {%- if title != blank or text != blank -%}
+    <div class="dev4-benefit__text">
+      {%- if title != blank -%}
+        <h3 class="dev4-benefit__title">{{ title }}</h3>
+      {%- endif -%}
+      {%- if text != blank -%}
+        <p class="dev4-benefit__description">{{ text | newline_to_br }}</p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:dev4_settings.benefit_item",
+  "tag": null,
+  "settings": [
+    {
+      "type": "html",
+      "id": "icon_svg",
+      "label": "t:dev4_settings.icon_svg",
+      "info": "t:dev4_settings.icon_svg_info",
+      "default": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 4.2C10.2 2.7 7 3 5.6 5.1C4.2 7.2 4.9 9.7 5.8 12.1C6.6 14.3 7.1 16.7 7.9 18.9C8.2 19.7 9.3 19.7 9.6 18.9C10.1 17.4 10.2 15.8 10.9 14.4C11.3 13.6 12.8 13.6 13.2 14.4C13.9 15.8 14 17.4 14.5 18.9C14.8 19.7 15.9 19.7 16.2 18.9C17 16.7 17.5 14.3 18.3 12.1C19.2 9.7 19.9 7.2 18.5 5.1C17.1 3 13.9 2.7 12 4.2Z\" fill=\"#DCF2FB\" fill-opacity=\".2\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_image",
+      "label": "t:dev4_settings.icon_image",
+      "info": "t:dev4_settings.icon_image_info"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:dev4_settings.benefit_title"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "t:dev4_settings.benefit_description"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "t:dev4_settings.icon_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "tile_color",
+      "label": "t:dev4_settings.tile_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "tile_border_color",
+      "label": "t:dev4_settings.tile_border_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "t:dev4_settings.description_color",
+      "placeholder": "t:settings.default"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:dev4_settings.benefit_item",
+      "category": "t:categories.basic"
+    }
+  ]
+}
+{% endschema %}

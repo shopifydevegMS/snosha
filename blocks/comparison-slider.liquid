@@ -27,9 +27,20 @@
   endif
 
   render 'contrast-override', background_color: block.settings.slider_bg_color, section_id: block.id
+
+  # dev4: inside a section set to Design 1 (sections/section.liquid) the element is the
+  # dev4-comparison-slider subclass (assets/dev4.js) and starts at the section's start position
+  assign cs_tag = 'comparison-slider-component'
+  assign cs_start = 50
+  assign dev4_compare = false
+  if section.settings.design == 'dev4' and section.settings.dev4_compare_start != blank
+    assign dev4_compare = true
+    assign cs_tag = 'dev4-comparison-slider'
+    assign cs_start = section.settings.dev4_compare_start
+  endif
 %}
 
-<comparison-slider-component
+<{{ cs_tag }}
   class="comparison-slider comparison-slider--{{ block.settings.slider_style }} spacing-style size-style border-style {% if block.settings.slider_bg_color != blank %} color-custom-{{ block.id }} {% endif %}"
   style="
     --ratio: {{ ratio }}; --text-background-color: {{ block.settings.text_background_color }}; --text-corner-radius: {{ block.settings.text_corner_radius }}px;
@@ -42,6 +53,9 @@
     {% render 'border-override', settings: block.settings %}
   "
   {{ block.shopify_attributes }}
+  {%- if dev4_compare %}
+    data-dev4-start="{{ cs_start }}"
+  {%- endif %}
 >
   <div class="comparison-slider__container">
     <div
@@ -59,6 +73,7 @@
     >
       <div class="comparison-slider__layer comparison-slider__layer--before">
         {%- if block.settings.before_image != blank -%}
+          {%- capture dev4_layer_image -%}
           {{
             block.settings.before_image
             | image_url: width: 3840
@@ -71,6 +86,23 @@
               height: block.settings.before_image.height,
               ref: 'beforeImage'
           }}
+          {%- endcapture -%}
+          {%- if block.settings.dev4_before_image_mobile != blank -%}
+            {%- comment -%} dev4: optional mobile image (empty = native output) {%- endcomment -%}
+            {%- assign dev4_mobile = block.settings.dev4_before_image_mobile -%}
+            <picture class="dev4-cs-picture">
+              <source
+                media="(max-width: 749px)"
+                srcset="{{ dev4_mobile | image_url: width: 375 }} 375w, {{ dev4_mobile | image_url: width: 550 }} 550w, {{ dev4_mobile | image_url: width: 750 }} 750w, {{ dev4_mobile | image_url: width: 1100 }} 1100w, {{ dev4_mobile | image_url: width: 1500 }} 1500w"
+                sizes="100vw"
+                width="{{ dev4_mobile.width }}"
+                height="{{ dev4_mobile.height }}"
+              >
+              {{- dev4_layer_image -}}
+            </picture>
+          {%- else -%}
+            {{- dev4_layer_image -}}
+          {%- endif -%}
         {%- else -%}
           <div
             class="comparison-slider__placeholder before-image"
@@ -94,6 +126,7 @@
 
       <div class="comparison-slider__layer comparison-slider__layer--after">
         {%- if block.settings.after_image != blank -%}
+          {%- capture dev4_layer_image -%}
           {{
             block.settings.after_image
             | image_url: width: 3840
@@ -106,6 +139,23 @@
               height: block.settings.after_image.height,
               ref: 'afterImage'
           }}
+          {%- endcapture -%}
+          {%- if block.settings.dev4_after_image_mobile != blank -%}
+            {%- comment -%} dev4: optional mobile image (empty = native output) {%- endcomment -%}
+            {%- assign dev4_mobile = block.settings.dev4_after_image_mobile -%}
+            <picture class="dev4-cs-picture">
+              <source
+                media="(max-width: 749px)"
+                srcset="{{ dev4_mobile | image_url: width: 375 }} 375w, {{ dev4_mobile | image_url: width: 550 }} 550w, {{ dev4_mobile | image_url: width: 750 }} 750w, {{ dev4_mobile | image_url: width: 1100 }} 1100w, {{ dev4_mobile | image_url: width: 1500 }} 1500w"
+                sizes="100vw"
+                width="{{ dev4_mobile.width }}"
+                height="{{ dev4_mobile.height }}"
+              >
+              {{- dev4_layer_image -}}
+            </picture>
+          {%- else -%}
+            {{- dev4_layer_image -}}
+          {%- endif -%}
         {%- else -%}
           <div
             class="comparison-slider__placeholder after-image"
@@ -142,7 +192,7 @@
         ref="slider"
         min="0"
         max="100"
-        value="50"
+        value="{{ cs_start }}"
         aria-label="{{ 'blocks.slider_label' | t }}"
         {% if block.settings.slider_style == 'vertical' %}
           aria-orientation="vertical"
@@ -152,7 +202,7 @@
       >
     </div>
   </div>
-</comparison-slider-component>
+</{{ cs_tag }}>
 
 {% stylesheet %}
   comparison-slider-component {
@@ -426,6 +476,18 @@
       "type": "image_picker",
       "id": "after_image",
       "label": "t:settings.image_2"
+    },
+    {
+      "type": "image_picker",
+      "id": "dev4_before_image_mobile",
+      "label": "t:dev4_settings.image_mobile_before",
+      "info": "t:dev4_settings.image_mobile_info"
+    },
+    {
+      "type": "image_picker",
+      "id": "dev4_after_image_mobile",
+      "label": "t:dev4_settings.image_mobile_after",
+      "info": "t:dev4_settings.image_mobile_info"
     },
     {
       "type": "select",

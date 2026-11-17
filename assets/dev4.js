@@ -1,7 +1,10 @@
 /*
  * dev4.js — scripts for session "dev4".
- * Loaded as a module only by sections whose Design is "Design - dev4".
+ * Loaded as a module only by sections whose Design option belongs to dev4.
  */
+
+import { ComparisonSliderComponent } from '@theme/comparison-slider';
+import { prefersReducedMotion } from '@theme/utilities';
 
 /**
  * <dev4-carousel-progress>
@@ -105,4 +108,64 @@ class Dev4CarouselProgress extends HTMLElement {
 
 if (!customElements.get('dev4-carousel-progress')) {
   customElements.define('dev4-carousel-progress', Dev4CarouselProgress);
+}
+
+/**
+ * <dev4-comparison-slider>
+ * The native comparison slider (assets/comparison-slider.js) with two changes, used only by
+ * blocks/comparison-slider.liquid inside a section set to the dev4 design:
+ * - the intro hint animates around and returns to the configured start position (data-dev4-start)
+ *   instead of the native fixed 50;
+ * - no intro animation when the visitor prefers reduced motion.
+ * Pointer, touch, keyboard and ARIA all stay on the native range input.
+ */
+class Dev4ComparisonSlider extends ComparisonSliderComponent {
+  /** @type {number[]} */
+  #timers = [];
+
+  get dev4Start() {
+    const value = Number(this.dataset.dev4Start);
+    return Number.isFinite(value) ? Math.min(100, Math.max(0, value)) : 50;
+  }
+
+  animateSlider() {
+    if (this.hasAnimated) return;
+    this.hasAnimated = true;
+    if (prefersReducedMotion()) return;
+
+    const { mediaWrapper, slider } = this.refs;
+    if (!mediaWrapper || !slider) return;
+
+    const start = this.dev4Start;
+    this.isAnimating = true;
+    mediaWrapper.style.setProperty('--transition-duration', '0.5s');
+
+    /** @type {Array<[number, number]>} */
+    const steps = [
+      [100, Math.max(0, start - 10)],
+      [600, Math.min(100, start + 10)],
+      [1100, start],
+    ];
+    for (const [delay, value] of steps) {
+      this.#timers.push(setTimeout(() => mediaWrapper.style.setProperty('--compare', String(value)), delay));
+    }
+
+    this.#timers.push(
+      setTimeout(() => {
+        mediaWrapper.style.setProperty('--transition-duration', '0s');
+        slider.value = String(start);
+        this.isAnimating = false;
+      }, 1600)
+    );
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.#timers.forEach((timer) => clearTimeout(timer));
+    this.#timers = [];
+  }
+}
+
+if (!customElements.get('dev4-comparison-slider')) {
+  customElements.define('dev4-comparison-slider', Dev4ComparisonSlider);
 }
