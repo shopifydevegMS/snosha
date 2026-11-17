@@ -1188,5 +1188,19 @@
       "hover_background": "اتركه فارغًا لاستخدام لون التمرير التلقائي.",
       "hover_shadow": "اترك اللون فارغًا لإلغاء الظل."
     }
+  },
+  "dev1_settings": {
+    "design": "التصميم",
+    "design_default": "افتراضي",
+    "design_dev1": "Design 1",
+    "dev1_design_header": "Design 1",
+    "show_icon": "إظهار أيقونة اللمعة",
+    "show_icon_info": "يُستخدم عندما يكون تصميم شريط الإعلانات \"Design 1\".",
+    "icon_image": "أيقونة مخصصة",
+    "icon_image_info": "اختياري. تحل محل أيقونة اللمعة. تُعرض بمقاس 24 × 24px.",
+    "font_size_mobile": "الحجم على الجوال",
+    "weight_mobile": "السُمك على الجوال",
+    "mobile_typography_info": "يُطبَّق على الشاشات الأصغر من 750px عندما يكون تصميم شريط الإعلانات \"Design 1\".",
+    "same_as_desktop": "مثل سطح المكتب"
   }
 }

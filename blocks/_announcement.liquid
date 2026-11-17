@@ -5,6 +5,9 @@
 {%- assign block_settings = block.settings -%}
 {%- assign plain_text = block_settings.text | strip_newlines | strip_html | strip -%}
 {%- assign block_index = section.blocks | find_index: 'id', block.id -%}
+{%- comment -%} dev1: icon + mobile typography, active only when the section Design is "Design - dev1" {%- endcomment -%}
+{%- assign dev1_design = false -%}
+{%- if section.settings.design == 'dev1' -%}{%- assign dev1_design = true -%}{%- endif -%}
 
 {%- unless plain_text == '' -%}
   <slideshow-slide
@@ -18,6 +21,7 @@
       custom-typography
       {% if block_settings.font_size != "" %}custom-font-size{% endif %}
       {% if block_settings.weight != "" %}custom-font-weight{% endif %}
+      {% if dev1_design %}dev1-announcement__slide{% endif %}
     "
     style="
       {% render 'typography-style', settings: block_settings, preset: 'custom' %}
@@ -25,6 +29,7 @@
       --width: 100%;
       --text-align: center;
       --line-height: 1;
+      {% if dev1_design %}{% if block_settings.dev1_font_size_mobile != blank %}--dev1-font-size-mobile: {{ block_settings.dev1_font_size_mobile }};{% endif %}{% if block_settings.dev1_weight_mobile != blank %} --dev1-font-weight-mobile: {{ block_settings.dev1_weight_mobile }};{% endif %}{% endif %}
     "
     {{ block.shopify_attributes }}
     aria-hidden="{% if block_index == 0 %}false{% else %}true{% endif %}"
@@ -32,6 +37,16 @@
     <p class="announcement-bar__text">
       {{ block.settings.text }}
     </p>
+
+    {%- if dev1_design and block_settings.dev1_show_icon -%}
+      <span class="dev1-announcement__icon" aria-hidden="true">
+        {%- if block_settings.dev1_icon_image != blank -%}
+          {{- block_settings.dev1_icon_image | image_url: width: 48 | image_tag: width: 24, height: 24, alt: '', loading: 'eager' -}}
+        {%- else -%}
+          {{- 'icon-sparkle-brand.svg' | inline_asset_content -}}
+        {%- endif -%}
+      </span>
+    {%- endif -%}
 
     {% if block_settings.link != blank %}
       <a
@@ -251,6 +266,85 @@
       "id": "text_color",
       "label": "t:settings.text_color",
       "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:dev1_settings.dev1_design_header"
+    },
+    {
+      "type": "checkbox",
+      "id": "dev1_show_icon",
+      "label": "t:dev1_settings.show_icon",
+      "info": "t:dev1_settings.show_icon_info",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "dev1_icon_image",
+      "label": "t:dev1_settings.icon_image",
+      "info": "t:dev1_settings.icon_image_info",
+      "visible_if": "{{ block.settings.dev1_show_icon }}"
+    },
+    {
+      "type": "select",
+      "id": "dev1_font_size_mobile",
+      "label": "t:dev1_settings.font_size_mobile",
+      "info": "t:dev1_settings.mobile_typography_info",
+      "options": [
+        {
+          "value": "",
+          "label": "t:dev1_settings.same_as_desktop"
+        },
+        {
+          "value": "0.625rem",
+          "label": "10px"
+        },
+        {
+          "value": "0.75rem",
+          "label": "12px"
+        },
+        {
+          "value": "0.875rem",
+          "label": "14px"
+        },
+        {
+          "value": "1rem",
+          "label": "16px"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "dev1_weight_mobile",
+      "label": "t:dev1_settings.weight_mobile",
+      "options": [
+        {
+          "value": "",
+          "label": "t:dev1_settings.same_as_desktop"
+        },
+        {
+          "value": "300",
+          "label": "t:options.light"
+        },
+        {
+          "value": "400",
+          "label": "t:options.regular"
+        },
+        {
+          "value": "500",
+          "label": "t:options.medium"
+        },
+        {
+          "value": "600",
+          "label": "t:options.semibold"
+        },
+        {
+          "value": "700",
+          "label": "t:options.bold"
+        }
+      ],
+      "default": ""
     }
   ],
   "presets": [

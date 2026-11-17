@@ -1295,5 +1295,19 @@
       "hover_background": "Leave empty to use the automatic hover color.",
       "hover_shadow": "Leave the color empty for no shadow."
     }
+  },
+  "dev1_settings": {
+    "design": "Design",
+    "design_default": "Default",
+    "design_dev1": "Design 1",
+    "dev1_design_header": "Design 1",
+    "show_icon": "Show sparkle icon",
+    "show_icon_info": "Used when the announcement bar Design is \"Design 1\".",
+    "icon_image": "Custom icon",
+    "icon_image_info": "Optional. Replaces the sparkle. Shown at 24 × 24px.",
+    "font_size_mobile": "Mobile size",
+    "weight_mobile": "Mobile weight",
+    "mobile_typography_info": "Applies below 750px when the announcement bar Design is \"Design 1\".",
+    "same_as_desktop": "Same as desktop"
   }
 }

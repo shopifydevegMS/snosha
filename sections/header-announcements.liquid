@@ -12,7 +12,7 @@
 
 <div class="section-background color-custom-{{ section.id }}"></div>
 <aside
-  class="announcement-bar spacing-style section section--{{ section.settings.section_width }} color-custom-{{ section.id }}"
+  class="announcement-bar spacing-style section section--{{ section.settings.section_width }} color-custom-{{ section.id }}{% if section.settings.design == 'dev1' %} dev1-announcement{% endif %}"
   style="{% render 'spacing-padding', settings: section.settings %}; --border-bottom-width: {{ section.settings.divider_width }}px;{% if section.settings.divider_color != blank %} --color-border: {{ section.settings.divider_color }};{% endif %}"
 >
   {% liquid
@@ -140,6 +140,22 @@
     "groups": ["header"]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "t:dev1_settings.design",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:dev1_settings.design_default"
+        },
+        {
+          "value": "dev1",
+          "label": "t:dev1_settings.design_dev1"
+        }
+      ],
+      "default": "default"
+    },
     {
       "type": "range",
       "id": "speed",

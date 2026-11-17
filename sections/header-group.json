@@ -17,11 +17,15 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "Welcome to our store",
+            "text": "شحن مجاني للطلبات من 2000 جنيه فأكثر",
             "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
+            "font_size": "0.875rem",
+            "weight": "500",
             "letter_spacing": "normal",
-            "case": "none"
+            "case": "none",
+            "dev1_show_icon": true,
+            "dev1_font_size_mobile": "0.75rem",
+            "dev1_weight_mobile": "400"
           },
           "blocks": {}
         }
@@ -31,13 +35,14 @@
       ],
       "name": "t:names.announcement_bar",
       "settings": {
+        "design": "dev1",
         "speed": 5,
         "section_width": "page-width",
-        "background_color": "{{ settings.color_palette.background }}",
-        "divider_width": 1,
+        "background_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+        "divider_width": 0,
         "divider_color": "{{ settings.color_palette.color2 }}",
-        "padding-block-start": 15,
-        "padding-block-end": 15
+        "padding-block-start": 10,
+        "padding-block-end": 10
       }
     },
     "header_section": {

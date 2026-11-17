@@ -1,0 +1,80 @@
+/*
+ * dev1.css — styles for session "dev1".
+ * Loaded once from snippets/stylesheets.liquid (after the other global stylesheets).
+ * Every rule is anchored on a .dev1-* class that is rendered only when an instance opts in
+ * through its "Design → Design - dev1" option, so the base theme is untouched otherwise.
+ */
+
+/* ==== dev1-announcement — 01 Announcement Bar (sections/header-announcements.liquid) ==== */
+/* Figma 190:3768 (desktop) / 190:4083 (mobile). Scope class on <aside class="announcement-bar">;
+   the slide class .dev1-announcement__slide is added by blocks/_announcement.liquid under the same option. */
+.dev1-announcement {
+  /* Figma: 10px between message and icon (no exact gap token: --gap-xs 8px, --gap-sm 11.2px) */
+  --dev1-announcement-gap: 10px;
+  /* Figma line heights as ratios of the font size: desktop 14px / 24px, mobile 12px / 19px */
+  --dev1-announcement-line-height: calc(24 / 14);
+  --dev1-announcement-line-height-mobile: calc(19 / 12);
+}
+
+/* Single announcement (no arrows): use the full content column instead of reserving
+   2 × --button-size for arrows that aren't rendered. Native max-width (680px) is kept. */
+.dev1-announcement.dev1-announcement .announcement-bar__slider:not(:has(slideshow-arrows)) .announcement-bar__slides {
+  width: 100%;
+}
+
+/* Message + icon row. direction: ltr is geometry only — it keeps the icon on the physical right
+   of the message in every locale, as in Figma; the text restores rtl below (04 §3.4).
+   The slide is also a native .text-block (snippets/text.liquid: flex-direction: column), so the row is set explicitly. */
+.dev1-announcement.dev1-announcement .dev1-announcement__slide {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--dev1-announcement-gap);
+  direction: ltr;
+}
+
+.dev1-announcement.dev1-announcement .dev1-announcement__slide .announcement-bar__text {
+  direction: rtl;
+  unicode-bidi: isolate;
+  /* Native .text-block > * sets width: var(--width) = 100%, which would push the icon to a new line. */
+  width: auto;
+  flex: 0 1 auto;
+  min-width: 0;
+  line-height: var(--dev1-announcement-line-height);
+  overflow-wrap: break-word;
+}
+
+/* Doubled scope beats native .text-block > * (width) and .text-block--align-center > * (auto margins). */
+.dev1-announcement.dev1-announcement .dev1-announcement__icon {
+  margin: 0;
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+  color: currentColor;
+  pointer-events: none;
+}
+
+.dev1-announcement .dev1-announcement__icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 749px) {
+  /* Natively the slider spans the full grid on mobile; restore Figma's 20px side padding (= page margin). */
+  .dev1-announcement.dev1-announcement .announcement-bar__slider:not(:has(slideshow-arrows)) .announcement-bar__slides {
+    padding-inline: var(--page-margin);
+  }
+
+  /* Mobile typography from the block's "Mobile size / Mobile weight" settings (blank = desktop values). */
+  .dev1-announcement.dev1-announcement .dev1-announcement__slide .announcement-bar__text {
+    font-size: var(--dev1-font-size-mobile, var(--font-size));
+    font-weight: var(--dev1-font-weight-mobile, var(--font-weight));
+    line-height: var(--dev1-announcement-line-height-mobile);
+  }
+}

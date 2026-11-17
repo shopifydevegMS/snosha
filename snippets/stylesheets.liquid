@@ -1,6 +1,7 @@
 {{ 'overflow-list.css' | asset_url | preload_tag: as: 'style' }}
 {{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
 {{ 'snosha.css' | asset_url | stylesheet_tag }}
+{{ 'dev1.css' | asset_url | stylesheet_tag }}
 {%- if settings.snosha_custom_font_enabled and settings.snosha_custom_font_url != blank %}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
