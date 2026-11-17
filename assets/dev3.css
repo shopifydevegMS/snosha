@@ -628,3 +628,308 @@
     line-height: 24px;
   }
 }
+
+/* ==== dev3-bundle — 11 Bundle (sections/section.liquid "Design 2" + blocks bundle-*.liquid) ==== */
+/* Figma 190:3987 (desktop 1480) / 190:4318 (mobile 390). Scope class .dev3-bundle on the section
+   wrapper. The row is pinned to direction: ltr (geometry only: image left, content right in every
+   locale, as in Figma); the content column restores rtl (04 §3.4). Colors: --dev3-bundle-* from the
+   palette (sections/section.liquid), with theme fallbacks when a bundle block is used elsewhere. */
+.dev3-bundle {
+  --dev3-bundle-radius: 16px; /* Bundle Image radius */
+  --dev3-bundle-hotspot-size: 32px;
+  --dev3-bundle-row-gap: 16px; /* Bundle Item gap */
+  --dev3-bundle-total-gap: 20px; /* mobile; 34px from 750px */
+}
+
+@media screen and (max-width: 749px) {
+  /* Figma mobile: 56 / 40 vertical padding (settings), 24px sides = page margin + 4px */
+  .dev3-bundle.dev3-bundle .section-content-wrapper {
+    gap: 20px; /* Figma mobile Bundle Container gap (native 56 × gap scale would be ~39) */
+    padding-block: var(--dev3-bundle-padding-top-mobile) var(--dev3-bundle-padding-bottom-mobile);
+    padding-inline: var(--padding-2xs);
+  }
+
+  /* Figma mobile description 15 / 26 */
+  .dev3-bundle.dev3-bundle .text-block.h5 {
+    --font-h5--size: 0.9375rem;
+    --font-h5--line-height: calc(26 / 15);
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .dev3-bundle {
+    --dev3-bundle-total-gap: 34px;
+  }
+
+  /* Figma Bundle Container: 20px side padding inside the 1376px page width */
+  .dev3-bundle.dev3-bundle .section-content-wrapper {
+    padding-inline: var(--padding-xl);
+    direction: ltr;
+  }
+
+  /* Two equal columns: image and content */
+  .dev3-bundle.dev3-bundle .section-content-wrapper > :is(.dev3-bundle-visual, .group-block) {
+    flex: 1 1 0;
+    min-inline-size: 0;
+    inline-size: auto;
+  }
+}
+
+.dev3-bundle.dev3-bundle .section-content-wrapper > .group-block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.dev3-bundle.dev3-bundle .group-block .text-block,
+.dev3-bundle.dev3-bundle .group-block .text-block > * {
+  text-align: start;
+}
+
+/* ---- Bundle image + hotspots ---- */
+.dev3-bundle-visual {
+  position: relative;
+  inline-size: 100%;
+}
+
+.dev3-bundle-visual__media {
+  aspect-ratio: 342 / 257; /* Figma mobile Bundle Visual */
+  overflow: hidden;
+  border-radius: var(--dev3-bundle-radius, var(--style-border-radius-lg));
+}
+
+@media screen and (min-width: 750px) {
+  .dev3-bundle-visual__media {
+    aspect-ratio: 744 / 560; /* Figma desktop Bundle Image */
+  }
+}
+
+.dev3-bundle-visual__media picture {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.dev3-bundle-visual .dev3-bundle-visual__img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* Hotspot centre = X / Y percent of the image box. Physical left/top on purpose: the
+   coordinates point at fixed spots in the picture, which doesn't mirror in RTL. */
+.dev3-hotspot {
+  position: absolute;
+  z-index: var(--layer-flat);
+  left: var(--dev3-hotspot-x);
+  top: var(--dev3-hotspot-y);
+  inline-size: var(--dev3-bundle-hotspot-size, 32px);
+  block-size: var(--dev3-bundle-hotspot-size, 32px);
+  translate: -50% -50%;
+  border: 1.5px solid var(--dev3-bundle-accent, var(--color-border));
+  border-radius: var(--style-border-radius-50);
+  background-color: var(--dev3-bundle-surface, var(--color-background));
+  box-shadow: 0 12px 32px rgb(var(--dev3-bundle-shadow-rgb, var(--color-foreground-rgb)) / 0.1);
+  pointer-events: none;
+}
+
+.dev3-hotspot::after {
+  content: '';
+  position: absolute;
+  inset: 50% auto auto 50%;
+  inline-size: 10px;
+  block-size: 10px;
+  translate: -50% -50%;
+  border-radius: var(--style-border-radius-50);
+  background-color: var(--dev3-bundle-brand, var(--color-foreground));
+}
+
+.dev3-hotspot[hidden] {
+  display: none;
+}
+
+@media screen and (min-width: 750px) {
+  .dev3-hotspot {
+    left: var(--dev3-hotspot-x-desktop);
+    top: var(--dev3-hotspot-y-desktop);
+  }
+}
+
+/* ---- Component rows (display only) ---- */
+.dev3-bundle-item {
+  display: flex;
+  align-items: center;
+  gap: var(--dev3-bundle-row-gap, 16px);
+  inline-size: 100%;
+  padding-block: 14px;
+  border-block-end: 1px solid var(--dev3-bundle-line, var(--color-border));
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.dev3-bundle-item__thumb {
+  flex: none;
+  inline-size: 64px;
+  block-size: 64px;
+  overflow: hidden;
+  border-radius: 8px; /* Figma Thumb */
+  background-color: var(--dev3-bundle-tint, var(--color-background));
+}
+
+.dev3-bundle-item__thumb .dev3-bundle-item__img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.dev3-bundle-item__text {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 2px;
+  min-inline-size: 0;
+}
+
+.dev3-bundle-item p {
+  margin: 0;
+}
+
+.dev3-bundle-item__name,
+.dev3-bundle-item__price {
+  color: var(--dev3-bundle-heading, var(--color-foreground));
+  font-family: var(--font-body--family);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: calc(27 / 16);
+}
+
+.dev3-bundle-item__subtitle {
+  color: var(--dev3-bundle-muted, var(--color-foreground));
+  font-family: var(--font-body--family);
+  font-size: 0.75rem;
+  line-height: calc(20 / 12);
+}
+
+.dev3-bundle-item__price {
+  flex: none;
+  white-space: nowrap;
+}
+
+/* ---- Bundle total + add to cart ---- */
+.dev3-bundle-offer {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  inline-size: 100%;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.dev3-bundle-offer p {
+  margin: 0;
+}
+
+.dev3-bundle-offer__total {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px var(--dev3-bundle-total-gap, 20px);
+  padding-block-start: 16px;
+}
+
+.dev3-bundle-offer__now,
+.dev3-bundle-offer__was {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.dev3-bundle-offer__now {
+  color: var(--dev3-bundle-heading, var(--color-foreground));
+  font-family: var(--font-body--family);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: calc(27 / 16);
+  white-space: nowrap;
+}
+
+.dev3-bundle-offer__compare {
+  color: var(--dev3-bundle-muted, var(--color-foreground));
+  font-family: var(--font-body--family);
+  font-size: 0.875rem;
+  line-height: calc(22 / 14);
+  text-decoration: line-through;
+  white-space: nowrap;
+}
+
+.dev3-bundle-offer__badge {
+  padding-block: 4px;
+  padding-inline: 12px;
+  border: 1px solid var(--dev3-bundle-line, var(--color-border));
+  border-radius: 8px; /* Figma Discount badge */
+  background-color: var(--dev3-bundle-tint, var(--color-background));
+  color: var(--dev3-bundle-brand, var(--color-foreground));
+  font-family: var(--font-body--family);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: calc(18 / 12);
+  white-space: nowrap;
+}
+
+/* Mobile: label on its own line; price, compare-at price and badge stay together on one line */
+@media screen and (max-width: 749px) {
+  .dev3-bundle-offer .dev3-bundle-offer__total {
+    column-gap: 12px;
+  }
+
+  .dev3-bundle-offer .dev3-bundle-offer__now {
+    display: contents;
+  }
+
+  .dev3-bundle-offer .dev3-bundle-offer__label {
+    flex-basis: 100%;
+    text-align: center;
+  }
+
+  .dev3-bundle-offer .dev3-bundle-offer__was {
+    flex-wrap: nowrap;
+    gap: 8px;
+  }
+}
+
+.dev3-bundle-offer add-to-cart-component,
+.dev3-bundle-offer .dev3-bundle-offer__form {
+  display: block;
+}
+
+/* Full-width brand button (out-ranks the native .button rules) */
+.dev3-bundle-offer .button.dev3-bundle-offer__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  min-block-size: 52px; /* 13 + 26 + 13 */
+  padding-block: 13px;
+  padding-inline: 28px;
+  border-radius: 12px; /* Figma Button */
+  background-color: var(--dev3-bundle-brand, var(--color-primary-button-background));
+  box-shadow: none;
+  color: var(--dev3-bundle-surface, var(--color-primary-button-text));
+  font-family: var(--font-body--family);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: calc(26 / 16);
+  text-decoration: none;
+}
+
+.dev3-bundle-offer .button.dev3-bundle-offer__button:not(:disabled):hover {
+  background-color: var(--dev3-bundle-heading, var(--color-primary-button-hover-background));
+}
+
+.dev3-bundle-offer__placeholder {
+  color: var(--dev3-bundle-muted, var(--color-foreground));
+  font-size: 0.875rem;
+}

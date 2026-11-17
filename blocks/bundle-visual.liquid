@@ -1,0 +1,98 @@
+<!-- bundle-visual.liquid -->
+{%- comment -%}
+  dev3 — bundle promo image with decorative hotspots (Figma "Bundle Image" 190:3988 / "Bundle Visual" 190:4319).
+  The image box keeps a fixed aspect ratio and crops with object-fit: cover (focal point from
+  Shopify Files), so hotspot percentages stay anchored to the same spot as it scales.
+{%- endcomment -%}
+{%- liquid
+  assign image = block.settings.image
+  assign image_mobile = block.settings.image_mobile | default: image
+  assign image_style = 'object-position: ' | append: image.presentation.focal_point | append: ';'
+-%}
+
+{%- if image == blank and request.design_mode == false -%}
+  {%- comment -%} Live storefront without an image: render nothing (no floating hotspots). {%- endcomment -%}
+{%- else -%}
+<div class="dev3-bundle-visual" {{ block.shopify_attributes }}>
+  <div class="dev3-bundle-visual__media">
+    {%- if image != blank -%}
+      <picture>
+        {%- if block.settings.image_mobile != blank -%}
+          <source
+            media="(max-width: 749px)"
+            srcset="{{ image_mobile | image_url: width: 400 }} 400w, {{ image_mobile | image_url: width: 700 }} 700w, {{ image_mobile | image_url: width: 1000 }} 1000w"
+            sizes="100vw"
+            width="{{ image_mobile.width }}"
+            height="{{ image_mobile.height }}"
+          >
+        {%- endif -%}
+        {{
+          image
+          | image_url: width: 1600
+          | image_tag:
+            widths: '400, 700, 1000, 1300, 1600',
+            sizes: '(min-width: 990px) 50vw, 100vw',
+            loading: 'lazy',
+            alt: image.alt,
+            class: 'dev3-bundle-visual__img',
+            style: image_style
+        }}
+      </picture>
+    {%- elsif request.design_mode -%}
+      {{ 'image' | placeholder_svg_tag: 'dev3-bundle-visual__img dev3-bundle-visual__img--placeholder' }}
+    {%- endif -%}
+  </div>
+  {% content_for 'blocks' %}
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Bundle image",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_bundle-hotspot"
+    }
+  ],
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Bundle composition. Shown in a 744 × 560 frame (cropped to fill)."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image",
+      "info": "Optional. Used below 750px. Falls back to the image."
+    },
+    {
+      "type": "paragraph",
+      "content": "Hotspots are positioned in percent of the image. After replacing the image, check their X / Y positions."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle image",
+      "category": "Products",
+      "blocks": {
+        "hotspot_1": {
+          "type": "_bundle-hotspot",
+          "settings": { "x": 22, "y": 64, "x_mobile": 25, "y_mobile": 68 }
+        },
+        "hotspot_2": {
+          "type": "_bundle-hotspot",
+          "settings": { "x": 51, "y": 54, "x_mobile": 53, "y_mobile": 57 }
+        },
+        "hotspot_3": {
+          "type": "_bundle-hotspot",
+          "settings": { "x": 77, "y": 68, "x_mobile": 80, "y_mobile": 71 }
+        }
+      },
+      "block_order": ["hotspot_1", "hotspot_2", "hotspot_3"]
+    }
+  ]
+}
+{% endschema %}

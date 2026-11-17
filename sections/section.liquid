@@ -10,7 +10,29 @@
   if section.settings.design == 'dev4'
     assign section_class = 'dev4-before-after'
   endif
+  # dev3: Design 2 (11 Bundle) scope class for assets/dev3.css
+  if section.settings.design == 'dev3'
+    assign section_class = 'dev3-bundle'
+  endif
 -%}
+
+{%- if section.settings.design == 'dev3' -%}
+  {%- comment -%} dev3: per-instance values and palette colors for assets/dev3.css (Design 2 only) {%- endcomment -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} {
+      --dev3-bundle-padding-top-mobile: {{ section.settings.dev3_padding_top_mobile }}px;
+      --dev3-bundle-padding-bottom-mobile: {{ section.settings.dev3_padding_bottom_mobile }}px;
+      --dev3-bundle-heading: {{ settings.color_palette.snosha_deep_blue }};
+      --dev3-bundle-muted: {{ settings.color_palette.color1 }};
+      --dev3-bundle-line: {{ settings.color_palette.color2 }};
+      --dev3-bundle-brand: {{ settings.color_palette.snosha_secondary_blue }};
+      --dev3-bundle-accent: {{ settings.color_palette.snosha_primary_blue }};
+      --dev3-bundle-surface: {{ settings.color_palette.background }};
+      --dev3-bundle-tint: {{ settings.color_palette.snosha_pale_tint }};
+      --dev3-bundle-shadow-rgb: {{ settings.color_palette.snosha_gradient_end.rgb }};
+    }
+  {%- endstyle -%}
+{%- endif -%}
 
 {%- if section.settings.design == 'dev4' -%}
   {%- comment -%} dev4: per-instance values for assets/dev4.css (Design 1 only) {%- endcomment -%}
@@ -65,6 +87,10 @@
         {
           "value": "dev4",
           "label": "t:dev4_settings.design_dev4"
+        },
+        {
+          "value": "dev3",
+          "label": "t:dev3_settings.design_2"
         }
       ],
       "default": "default"
@@ -521,6 +547,33 @@
       "alpha": true,
       "placeholder": "t:settings.default",
       "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:dev3_settings.design_2_header",
+      "visible_if": "{{ section.settings.design == 'dev3' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev3_padding_top_mobile",
+      "label": "t:dev3_settings.padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 56,
+      "visible_if": "{{ section.settings.design == 'dev3' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev3_padding_bottom_mobile",
+      "label": "t:dev3_settings.padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 40,
+      "visible_if": "{{ section.settings.design == 'dev3' }}"
     }
   ],
   "presets": [

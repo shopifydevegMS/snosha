@@ -1,0 +1,68 @@
+<!-- bundle-item.liquid -->
+{%- comment -%}
+  dev3 — one bundle component row (Figma "Bundle Item" 190:3999). DISPLAY ONLY: the picked
+  product only supplies the thumbnail, name and price shown here. It does not define the
+  bundle's contents, the cart contents or the bundle price — those come from Shopify Bundles.
+{%- endcomment -%}
+{%- assign item = block.settings.product -%}
+
+{%- if item != blank -%}
+  {%- liquid
+    assign subtitle = block.settings.subtitle
+    if subtitle == blank
+      assign subtitle = item.description | strip_html | truncatewords: 6
+    endif
+    assign media = item.featured_media.preview_image
+  -%}
+  <div class="dev3-bundle-item" {{ block.shopify_attributes }}>
+    <div class="dev3-bundle-item__thumb">
+      {%- if media != blank -%}
+        {{ media | image_url: width: 192 | image_tag: width: 64, height: 64, loading: 'lazy', alt: '', class: 'dev3-bundle-item__img' }}
+      {%- endif -%}
+    </div>
+    <div class="dev3-bundle-item__text">
+      <p class="dev3-bundle-item__name">{{ item.title | escape }}</p>
+      {%- if subtitle != blank -%}
+        <p class="dev3-bundle-item__subtitle">{{ subtitle | escape }}</p>
+      {%- endif -%}
+    </div>
+    <p class="dev3-bundle-item__price"><bdi>{{ item.selected_or_first_available_variant.price | money }}</bdi></p>
+  </div>
+{%- elsif request.design_mode -%}
+  <div class="dev3-bundle-item dev3-bundle-item--placeholder" {{ block.shopify_attributes }}>
+    <div class="dev3-bundle-item__thumb">{{ 'product-1' | placeholder_svg_tag: 'dev3-bundle-item__img' }}</div>
+    <div class="dev3-bundle-item__text">
+      <p class="dev3-bundle-item__name">Select a product</p>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Bundle item",
+  "tag": null,
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "paragraph",
+      "content": "Display only. Pick the same products as in the Shopify Bundles setup. This row doesn't change what is added to the cart or the bundle price."
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Short description",
+      "info": "Leave empty to use the start of the product description."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle item",
+      "category": "Products"
+    }
+  ]
+}
+{% endschema %}

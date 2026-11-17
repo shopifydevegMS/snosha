@@ -1,0 +1,154 @@
+<!-- bundle-offer.liquid -->
+{%- comment -%}
+  dev3 — bundle total + add-to-cart for ONE Shopify Bundles product (Figma "Bundle Total" 190:4002
+  and "Button" 190:4008). Price, compare-at price and availability come from the selected
+  bundle variant; the discount badge is computed only from a real compare-at price.
+  Add to cart reuses Horizon's own product-form-component + add-to-cart-button (same pattern as
+  snippets/quick-add.liquid), so the bundle product itself is added and Shopify Bundles handles
+  its components and inventory. Multi-variant bundles link to the product page to choose.
+{%- endcomment -%}
+{%- assign product = block.settings.product -%}
+
+{%- if product != blank -%}
+  {%- liquid
+    assign variant = product.selected_or_first_available_variant
+    assign price = variant.price
+    assign compare_at_price = variant.compare_at_price
+
+    assign discount_percent = 0
+    if compare_at_price > price
+      assign discount_percent = compare_at_price | minus: price | times: 100.0 | divided_by: compare_at_price | round
+    endif
+
+    assign can_add_to_cart = false
+    assign button_text = 'products.product.unavailable' | t
+    if variant.available
+      assign can_add_to_cart = true
+      assign button_text = 'products.product.add_to_cart' | t
+      if block.settings.button_label != blank
+        assign button_text = block.settings.button_label
+      endif
+    elsif variant.inventory_management == 'shopify' and variant.inventory_quantity <= 0 and variant.inventory_policy == 'deny'
+      assign button_text = 'products.product.sold_out' | t
+    endif
+
+    assign product_form_id = 'BundleOffer-ProductForm-' | append: block.id
+  -%}
+
+  <div class="dev3-bundle-offer" {{ block.shopify_attributes }}>
+    <div class="dev3-bundle-offer__total">
+      <p class="dev3-bundle-offer__now">
+        {%- if block.settings.total_label != blank -%}
+          <span class="dev3-bundle-offer__label">{{ block.settings.total_label | escape }}</span>
+        {%- endif -%}
+        <span class="dev3-bundle-offer__price">
+          {%- if compare_at_price > price -%}
+            <span class="visually-hidden">{{ 'content.price_sale' | t }}&nbsp;</span>
+          {%- endif -%}
+          <bdi>{{ price | money }}</bdi>
+        </span>
+      </p>
+      {%- if compare_at_price > price -%}
+        <p class="dev3-bundle-offer__was">
+          <span class="dev3-bundle-offer__compare">
+            <span class="visually-hidden">{{ 'content.price_regular' | t }}&nbsp;</span>
+            <bdi>{{ compare_at_price | money }}</bdi>
+          </span>
+          {%- if discount_percent > 0 and block.settings.discount_label != blank -%}
+            <span class="dev3-bundle-offer__badge">
+              {{- block.settings.discount_label | escape | replace: '[percent]', discount_percent -}}
+            </span>
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+    </div>
+
+    {%- if product.has_only_default_variant -%}
+      {% render 'fly-to-cart-styles' %}
+      {% render 'add-to-cart-button-styles' %}
+      <product-form-component
+        class="dev3-bundle-offer__form"
+        data-section-id="{{ section.id }}"
+        data-product-id="{{ product.id }}"
+        data-product-url="{{ product.url }}"
+        on:submit="/handleSubmit"
+        data-quantity-default="1"
+      >
+        <div
+          class="visually-hidden"
+          aria-live="assertive"
+          role="status"
+          aria-atomic="true"
+          ref="liveRegion"
+        ></div>
+        {%- form 'product', product, id: product_form_id, novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+          <input
+            type="hidden"
+            name="id"
+            ref="variantId"
+            value="{{ variant.id }}"
+            {% unless can_add_to_cart %}
+              disabled
+            {% endunless %}
+          >
+          <input type="hidden" name="quantity" value="1">
+          {% render 'add-to-cart-button',
+            add_to_cart_text: button_text,
+            class: 'dev3-bundle-offer__button',
+            can_add_to_cart: can_add_to_cart,
+            show_icon: false,
+            product: product
+          %}
+        {%- endform -%}
+      </product-form-component>
+    {%- else -%}
+      <a class="button dev3-bundle-offer__button" href="{{ product.url }}">
+        {{- 'actions.choose' | t -}}
+      </a>
+    {%- endif -%}
+  </div>
+{%- elsif request.design_mode -%}
+  <div class="dev3-bundle-offer dev3-bundle-offer--placeholder" {{ block.shopify_attributes }}>
+    <p class="dev3-bundle-offer__placeholder">Select the Shopify Bundles product to show its price and add-to-cart button.</p>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Bundle price and button",
+  "tag": null,
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Bundle product",
+      "info": "The product created with the Shopify Bundles app. Its price, compare-at price and stock are used as-is."
+    },
+    {
+      "type": "text",
+      "id": "total_label",
+      "label": "Total label",
+      "default": "Bundle total"
+    },
+    {
+      "type": "text",
+      "id": "discount_label",
+      "label": "Discount badge text",
+      "info": "Shown only when the bundle has a compare-at price. [percent] is replaced by the real discount.",
+      "default": "Save [percent]%"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "info": "Leave empty to use the theme's add-to-cart text."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle price and button",
+      "category": "Products"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,96 @@
+<!-- _bundle-hotspot.liquid -->
+{%- comment -%}
+  dev3 — one decorative hotspot on the bundle image (blocks/bundle-visual.liquid).
+  Visual indicator only: no link, no selection, no popover. Positioned by its centre point,
+  in percent of the image box, with separate desktop (≥ 750px) and mobile coordinates.
+{%- endcomment -%}
+{%- assign bs = block.settings -%}
+
+{% style %}
+  #shopify-section-{{ section.id }} .dev3-hotspot--{{ block.id }} {
+    --dev3-hotspot-x: {{ bs.x_mobile }}%;
+    --dev3-hotspot-y: {{ bs.y_mobile }}%;
+    --dev3-hotspot-x-desktop: {{ bs.x }}%;
+    --dev3-hotspot-y-desktop: {{ bs.y }}%;
+  }
+{% endstyle %}
+
+<span
+  class="dev3-hotspot dev3-hotspot--{{ block.id }}"
+  aria-hidden="true"
+  {% unless bs.enabled %}
+    hidden
+  {% endunless %}
+  {{ block.shopify_attributes }}
+></span>
+
+{% schema %}
+{
+  "name": "Hotspot",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Linked product",
+      "info": "For reference in the editor only (e.g. the product it points at). It doesn't change the bundle."
+    },
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Show hotspot",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Desktop position",
+      "info": "Centre of the hotspot, in percent of the image. From 750px."
+    },
+    {
+      "type": "range",
+      "id": "x",
+      "label": "Horizontal (X)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "y",
+      "label": "Vertical (Y)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Mobile position",
+      "info": "Centre of the hotspot, in percent of the image. Below 750px."
+    },
+    {
+      "type": "range",
+      "id": "x_mobile",
+      "label": "Horizontal (X)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "y_mobile",
+      "label": "Vertical (Y)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    }
+  ]
+}
+{% endschema %}
