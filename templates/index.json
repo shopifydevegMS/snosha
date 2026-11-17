@@ -35,7 +35,8 @@
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
-          "blocks": {}
+          "blocks": {},
+          "disabled": true
         },
         "button_H9gpTf": {
           "type": "button",
@@ -53,15 +54,205 @@
             "width_mobile": "fit-content",
             "custom_width_mobile": 100
           },
-          "blocks": {}
+          "blocks": {},
+          "disabled": true
+        },
+        "dev3_hero_stage": {
+          "type": "_hero-stage",
+          "name": "Product stage",
+          "settings": {},
+          "blocks": {
+            "dev3_chip_sonic": {
+              "type": "_hero-chip",
+              "settings": {
+                "label": "حتى 42,000 حركة/دقيقة",
+                "icon": "sonic",
+                "desktop_anchor": "left",
+                "desktop_x": 57,
+                "desktop_y": 24,
+                "mobile_anchor": "right",
+                "mobile_x": 0,
+                "mobile_y": 11
+              },
+              "blocks": {}
+            },
+            "dev3_chip_battery": {
+              "type": "_hero-chip",
+              "settings": {
+                "label": "بطارية حتى 120 يوم",
+                "icon": "battery",
+                "desktop_anchor": "left",
+                "desktop_x": -4,
+                "desktop_y": 31,
+                "mobile_anchor": "left",
+                "mobile_x": -2,
+                "mobile_y": 87
+              },
+              "blocks": {}
+            },
+            "dev3_chip_modes": {
+              "type": "_hero-chip",
+              "settings": {
+                "label": "5 أوضاع تنظيف",
+                "icon": "sliders",
+                "desktop_anchor": "left",
+                "desktop_x": -2,
+                "desktop_y": 63,
+                "mobile_anchor": "left",
+                "mobile_x": -6,
+                "mobile_y": 45
+              },
+              "blocks": {}
+            },
+            "dev3_chip_heads": {
+              "type": "_hero-chip",
+              "settings": {
+                "label": "8 رؤوس DuPont",
+                "icon": "brush-head",
+                "desktop_anchor": "left",
+                "desktop_x": 57,
+                "desktop_y": 51,
+                "mobile_anchor": "right",
+                "mobile_x": -1,
+                "mobile_y": 47
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dev3_chip_sonic",
+            "dev3_chip_battery",
+            "dev3_chip_modes",
+            "dev3_chip_heads"
+          ]
+        },
+        "dev3_hero_content": {
+          "type": "_hero-content",
+          "settings": {
+            "overline": "عناية ذكية بالفم  تكنولوجيا وتصميم مدروس",
+            "overline_icon": "sparkle"
+          },
+          "blocks": {
+            "dev3_hero_heading": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h1>العناية <em>الذكية</em> بصحة<br>الفم والأسنان</h1>",
+                "text_color": "{{ settings.color_palette.background }}",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "right",
+                "type_preset": "h1",
+                "wrap": "pretty",
+                "background": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "dev3_hero_description": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>حلول ذكية للعناية بالفم تجمع بين التكنولوجيا والتصميم العملي لتجعل روتينك اليومي أسهل.</p>",
+                "text_color": "rgba(255,255,255,0.86)",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "right",
+                "type_preset": "paragraph",
+                "wrap": "pretty",
+                "background": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "dev3_hero_cta": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "تسوّق الآن",
+                "link": "",
+                "open_in_new_tab": false,
+                "style_class": "button-secondary",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "custom",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dev3_hero_heading",
+            "dev3_hero_description",
+            "dev3_hero_cta"
+          ]
+        },
+        "dev3_trust_strip": {
+          "type": "_trust-strip",
+          "settings": {},
+          "blocks": {
+            "dev3_trust_warranty": {
+              "type": "_trust-item",
+              "settings": {
+                "icon": "shield-check",
+                "title": "ضمان لمدة سنة",
+                "subtitle": "علي الأجهزة"
+              },
+              "blocks": {}
+            },
+            "dev3_trust_exchange": {
+              "type": "_trust-item",
+              "settings": {
+                "icon": "exchange",
+                "title": "استبدال واسترجاع",
+                "subtitle": "خلال 7 أيام"
+              },
+              "blocks": {}
+            },
+            "dev3_trust_shipping": {
+              "type": "_trust-item",
+              "settings": {
+                "icon": "package",
+                "title": "شحن مجاني",
+                "subtitle": "للطلبات من 2000 جنيه فأكثر",
+                "subtitle_mobile": "للطلبات من 2000 جنيه"
+              },
+              "blocks": {}
+            },
+            "dev3_trust_delivery": {
+              "type": "_trust-item",
+              "settings": {
+                "icon": "truck",
+                "title": "توصيل سريع",
+                "subtitle": "لجميع أنحاء مصر"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dev3_trust_warranty",
+            "dev3_trust_exchange",
+            "dev3_trust_shipping",
+            "dev3_trust_delivery"
+          ]
         }
       },
       "block_order": [
         "text_YLPk4p",
-        "button_H9gpTf"
+        "button_H9gpTf",
+        "dev3_hero_stage",
+        "dev3_hero_content",
+        "dev3_trust_strip"
       ],
       "name": "t:names.hero",
       "settings": {
+        "design": "dev3",
         "media_type_1": "image",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
@@ -78,17 +269,17 @@
         "vertical_alignment_flex_direction_column": "flex-end",
         "gap": 24,
         "section_width": "page-width",
-        "section_height": "medium",
+        "section_height": "auto",
         "section_height_custom": 50,
         "background_color": "rgba(0,0,0,0)",
-        "toggle_overlay": true,
+        "toggle_overlay": false,
         "overlay_color": "#12121266",
         "overlay_style": "solid",
         "gradient_direction": "to bottom",
         "blurred_reflection": false,
         "reflection_opacity": 75,
-        "padding-block-start": 100,
-        "padding-block-end": 72
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     },
     "product_list_fa6P9H": {

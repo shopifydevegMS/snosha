@@ -1234,5 +1234,13 @@
     "collection_card": "بطاقة المجموعة",
     "image_override": "صورة مخصصة",
     "image_override_info": "اختياري. تستبدل صورة المجموعة في هذه البطاقة فقط. العنوان والرابط يأتيان دائمًا من المجموعة."
+  },
+  "dev3_settings": {
+    "design": "التصميم",
+    "design_default": "افتراضي",
+    "design_dev3": "Design 1",
+    "background": "تدرج الخلفية",
+    "background_mobile": "تدرج الخلفية على الجوال",
+    "background_mobile_info": "يُستخدم على الشاشات الأصغر من 990px. اتركه فارغًا لاستخدام تدرج الخلفية."
   }
 }

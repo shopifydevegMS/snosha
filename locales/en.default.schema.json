@@ -1341,5 +1341,13 @@
     "collection_card": "Collection card",
     "image_override": "Custom image",
     "image_override_info": "Optional. Replaces the collection image on this card only. Title and link always come from the collection."
+  },
+  "dev3_settings": {
+    "design": "Design",
+    "design_default": "Default",
+    "design_dev3": "Design 1",
+    "background": "Background gradient",
+    "background_mobile": "Mobile background gradient",
+    "background_mobile_info": "Used below 990px. Leave empty to use the background gradient."
   }
 }
