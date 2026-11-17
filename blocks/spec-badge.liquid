@@ -1,0 +1,96 @@
+<!-- spec-badge.liquid -->
+{%- doc -%}
+  Renders a small specification badge: an icon tile (SVG code setting) and a short label.
+  Static and informational. Colors fall back to the parent section's accent colors
+  (--dev2-f1-accent-*) and then to the theme's color variables.
+
+  @example
+  {% content_for 'block', type: 'spec-badge', id: 'spec' %}
+{%- enddoc -%}
+
+{%- liquid
+  assign block_settings = block.settings
+  assign has_icon = false
+  if block_settings.icon_svg != blank
+    assign has_icon = true
+  endif
+-%}
+
+{%- if block_settings.label != blank or has_icon -%}
+  <div
+    class="dev2-spec-badge"
+    style="
+      {%- if block_settings.text_color != blank %} --dev2-spec-text: {{ block_settings.text_color }};{% endif -%}
+      {%- if block_settings.background_color != blank %} --dev2-spec-background: {{ block_settings.background_color }};{% endif -%}
+      {%- if block_settings.border_color != blank %} --dev2-spec-border: {{ block_settings.border_color }};{% endif -%}
+      {%- if block_settings.icon_background_start != blank %} --dev2-spec-icon-start: {{ block_settings.icon_background_start }};{% endif -%}
+      {%- if block_settings.icon_background_end != blank %} --dev2-spec-icon-end: {{ block_settings.icon_background_end }};{% endif -%}
+    "
+    {{ block.shopify_attributes }}
+  >
+    {%- if has_icon -%}
+      <span class="dev2-spec-badge__icon" aria-hidden="true">{{ block_settings.icon_svg }}</span>
+    {%- endif -%}
+    {%- if block_settings.label != blank -%}
+      <span class="dev2-spec-badge__label">{{ block_settings.label | escape }}</span>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:dev2_settings.spec_badge",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:dev2_settings.spec_badge_label",
+      "default": "t:dev2_settings.spec_badge_label_default"
+    },
+    {
+      "type": "html",
+      "id": "icon_svg",
+      "label": "t:dev2_settings.spec_badge_icon_svg",
+      "info": "t:dev2_settings.icon_svg_info",
+      "default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8.5 3H15.5V6.5C15.95 6.86 16.32 7.32 16.58 7.84C16.84 8.35 16.98 8.92 17 9.5V19C17 19.53 16.79 20.04 16.41 20.41C16.04 20.79 15.53 21 15 21H9C8.47 21 7.96 20.79 7.59 20.41C7.21 20.04 7 19.53 7 19V9.5C7.02 8.92 7.16 8.35 7.42 7.84C7.68 7.32 8.05 6.86 8.5 6.5V3Z\"/><path d=\"M7 14H17\"/></svg>"
+    },
+    {
+      "type": "header",
+      "content": "t:content.colors",
+      "info": "t:dev2_settings.colors_default_info"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:dev2_settings.text_color"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:dev2_settings.background_color"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "t:dev2_settings.border_color"
+    },
+    {
+      "type": "color",
+      "id": "icon_background_start",
+      "label": "t:dev2_settings.icon_background_start"
+    },
+    {
+      "type": "color",
+      "id": "icon_background_end",
+      "label": "t:dev2_settings.icon_background_end"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:dev2_settings.spec_badge",
+      "category": "t:categories.basic"
+    }
+  ]
+}
+{% endschema %}

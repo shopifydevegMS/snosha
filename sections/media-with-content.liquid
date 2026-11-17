@@ -10,7 +10,37 @@
   if section.settings.media_position == 'right'
     assign media_class_modifier = media_class_modifier | append: ' media-with-content--media-right'
   endif
+
+  # dev2: opt-in product promotion design (assets/dev2.css); hidden on the live storefront without a product
+  if section.settings.design == 'dev2'
+    assign media_class_modifier = media_class_modifier | append: ' dev2-f1'
+    if section.settings.product == blank and request.design_mode == false
+      assign media_class_modifier = media_class_modifier | append: ' dev2-f1--hidden'
+    endif
+  endif
 %}
+
+{%- if section.settings.design == 'dev2' -%}
+  {% style %}
+    #shopify-section-{{ section.id }} {
+      {%- if section.settings.dev2_accent_start != blank %}
+        --dev2-f1-accent-start: {{ section.settings.dev2_accent_start }};
+      {%- endif %}
+      {%- if section.settings.dev2_accent_end != blank %}
+        --dev2-f1-accent-end: {{ section.settings.dev2_accent_end }};
+      {%- endif %}
+      {%- if section.settings.dev2_highlight_color != blank %}
+        --dev2-f1-highlight: {{ section.settings.dev2_highlight_color }};
+      {%- endif %}
+      {%- if section.settings.dev2_wave_color != blank %}
+        --dev2-f1-soft: {{ section.settings.dev2_wave_color }};
+      {%- endif %}
+      {%- if section.settings.dev2_tint_color != blank %}
+        --dev2-f1-tint: {{ section.settings.dev2_tint_color }};
+      {%- endif %}
+    }
+  {% endstyle %}
+{%- endif -%}
 
 {% liquid
   if section.settings.background_color != blank
@@ -49,6 +79,9 @@
     data-shopify-visual-preview
   {% endif %}
 >
+  {%- if section.settings.design == 'dev2' and section.settings.dev2_show_decorations -%}
+    {% render 'product-promo-decor', section: section %}
+  {%- endif -%}
   {% content_for 'block', type: '_media-without-appearance', id: 'media' %}
 
   {% content_for 'block', type: '_content-without-appearance', id: 'content' %}
@@ -212,6 +245,86 @@
     "groups": ["header"]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "t:dev2_settings.design",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:dev2_settings.design_default"
+        },
+        {
+          "value": "dev2",
+          "label": "t:dev2_settings.design_dev2"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:dev2_settings.promo_header",
+      "info": "t:dev2_settings.promo_info",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:settings.product",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "dev2_show_decorations",
+      "label": "t:dev2_settings.show_decorations",
+      "default": false,
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "text",
+      "id": "dev2_watermark_text",
+      "label": "t:dev2_settings.watermark_text",
+      "info": "t:dev2_settings.watermark_text_info",
+      "visible_if": "{{ section.settings.design == 'dev2' and section.settings.dev2_show_decorations }}"
+    },
+    {
+      "type": "html",
+      "id": "dev2_sparkle_icon_svg",
+      "label": "t:dev2_settings.sparkle_icon_svg",
+      "info": "t:dev2_settings.icon_svg_info",
+      "visible_if": "{{ section.settings.design == 'dev2' and section.settings.dev2_show_decorations }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_accent_start",
+      "label": "t:dev2_settings.accent_start",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_accent_end",
+      "label": "t:dev2_settings.accent_end",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_highlight_color",
+      "label": "t:dev2_settings.highlight_color",
+      "info": "t:dev2_settings.highlight_color_info",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_wave_color",
+      "label": "t:dev2_settings.wave_color",
+      "visible_if": "{{ section.settings.design == 'dev2' and section.settings.dev2_show_decorations }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_tint_color",
+      "label": "t:dev2_settings.tint_color",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
     {
       "type": "select",
       "id": "media_position",

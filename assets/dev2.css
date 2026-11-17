@@ -331,3 +331,453 @@
 #header-component.dev2-header[data-menu-style='drawer'] .header__row--top {
   --dev2-header-icon-color: var(--dev2-header-icon-color-mobile, currentcolor);
 }
+
+/* ==== dev2-f1 — F1 Banner / product promotion (sections/media-with-content.liquid, "Design 1") ==== */
+/* Figma 190:3851 (desktop) and 190:4167 (mobile). Scope class on the section's .section grid.
+   Native blocks: product-title (badge), text (heading), product-description, group + spec-badge, button,
+   and the media block showing the product's featured image. Decorations: snippets/product-promo-decor.liquid.
+   Colors come from the section's dev2 color settings (--dev2-f1-*, inline {% style %}), with theme fallbacks. */
+.dev2-f1 {
+  --dev2-f1-start: var(--dev2-f1-accent-start, var(--color-primary-button-background));
+  --dev2-f1-end: var(--dev2-f1-accent-end, var(--color-primary-button-background));
+  --dev2-f1-mark: var(--dev2-f1-highlight, var(--color-foreground));
+  --dev2-f1-wave: var(--dev2-f1-soft, var(--color-border));
+  --dev2-f1-bg-end: var(--dev2-f1-tint, var(--color-background));
+
+  /* Figma stage: dotted arc 510px with the 438px product image (desktop), 320px / 280px (mobile) */
+  --dev2-f1-orbit: 510px;
+  --dev2-f1-product: 438px;
+  --dev2-f1-product-ratio: calc(438 / 510);
+}
+
+/* Live storefront without a selected product: hide the banner instead of a broken title/link */
+.dev2-f1.dev2-f1--hidden {
+  display: none;
+}
+
+/* Section: Figma white → tint gradient; layers stack inside the section.
+   Out-ranks the native `.shopify-section:not(.header-section) :is(.section, …) { background: transparent }`. */
+.shopify-section .dev2-f1.dev2-f1.dev2-f1 {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  background-image: linear-gradient(68.2deg, var(--color-background) 5.73%, var(--dev2-f1-bg-end) 94.27%);
+}
+
+/* -- Background waves (section-wide, bottom anchored; Figma back wave y 390–560, front wave y 203–610 of 520) -- */
+.dev2-f1 .dev2-f1__backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.dev2-f1 .dev2-f1__wave {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  display: block;
+  inline-size: 100%;
+}
+
+.dev2-f1 .dev2-f1__wave--back {
+  z-index: 0;
+  block-size: 170px;
+  margin-block-end: -40px;
+}
+
+.dev2-f1 .dev2-f1__wave--front {
+  z-index: 1;
+  block-size: 407px;
+  margin-block-end: -90px;
+}
+
+.dev2-f1 .dev2-f1__wave--back-mobile {
+  display: none;
+}
+
+.dev2-f1 .dev2-f1__stop--soft {
+  stop-color: var(--dev2-f1-wave);
+  stop-opacity: 0.95;
+}
+
+.dev2-f1 .dev2-f1__stop--tint {
+  stop-color: var(--dev2-f1-bg-end);
+  stop-opacity: 0.95;
+}
+
+.dev2-f1 .dev2-f1__stop--base {
+  stop-color: var(--color-background);
+  stop-opacity: 0.95;
+}
+
+.dev2-f1 .dev2-f1__stop--soft-light {
+  stop-color: var(--dev2-f1-wave);
+  stop-opacity: 0.6;
+}
+
+.dev2-f1 .dev2-f1__stop--accent {
+  stop-color: var(--dev2-f1-start);
+}
+
+.dev2-f1 .dev2-f1__stop--highlight {
+  stop-color: var(--dev2-f1-mark);
+}
+
+/* -- Product stage: two decorative layers + the native media block share the media grid area --
+   direction: ltr is geometry only (04 §3.4): the decorative composition keeps Figma's physical
+   placement in every locale; it holds no text except the Latin background text. */
+.dev2-f1 .dev2-f1__stage {
+  grid-area: media;
+  display: grid;
+  place-items: center;
+  padding-block: 5px;
+  container-type: inline-size;
+  direction: ltr;
+  pointer-events: none;
+}
+
+.dev2-f1 .dev2-f1__stage--under {
+  z-index: 0;
+}
+
+.dev2-f1 .dev2-f1__stage--over {
+  z-index: 2;
+}
+
+.dev2-f1 .dev2-f1__orbit {
+  --dev2-f1-orbit-size: min(var(--dev2-f1-orbit), 100cqi);
+
+  position: relative;
+  inline-size: var(--dev2-f1-orbit-size);
+  aspect-ratio: 1;
+}
+
+/* Figma "Arc": 2px dashes (≈3px on, 12px off), accent → highlight gradient, 50% opacity */
+.dev2-f1 .dev2-f1__arc {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+
+.dev2-f1 .dev2-f1__arc circle {
+  r: calc(50% - 1px);
+  fill: none;
+  stroke-width: 2px;
+  stroke-dasharray: 3px 12px;
+  stroke-opacity: 0.5;
+}
+
+/* Figma "Glow": accent ellipse at 20% with a 75px blur, above the arc's top-right */
+.dev2-f1 .dev2-f1__glow {
+  position: absolute;
+  inset-inline-start: 69.6%;
+  inset-block-start: -28.4%;
+  inline-size: 62.7%;
+  block-size: 54.9%;
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--dev2-f1-start) 20%, transparent);
+  filter: blur(75px);
+}
+
+/* Figma "F1 Watermark": 380px bold text (74.5% of the 510px arc), highlight color at 5% */
+.dev2-f1 .dev2-f1__watermark {
+  position: absolute;
+  inset-inline-start: -26.3%;
+  inset-block-start: -20.6%;
+  font-family: var(--font-heading--family);
+  font-weight: var(--font-heading--weight);
+  font-size: calc(var(--dev2-f1-orbit-size) * 0.745);
+  line-height: normal;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--dev2-f1-mark) 5%, transparent);
+}
+
+/* Bubbles and sparkles: Figma positions as % of the arc box (desktop), px sizes */
+.dev2-f1 .dev2-f1__bubble,
+.dev2-f1 .dev2-f1__sparkle {
+  position: absolute;
+  inset-inline-start: var(--dev2-f1-x);
+  inset-block-start: var(--dev2-f1-y);
+  inline-size: var(--dev2-f1-size);
+  aspect-ratio: 1;
+}
+
+.dev2-f1 .dev2-f1__bubble {
+  border-radius: 50%;
+  background-color: color-mix(in srgb, var(--dev2-f1-start) 22%, transparent);
+}
+
+/* Ring bubbles: 1.5px outline at 30% */
+.dev2-f1 :is(.dev2-f1__bubble--3, .dev2-f1__bubble--4, .dev2-f1__bubble--6, .dev2-f1__bubble--7, .dev2-f1__bubble--9) {
+  background-color: transparent;
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--dev2-f1-start) 30%, transparent);
+}
+
+.dev2-f1 .dev2-f1__bubble--1 { --dev2-f1-x: 106.1%; --dev2-f1-y: 68%; --dev2-f1-size: 18px; }
+.dev2-f1 .dev2-f1__bubble--2 { --dev2-f1-x: 117.1%; --dev2-f1-y: 57.1%; --dev2-f1-size: 10px; }
+.dev2-f1 .dev2-f1__bubble--3 { --dev2-f1-x: 102.5%; --dev2-f1-y: 44.5%; --dev2-f1-size: 8px; }
+.dev2-f1 .dev2-f1__bubble--4 { --dev2-f1-x: 113.1%; --dev2-f1-y: 32%; --dev2-f1-size: 14px; }
+.dev2-f1 .dev2-f1__bubble--5 { --dev2-f1-x: 11%; --dev2-f1-y: 62.7%; --dev2-f1-size: 18px; }
+.dev2-f1 .dev2-f1__bubble--6 { --dev2-f1-x: 7.5%; --dev2-f1-y: 39.2%; --dev2-f1-size: 8px; }
+.dev2-f1 .dev2-f1__bubble--7 { --dev2-f1-x: 18%; --dev2-f1-y: 26.7%; --dev2-f1-size: 14px; }
+.dev2-f1 .dev2-f1__bubble--8 { --dev2-f1-x: 97.8%; --dev2-f1-y: 22.5%; --dev2-f1-size: 6px; }
+.dev2-f1 .dev2-f1__bubble--9 { --dev2-f1-x: -8.8%; --dev2-f1-y: 26.5%; --dev2-f1-size: 12px; }
+
+.dev2-f1 .dev2-f1__sparkle {
+  color: var(--dev2-f1-mark);
+  opacity: 0.7;
+}
+
+.dev2-f1 .dev2-f1__sparkle svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.dev2-f1 .dev2-f1__sparkle--1 { --dev2-f1-x: 93.1%; --dev2-f1-y: 16.7%; --dev2-f1-size: 22px; }
+.dev2-f1 .dev2-f1__sparkle--2 { --dev2-f1-x: -2.9%; --dev2-f1-y: 77.5%; --dev2-f1-size: 16px; opacity: 0.5; }
+.dev2-f1 .dev2-f1__sparkle--3 { --dev2-f1-x: -2%; --dev2-f1-y: 11.4%; --dev2-f1-size: 22px; }
+
+/* -- Product image: the native media block (product featured image via dynamic source), centered on the arc
+   at Figma's product/arc ratio. Transparent so the stage shows through; image fit from "contain". */
+.dev2-f1.dev2-f1 .media-block {
+  z-index: 2;
+  align-self: center;
+  justify-self: center;
+  inline-size: min(var(--dev2-f1-product), calc(100% * var(--dev2-f1-product-ratio)));
+  aspect-ratio: 1;
+  min-height: 0;
+  background: transparent;
+}
+
+/* The product image fills the square box and keeps its proportions (any product photo ratio) */
+.dev2-f1.dev2-f1 .media-block .media-block__media {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+}
+
+/* -- Copy column -- */
+/* Authored Arabic: text boundary keeps rtl in every locale (04 §3.1); alignment stays logical. */
+.dev2-f1.dev2-f1 .media-with-content__content {
+  position: relative;
+  z-index: 2;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Figma "F1 Copy": 560px text column with 24px inner padding inside the 20px container padding.
+   Out-ranks the native page-width / media-right content padding rules (0,5,0). */
+@media screen and (min-width: 750px) {
+  .dev2-f1.dev2-f1.dev2-f1.media-with-content .media-with-content__content > .group-block-content {
+    padding-block: var(--padding-xl);
+    padding-inline-start: calc(var(--padding-xl) + var(--padding-2xl));
+    padding-inline-end: max(var(--page-margin), calc(100% - 560px - var(--padding-xl) - var(--padding-2xl)));
+  }
+}
+
+/* Tablet (750–989px): two half columns are too narrow for the 560px copy (3-line heading, 3 spec rows),
+   so the banner stacks like mobile — stage on top at the desktop arc size, copy below. Uses the theme's
+   990px breakpoint; out-ranks the native page-width/medium/media-right grid rules. */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .dev2-f1.dev2-f1.dev2-f1.media-with-content {
+    --media-with-content-grid-columns: var(--full-page-grid-with-margins);
+
+    grid-template-areas: 'media media media' 'content content content';
+  }
+}
+
+/* Heading: bold text takes the highlight color (Figma "بخطوة أسهل") */
+.dev2-f1.dev2-f1 .text-block strong {
+  color: var(--dev2-f1-mark);
+}
+
+/* Badge: product title with the Figma accent gradient (left → right) and a soft accent shadow */
+.dev2-f1.dev2-f1 [ref='productTitleLink'] > .text-block--background {
+  background-image: linear-gradient(to right, var(--dev2-f1-start), var(--dev2-f1-end));
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--dev2-f1-end) 30%, transparent);
+  line-height: calc(18 / 12);
+}
+
+/* Specs row: wraps on every width (native row groups only wrap below 750px); Figma gaps 10px / 8px */
+.dev2-f1.dev2-f1 .layout-panel-flex--row:has(> .dev2-spec-badge) {
+  flex-wrap: wrap;
+}
+
+/* CTA: Figma gradient button, 157px wide, 14px / 32px padding, accent shadow; the gradient
+   slides toward the end color on hover. Native focus outline is kept. */
+.dev2-f1.dev2-f1 .media-with-content__content .button:not(.button-secondary, .button-unstyled) {
+  --button-padding-block: 14px;
+  --button-padding-inline: 32px;
+
+  min-inline-size: 157px;
+  /* Figma Desktop/Button CTA 16 / 26 on every width */
+  font-size: var(--font-size--md);
+  line-height: calc(26 / 16);
+  justify-content: center;
+  border: 0;
+  background-color: var(--dev2-f1-end);
+  background-image: linear-gradient(to right, var(--dev2-f1-start), var(--dev2-f1-end), var(--dev2-f1-end));
+  background-size: 200% 100%;
+  background-position: 0 0;
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--dev2-f1-end) 35%, transparent);
+  transition: background-position var(--animation-speed) var(--animation-easing);
+}
+
+.dev2-f1.dev2-f1 .media-with-content__content .button:not(.button-secondary, .button-unstyled):hover {
+  background-position: 100% 0;
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--dev2-f1-end) 35%, transparent);
+}
+
+/* -- Mobile (< 750px): Figma 190:4167 — stage on top (arc 320 / product 280, 330px tall), copy below -- */
+@media screen and (max-width: 749px) {
+  .dev2-f1 {
+    --dev2-f1-orbit: 320px;
+    --dev2-f1-product: 280px;
+    --dev2-f1-product-ratio: calc(280 / 320);
+  }
+
+  .shopify-section .dev2-f1.dev2-f1.dev2-f1 {
+    background-image: linear-gradient(85.6deg, var(--color-background) 5.73%, var(--dev2-f1-bg-end) 94.27%);
+  }
+
+  .dev2-f1 .dev2-f1__wave--back,
+  .dev2-f1 .dev2-f1__wave--front {
+    display: none;
+  }
+
+  /* Figma mobile wave: 44.8px, on the section's bottom edge */
+  .dev2-f1 .dev2-f1__wave--back-mobile {
+    display: block;
+    z-index: 0;
+    block-size: 44.8px;
+  }
+
+  /* Arc at 20px from the top of the 330px stage, overlapping the copy by 10px */
+  .dev2-f1 .dev2-f1__stage {
+    place-items: start center;
+    padding-block: 20px 0;
+  }
+
+  .dev2-f1 .dev2-f1__orbit {
+    margin-block-end: -10px;
+  }
+
+  .dev2-f1.dev2-f1 .media-block {
+    align-self: start;
+    margin-block-start: 40px;
+  }
+
+  .dev2-f1 .dev2-f1__glow {
+    inset-inline-start: 51.6%;
+    inset-block-start: -34.4%;
+    inline-size: 81.3%;
+    block-size: 68.8%;
+    filter: blur(50px);
+  }
+
+  /* Figma: 210px text below the stage, behind the copy */
+  .dev2-f1 .dev2-f1__watermark {
+    inset-inline-start: -17.2%;
+    inset-block-start: 104.4%;
+    font-size: calc(var(--dev2-f1-orbit-size) * 0.656);
+  }
+
+  .dev2-f1 :is(.dev2-f1__bubble--4, .dev2-f1__bubble--6, .dev2-f1__bubble--7, .dev2-f1__bubble--8, .dev2-f1__bubble--9, .dev2-f1__sparkle--3) {
+    display: none;
+  }
+
+  .dev2-f1 .dev2-f1__bubble--1 { --dev2-f1-x: 92.2%; --dev2-f1-y: 87.5%; }
+  .dev2-f1 .dev2-f1__bubble--2 { --dev2-f1-x: 99.1%; --dev2-f1-y: 71.9%; }
+  .dev2-f1 .dev2-f1__bubble--3 { --dev2-f1-x: 88.4%; --dev2-f1-y: 59.4%; }
+  .dev2-f1 .dev2-f1__bubble--5 { --dev2-f1-x: -1.6%; --dev2-f1-y: 62.5%; }
+  .dev2-f1 .dev2-f1__sparkle--1 { --dev2-f1-x: 92.2%; --dev2-f1-y: 7.5%; }
+  .dev2-f1 .dev2-f1__sparkle--2 { --dev2-f1-x: 1.6%; --dev2-f1-y: 87.5%; }
+
+  /* Figma "F1 Container": 24px side padding, 36px bottom; badge/heading/description 12px apart,
+     18px to the specs, 32px to the button */
+  /* The native grid already insets the content column by the page margin; add the rest of Figma's 24px */
+  .dev2-f1.dev2-f1.dev2-f1.media-with-content .media-with-content__content > .group-block-content {
+    padding-block: 0 36px;
+    padding-inline: max(0px, calc(var(--padding-2xl) - var(--page-margin)));
+    row-gap: 12px;
+  }
+
+  .dev2-f1.dev2-f1 .media-with-content__content > .group-block-content > :has(.dev2-spec-badge) {
+    margin-block-start: 6px;
+  }
+
+  .dev2-f1.dev2-f1 .media-with-content__content > .group-block-content > .button {
+    margin-block-start: 20px;
+  }
+
+  /* Figma Mobile/H2 (24 / 38, accent weight) = the theme's h2 preset */
+  .dev2-f1.dev2-f1 .text-block.h1 > * {
+    font-family: var(--font-h2--family);
+    font-weight: var(--font-h2--weight);
+    font-size: var(--font-h2--size);
+    line-height: var(--font-h2--line-height);
+  }
+
+  /* Figma Mobile/Body Small: 13 / 22 */
+  .dev2-f1.dev2-f1 .text-block.paragraph {
+    font-size: var(--font-size--xs);
+    line-height: calc(22 / 13);
+  }
+
+  .dev2-f1.dev2-f1 .layout-panel-flex--row:has(> .dev2-spec-badge) {
+    row-gap: 8px;
+  }
+}
+
+/* ==== dev2-spec-badge — specification badge block (blocks/spec-badge.liquid) ==== */
+/* Figma "Spec": white tile, 1px soft border, 12px radius, 26px gradient icon tile (8px radius), 12 / 20 label.
+   Authored Arabic: rtl text boundary, so the icon leads on the right in every locale. */
+.dev2-spec-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  max-inline-size: 100%;
+  /* Figma 6px / 10px / 12px padding with the 1px border drawn inside the 38px tile */
+  padding-block: 5px;
+  padding-inline: 9px 11px;
+  border: 1px solid var(--dev2-spec-border, var(--color-border));
+  border-radius: 12px;
+  background-color: var(--dev2-spec-background, var(--color-background));
+  color: var(--dev2-spec-text, var(--color-foreground));
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.dev2-spec-badge__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 26px;
+  block-size: 26px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-image: linear-gradient(
+    to bottom,
+    var(--dev2-spec-icon-start, var(--dev2-f1-start, var(--color-foreground))),
+    var(--dev2-spec-icon-end, var(--dev2-f1-end, var(--color-foreground)))
+  );
+  color: var(--color-background);
+}
+
+.dev2-spec-badge__icon svg {
+  display: block;
+  inline-size: 24px;
+  block-size: 24px;
+}
+
+.dev2-spec-badge__label {
+  min-inline-size: 0;
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--2xs);
+  line-height: calc(20 / 12);
+}
