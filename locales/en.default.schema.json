@@ -1309,5 +1309,27 @@
     "weight_mobile": "Mobile weight",
     "mobile_typography_info": "Applies below 750px when the announcement bar Design is \"Design 1\".",
     "same_as_desktop": "Same as desktop"
+  },
+  "dev4_settings": {
+    "design": "Design",
+    "design_default": "Default",
+    "design_dev4": "Design 1",
+    "dev4_design_header": "Design 1",
+    "layout_info": "Cards: the column count plus half of the next card. Desktop uses \"Columns\" and \"Horizontal gap\" above.",
+    "columns_tablet": "Tablet columns",
+    "columns_mobile": "Mobile columns",
+    "columns_gap_mobile": "Mobile horizontal gap",
+    "section_gap": "Heading to carousel gap",
+    "section_gap_mobile": "Mobile heading and progress gap",
+    "padding_bottom_mobile": "Mobile bottom padding",
+    "arrow_border": "Arrow border",
+    "arrow_icon": "Arrow icon",
+    "arrow_shadow": "Arrow shadow",
+    "progress_track": "Mobile progress track",
+    "progress_start": "Mobile progress start",
+    "progress_end": "Mobile progress end",
+    "collection_card": "Collection card",
+    "image_override": "Custom image",
+    "image_override_info": "Optional. Replaces the collection image on this card only. Title and link always come from the collection."
   }
 }

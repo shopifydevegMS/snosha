@@ -1,0 +1,15 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="vector" clip-path="url(#clip0_0_368)">
+<path id="Vector" d="M4 7.3H14.2V15.9H6.2" fill="white" fill-opacity="0.55" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke="#176BB0"/>
+<path id="Vector_2" d="M4 7.3H14.2V15.9H6.2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke="#176BB0"/>
+<path id="Vector_3" d="M14.2 10.3H17.7L20.5 13.1V15.9H14.2V10.3Z" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke="#176BB0"/>
+<path id="Vector_4" d="M8.2 19.9C9.19411 19.9 10 19.0941 10 18.1C10 17.1059 9.19411 16.3 8.2 16.3C7.20589 16.3 6.4 17.1059 6.4 18.1C6.4 19.0941 7.20589 19.9 8.2 19.9Z" fill="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke="#176BB0"/>
+<path id="Vector_5" d="M16.6 19.9C17.5941 19.9 18.4 19.0941 18.4 18.1C18.4 17.1059 17.5941 16.3 16.6 16.3C15.6059 16.3 14.8 17.1059 14.8 18.1C14.8 19.0941 15.6059 19.9 16.6 19.9Z" fill="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke="#176BB0"/>
+<path id="Vector_6" d="M1.2 10.2H4.2M0.8 13.2H4.2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke="#60C1E1"/>
+</g>
+<defs>
+<clipPath id="clip0_0_368">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg>

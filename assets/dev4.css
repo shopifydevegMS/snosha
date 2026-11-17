@@ -1,0 +1,157 @@
+/*
+ * dev4.css — styles for session "dev4".
+ * Loaded once from snippets/stylesheets.liquid. Every rule is anchored on a .dev4- class.
+ * Per-instance values arrive as --dev4-* variables from the inline {% style %} of the section.
+ */
+
+/* ==== dev4-collection-card — collection card slide (blocks/_collection-carousel-card.liquid) ==== */
+
+/* Base slide size in any carousel: the same formula as the native `.carousel-content slideshow-slides > .card`. */
+.carousel-content slideshow-slides > .dev4-collection-card {
+  flex: 0 0 auto;
+  width: calc(
+    (100% - (var(--carousel-gap, 8px) * (var(--carousel-mobile-columns, 2) - 1)) - var(--peek-next-slide-size, 0px)) /
+      var(--carousel-mobile-columns, 2)
+  );
+}
+
+@media screen and (min-width: 750px) {
+  .carousel-content slideshow-slides > .dev4-collection-card {
+    width: calc(
+      (100% - (var(--carousel-gap, 8px) * (var(--carousel-columns, 4) - 1)) - var(--peek-next-slide-size, 0px)) /
+        var(--carousel-columns, 4)
+    );
+  }
+}
+
+/* Arabic content inside a page whose direction follows the locale: one direction boundary per card. */
+.dev4-collection-card .collection-card__content {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* ==== dev4-collections — "05 Collections" carousel (sections/carousel.liquid, Design - dev4) ==== */
+
+.dev4-collections {
+  --dev4-arrow-size: 44px;
+  --dev4-arrow-icon-size: 22px;
+  --dev4-progress-height: 4px;
+}
+
+/* Heading → carousel spacing. Out-ranks `.section-carousel { row-gap }` (inline --gap: 12px). */
+.dev4-collections.dev4-collections {
+  row-gap: var(--dev4-section-gap);
+}
+
+/* Arabic heading: direction boundary on the header group; alignment stays a block setting. */
+.dev4-collections > .group-block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Track: N full cards + half a card visible between the start gutter and the far viewport edge
+   (Figma: 4 + ½ at 1480px, 3 + ½ at 390px). 100cqw = the full-width <slideshow-container>;
+   --dev4-gutter is the page-grid margin column (same value as --util-page-margin-offset). */
+.dev4-collections.dev4-collections .carousel-content slideshow-slides {
+  --dev4-columns: var(--carousel-columns, 4);
+  --dev4-gutter: max(var(--page-margin), calc((100cqw - var(--page-content-width)) / 2));
+  --slideshow-gap: var(--carousel-gap, 8px);
+}
+
+.dev4-collections.dev4-collections .carousel-content slideshow-slides > .dev4-collection-card {
+  width: calc(
+    (100cqw - var(--dev4-gutter) - (var(--slideshow-gap) * var(--dev4-columns))) / (var(--dev4-columns) + 0.5)
+  );
+}
+
+/* Arrows: always visible (no hover slide-in), centred on the edge of the start gutter like Figma.
+   Triple class out-ranks base.css `slideshow-container[animate-arrows]:hover > slideshow-arrows .slideshow-control`.
+   Disabled arrows keep the native `.carousel-content .slideshow-control[disabled] { display: none }`. */
+.dev4-collections.dev4-collections slideshow-arrows {
+  padding-inline: max(0px, calc(var(--util-page-margin-offset) - (var(--dev4-arrow-size) / 2)));
+}
+
+.dev4-collections.dev4-collections.dev4-collections slideshow-arrows .slideshow-control {
+  /* Figma chevron: 2px stroke at 22px; the theme caret is drawn on a 14-unit viewBox, scaled 22/14. */
+  --icon-stroke-width: calc(2px * 14 / 22);
+
+  opacity: 1;
+  animation: none;
+  width: var(--dev4-arrow-size);
+  height: var(--dev4-arrow-size);
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--color-background);
+  color: var(--dev4-arrow-icon, var(--color-foreground));
+  /* Hairline border as an inset shadow so the 44px box stays 44px. */
+  box-shadow:
+    inset 0 0 0 1px var(--dev4-arrow-border, var(--color-border)),
+    0 8px 18px var(--dev4-arrow-shadow, transparent);
+}
+
+.dev4-collections.dev4-collections.dev4-collections slideshow-arrows .slideshow-control .svg-wrapper,
+.dev4-collections.dev4-collections.dev4-collections slideshow-arrows .slideshow-control svg {
+  width: var(--dev4-arrow-icon-size);
+  height: var(--dev4-arrow-icon-size);
+}
+
+/* Mobile progress indicator: visual only, never interactive. */
+.dev4-collections__progress {
+  display: none;
+}
+
+.dev4-collections__progress-fill {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: calc(var(--dev4-progress-offset, 0) * 100%);
+  inline-size: calc(var(--dev4-progress-size, 1) * 100%);
+  border-radius: inherit;
+  /* Physical "to right" on purpose: Figma's gradient runs light (left) → dark (right) in both directions. */
+  background-image: linear-gradient(
+    to right,
+    var(--dev4-progress-start, var(--color-foreground)),
+    var(--dev4-progress-end, var(--color-foreground))
+  );
+}
+
+@media screen and (max-width: 749px) {
+  .dev4-collections.dev4-collections {
+    row-gap: var(--dev4-section-gap-mobile);
+    padding-block-end: var(--dev4-padding-bottom-mobile);
+  }
+
+  .dev4-collections.dev4-collections .carousel-content slideshow-slides {
+    --dev4-columns: var(--dev4-columns-mobile, 3);
+    --slideshow-gap: var(--dev4-columns-gap-mobile, var(--carousel-gap, 8px));
+  }
+
+  .dev4-collections.dev4-collections slideshow-arrows {
+    display: none;
+  }
+
+  /* Card title: Figma mobile is 11px — the theme's mobile h6 size and line height. */
+  .dev4-collections.dev4-collections .dev4-collection-card .text-block > * {
+    font-size: var(--font-h6--size);
+    line-height: var(--font-h6--line-height);
+  }
+
+  .dev4-collections__progress {
+    display: block;
+    position: relative;
+    block-size: var(--dev4-progress-height);
+    border-radius: calc(var(--dev4-progress-height) / 2);
+    overflow: hidden;
+    pointer-events: none;
+    background-color: var(--dev4-progress-track, rgb(var(--color-foreground-rgb) / var(--opacity-10)));
+  }
+
+  .dev4-collections__progress[data-overflow='false'] {
+    visibility: hidden;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .dev4-collections.dev4-collections .carousel-content slideshow-slides {
+    --dev4-columns: var(--dev4-columns-tablet, 3);
+  }
+}

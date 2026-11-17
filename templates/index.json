@@ -276,10 +276,291 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "dev4_collections": {
+      "type": "carousel",
+      "name": "مجموعات SNOSHA",
+      "blocks": {
+        "static-header": {
+          "type": "group",
+          "static": true,
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "center",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 6,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "dev4_heading": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h2>مجموعات SNOSHA</h2>",
+                "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "center",
+                "type_preset": "h2",
+                "font": "var(--font-accent--family)",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dev4_heading"
+          ]
+        },
+        "static-carousel-content": {
+          "type": "_carousel-content",
+          "static": true,
+          "settings": {
+            "height": "fit",
+            "position": "top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "dev4_card_brush": {
+              "type": "_collection-carousel-card",
+              "name": "فرشاة الأسنان الكهربائية",
+              "settings": {
+                "image_ratio": "square",
+                "horizontal_alignment": "center",
+                "collection_card_gap": 18,
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 12
+              },
+              "blocks": {
+                "dev4-title": {
+                  "type": "collection-title",
+                  "static": true,
+                  "settings": {
+                    "width": "100%",
+                    "max_width": "none",
+                    "alignment": "center",
+                    "type_preset": "h3",
+                    "font": "var(--font-accent--family)",
+                    "wrap": "pretty",
+                    "background": false,
+                    "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 4,
+                    "padding-inline-end": 4
+                  }
+                }
+              }
+            },
+            "dev4_card_accessories": {
+              "type": "_collection-carousel-card",
+              "name": "الأكسسوارات",
+              "settings": {
+                "image_ratio": "square",
+                "horizontal_alignment": "center",
+                "collection_card_gap": 18,
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 12
+              },
+              "blocks": {
+                "dev4-title": {
+                  "type": "collection-title",
+                  "static": true,
+                  "settings": {
+                    "width": "100%",
+                    "max_width": "none",
+                    "alignment": "center",
+                    "type_preset": "h3",
+                    "font": "var(--font-accent--family)",
+                    "wrap": "pretty",
+                    "background": false,
+                    "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 4,
+                    "padding-inline-end": 4
+                  }
+                }
+              }
+            },
+            "dev4_card_oral_care": {
+              "type": "_collection-carousel-card",
+              "name": "منتجات العناية بالفم",
+              "settings": {
+                "image_ratio": "square",
+                "horizontal_alignment": "center",
+                "collection_card_gap": 18,
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 12
+              },
+              "blocks": {
+                "dev4-title": {
+                  "type": "collection-title",
+                  "static": true,
+                  "settings": {
+                    "width": "100%",
+                    "max_width": "none",
+                    "alignment": "center",
+                    "type_preset": "h3",
+                    "font": "var(--font-accent--family)",
+                    "wrap": "pretty",
+                    "background": false,
+                    "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 4,
+                    "padding-inline-end": 4
+                  }
+                }
+              }
+            },
+            "dev4_card_bundle": {
+              "type": "_collection-carousel-card",
+              "name": "باندل",
+              "settings": {
+                "image_ratio": "square",
+                "horizontal_alignment": "center",
+                "collection_card_gap": 18,
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 12
+              },
+              "blocks": {
+                "dev4-title": {
+                  "type": "collection-title",
+                  "static": true,
+                  "settings": {
+                    "width": "100%",
+                    "max_width": "none",
+                    "alignment": "center",
+                    "type_preset": "h3",
+                    "font": "var(--font-accent--family)",
+                    "wrap": "pretty",
+                    "background": false,
+                    "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 4,
+                    "padding-inline-end": 4
+                  }
+                }
+              }
+            },
+            "dev4_card_heads": {
+              "type": "_collection-carousel-card",
+              "name": "الرؤوس البديلة",
+              "settings": {
+                "image_ratio": "square",
+                "horizontal_alignment": "center",
+                "collection_card_gap": 18,
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 12
+              },
+              "blocks": {
+                "dev4-title": {
+                  "type": "collection-title",
+                  "static": true,
+                  "settings": {
+                    "width": "100%",
+                    "max_width": "none",
+                    "alignment": "center",
+                    "type_preset": "h3",
+                    "font": "var(--font-accent--family)",
+                    "wrap": "pretty",
+                    "background": false,
+                    "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 4,
+                    "padding-inline-end": 4
+                  }
+                }
+              }
+            }
+          },
+          "block_order": [
+            "dev4_card_brush",
+            "dev4_card_accessories",
+            "dev4_card_oral_care",
+            "dev4_card_bundle",
+            "dev4_card_heads"
+          ]
+        }
+      },
+      "settings": {
+        "design": "dev4",
+        "columns": 4,
+        "mobile_columns": "1",
+        "section_width": "page-width",
+        "columns_gap": 24,
+        "background_color": "",
+        "icons_style": "chevron",
+        "icons_shape": "circle",
+        "padding-block-start": 50,
+        "padding-block-end": 100,
+        "dev4_columns_tablet": 3,
+        "dev4_columns_mobile": 3,
+        "dev4_columns_gap_mobile": 10,
+        "dev4_section_gap": 40,
+        "dev4_section_gap_mobile": 28,
+        "dev4_padding_bottom_mobile": 9,
+        "dev4_arrow_border": "{{ settings.color_palette.color2 }}",
+        "dev4_arrow_icon": "{{ settings.color_palette.snosha_secondary_blue }}",
+        "dev4_arrow_shadow": "#0d408029",
+        "dev4_progress_track": "{{ settings.color_palette.color2 }}",
+        "dev4_progress_start": "{{ settings.color_palette.snosha_gradient_start }}",
+        "dev4_progress_end": "{{ settings.color_palette.snosha_gradient_end }}"
+      }
     }
   },
   "order": [
     "hero_jVaWmY",
+    "dev4_collections",
     "product_list_fa6P9H"
   ]
 }

@@ -1,0 +1,77 @@
+<!-- _trust-item.liquid -->
+{%- comment -%}
+  dev3 — one trust item (icon tile, title, subtitle). Informational only: no link, no hover.
+{%- endcomment -%}
+{%- assign bs = block.settings -%}
+{%- if bs.title != blank or bs.subtitle != blank or bs.icon != 'none' or bs.icon_image != blank -%}
+  <li class="dev3-trust__item" {{ block.shopify_attributes }}>
+    {%- if bs.icon_image != blank or bs.icon != 'none' -%}
+      <span class="dev3-trust__tile" aria-hidden="true">
+        {%- if bs.icon_image != blank -%}
+          {{ bs.icon_image | image_url: width: 120 | image_tag: width: 30, height: 30, alt: '', class: 'dev3-trust__icon', loading: 'lazy' }}
+        {%- else -%}
+          {%- assign icon_file = 'icon-' | append: bs.icon | append: '.svg' -%}
+          <img class="dev3-trust__icon" src="{{ icon_file | asset_url }}" alt="" width="30" height="30" loading="lazy">
+        {%- endif -%}
+      </span>
+    {%- endif -%}
+    <span class="dev3-trust__text">
+      {%- if bs.title != blank -%}
+        <span class="dev3-trust__title">{{ bs.title | escape }}</span>
+      {%- endif -%}
+      {%- if bs.subtitle != blank -%}
+        <span class="dev3-trust__subtitle{% if bs.subtitle_mobile != blank %} dev3-trust__subtitle--desktop{% endif %}">
+          {{- bs.subtitle | escape -}}
+        </span>
+      {%- endif -%}
+      {%- if bs.subtitle_mobile != blank -%}
+        <span class="dev3-trust__subtitle dev3-trust__subtitle--mobile">{{ bs.subtitle_mobile | escape }}</span>
+      {%- endif -%}
+    </span>
+  </li>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Trust item",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Icon",
+      "default": "truck",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "truck", "label": "Delivery truck" },
+        { "value": "package", "label": "Package" },
+        { "value": "exchange", "label": "Exchange / return" },
+        { "value": "shield-check", "label": "Shield" }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_image",
+      "label": "Custom icon",
+      "info": "Optional. Replaces the icon. Square image, shown at 30 × 30px (20 × 20px on mobile)."
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Title"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "subtitle_mobile",
+      "label": "Mobile subtitle",
+      "info": "Optional shorter subtitle below 750px. Leave empty to use the subtitle."
+    }
+  ]
+}
+{% endschema %}

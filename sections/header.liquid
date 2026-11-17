@@ -205,6 +205,11 @@
     assign class = class | append: ' ' | append: collapse_header_paddings_class
   endif
 
+  # dev2: opt-in project styling (assets/dev2.css), only when Design is "Design - dev2"
+  if section.settings.design == 'dev2'
+    assign class = class | append: ' dev2-header'
+  endif
+
   # Determine transparent background value
   assign top_transparent = false
   assign bottom_transparent = false
@@ -336,6 +341,22 @@
     "url": {{ request.origin | append: page.url | json }}
   }
 </script>
+
+{%- if section.settings.design == 'dev2' -%}
+  {% style %}
+    #shopify-section-{{ section.id }} {
+      {%- if section.settings.dev2_icon_color_mobile != blank %}
+        --dev2-header-icon-color-mobile: {{ section.settings.dev2_icon_color_mobile }};
+      {%- endif %}
+      {%- if section.settings.dev2_nav_active_color != blank %}
+        --dev2-header-nav-active-color: {{ section.settings.dev2_nav_active_color }};
+      {%- endif %}
+      {%- if section.settings.dev2_nav_marker_color != blank %}
+        --dev2-header-nav-marker-color: {{ section.settings.dev2_nav_marker_color }};
+      {%- endif %}
+    }
+  {% endstyle %}
+{%- endif -%}
 
 <header-component
   id="header-component"
@@ -1277,6 +1298,48 @@
   "tag": "header",
   "class": "header-section",
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "t:dev2_settings.design",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:dev2_settings.design_default"
+        },
+        {
+          "value": "dev2",
+          "label": "t:dev2_settings.design_dev2"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:dev2_settings.dev2_design_header",
+      "info": "t:dev2_settings.colors_info",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_icon_color_mobile",
+      "label": "t:dev2_settings.icon_color_mobile",
+      "alpha": false,
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_nav_active_color",
+      "label": "t:dev2_settings.nav_active_color",
+      "alpha": false,
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_nav_marker_color",
+      "label": "t:dev2_settings.nav_marker_color",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
     {
       "type": "header",
       "content": "t:content.logo"

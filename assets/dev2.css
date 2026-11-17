@@ -1,0 +1,333 @@
+/*
+ * dev2.css — styles for session "dev2".
+ * Loaded once from snippets/stylesheets.liquid (after the other global stylesheets).
+ * Every rule is anchored on a .dev2-* class that is rendered only when an instance opts in
+ * through its "Design → Design - dev2" option, so the base theme is untouched otherwise.
+ */
+
+/* ==== dev2-header — 02 Header + 02 Navigation (sections/header.liquid) ==== */
+/* Figma 190:3769 (desktop header), 190:3776 (desktop navigation), 190:4084 (mobile header).
+   Scope class on <header-component id="header-component">. The native header component, logo block,
+   menu block, drawer, search modal and cart drawer are reused unchanged; this block only restyles them.
+   Native header rules use #header-component, so the selectors below repeat that id plus the scope
+   class to out-rank them (no !important needed).
+   Per-instance colors arrive as --dev2-header-* variables from the section's inline {% style %}. */
+
+/* -- Icons: Figma glyphs drawn from the stored SVGs as masks, colored with currentColor --
+   The native icon <svg> stays in the markup (hidden) so buttons, labels and states are untouched.
+   Relative url() resolves next to this file in assets/. */
+.dev2-header.dev2-header :is(
+    .header-actions__cart-icon > .svg-wrapper,
+    .search-action .svg-wrapper,
+    shopify-account > span[aria-hidden='true'],
+    .header__icon--menu .header-drawer-icon--open
+  )
+  > svg {
+  display: none;
+}
+
+/* The account wrapper carries .color-custom-popover (popover colors); the native account icon uses
+   --color-account-icon (the row text color), so the glyph does too. */
+.dev2-header.dev2-header shopify-account > span[aria-hidden='true'] {
+  display: flex;
+  color: var(--color-account-icon);
+}
+
+.dev2-header.dev2-header :is(
+    .header-actions__cart-icon > .svg-wrapper,
+    .search-action .svg-wrapper,
+    shopify-account > span[aria-hidden='true'],
+    .header__icon--menu .header-drawer-icon--open
+  )::before {
+  content: '';
+  display: block;
+  flex-shrink: 0;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  background-color: var(--dev2-header-icon-color, currentcolor);
+  mask-repeat: no-repeat;
+  mask-position: 0 0;
+  mask-size: 100%;
+  pointer-events: none;
+  /* Keep the glyph visible in forced-colors mode (the mask is filled with the forced text color) */
+  forced-color-adjust: none;
+}
+
+/* Figma "Icon / cart": 22 × 22 glyph */
+.dev2-header.dev2-header .header-actions__cart-icon > .svg-wrapper::before {
+  mask-image: url('icon-cart-line.svg');
+}
+
+/* Figma "Icon / search": 18 × 18 glyph centered in the 22px icon box */
+.dev2-header.dev2-header .search-action .svg-wrapper::before {
+  mask-image: url('icon-search-line.svg');
+  mask-position: center;
+  mask-size: calc(var(--icon-size-md) * 18 / 22);
+}
+
+/* Figma "Icon / user" and "Icon / menu": 24 × 24 vector anchored top-left in the 22px icon box */
+.dev2-header.dev2-header shopify-account > span[aria-hidden='true']::before {
+  mask-image: url('icon-user.svg');
+  mask-size: calc(var(--icon-size-md) * 24 / 22);
+}
+
+.dev2-header.dev2-header .header__icon--menu .header-drawer-icon--open::before {
+  mask-image: url('icon-menu-line.svg');
+  mask-size: calc(var(--icon-size-md) * 24 / 22);
+}
+
+/* -- Top row geometry: pinned to the Figma physical order in every locale --
+   direction: ltr is geometry only (04 §3.4): it keeps the icons on the physical right on desktop, and
+   cart + search on the physical left / menu on the physical right on mobile, as in both Figma frames.
+   Text-bearing children restore rtl when the page is RTL. Icon-only buttons stay ltr. */
+#header-component.dev2-header .header__row--top .header__columns {
+  direction: ltr;
+}
+
+:root[dir='rtl'] #header-component.dev2-header .header__row--top :is(
+    .header-logo,
+    .account-button,
+    .menu-drawer,
+    .dropdown-localization,
+    header-menu
+  ) {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Account, search and cart become siblings so they can be ordered as in Figma (user, search, cart).
+   header-actions keeps its element, refs, listeners and live region; only its box is removed. */
+#header-component.dev2-header .header__row--top header-actions {
+  display: contents;
+}
+
+/* -- Desktop (menu style, ≥ 750px) -- */
+@media screen and (min-width: 750px) {
+  /* Figma: 33px above/below the 22px icons → padding = 33px − (44px tap target − 22px icon) / 2.
+     Figma container: 1376px including 20px inner padding (--padding-xl), inside the page grid. */
+  #header-component.dev2-header[data-menu-style='menu'] .header__row--top .header__columns {
+    padding-block: calc(33px - (var(--button-size) - var(--icon-size-md)) / 2);
+    padding-inline: var(--padding-xl);
+  }
+
+  /* Figma "Header Icons": 22px gap between 22px icons = 44px tap targets placed edge to edge.
+     The negative end margin puts the cart glyph on the content edge, as in Figma. */
+  #header-component.dev2-header[data-menu-style='menu'] .header__row--top .header__column--right {
+    gap: 0;
+    margin-inline-end: calc((var(--button-size) - var(--icon-size-md)) / -2);
+  }
+
+  #header-component.dev2-header[data-menu-style='menu'] .header__column--right .dropdown-localization {
+    order: 0;
+  }
+
+  /* Same 44px slot as search and cart so the three glyphs sit 22px apart */
+  #header-component.dev2-header[data-menu-style='menu'] .header__column--right .account-button {
+    order: 1;
+    min-width: var(--button-size);
+  }
+
+  /* Native pulls the right-column search into its neighbours with negative margins; the Figma
+     group uses even 44px slots instead. */
+  #header-component.dev2-header[data-menu-style='menu'] .header__column--right .search-action {
+    order: 2;
+    margin-inline: 0;
+  }
+
+  #header-component.dev2-header[data-menu-style='menu'] .header__column--right header-actions > .header-actions__action:not(.account-button) {
+    order: 3;
+  }
+
+  /* Figma "02 Navigation": 5px top / 14px bottom padding, same 20px inner padding as the header row.
+     Figma has no line under the desktop navigation; the native bottom border stays on the mobile header. */
+  #header-component.dev2-header[data-menu-style='menu'] .header__row--bottom .header__columns {
+    padding-block: 5px 14px;
+    padding-inline: var(--padding-xl);
+  }
+
+  #header-component.dev2-header[data-menu-style='menu'] .header__row--bottom {
+    border-bottom-width: 0;
+  }
+}
+
+/* Drawer style (touch devices ≥ 750px): the bottom row only holds the inline menu, which the drawer
+   replaces — hide the empty row, as the native header already does below 750px. */
+#header-component.dev2-header[data-menu-style='drawer'] .header__row--bottom {
+  display: none;
+}
+
+/* -- Navigation (desktop menu) -- */
+/* Figma Nav Item: label line height 24px at 15px; 32px between labels (--gap-2xl), split per item. */
+.dev2-header.dev2-header .menu-list .menu-list__link {
+  line-height: calc(24 / 15);
+}
+
+.dev2-header.dev2-header .menu-list__list-item:not([slot='overflow']) .menu-list__link-title {
+  padding-inline: calc(var(--gap-2xl) / 2);
+}
+
+/* Figma shows every default label at full navy. Native dimming on hover/focus is kept; only the
+   "an item is active" dimming is lifted so inactive labels match Figma when nothing is hovered. */
+.dev2-header.dev2-header
+  .menu-list:not(:has(.menu-list__list-item:hover, .menu-list__list-item:focus-within))
+  .menu-list__link:not(.menu-list__link--active) {
+  color: var(--menu-top-level-font-color);
+}
+
+/* Active item (native link.active → .menu-list__link--active): Figma secondary blue label … */
+.dev2-header.dev2-header .menu-list .menu-list__link.menu-list__link--active {
+  color: var(--dev2-header-nav-active-color, var(--menu-top-level-font-color));
+}
+
+/* Hover / keyboard focus feedback (not defined in Figma): the hovered link takes the same secondary
+   blue as the active link, while native dimming of the other links stays. Out-ranks the native
+   `.menu-list .menu-list__list-item:where(:hover, :focus-within) .menu-list__link` rule. */
+.dev2-header.dev2-header .menu-list .menu-list__list-item:is(:hover, :focus-within) > :is(.menu-list__link, .menu-list__trigger > .menu-list__link) {
+  color: var(--dev2-header-nav-active-color, var(--menu-top-level-font-color));
+}
+
+/* … and a light marker behind it. Decorative pseudo-element: sized from the label (extends 5px past
+   the text on each side, Figma active padding), 14.54px tall from 9px below the top of the 24px line
+   box (expressed in em so it scales with the font size), radius 3px, rotated 1.5deg. */
+.dev2-header.dev2-header .menu-list__list-item:not([slot='overflow']) .menu-list__link--active .menu-list__link-title {
+  position: relative;
+  isolation: isolate;
+}
+
+.dev2-header.dev2-header .menu-list__list-item:not([slot='overflow']) .menu-list__link--active .menu-list__link-title::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset-inline: calc(var(--gap-2xl) / 2 - 5px);
+  inset-block-start: calc(50% - 0.2em);
+  height: calc(14.54em / 15);
+  border-radius: 3px;
+  background-color: var(--dev2-header-nav-marker-color, rgb(var(--color-foreground-rgb) / var(--opacity-10)));
+  rotate: 1.5deg;
+  pointer-events: none;
+}
+
+/* -- Mobile (< 750px) and drawer style: Figma 190:4084 --
+   Five equal-weight tracks keep the logo centered on the viewport: [cart][search][logo][ ][menu].
+   Track = 22px icon + 18px Figma gap. Tap targets stay 44px and are centered on their glyphs; the
+   glyphs at the edges sit on the 20px page margin as in Figma. Row: 44px targets + 2 × 10px = 64px. */
+@media screen and (max-width: 749px) {
+  #header-component.dev2-header .header__row--top .header__columns {
+    --header-template-columns: var(--dev2-header-mobile-track) var(--dev2-header-mobile-track) 1fr
+      var(--dev2-header-mobile-track) var(--dev2-header-mobile-track);
+    --dev2-header-mobile-track: calc(var(--icon-size-md) + 18px);
+    --dev2-header-target-offset: calc((var(--button-size) - var(--icon-size-md)) / -2);
+
+    grid-template-areas: 'dev2-cart dev2-search center . dev2-menu';
+    padding-block: 10px;
+  }
+
+  #header-component.dev2-header .header__row--top .header__drawer {
+    --header-drawer-min-height: var(--button-size);
+
+    grid-area: dev2-menu;
+    justify-self: end;
+    margin-inline-end: var(--dev2-header-target-offset);
+  }
+
+  #header-component.dev2-header .header__row--top .search-action {
+    grid-area: dev2-search;
+    justify-self: start;
+    margin-inline-start: var(--dev2-header-target-offset);
+  }
+
+  #header-component.dev2-header .header__row--top header-actions > .header-actions__action:not(.account-button) {
+    grid-area: dev2-cart;
+    justify-self: start;
+    margin-inline-start: var(--dev2-header-target-offset);
+  }
+
+  /* Figma mobile header has no account icon (the account stays reachable from the drawer). */
+  #header-component.dev2-header .header__row--top .account-button {
+    display: none;
+  }
+
+  #header-component.dev2-header .header__row--top .header-logo {
+    min-width: 0;
+  }
+
+  #header-component.dev2-header .header__row--top .header-logo__image {
+    max-width: 100%;
+  }
+
+  #header-component.dev2-header .header__row--top .header__icon--menu {
+    width: var(--button-size);
+    height: var(--button-size);
+    padding: 0;
+    justify-content: center;
+  }
+
+  #header-component.dev2-header .header__row--top .header__icon--menu .header-drawer-icon {
+    width: var(--icon-size-md);
+    height: var(--icon-size-md);
+  }
+
+  /* Figma mobile icons use the secondary blue (desktop icons use the row text color) */
+  #header-component.dev2-header .header__row--top {
+    --dev2-header-icon-color: var(--dev2-header-icon-color-mobile, currentcolor);
+  }
+}
+
+/* Same mobile layout for the drawer style on touch devices ≥ 750px (native duplicates its rules too). */
+#header-component.dev2-header[data-menu-style='drawer'] .header__row--top .header__columns {
+  --header-template-columns: var(--dev2-header-mobile-track) var(--dev2-header-mobile-track) 1fr
+    var(--dev2-header-mobile-track) var(--dev2-header-mobile-track);
+  --dev2-header-mobile-track: calc(var(--icon-size-md) + 18px);
+  --dev2-header-target-offset: calc((var(--button-size) - var(--icon-size-md)) / -2);
+
+  grid-template-areas: 'dev2-cart dev2-search center . dev2-menu';
+  padding-block: 10px;
+}
+
+#header-component.dev2-header[data-menu-style='drawer'] .header__row--top .header__drawer {
+  --header-drawer-min-height: var(--button-size);
+
+  grid-area: dev2-menu;
+  justify-self: end;
+  margin-inline-end: var(--dev2-header-target-offset);
+}
+
+#header-component.dev2-header[data-menu-style='drawer'] .header__row--top .search-action {
+  grid-area: dev2-search;
+  justify-self: start;
+  margin-inline-start: var(--dev2-header-target-offset);
+}
+
+#header-component.dev2-header[data-menu-style='drawer'] .header__row--top header-actions > .header-actions__action:not(.account-button) {
+  grid-area: dev2-cart;
+  justify-self: start;
+  margin-inline-start: var(--dev2-header-target-offset);
+}
+
+#header-component.dev2-header[data-menu-style='drawer'] .header__row--top .account-button {
+  display: none;
+}
+
+#header-component.dev2-header[data-menu-style='drawer'] .header__row--top .header-logo {
+  min-width: 0;
+}
+
+#header-component.dev2-header[data-menu-style='drawer'] .header__row--top .header-logo__image {
+  max-width: 100%;
+}
+
+#header-component.dev2-header[data-menu-style='drawer'] .header__row--top .header__icon--menu {
+  width: var(--button-size);
+  height: var(--button-size);
+  padding: 0;
+  justify-content: center;
+}
+
+#header-component.dev2-header[data-menu-style='drawer'] .header__row--top .header__icon--menu .header-drawer-icon {
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+}
+
+#header-component.dev2-header[data-menu-style='drawer'] .header__row--top {
+  --dev2-header-icon-color: var(--dev2-header-icon-color-mobile, currentcolor);
+}

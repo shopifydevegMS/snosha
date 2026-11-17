@@ -1,0 +1,81 @@
+<!-- _hero-stage.liquid -->
+{%- comment -%}
+  dev3 — product stage of the hero (Figma "Hero Stage" 190:3791 / 335:3961).
+  The decorative highlight is drawn with CSS (assets/dev3.css); the rings are part of the
+  merchant's product image, so they aren't drawn here. The product composition is a merchant
+  image (desktop + optional mobile override); optional spec chips are nested _hero-chip blocks.
+{%- endcomment -%}
+{%- liquid
+  assign image = block.settings.image
+  assign image_mobile = block.settings.image_mobile | default: image
+
+  assign fetch_priority = 'auto'
+  assign loading = 'lazy'
+  if section.index == 1
+    assign fetch_priority = 'high'
+    assign loading = 'eager'
+  endif
+-%}
+
+<div class="dev3-hero-stage" {{ block.shopify_attributes }}>
+  <div class="dev3-hero-stage__decor" aria-hidden="true">
+    <span class="dev3-hero-stage__highlight"></span>
+  </div>
+
+  <div class="dev3-hero-stage__media">
+    {%- if image != blank -%}
+      <picture>
+        {%- if block.settings.image_mobile != blank -%}
+          <source
+            media="(max-width: 989px)"
+            srcset="{{ image_mobile | image_url: width: 480 }} 480w, {{ image_mobile | image_url: width: 720 }} 720w, {{ image_mobile | image_url: width: 960 }} 960w, {{ image_mobile | image_url: width: 1200 }} 1200w"
+            sizes="min(100vw, 480px)"
+            width="{{ image_mobile.width }}"
+            height="{{ image_mobile.height }}"
+          >
+        {%- endif -%}
+        {{
+          image
+          | image_url: width: 1600
+          | image_tag:
+            widths: '480, 720, 960, 1200, 1600',
+            sizes: '(min-width: 990px) 52vw, min(100vw, 480px)',
+            alt: image.alt,
+            class: 'dev3-hero-stage__img',
+            loading: loading,
+            fetchpriority: fetch_priority
+        }}
+      </picture>
+    {%- elsif request.design_mode -%}
+      {{ 'image' | placeholder_svg_tag: 'dev3-hero-stage__img dev3-hero-stage__img--placeholder' }}
+    {%- endif -%}
+  </div>
+
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "Product stage",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_hero-chip"
+    }
+  ],
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Product image",
+      "info": "Transparent PNG of the full product composition. About 1540 × 1020px."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile product image",
+      "info": "Optional. Used below 990px. Falls back to the product image."
+    }
+  ]
+}
+{% endschema %}

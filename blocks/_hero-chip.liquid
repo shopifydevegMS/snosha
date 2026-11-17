@@ -1,0 +1,158 @@
+<!-- _hero-chip.liquid -->
+{%- comment -%}
+  dev3 — static spec chip placed on the hero product stage (blocks/_hero-stage.liquid).
+  Informational only: no link, no hover, no JS. Position comes from the block's own
+  desktop / mobile placement settings (percent of the stage), never from the block id.
+{%- endcomment -%}
+{%- liquid
+  assign bs = block.settings
+
+  if bs.desktop_anchor == 'right'
+    assign desktop_start = 'auto'
+    assign desktop_end = bs.desktop_x | append: '%'
+  else
+    assign desktop_start = bs.desktop_x | append: '%'
+    assign desktop_end = 'auto'
+  endif
+
+  if bs.mobile_anchor == 'right'
+    assign mobile_start = 'auto'
+    assign mobile_end = bs.mobile_x | append: '%'
+  else
+    assign mobile_start = bs.mobile_x | append: '%'
+    assign mobile_end = 'auto'
+  endif
+-%}
+
+{% style %}
+  #shopify-section-{{ section.id }} .dev3-hero-chip--{{ block.id }} {
+    --dev3-chip-start: {{ mobile_start }};
+    --dev3-chip-end: {{ mobile_end }};
+    --dev3-chip-top: {{ bs.mobile_y }}%;
+    --dev3-chip-start-desktop: {{ desktop_start }};
+    --dev3-chip-end-desktop: {{ desktop_end }};
+    --dev3-chip-top-desktop: {{ bs.desktop_y }}%;
+  }
+{% endstyle %}
+
+<div class="dev3-hero-chip dev3-hero-chip--{{ block.id }}" {{ block.shopify_attributes }}>
+  <span class="dev3-hero-chip__label">{{ bs.label | escape }}</span>
+  <span class="dev3-hero-chip__badge" aria-hidden="true">
+    {%- if bs.icon_image != blank -%}
+      {{ bs.icon_image | image_url: width: 96 | image_tag: width: 24, height: 24, alt: '', class: 'dev3-hero-chip__icon' }}
+    {%- elsif bs.icon != 'none' -%}
+      {%- assign icon_file = 'icon-' | append: bs.icon | append: '.svg' -%}
+      <img
+        class="dev3-hero-chip__icon dev3-hero-chip__icon--{{ bs.icon }}"
+        src="{{ icon_file | asset_url }}"
+        alt=""
+        width="24"
+        height="{% if bs.icon == 'brush-head' %}7{% else %}24{% endif %}"
+      >
+    {%- endif -%}
+  </span>
+</div>
+
+{% schema %}
+{
+  "name": "Spec chip",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Feature"
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Icon",
+      "default": "sonic",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "sonic", "label": "Sonic" },
+        { "value": "battery", "label": "Battery" },
+        { "value": "sliders", "label": "Cleaning modes" },
+        { "value": "brush-head", "label": "Brush heads" }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_image",
+      "label": "Custom icon",
+      "info": "Optional. Replaces the icon. Shown at 24 × 24px on the blue badge."
+    },
+    {
+      "type": "header",
+      "content": "Desktop position",
+      "info": "Percent of the product stage, from 990px."
+    },
+    {
+      "type": "select",
+      "id": "desktop_anchor",
+      "label": "Measure from",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left edge" },
+        { "value": "right", "label": "Right edge" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "desktop_x",
+      "label": "Horizontal offset",
+      "min": -10,
+      "max": 90,
+      "step": 1,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "desktop_y",
+      "label": "Top offset",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Mobile and tablet position",
+      "info": "Percent of the product stage, below 990px."
+    },
+    {
+      "type": "select",
+      "id": "mobile_anchor",
+      "label": "Measure from",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left edge" },
+        { "value": "right", "label": "Right edge" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "mobile_x",
+      "label": "Horizontal offset",
+      "min": -10,
+      "max": 90,
+      "step": 1,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "mobile_y",
+      "label": "Top offset",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}

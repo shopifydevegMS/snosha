@@ -326,7 +326,8 @@
   {{ media_slot_1 }}
   {{ media_slot_2 }}
 
-  {% if media_count == 0 %}
+  {% # dev3: the "Design - dev3" option draws its own gradient background, so no placeholder media %}
+  {% if media_count == 0 and section.settings.design != 'dev3' %}
     {{ 'hero-apparel-1' | placeholder_svg_tag: 'hero__media' }}
   {%- endif -%}
 {% endcapture %}
@@ -459,9 +460,36 @@
 {% # A first-section hero consumes `--header-group-height` at first paint (`.hero-wrapper:first-child` rule below) %}
 {% render 'measure-header-heights', only_when_first_section: true %}
 
+{%- if section.settings.design == 'dev3' -%}
+  {% # dev3: color palette values for the "Design - dev3" hero (used in assets/dev3.css) %}
+  {% style %}
+    #shopify-section-{{ section.id }} {
+      --dev3-hero-start: {{ settings.color_palette.snosha_gradient_start }};
+      --dev3-hero-start-rgb: {{ settings.color_palette.snosha_gradient_start.rgb }};
+      --dev3-hero-mid: {{ settings.color_palette.snosha_secondary_blue }};
+      --dev3-hero-end: {{ settings.color_palette.snosha_gradient_end }};
+      --dev3-hero-end-rgb: {{ settings.color_palette.snosha_gradient_end.rgb }};
+      --dev3-hero-shadow-rgb: {{ settings.color_palette.snosha_deep_blue.rgb }};
+      --dev3-hero-chip-text: {{ settings.color_palette.snosha_deep_blue }};
+      --dev3-hero-surface: {{ settings.color_palette.background }};
+      --dev3-hero-on-brand-rgb: {{ settings.color_palette.background.rgb }};
+      --dev3-hero-title: {{ settings.color_palette.foreground }};
+      --dev3-hero-muted: {{ settings.color_palette.color1 }};
+      --dev3-hero-line: {{ settings.color_palette.color2 }};
+      --dev3-hero-tint: {{ settings.color_palette.snosha_pale_tint }};
+      {%- if section.settings.dev3_background != blank %}
+        --dev3-hero-bg: {{ section.settings.dev3_background }};
+      {%- endif %}
+      {%- if section.settings.dev3_background_mobile != blank %}
+        --dev3-hero-bg-mobile: {{ section.settings.dev3_background_mobile }};
+      {%- endif %}
+    }
+  {% endstyle %}
+{%- endif -%}
+
 <div
   id="Hero-{{ section.id }}"
-  class="hero{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}{% if section.blocks.size == 0 and section.settings.section_height == 'auto' %} hero--no-blocks-auto-height{% endif %}{% if section.settings.stack_media_on_mobile %} hero--stack-mobile{% endif %}"
+  class="hero{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}{% if section.blocks.size == 0 and section.settings.section_height == 'auto' %} hero--no-blocks-auto-height{% endif %}{% if section.settings.stack_media_on_mobile %} hero--stack-mobile{% endif %}{% if section.settings.design == 'dev3' %} dev3-hero{% endif %}"
   style="
     --hero-border-style: {{ section.settings.border }};
     --hero-border-width: {{ section.settings.border_width }}px;
@@ -795,12 +823,52 @@
     },
     {
       "type": "_marquee"
+    },
+    {
+      "type": "_hero-stage"
+    },
+    {
+      "type": "_hero-content"
+    },
+    {
+      "type": "_trust-strip"
     }
   ],
   "disabled_on": {
     "groups": ["header"]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "t:dev3_settings.design",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:dev3_settings.design_default"
+        },
+        {
+          "value": "dev3",
+          "label": "t:dev3_settings.design_dev3"
+        }
+      ]
+    },
+    {
+      "type": "color_background",
+      "id": "dev3_background",
+      "label": "t:dev3_settings.background",
+      "default": "linear-gradient(57.82deg, rgba(99, 205, 255, 1) 7.84%, rgba(23, 107, 176, 1) 50%, rgba(15, 100, 168, 1) 92.16%)",
+      "visible_if": "{{ section.settings.design == 'dev3' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "dev3_background_mobile",
+      "label": "t:dev3_settings.background_mobile",
+      "info": "t:dev3_settings.background_mobile_info",
+      "default": "linear-gradient(83.14deg, rgba(99, 205, 255, 1) 7.84%, rgba(23, 107, 176, 1) 50%, rgba(15, 100, 168, 1) 92.16%)",
+      "visible_if": "{{ section.settings.design == 'dev3' }}"
+    },
     {
       "type": "header",
       "content": "t:content.media_1"

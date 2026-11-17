@@ -1,0 +1,204 @@
+<!-- _collection-carousel-card.liquid -->
+{%- comment -%}
+  dev4: one collection card slide for carousels (allowed in blocks/_carousel-content.liquid).
+  The collection picker is the single source of title and link; the optional custom image
+  replaces only the displayed image. Renders the native collection-card / resource-image
+  snippets and a static native collection-title block.
+{%- endcomment -%}
+
+{%- liquid
+  assign collection = block.settings.collection
+  assign dev4_image = block.settings.image
+  if dev4_image == blank and collection != blank
+    assign dev4_image = collection.image | default: collection.products.first.featured_image
+  endif
+-%}
+
+{%- capture card_image -%}
+  {% render 'resource-image',
+    content_type: 'collections',
+    parent_block_id: block.id,
+    block_settings: block.settings,
+    section_settings: section.settings,
+    dev4_image_override: dev4_image
+  %}
+{%- endcapture -%}
+
+{%- capture children -%}
+  {% content_for 'block', type: 'collection-title', id: 'dev4-title', closest.collection: collection %}
+{%- endcapture -%}
+
+<div class="dev4-collection-card" ref="slides[]">
+  {% render 'collection-card',
+    card_image: card_image,
+    children: children,
+    block: block,
+    collection: collection,
+    section: section
+  %}
+</div>
+
+{% schema %}
+{
+  "name": "t:dev4_settings.collection_card",
+  "tag": null,
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:settings.collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:dev4_settings.image_override",
+      "info": "t:dev4_settings.image_override_info"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "t:settings.aspect_ratio",
+      "info": "t:info.aspect_ratio_adjusted",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:options.auto"
+        },
+        {
+          "value": "portrait",
+          "label": "t:options.portrait"
+        },
+        {
+          "value": "square",
+          "label": "t:options.square"
+        },
+        {
+          "value": "landscape",
+          "label": "t:options.landscape"
+        }
+      ],
+      "default": "square"
+    },
+    {
+      "type": "header",
+      "content": "t:content.text"
+    },
+    {
+      "type": "select",
+      "id": "horizontal_alignment",
+      "label": "t:settings.alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "t:options.direction_start"
+        },
+        {
+          "value": "center",
+          "label": "t:options.direction_center"
+        },
+        {
+          "value": "flex-end",
+          "label": "t:options.direction_end"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "collection_card_gap",
+      "label": "t:settings.vertical_gap",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "t:content.borders"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "t:settings.style",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "solid",
+          "label": "t:options.solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.thickness",
+      "default": 1,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.opacity",
+      "default": 100,
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "t:settings.color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ block.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "t:settings.border_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:dev4_settings.collection_card",
+      "settings": {
+        "image_ratio": "square",
+        "horizontal_alignment": "center",
+        "collection_card_gap": 18,
+        "border": "none",
+        "border_radius": 12
+      },
+      "blocks": {
+        "dev4-title": {
+          "type": "collection-title",
+          "static": true,
+          "settings": {
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "center",
+            "type_preset": "h3",
+            "wrap": "pretty",
+            "padding-inline-start": 4,
+            "padding-inline-end": 4
+          }
+        }
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1202,5 +1202,27 @@
     "weight_mobile": "السُمك على الجوال",
     "mobile_typography_info": "يُطبَّق على الشاشات الأصغر من 750px عندما يكون تصميم شريط الإعلانات \"Design 1\".",
     "same_as_desktop": "مثل سطح المكتب"
+  },
+  "dev4_settings": {
+    "design": "التصميم",
+    "design_default": "افتراضي",
+    "design_dev4": "Design 1",
+    "dev4_design_header": "Design 1",
+    "layout_info": "البطاقات: عدد الأعمدة بالإضافة إلى نصف البطاقة التالية. يستخدم سطح المكتب \"الأعمدة\" و\"المسافة الأفقية\" أعلاه.",
+    "columns_tablet": "أعمدة الجهاز اللوحي",
+    "columns_mobile": "أعمدة الجوال",
+    "columns_gap_mobile": "المسافة الأفقية على الجوال",
+    "section_gap": "المسافة بين العنوان والعرض",
+    "section_gap_mobile": "مسافة العنوان وشريط التقدم على الجوال",
+    "padding_bottom_mobile": "الحشو السفلي على الجوال",
+    "arrow_border": "إطار الأسهم",
+    "arrow_icon": "أيقونة الأسهم",
+    "arrow_shadow": "ظل الأسهم",
+    "progress_track": "مسار شريط التقدم على الجوال",
+    "progress_start": "بداية شريط التقدم على الجوال",
+    "progress_end": "نهاية شريط التقدم على الجوال",
+    "collection_card": "بطاقة المجموعة",
+    "image_override": "صورة مخصصة",
+    "image_override_info": "اختياري. تستبدل صورة المجموعة في هذه البطاقة فقط. العنوان والرابط يأتيان دائمًا من المجموعة."
   }
 }

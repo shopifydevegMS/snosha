@@ -1,0 +1,30 @@
+<!-- _trust-strip.liquid -->
+{%- comment -%}
+  dev3 — trust strip that overlaps the bottom of the hero (Figma 190:4081 / 335:4229).
+  Items are nested _trust-item blocks; overlap and layout: assets/dev3.css.
+{%- endcomment -%}
+<div class="dev3-trust" {{ block.shopify_attributes }}>
+  <div class="dev3-trust__card">
+    <ul class="dev3-trust__list" role="list">
+      {% content_for 'blocks' %}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Trust strip",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_trust-item"
+    }
+  ],
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Add up to four items to keep them on one row on mobile."
+    }
+  ]
+}
+{% endschema %}

@@ -6,6 +6,39 @@
   endif
 %}
 
+{%- if section.settings.design == 'dev4' -%}
+  {%- comment -%} dev4: per-instance values for assets/dev4.css (Design - dev4 only) {%- endcomment -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} {
+      --dev4-columns-tablet: {{ section.settings.dev4_columns_tablet }};
+      --dev4-columns-mobile: {{ section.settings.dev4_columns_mobile }};
+      --dev4-columns-gap-mobile: {{ section.settings.dev4_columns_gap_mobile }}px;
+      --dev4-section-gap: {{ section.settings.dev4_section_gap }}px;
+      --dev4-section-gap-mobile: {{ section.settings.dev4_section_gap_mobile }}px;
+      --dev4-padding-bottom-mobile: {{ section.settings.dev4_padding_bottom_mobile }}px;
+      {%- if section.settings.dev4_arrow_border != blank %}
+        --dev4-arrow-border: rgb({{ section.settings.dev4_arrow_border.rgba }});
+      {%- endif %}
+      {%- if section.settings.dev4_arrow_icon != blank %}
+        --dev4-arrow-icon: rgb({{ section.settings.dev4_arrow_icon.rgba }});
+      {%- endif %}
+      {%- if section.settings.dev4_arrow_shadow != blank %}
+        --dev4-arrow-shadow: rgb({{ section.settings.dev4_arrow_shadow.rgba }});
+      {%- endif %}
+      {%- if section.settings.dev4_progress_track != blank %}
+        --dev4-progress-track: rgb({{ section.settings.dev4_progress_track.rgba }});
+      {%- endif %}
+      {%- if section.settings.dev4_progress_start != blank %}
+        --dev4-progress-start: rgb({{ section.settings.dev4_progress_start.rgba }});
+      {%- endif %}
+      {%- if section.settings.dev4_progress_end != blank %}
+        --dev4-progress-end: rgb({{ section.settings.dev4_progress_end.rgba }});
+      {%- endif %}
+    }
+  {%- endstyle -%}
+  <script src="{{ 'dev4.js' | asset_url }}" type="module"></script>
+{%- endif -%}
+
 <div
   class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
 ></div>
@@ -17,6 +50,7 @@
     section-carousel
     spacing-style
     gap-style
+    {% if section.settings.design == 'dev4' %}dev4-collections{% endif %}
   "
   style="
     {% render 'spacing-style', settings: section.settings %}
@@ -27,6 +61,13 @@
   {% content_for 'block', type: 'group', id: 'static-header' %}
 
   {% content_for 'block', type: '_carousel-content', id: 'static-carousel-content', closest.product: null %}
+
+  {%- if section.settings.design == 'dev4' -%}
+    {%- comment -%} dev4: visual-only mobile scroll indicator (assets/dev4.js) {%- endcomment -%}
+    <dev4-carousel-progress class="dev4-collections__progress" aria-hidden="true">
+      <span class="dev4-collections__progress-fill"></span>
+    </dev4-carousel-progress>
+  {%- endif -%}
 </div>
 
 {% schema %}
@@ -36,6 +77,22 @@
     "groups": ["header", "footer"]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "t:dev4_settings.design",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:dev4_settings.design_default"
+        },
+        {
+          "value": "dev4",
+          "label": "t:dev4_settings.design_dev4"
+        }
+      ],
+      "default": "default"
+    },
     {
       "type": "range",
       "id": "columns",
@@ -169,6 +226,119 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:dev4_settings.dev4_design_header",
+      "info": "t:dev4_settings.layout_info",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev4_columns_tablet",
+      "label": "t:dev4_settings.columns_tablet",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3,
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev4_columns_mobile",
+      "label": "t:dev4_settings.columns_mobile",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3,
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev4_columns_gap_mobile",
+      "label": "t:dev4_settings.columns_gap_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 10,
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev4_section_gap",
+      "label": "t:dev4_settings.section_gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 40,
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev4_section_gap_mobile",
+      "label": "t:dev4_settings.section_gap_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 28,
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev4_padding_bottom_mobile",
+      "label": "t:dev4_settings.padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 9,
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_arrow_border",
+      "label": "t:dev4_settings.arrow_border",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_arrow_icon",
+      "label": "t:dev4_settings.arrow_icon",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_arrow_shadow",
+      "label": "t:dev4_settings.arrow_shadow",
+      "alpha": true,
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_progress_track",
+      "label": "t:dev4_settings.progress_track",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_progress_start",
+      "label": "t:dev4_settings.progress_start",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_progress_end",
+      "label": "t:dev4_settings.progress_end",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
     }
   ],
   "presets": [

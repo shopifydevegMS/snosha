@@ -1,0 +1,73 @@
+<!-- _hero-content.liquid -->
+{%- comment -%}
+  dev3 — text column of the hero (Figma "Hero Content" 190:3821 / 382:4562).
+  Renders the overline pill (text + sparkle) and then the nested native blocks
+  (text heading, text description, button). Layout and alignment: assets/dev3.css.
+{%- endcomment -%}
+<div class="dev3-hero-content" {{ block.shopify_attributes }}>
+  {%- if block.settings.overline != blank -%}
+    <p class="dev3-hero-pill">
+      {%- if block.settings.overline_icon_image != blank -%}
+        {{ block.settings.overline_icon_image | image_url: width: 96 | image_tag: width: 24, height: 24, alt: '', class: 'dev3-hero-pill__icon' }}
+      {%- elsif block.settings.overline_icon == 'sparkle' -%}
+        <img
+          class="dev3-hero-pill__icon"
+          src="{{ 'icon-sparkle-brand-gradient.svg' | asset_url }}"
+          alt=""
+          width="24"
+          height="24"
+        >
+      {%- endif -%}
+      <span class="dev3-hero-pill__text">{{ block.settings.overline | escape }}</span>
+    </p>
+  {%- endif -%}
+
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "Hero content",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Overline pill"
+    },
+    {
+      "type": "text",
+      "id": "overline",
+      "label": "Text",
+      "info": "Leave empty to hide the pill."
+    },
+    {
+      "type": "select",
+      "id": "overline_icon",
+      "label": "Icon",
+      "default": "sparkle",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "sparkle", "label": "Sparkle" }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "overline_icon_image",
+      "label": "Custom icon",
+      "info": "Optional. Replaces the icon. Shown at 24 × 24px."
+    },
+    {
+      "type": "paragraph",
+      "content": "Heading tip: select a word and make it italic to show it in the highlight color."
+    }
+  ]
+}
+{% endschema %}
