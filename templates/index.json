@@ -794,7 +794,9 @@
                 "stars_style": "outline",
                 "show_number": false,
                 "text_color": "{{ settings.color_palette.snosha_primary_blue }}",
-                "type_preset": "h5"
+                "type_preset": "h5",
+                "width": "100%",
+                "alignment": "left"
               },
               "blocks": {}
             },
@@ -814,6 +816,10 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                "dev1_show_discount": true,
+                "dev1_discount_background": "{{ settings.color_palette.snosha_pale_tint }}",
+                "dev1_discount_border": "{{ settings.color_palette.color2 }}",
+                "dev1_discount_text": "{{ settings.color_palette.snosha_secondary_blue }}",
                 "padding-block-start": 4,
                 "padding-block-end": 0,
                 "padding-inline-start": 12,
@@ -825,7 +831,7 @@
               "type": "_product-card-link",
               "settings": {
                 "label": "عرض المنتج",
-                "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19 12H5M11 18L5 12L11 6\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                "icon_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19 12H5M11 18L5 12L11 6\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
                 "text_color": "{{ settings.color_palette.snosha_secondary_blue }}"
               },
               "blocks": {}
@@ -846,10 +852,10 @@
         "design": "dev1",
         "dev1_card_badge": "الأكثر مبيعًا",
         "dev1_add_to_cart_label": "أضف إلى السلة",
-        "dev1_cart_icon_svg": "<svg viewBox=\"0 0 18 18\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M2.25 3h1.5l1.8 8.25h8.25l1.5-5.25H5.25\" stroke=\"currentColor\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"6.75\" cy=\"14.25\" r=\"1.125\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"12.75\" cy=\"14.25\" r=\"1.125\" stroke=\"currentColor\" stroke-width=\"1.2\"/></svg>",
+        "dev1_cart_icon_svg": "<svg viewbox=\"0 0 18 18\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M2.25 3h1.5l1.8 8.25h8.25l1.5-5.25H5.25\" stroke=\"currentColor\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><circle cx=\"6.75\" cy=\"14.25\" r=\"1.125\" stroke=\"currentColor\" stroke-width=\"1.2\"></circle><circle cx=\"12.75\" cy=\"14.25\" r=\"1.125\" stroke=\"currentColor\" stroke-width=\"1.2\"></circle></svg>",
         "dev1_discount_label": "خصم [percent]%",
         "dev1_rating_label": "التقييمات",
-        "dev1_link_icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19 12H5M11 18L5 12L11 6\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+        "dev1_link_icon_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19 12H5M11 18L5 12L11 6\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
         "dev1_columns_tablet": 2,
         "dev1_padding_mobile_top": 56,
         "dev1_padding_mobile_bottom": 56,
@@ -859,8 +865,8 @@
         "dev1_progress_track": "{{ settings.color_palette.color2 }}",
         "dev1_progress_start": "{{ settings.color_palette.snosha_gradient_start }}",
         "dev1_progress_end": "{{ settings.color_palette.snosha_gradient_end }}",
-        "dev1_shadow_color": "rgba(15,100,168,0.35)",
-        "collection": "all",
+        "dev1_shadow_color": "#0f64a859",
+        "collection": "الاكثر-مبيعا",
         "layout_type": "grid",
         "carousel_on_mobile": true,
         "max_products": 4,
@@ -879,271 +885,6 @@
         "padding-block-end": 91
       }
     },
-    "dev4_before_after": {
-      "type": "section",
-      "name": "قبل وبعد",
-      "blocks": {
-        "dev4_ba_compare": {
-          "type": "comparison-slider",
-          "name": "قبل / بعد",
-          "settings": {
-            "slider_style": "horizontal",
-            "show_text": true,
-            "before_text": "قبل",
-            "after_text": "بعد",
-            "text_preset": "h6",
-            "text_position_horizontal": "start",
-            "text_position_vertical": "start",
-            "text_background": true,
-            "text_background_color": "{{ settings.color_palette.background }}",
-            "text_corner_radius": 10,
-            "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
-            "image_ratio": "adapt",
-            "width": "custom",
-            "custom_width": 58,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "slider_bg_color": "",
-            "slider_handle_color": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 18,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "dev4_ba_content": {
-          "type": "group",
-          "name": "المحتوى",
-          "settings": {
-            "link": "",
-            "open_in_new_tab": false,
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 20,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "dev4_ba_heading": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<h2>روتينك اليومي ممكن يغير شكل ابتسامتك.</h2>",
-                "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
-                "width": "100%",
-                "max_width": "none",
-                "alignment": "left",
-                "type_preset": "h2",
-                "font": "var(--font-accent--family)",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "dev4_ba_description": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<p>التنظيف المنتظم مع فرشاة SNOSHA يساعدك على إزالة بقايا الطعام والتصبغات السطحية التي تتراكم مع الوقت ، لابتسامة تبدو أنظف وأكثر انتعاشًا.</p>",
-                "text_color": "{{ settings.color_palette.color1 }}",
-                "width": "100%",
-                "max_width": "none",
-                "alignment": "left",
-                "type_preset": "h5",
-                "font": "var(--font-body--family)",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "dev4_ba_benefits": {
-              "type": "group",
-              "name": "المميزات",
-              "settings": {
-                "link": "",
-                "open_in_new_tab": false,
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 14,
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "background_media": "none",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 6,
-                "padding-block-end": 8,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "dev4_ba_benefit_clean": {
-                  "type": "benefit-item",
-                  "name": "تنظيف يومي أعمق",
-                  "settings": {
-                    "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 4.2C10.2 2.7 7 3 5.6 5.1C4.2 7.2 4.9 9.7 5.8 12.1C6.6 14.3 7.1 16.7 7.9 18.9C8.2 19.7 9.3 19.7 9.6 18.9C10.1 17.4 10.2 15.8 10.9 14.4C11.3 13.6 12.8 13.6 13.2 14.4C13.9 15.8 14 17.4 14.5 18.9C14.8 19.7 15.9 19.7 16.2 18.9C17 16.7 17.5 14.3 18.3 12.1C19.2 9.7 19.9 7.2 18.5 5.1C17.1 3 13.9 2.7 12 4.2Z\" fill=\"#DCF2FB\" fill-opacity=\".2\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
-                    "title": "تنظيف يومي أعمق",
-                    "text": "يساعد على إزالة بقايا الطعام والتراكمات التي تتجمع مع الوقت.",
-                    "icon_color": "{{ settings.color_palette.snosha_secondary_blue }}",
-                    "tile_color": "{{ settings.color_palette.snosha_pale_tint }}",
-                    "tile_border_color": "{{ settings.color_palette.color2 }}",
-                    "description_color": "{{ settings.color_palette.color1 }}"
-                  }
-                },
-                "dev4_ba_benefit_stains": {
-                  "type": "benefit-item",
-                  "name": "إزالة التصبغات السطحية",
-                  "settings": {
-                    "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M19 17L19.7 18.8L21.5 19.5L19.7 20.2L19 22L18.3 20.2L16.5 19.5L18.3 18.8L19 17Z\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
-                    "title": "إزالة التصبغات السطحية",
-                    "text": "وضع White مصمم للمساعدة في تنظيف التصبغات السطحية والحفاظ على مظهر أكثر إشراقًا.",
-                    "icon_color": "{{ settings.color_palette.snosha_secondary_blue }}",
-                    "tile_color": "{{ settings.color_palette.snosha_pale_tint }}",
-                    "tile_border_color": "{{ settings.color_palette.color2 }}",
-                    "description_color": "{{ settings.color_palette.color1 }}"
-                  }
-                },
-                "dev4_ba_benefit_routine": {
-                  "type": "benefit-item",
-                  "name": "روتين منتظم",
-                  "settings": {
-                    "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19.5 13C19.5 17.1421 16.1421 20.5 12 20.5C7.85786 20.5 4.5 17.1421 4.5 13C4.5 8.85786 7.85786 5.5 12 5.5C16.1421 5.5 19.5 8.85786 19.5 13Z\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M12 9.5V13L14.5 14.5\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M10 3H14M12 3V5.5\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
-                    "title": "روتين منتظم",
-                    "text": "مؤقت دقيقتين يساعدك تكملي وقت التنظيف الموصى به في كل مرة.",
-                    "icon_color": "{{ settings.color_palette.snosha_secondary_blue }}",
-                    "tile_color": "{{ settings.color_palette.snosha_pale_tint }}",
-                    "tile_border_color": "{{ settings.color_palette.color2 }}",
-                    "description_color": "{{ settings.color_palette.color1 }}"
-                  }
-                },
-                "dev4_ba_benefit_gentle": {
-                  "type": "benefit-item",
-                  "name": "تنظيف يناسبك",
-                  "settings": {
-                    "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 20.5C7.3 16.3 2.8 12.7 2.8 8.9C2.8 6.2 5 4.3 7.4 4.3C9.2 4.3 10.8 5.2 12 6.7C13.2 5.2 14.8 4.3 16.6 4.3C19 4.3 21.2 6.2 21.2 8.9C21.2 12.7 16.7 16.3 12 20.5Z\" fill=\"#DCF2FB\" fill-opacity=\".2\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
-                    "title": "تنظيف يناسبك",
-                    "text": "اختاري الوضع المناسب لاحتياجك، من التنظيف اليومي إلى Sensitive للعناية اللطيفة.",
-                    "icon_color": "{{ settings.color_palette.snosha_secondary_blue }}",
-                    "tile_color": "{{ settings.color_palette.snosha_pale_tint }}",
-                    "tile_border_color": "{{ settings.color_palette.color2 }}",
-                    "description_color": "{{ settings.color_palette.color1 }}"
-                  }
-                }
-              },
-              "block_order": [
-                "dev4_ba_benefit_clean",
-                "dev4_ba_benefit_stains",
-                "dev4_ba_benefit_routine",
-                "dev4_ba_benefit_gentle"
-              ]
-            },
-            "dev4_ba_cta": {
-              "type": "button",
-              "name": "اكتشف SNOSHA N2",
-              "settings": {
-                "label": "اكتشف SNOSHA N2",
-                "open_in_new_tab": false,
-                "style_class": "button-secondary",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "dev4_ba_heading",
-            "dev4_ba_description",
-            "dev4_ba_benefits",
-            "dev4_ba_cta"
-          ]
-        }
-      },
-      "block_order": [
-        "dev4_ba_compare",
-        "dev4_ba_content"
-      ],
-      "settings": {
-        "design": "dev4",
-        "content_direction": "row",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "flex-start",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 27,
-        "section_width": "page-width",
-        "section_height": "",
-        "background_media": "none",
-        "background_color": "",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "padding-block-start": 60,
-        "padding-block-end": 60,
-        "dev4_compare_start": 50,
-        "dev4_padding_top_mobile": 56,
-        "dev4_padding_bottom_mobile": 40,
-        "dev4_shadow_color": "#0f64a81a"
-      }
-    },
     "dev2_f1_banner": {
       "type": "media-with-content",
       "blocks": {
@@ -1153,7 +894,11 @@
           "settings": {
             "media_type": "image",
             "image": "{{ closest.product.featured_image }}",
-            "image_position": "contain "
+            "link": "",
+            "video_loop": true,
+            "video_autoplay": false,
+            "image_position": "contain",
+            "video_position": "cover"
           },
           "blocks": {}
         },
@@ -1176,6 +921,8 @@
                 "font": "var(--font-accent--family)",
                 "font_size": "0.75rem",
                 "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
                 "wrap": "nowrap",
                 "text_color": "{{ settings.color_palette.background }}",
                 "background": true,
@@ -1196,7 +943,20 @@
                 "max_width": "none",
                 "alignment": "left",
                 "type_preset": "h1",
-                "text_color": "{{ settings.color_palette.snosha_deep_blue }}"
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -1208,7 +968,20 @@
                 "max_width": "none",
                 "alignment": "left",
                 "type_preset": "paragraph",
-                "text_color": "{{ settings.color_palette.color1 }}"
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.color1 }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -1219,19 +992,48 @@
                 "vertical_on_mobile": false,
                 "horizontal_alignment": "flex-start",
                 "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
                 "gap": 10,
                 "width": "fill",
-                "width_mobile": "fill"
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {
                 "dev2_f1_spec_pressure": {
                   "type": "spec-badge",
                   "settings": {
                     "label": "ضغط 30–120 PSI",
-                    "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><g transform=\"translate(3 3)\"><path d=\"M9.06 1.2C9.02 1.15 8.95 1.11 8.87 1.11C8.79 1.11 8.72 1.14 8.67 1.19C8.56 1.32 5.87 4.22 5.87 6.48C5.87 8.15 7.21 9.51 8.86 9.51C10.51 9.51 11.86 8.15 11.86 6.48C11.86 4.44 9.18 1.33 9.06 1.2ZM8.86 8.98C7.51 8.98 6.41 7.86 6.41 6.49C6.41 4.77 8.24 2.51 8.86 1.79C9.11 2.09 9.56 2.68 10.01 3.35C10.87 4.65 11.32 5.74 11.32 6.49C11.32 7.86 10.22 8.98 8.86 8.98Z\"/><path d=\"M10.01 3.35C9.56 2.67 9.11 2.09 8.86 1.78C8.24 2.5 6.41 4.77 6.41 6.48C6.41 7.86 7.51 8.97 8.86 8.97C10.22 8.97 11.32 7.85 11.32 6.48C11.32 5.73 10.87 4.65 10.01 3.35ZM8.67 8.49H8.64C7.73 8.39 6.99 7.64 6.89 6.73C6.87 6.58 6.97 6.44 7.12 6.43C7.27 6.41 7.4 6.52 7.42 6.66C7.5 7.34 8.03 7.88 8.7 7.96C8.84 7.97 8.95 8.11 8.93 8.26C8.92 8.39 8.8 8.49 8.67 8.49H8.67Z\"/><path d=\"M5.16 7.48C5.25 7.48 5.34 7.48 5.42 7.47C5.57 7.45 5.68 7.32 5.66 7.18C5.65 7.03 5.51 6.92 5.37 6.94C5.3 6.95 5.23 6.95 5.16 6.95C3.98 6.95 3.02 5.98 3.02 4.78C3.02 3.3 4.58 1.34 5.15 0.68C5.47 1.07 6.13 1.92 6.63 2.82C6.7 2.95 6.87 3 6.99 2.93C7.12 2.85 7.17 2.69 7.1 2.56C6.38 1.27 5.4 0.14 5.36 0.09C5.31 0.04 5.24 0 5.16 0C5.09 0 5.02 0.03 4.97 0.08C4.87 0.19 2.48 2.77 2.48 4.78C2.48 6.27 3.68 7.49 5.16 7.49V7.48Z\"/><path d=\"M10.82 2.92C10.94 3 11.11 2.95 11.18 2.83C11.66 2 12.26 1.27 12.56 0.92C12.78 1.2 13.17 1.69 13.55 2.27C14.31 3.42 14.71 4.37 14.71 5.03C14.71 6.22 13.74 7.2 12.56 7.2C12.49 7.2 12.41 7.19 12.34 7.18C12.19 7.17 12.06 7.27 12.04 7.42C12.03 7.57 12.13 7.7 12.28 7.72C12.38 7.73 12.47 7.73 12.57 7.73C14.04 7.73 15.24 6.52 15.24 5.03C15.24 3.21 12.87 0.46 12.77 0.34C12.72 0.28 12.65 0.25 12.57 0.25C12.5 0.25 12.43 0.28 12.38 0.33C12.34 0.37 11.43 1.35 10.73 2.56C10.65 2.69 10.69 2.85 10.82 2.93L10.82 2.92Z\"/><path d=\"M17.72 16.67L16.06 9.25C16.04 9.13 15.93 9.05 15.8 9.05H14.1C13.95 9.05 13.83 9.17 13.83 9.31C13.83 9.46 13.95 9.58 14.1 9.58H15.59L17.13 16.46H0.6L2.14 9.58H3.63C3.78 9.58 3.9 9.46 3.9 9.31C3.9 9.17 3.78 9.05 3.63 9.05H1.93C1.8 9.05 1.69 9.13 1.66 9.25L0.01 16.67C-0.01 16.75 0.01 16.84 0.06 16.9C0.11 16.96 0.18 17 0.26 17H17.46C17.54 17 17.62 16.96 17.67 16.9C17.72 16.84 17.74 16.75 17.72 16.67H17.72Z\"/><path d=\"M4.96 9.53C4.81 9.53 4.69 9.65 4.69 9.8V12.86L3.89 11.87C3.8 11.76 3.63 11.74 3.51 11.83C3.4 11.93 3.38 12.1 3.47 12.21L4.75 13.79C4.8 13.85 4.88 13.89 4.96 13.89C5.04 13.89 5.11 13.85 5.16 13.79L6.44 12.21C6.53 12.1 6.52 11.93 6.4 11.83C6.29 11.74 6.12 11.76 6.02 11.87L5.22 12.86V9.8C5.22 9.65 5.11 9.53 4.96 9.53Z\"/><path d=\"M8.86 10.95C8.72 10.95 8.6 11.07 8.6 11.21V14.27L7.79 13.28C7.7 13.17 7.53 13.15 7.42 13.24C7.3 13.33 7.28 13.51 7.38 13.62L8.66 15.2C8.71 15.26 8.78 15.3 8.86 15.3C8.94 15.3 9.02 15.26 9.07 15.2L10.35 13.62C10.44 13.51 10.43 13.34 10.31 13.24C10.2 13.15 10.03 13.17 9.93 13.28L9.13 14.27V11.21C9.13 11.07 9.01 10.95 8.86 10.95Z\"/><path d=\"M12.77 9.53C12.62 9.53 12.5 9.65 12.5 9.8V12.87L11.69 11.87C11.59 11.76 11.43 11.74 11.31 11.84C11.19 11.93 11.18 12.1 11.27 12.22L12.56 13.79C12.61 13.85 12.69 13.89 12.77 13.89C12.85 13.89 12.93 13.85 12.98 13.79L14.27 12.22C14.36 12.1 14.35 11.93 14.23 11.84C14.11 11.74 13.95 11.76 13.85 11.87L13.04 12.87V9.8C13.04 9.65 12.92 9.53 12.77 9.53Z\"/></g></svg>",
+                    "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"currentColor\"><g transform=\"translate(3 3)\"><path d=\"M9.06 1.2C9.02 1.15 8.95 1.11 8.87 1.11C8.79 1.11 8.72 1.14 8.67 1.19C8.56 1.32 5.87 4.22 5.87 6.48C5.87 8.15 7.21 9.51 8.86 9.51C10.51 9.51 11.86 8.15 11.86 6.48C11.86 4.44 9.18 1.33 9.06 1.2ZM8.86 8.98C7.51 8.98 6.41 7.86 6.41 6.49C6.41 4.77 8.24 2.51 8.86 1.79C9.11 2.09 9.56 2.68 10.01 3.35C10.87 4.65 11.32 5.74 11.32 6.49C11.32 7.86 10.22 8.98 8.86 8.98Z\"></path><path d=\"M10.01 3.35C9.56 2.67 9.11 2.09 8.86 1.78C8.24 2.5 6.41 4.77 6.41 6.48C6.41 7.86 7.51 8.97 8.86 8.97C10.22 8.97 11.32 7.85 11.32 6.48C11.32 5.73 10.87 4.65 10.01 3.35ZM8.67 8.49H8.64C7.73 8.39 6.99 7.64 6.89 6.73C6.87 6.58 6.97 6.44 7.12 6.43C7.27 6.41 7.4 6.52 7.42 6.66C7.5 7.34 8.03 7.88 8.7 7.96C8.84 7.97 8.95 8.11 8.93 8.26C8.92 8.39 8.8 8.49 8.67 8.49H8.67Z\"></path><path d=\"M5.16 7.48C5.25 7.48 5.34 7.48 5.42 7.47C5.57 7.45 5.68 7.32 5.66 7.18C5.65 7.03 5.51 6.92 5.37 6.94C5.3 6.95 5.23 6.95 5.16 6.95C3.98 6.95 3.02 5.98 3.02 4.78C3.02 3.3 4.58 1.34 5.15 0.68C5.47 1.07 6.13 1.92 6.63 2.82C6.7 2.95 6.87 3 6.99 2.93C7.12 2.85 7.17 2.69 7.1 2.56C6.38 1.27 5.4 0.14 5.36 0.09C5.31 0.04 5.24 0 5.16 0C5.09 0 5.02 0.03 4.97 0.08C4.87 0.19 2.48 2.77 2.48 4.78C2.48 6.27 3.68 7.49 5.16 7.49V7.48Z\"></path><path d=\"M10.82 2.92C10.94 3 11.11 2.95 11.18 2.83C11.66 2 12.26 1.27 12.56 0.92C12.78 1.2 13.17 1.69 13.55 2.27C14.31 3.42 14.71 4.37 14.71 5.03C14.71 6.22 13.74 7.2 12.56 7.2C12.49 7.2 12.41 7.19 12.34 7.18C12.19 7.17 12.06 7.27 12.04 7.42C12.03 7.57 12.13 7.7 12.28 7.72C12.38 7.73 12.47 7.73 12.57 7.73C14.04 7.73 15.24 6.52 15.24 5.03C15.24 3.21 12.87 0.46 12.77 0.34C12.72 0.28 12.65 0.25 12.57 0.25C12.5 0.25 12.43 0.28 12.38 0.33C12.34 0.37 11.43 1.35 10.73 2.56C10.65 2.69 10.69 2.85 10.82 2.93L10.82 2.92Z\"></path><path d=\"M17.72 16.67L16.06 9.25C16.04 9.13 15.93 9.05 15.8 9.05H14.1C13.95 9.05 13.83 9.17 13.83 9.31C13.83 9.46 13.95 9.58 14.1 9.58H15.59L17.13 16.46H0.6L2.14 9.58H3.63C3.78 9.58 3.9 9.46 3.9 9.31C3.9 9.17 3.78 9.05 3.63 9.05H1.93C1.8 9.05 1.69 9.13 1.66 9.25L0.01 16.67C-0.01 16.75 0.01 16.84 0.06 16.9C0.11 16.96 0.18 17 0.26 17H17.46C17.54 17 17.62 16.96 17.67 16.9C17.72 16.84 17.74 16.75 17.72 16.67H17.72Z\"></path><path d=\"M4.96 9.53C4.81 9.53 4.69 9.65 4.69 9.8V12.86L3.89 11.87C3.8 11.76 3.63 11.74 3.51 11.83C3.4 11.93 3.38 12.1 3.47 12.21L4.75 13.79C4.8 13.85 4.88 13.89 4.96 13.89C5.04 13.89 5.11 13.85 5.16 13.79L6.44 12.21C6.53 12.1 6.52 11.93 6.4 11.83C6.29 11.74 6.12 11.76 6.02 11.87L5.22 12.86V9.8C5.22 9.65 5.11 9.53 4.96 9.53Z\"></path><path d=\"M8.86 10.95C8.72 10.95 8.6 11.07 8.6 11.21V14.27L7.79 13.28C7.7 13.17 7.53 13.15 7.42 13.24C7.3 13.33 7.28 13.51 7.38 13.62L8.66 15.2C8.71 15.26 8.78 15.3 8.86 15.3C8.94 15.3 9.02 15.26 9.07 15.2L10.35 13.62C10.44 13.51 10.43 13.34 10.31 13.24C10.2 13.15 10.03 13.17 9.93 13.28L9.13 14.27V11.21C9.13 11.07 9.01 10.95 8.86 10.95Z\"></path><path d=\"M12.77 9.53C12.62 9.53 12.5 9.65 12.5 9.8V12.87L11.69 11.87C11.59 11.76 11.43 11.74 11.31 11.84C11.19 11.93 11.18 12.1 11.27 12.22L12.56 13.79C12.61 13.85 12.69 13.89 12.77 13.89C12.85 13.89 12.93 13.85 12.98 13.79L14.27 12.22C14.36 12.1 14.35 11.93 14.23 11.84C14.11 11.74 13.95 11.76 13.85 11.87L13.04 12.87V9.8C13.04 9.65 12.92 9.53 12.77 9.53Z\"></path></g></svg>",
                     "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
                     "background_color": "{{ settings.color_palette.background }}",
-                    "border_color": "{{ settings.color_palette.color2 }}"
+                    "border_color": "{{ settings.color_palette.color2 }}",
+                    "icon_background_start": "",
+                    "icon_background_end": ""
                   },
                   "blocks": {}
                 },
@@ -1239,10 +1041,12 @@
                   "type": "spec-badge",
                   "settings": {
                     "label": "4 أوضاع تنظيف",
-                    "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 7H14M18 7H20M4 17H8M12 17H20\"/><path d=\"M18 7C18 8.1 17.1 9 16 9C14.9 9 14 8.1 14 7C14 5.9 14.9 5 16 5C17.1 5 18 5.9 18 7Z\"/><path d=\"M12 17C12 18.1 11.1 19 10 19C8.9 19 8 18.1 8 17C8 15.9 8.9 15 10 15C11.1 15 12 15.9 12 17Z\"/></svg>",
+                    "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 7H14M18 7H20M4 17H8M12 17H20\"></path><path d=\"M18 7C18 8.1 17.1 9 16 9C14.9 9 14 8.1 14 7C14 5.9 14.9 5 16 5C17.1 5 18 5.9 18 7Z\"></path><path d=\"M12 17C12 18.1 11.1 19 10 19C8.9 19 8 18.1 8 17C8 15.9 8.9 15 10 15C11.1 15 12 15.9 12 17Z\"></path></svg>",
                     "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
                     "background_color": "{{ settings.color_palette.background }}",
-                    "border_color": "{{ settings.color_palette.color2 }}"
+                    "border_color": "{{ settings.color_palette.color2 }}",
+                    "icon_background_start": "",
+                    "icon_background_end": ""
                   },
                   "blocks": {}
                 },
@@ -1250,10 +1054,12 @@
                   "type": "spec-badge",
                   "settings": {
                     "label": "خزان ماء 330 مل",
-                    "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8.5 3H15.5V6.5C15.95 6.86 16.32 7.32 16.58 7.84C16.84 8.35 16.98 8.92 17 9.5V19C17 19.53 16.79 20.04 16.41 20.41C16.04 20.79 15.53 21 15 21H9C8.47 21 7.96 20.79 7.59 20.41C7.21 20.04 7 19.53 7 19V9.5C7.02 8.92 7.16 8.35 7.42 7.84C7.68 7.32 8.05 6.86 8.5 6.5V3Z\"/><path d=\"M7 14H17\"/></svg>",
+                    "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8.5 3H15.5V6.5C15.95 6.86 16.32 7.32 16.58 7.84C16.84 8.35 16.98 8.92 17 9.5V19C17 19.53 16.79 20.04 16.41 20.41C16.04 20.79 15.53 21 15 21H9C8.47 21 7.96 20.79 7.59 20.41C7.21 20.04 7 19.53 7 19V9.5C7.02 8.92 7.16 8.35 7.42 7.84C7.68 7.32 8.05 6.86 8.5 6.5V3Z\"></path><path d=\"M7 14H17\"></path></svg>",
                     "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
                     "background_color": "{{ settings.color_palette.background }}",
-                    "border_color": "{{ settings.color_palette.color2 }}"
+                    "border_color": "{{ settings.color_palette.color2 }}",
+                    "icon_background_start": "",
+                    "icon_background_end": ""
                   },
                   "blocks": {}
                 },
@@ -1261,10 +1067,12 @@
                   "type": "spec-badge",
                   "settings": {
                     "label": "4 رؤوس متخصصة",
-                    "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><defs><path id=\"spec-brush-head-shape\" d=\"M0.01 3.71L0.02 5.74C0.02 5.83 0.06 5.91 0.12 5.97C0.18 6.04 0.26 6.07 0.35 6.07L9.61 6.03C9.64 6.03 9.67 6.04 9.7 6.05L11.13 6.72C11.52 6.91 11.95 7 12.38 7L23.67 6.95C23.75 6.95 23.84 6.91 23.9 6.85C23.96 6.79 24 6.7 24 6.62L23.99 4.58C23.99 4.4 23.84 4.25 23.65 4.25H22.81L22.79 0.33C22.79 0.15 22.64 0 22.45 0L18.41 0.02L16.22 0.03L13.76 0.04C13.57 0.04 13.42 0.19 13.42 0.38L13.44 4.3H12.36C12.33 4.3 12.3 4.3 12.27 4.28L10.84 3.61C10.45 3.43 10.02 3.33 9.59 3.33L0.33 3.37C0.15 3.37 0 3.53 0 3.71L0.01 3.71ZM15.89 0.7L15.9 2.74C15.9 2.83 15.94 2.91 16 2.97C16.06 3.04 16.14 3.07 16.24 3.07C16.42 3.07 16.57 2.92 16.57 2.73L16.56 0.69H18.08L18.09 2.73C18.09 2.82 18.13 2.9 18.19 2.96C18.25 3.03 18.33 3.06 18.42 3.06C18.61 3.06 18.76 2.91 18.76 2.72L18.75 0.68H20.27L20.28 2.72C20.28 2.81 20.31 2.89 20.37 2.95C20.44 3.02 20.52 3.05 20.61 3.05C20.79 3.05 20.94 2.9 20.94 2.71L20.93 0.67H22.12L22.13 4.25L14.11 4.29L14.09 0.7L15.88 0.69L15.89 0.7ZM9.61 4C9.94 4 10.27 4.07 10.57 4.22L12 4.89C12.12 4.94 12.25 4.97 12.37 4.97L23.33 4.92V6.28L12.38 6.33C12.06 6.33 11.72 6.26 11.42 6.12L9.99 5.45C9.87 5.39 9.75 5.36 9.62 5.36L0.69 5.41V4.05L9.61 4.01L9.61 4Z\"/><mask id=\"spec-brush-head-mask\"><use href=\"#spec-brush-head-shape\" fill=\"#fff\"/></mask></defs><g transform=\"translate(0 8.5)\"><use href=\"#spec-brush-head-shape\"/><use href=\"#spec-brush-head-shape\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" mask=\"url(#spec-brush-head-mask)\"/></g></svg>",
+                    "icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"currentColor\"><defs><path id=\"spec-brush-head-shape\" d=\"M0.01 3.71L0.02 5.74C0.02 5.83 0.06 5.91 0.12 5.97C0.18 6.04 0.26 6.07 0.35 6.07L9.61 6.03C9.64 6.03 9.67 6.04 9.7 6.05L11.13 6.72C11.52 6.91 11.95 7 12.38 7L23.67 6.95C23.75 6.95 23.84 6.91 23.9 6.85C23.96 6.79 24 6.7 24 6.62L23.99 4.58C23.99 4.4 23.84 4.25 23.65 4.25H22.81L22.79 0.33C22.79 0.15 22.64 0 22.45 0L18.41 0.02L16.22 0.03L13.76 0.04C13.57 0.04 13.42 0.19 13.42 0.38L13.44 4.3H12.36C12.33 4.3 12.3 4.3 12.27 4.28L10.84 3.61C10.45 3.43 10.02 3.33 9.59 3.33L0.33 3.37C0.15 3.37 0 3.53 0 3.71L0.01 3.71ZM15.89 0.7L15.9 2.74C15.9 2.83 15.94 2.91 16 2.97C16.06 3.04 16.14 3.07 16.24 3.07C16.42 3.07 16.57 2.92 16.57 2.73L16.56 0.69H18.08L18.09 2.73C18.09 2.82 18.13 2.9 18.19 2.96C18.25 3.03 18.33 3.06 18.42 3.06C18.61 3.06 18.76 2.91 18.76 2.72L18.75 0.68H20.27L20.28 2.72C20.28 2.81 20.31 2.89 20.37 2.95C20.44 3.02 20.52 3.05 20.61 3.05C20.79 3.05 20.94 2.9 20.94 2.71L20.93 0.67H22.12L22.13 4.25L14.11 4.29L14.09 0.7L15.88 0.69L15.89 0.7ZM9.61 4C9.94 4 10.27 4.07 10.57 4.22L12 4.89C12.12 4.94 12.25 4.97 12.37 4.97L23.33 4.92V6.28L12.38 6.33C12.06 6.33 11.72 6.26 11.42 6.12L9.99 5.45C9.87 5.39 9.75 5.36 9.62 5.36L0.69 5.41V4.05L9.61 4.01L9.61 4Z\"></path><mask id=\"spec-brush-head-mask\"><use href=\"#spec-brush-head-shape\" fill=\"#fff\"></use></mask></defs><g transform=\"translate(0 8.5)\"><use href=\"#spec-brush-head-shape\"></use><use href=\"#spec-brush-head-shape\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4\" mask=\"url(#spec-brush-head-mask)\"></use></g></svg>",
                     "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
                     "background_color": "{{ settings.color_palette.background }}",
-                    "border_color": "{{ settings.color_palette.color2 }}"
+                    "border_color": "{{ settings.color_palette.color2 }}",
+                    "icon_background_start": "",
+                    "icon_background_end": ""
                   },
                   "blocks": {}
                 }
@@ -1283,8 +1091,14 @@
                 "link": "{{ closest.product.url }}",
                 "open_in_new_tab": false,
                 "style_class": "button",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "",
                 "width": "fit-content",
-                "width_mobile": "fit-content"
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
               },
               "blocks": {}
             }
@@ -1303,7 +1117,7 @@
         "product": "snosha-f1",
         "dev2_show_decorations": true,
         "dev2_watermark_text": "F1",
-        "dev2_sparkle_icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M12 2.09C12.6 7.49 16.6 11.49 22 12.09C16.6 12.69 12.6 16.69 12 22.09C11.4 16.69 7.4 12.69 2 12.09C7.4 11.49 11.4 7.49 12 2.09Z\"/></svg>",
+        "dev2_sparkle_icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M12 2.09C12.6 7.49 16.6 11.49 22 12.09C16.6 12.69 12.6 16.69 12 22.09C11.4 16.69 7.4 12.69 2 12.09C7.4 11.49 11.4 7.49 12 2.09Z\"></path></svg>",
         "dev2_accent_start": "{{ settings.color_palette.snosha_gradient_start }}",
         "dev2_accent_end": "{{ settings.color_palette.snosha_gradient_end }}",
         "dev2_highlight_color": "{{ settings.color_palette.snosha_secondary_blue }}",
@@ -1523,7 +1337,9 @@
                 "stars_style": "outline",
                 "show_number": false,
                 "text_color": "{{ settings.color_palette.snosha_primary_blue }}",
-                "type_preset": "h5"
+                "type_preset": "h5",
+                "width": "100%",
+                "alignment": "left"
               },
               "blocks": {}
             },
@@ -1543,6 +1359,10 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                "dev1_show_discount": true,
+                "dev1_discount_background": "{{ settings.color_palette.snosha_pale_tint }}",
+                "dev1_discount_border": "{{ settings.color_palette.color2 }}",
+                "dev1_discount_text": "{{ settings.color_palette.snosha_secondary_blue }}",
                 "padding-block-start": 4,
                 "padding-block-end": 0,
                 "padding-inline-start": 12,
@@ -1554,7 +1374,7 @@
               "type": "_product-card-link",
               "settings": {
                 "label": "عرض المنتج",
-                "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19 12H5M11 18L5 12L11 6\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+                "icon_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19 12H5M11 18L5 12L11 6\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
                 "text_color": "{{ settings.color_palette.snosha_secondary_blue }}"
               },
               "blocks": {}
@@ -1575,10 +1395,10 @@
         "design": "dev1",
         "dev1_card_badge": "الأكثر مبيعًا",
         "dev1_add_to_cart_label": "أضف إلى السلة",
-        "dev1_cart_icon_svg": "<svg viewBox=\"0 0 18 18\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M2.25 3h1.5l1.8 8.25h8.25l1.5-5.25H5.25\" stroke=\"currentColor\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"6.75\" cy=\"14.25\" r=\"1.125\" stroke=\"currentColor\" stroke-width=\"1.2\"/><circle cx=\"12.75\" cy=\"14.25\" r=\"1.125\" stroke=\"currentColor\" stroke-width=\"1.2\"/></svg>",
+        "dev1_cart_icon_svg": "<svg viewbox=\"0 0 18 18\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M2.25 3h1.5l1.8 8.25h8.25l1.5-5.25H5.25\" stroke=\"currentColor\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><circle cx=\"6.75\" cy=\"14.25\" r=\"1.125\" stroke=\"currentColor\" stroke-width=\"1.2\"></circle><circle cx=\"12.75\" cy=\"14.25\" r=\"1.125\" stroke=\"currentColor\" stroke-width=\"1.2\"></circle></svg>",
         "dev1_discount_label": "خصم [percent]%",
         "dev1_rating_label": "التقييمات",
-        "dev1_link_icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19 12H5M11 18L5 12L11 6\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+        "dev1_link_icon_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19 12H5M11 18L5 12L11 6\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
         "dev1_columns_tablet": 2,
         "dev1_padding_mobile_top": 56,
         "dev1_padding_mobile_bottom": 40,
@@ -1588,8 +1408,8 @@
         "dev1_progress_track": "{{ settings.color_palette.color2 }}",
         "dev1_progress_start": "{{ settings.color_palette.snosha_gradient_start }}",
         "dev1_progress_end": "{{ settings.color_palette.snosha_gradient_end }}",
-        "dev1_shadow_color": "rgba(15,100,168,0.35)",
-        "collection": "",
+        "dev1_shadow_color": "#0f64a859",
+        "collection": "باندل",
         "layout_type": "grid",
         "carousel_on_mobile": true,
         "max_products": 4,
@@ -1606,6 +1426,309 @@
         "background_color": "{{ settings.color_palette.background }}",
         "padding-block-start": 60,
         "padding-block-end": 91
+      }
+    },
+    "dev4_before_after": {
+      "type": "section",
+      "blocks": {
+        "dev4_ba_compare": {
+          "type": "comparison-slider",
+          "name": "قبل / بعد",
+          "settings": {
+            "before_image": "shopify://shop_images/last_before.webp",
+            "after_image": "shopify://shop_images/last_after.webp",
+            "slider_style": "horizontal",
+            "show_text": true,
+            "before_text": "قبل",
+            "after_text": "بعد",
+            "text_preset": "h6",
+            "text_position_horizontal": "start",
+            "text_position_vertical": "start",
+            "text_background": true,
+            "text_background_color": "{{ settings.color_palette.background }}",
+            "text_corner_radius": 10,
+            "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+            "image_ratio": "adapt",
+            "width": "custom",
+            "custom_width": 58,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "slider_bg_color": "",
+            "slider_handle_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 18,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "dev4_ba_content": {
+          "type": "group",
+          "name": "المحتوى",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 20,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "dev4_ba_heading": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h2>روتينك اليومي ممكن يغير شكل ابتسامتك.</h2>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "h2",
+                "font": "var(--font-accent--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "dev4_ba_description": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>التنظيف المنتظم مع فرشاة SNOSHA يساعدك على إزالة بقايا الطعام والتصبغات السطحية التي تتراكم مع الوقت ، لابتسامة تبدو أنظف وأكثر انتعاشًا.</p>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.color1 }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "dev4_ba_benefits": {
+              "type": "group",
+              "name": "المميزات",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 14,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 6,
+                "padding-block-end": 8,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev4_ba_benefit_clean": {
+                  "type": "benefit-item",
+                  "name": "تنظيف يومي أعمق",
+                  "settings": {
+                    "icon_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 4.2C10.2 2.7 7 3 5.6 5.1C4.2 7.2 4.9 9.7 5.8 12.1C6.6 14.3 7.1 16.7 7.9 18.9C8.2 19.7 9.3 19.7 9.6 18.9C10.1 17.4 10.2 15.8 10.9 14.4C11.3 13.6 12.8 13.6 13.2 14.4C13.9 15.8 14 17.4 14.5 18.9C14.8 19.7 15.9 19.7 16.2 18.9C17 16.7 17.5 14.3 18.3 12.1C19.2 9.7 19.9 7.2 18.5 5.1C17.1 3 13.9 2.7 12 4.2Z\" fill=\"#DCF2FB\" fill-opacity=\".2\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+                    "title": "تنظيف يومي أعمق",
+                    "text": "يساعد على إزالة بقايا الطعام والتراكمات التي تتجمع مع الوقت.",
+                    "icon_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                    "tile_color": "{{ settings.color_palette.snosha_pale_tint }}",
+                    "tile_border_color": "{{ settings.color_palette.color2 }}",
+                    "description_color": "{{ settings.color_palette.color1 }}"
+                  },
+                  "blocks": {}
+                },
+                "dev4_ba_benefit_stains": {
+                  "type": "benefit-item",
+                  "name": "إزالة التصبغات السطحية",
+                  "settings": {
+                    "icon_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M19 17L19.7 18.8L21.5 19.5L19.7 20.2L19 22L18.3 20.2L16.5 19.5L18.3 18.8L19 17Z\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+                    "title": "إزالة التصبغات السطحية",
+                    "text": "وضع White مصمم للمساعدة في تنظيف التصبغات السطحية والحفاظ على مظهر أكثر إشراقًا.",
+                    "icon_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                    "tile_color": "{{ settings.color_palette.snosha_pale_tint }}",
+                    "tile_border_color": "{{ settings.color_palette.color2 }}",
+                    "description_color": "{{ settings.color_palette.color1 }}"
+                  },
+                  "blocks": {}
+                },
+                "dev4_ba_benefit_routine": {
+                  "type": "benefit-item",
+                  "name": "روتين منتظم",
+                  "settings": {
+                    "icon_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19.5 13C19.5 17.1421 16.1421 20.5 12 20.5C7.85786 20.5 4.5 17.1421 4.5 13C4.5 8.85786 7.85786 5.5 12 5.5C16.1421 5.5 19.5 8.85786 19.5 13Z\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M12 9.5V13L14.5 14.5\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><path d=\"M10 3H14M12 3V5.5\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+                    "title": "روتين منتظم",
+                    "text": "مؤقت دقيقتين يساعدك تكملي وقت التنظيف الموصى به في كل مرة.",
+                    "icon_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                    "tile_color": "{{ settings.color_palette.snosha_pale_tint }}",
+                    "tile_border_color": "{{ settings.color_palette.color2 }}",
+                    "description_color": "{{ settings.color_palette.color1 }}"
+                  },
+                  "blocks": {}
+                },
+                "dev4_ba_benefit_gentle": {
+                  "type": "benefit-item",
+                  "name": "تنظيف يناسبك",
+                  "settings": {
+                    "icon_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 20.5C7.3 16.3 2.8 12.7 2.8 8.9C2.8 6.2 5 4.3 7.4 4.3C9.2 4.3 10.8 5.2 12 6.7C13.2 5.2 14.8 4.3 16.6 4.3C19 4.3 21.2 6.2 21.2 8.9C21.2 12.7 16.7 16.3 12 20.5Z\" fill=\"#DCF2FB\" fill-opacity=\".2\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+                    "title": "تنظيف يناسبك",
+                    "text": "اختاري الوضع المناسب لاحتياجك، من التنظيف اليومي إلى Sensitive للعناية اللطيفة.",
+                    "icon_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                    "tile_color": "{{ settings.color_palette.snosha_pale_tint }}",
+                    "tile_border_color": "{{ settings.color_palette.color2 }}",
+                    "description_color": "{{ settings.color_palette.color1 }}"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "dev4_ba_benefit_clean",
+                "dev4_ba_benefit_stains",
+                "dev4_ba_benefit_routine",
+                "dev4_ba_benefit_gentle"
+              ]
+            },
+            "dev4_ba_cta": {
+              "type": "button",
+              "name": "اكتشف SNOSHA N2",
+              "settings": {
+                "label": "اكتشف SNOSHA N2",
+                "link": "shopify://products/snosha-n2",
+                "open_in_new_tab": false,
+                "style_class": "button-secondary",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dev4_ba_heading",
+            "dev4_ba_description",
+            "dev4_ba_benefits",
+            "dev4_ba_cta"
+          ]
+        }
+      },
+      "block_order": [
+        "dev4_ba_compare",
+        "dev4_ba_content"
+      ],
+      "name": "قبل وبعد",
+      "settings": {
+        "design": "dev4",
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 27,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 60,
+        "padding-block-end": 60,
+        "dev4_compare_start": 50,
+        "dev4_padding_top_mobile": 56,
+        "dev4_padding_bottom_mobile": 40,
+        "dev4_shadow_color": "#0f64a81a"
       }
     }
   },
