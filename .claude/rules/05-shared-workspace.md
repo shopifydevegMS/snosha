@@ -6,16 +6,17 @@
 
 - The developer names each session (e.g. "you are `dev1`"), in the task prompt or a message. Use exactly that name. **Until you have a name, create or edit no file — ask for it.** Never derive it from the git branch: all sessions share one branch.
 - The name becomes part of CSS classes and JSON IDs, so it must be lowercase letters and digits, start with a letter, and not equal the theme namespace (theme file → T2). If the given name breaks this (e.g. `Dev 1`, `1dev`), tell the developer and propose a valid form (`dev1`); don't rename silently.
-- The name is your **prefix** for everything new that another session could collide with: files (`sections/<session>-hero.liquid`), CSS classes (`.<session>-hero`), custom properties (`--<session>-gap`), JSON section/block IDs (`"<session>_hero"`), locale keys (`"<session>_hero": {…}`), JS identifiers and element names (`<session>Slider`, `<session>-slider`), global color IDs where the format allows them (e.g. `scheme-<session>-…`), design-option values (01 §4). Check a name doesn't exist before creating it.
-- **Exception — icons and images exported from Figma** carry no prefix: they are shared, non-critical assets any session may reuse. Name them after the Figma layer (`icon-arrow-left.svg`), or give a short descriptive name when the layer name is generic (`Vector 12` → `icon-truck.svg`). Before saving, check the name: if a file with that name exists and is the same asset, reuse it; if it's a different asset, choose another name. Never overwrite an existing asset.
-- **You own** (edit freely): `sections/<session>-*.liquid`, `snippets/<session>-*.liquid`, `blocks/<session>-*.liquid`, `assets/<session>.css`, `assets/<session>.js`.
+- The name is your **prefix** for everything new that another session could collide with (except section/block/snippet file names — next rule): your CSS/JS files (`assets/<session>.css`), CSS classes (`.<session>-hero`), custom properties (`--<session>-gap`), JSON section/block IDs (`"<session>_hero"`), locale keys (`"<session>_hero": {…}`), JS identifiers and element names (`<session>Slider`, `<session>-slider`), global color IDs where the format allows them (e.g. `scheme-<session>-…`), design-option values (01 §4). Check a name doesn't exist before creating it.
+- **File names of new sections, blocks and snippets carry NO prefix (developer decision — important).** Name them by what they are: `sections/trust-strip.liquid`, `blocks/_trust-strip.liquid`, `snippets/trust-strip-card.liquid` — never `_dev3-trust-strip.liquid` or `snosha-hero.liquid`. Before creating one, check the name doesn't exist in `sections/`, `blocks/`, `snippets/` (theme or another session); if it does, pick another descriptive name. Your CSS/JS files (`assets/<session>.css`, `assets/<session>.js`), classes, variables, IDs and keys keep the prefix.
+- **Exception — images exported from Figma** carry no prefix: they are shared, non-critical assets any session may reuse. (Icons normally go into SVG-code settings instead of files — 04 §6.1; an icon file is only for a native control that needs one.) Name them after the Figma layer (`icon-arrow-left.svg`), or give a short descriptive name when the layer name is generic (`Vector 12` → `icon-truck.svg`). Before saving, check the name: if a file with that name exists and is the same asset, reuse it; if it's a different asset, choose another name. Never overwrite an existing asset.
+- **You own** (edit freely): the section, block and snippet files you created, `assets/<session>.css`, `assets/<session>.js`.
 - **Shared files you may edit without asking** — targeted changes only (§4–§5):
   - the JSON template or section group of the page your task targets, to add or configure your section or the existing instance your task configures;
   - locale files, to add your own `<session>_` keys;
   - native theme `sections/`, `blocks/`, `snippets/`, with **gated, opt-in changes only** (01 §4);
   - protected files, with **purely additive** changes only (§7): your CSS/JS loading line (§3) and a new global color entry (01 §6).
 - Before your first shared edit, state in one line which shared files you'll touch and why, then continue. List every one under "Shared files touched" in the final report.
-- Never touch files with another session's prefix, never change another session's work to "improve" it, never claim ownership of unrelated components.
+- Never touch files another session created, never change another session's work to "improve" it, never claim ownership of unrelated components.
 
 ## 2. When to ask (and stop that part only)
 
@@ -23,7 +24,7 @@ Work autonomously otherwise (02 §3): no "should I start?" after planning, no qu
 
 - deleting or renaming any existing file;
 - renaming or removing setting IDs, block types, presets or a section's `type`;
-- changing or removing another session's work, or any file or gated block with another session's prefix;
+- changing or removing another session's work, or any file another session created, or a gated block with another session's prefix;
 - touching a template of a page outside your task;
 - duplicating or creating a section (01 §3 steps 9–10);
 - a non-additive change to a protected file (§7);
@@ -78,7 +79,7 @@ The developer's `shopify theme dev` uploads every save, and a broken file breaks
 ## 8. Commands
 
 - **Git:** read-only only (`status`, `diff`, `log`, `show`, `blame`). Without approval never run `add`, `commit`, `reset`, `restore`, `checkout`, `switch`, `clean`, `stash`, `rebase`, `merge`, `cherry-pick`, `pull`, `fetch`, `push`, or anything that stages, discards or rewrites changes. `git status` / `git diff` show every session's changes.
-- **Shopify CLI:** never run `shopify theme pull` (it overwrites local files), `dev`, `push`, `publish`, `share` or any deployment. Don't change ports, theme targets or environments, or touch live theme/store data. `shopify theme check` is allowed, never with `--auto-correct` / `-a`.
+- **Shopify CLI:** never run `shopify theme pull` (it overwrites local files), `dev`, `push`, `publish`, `share` or any deployment. Don't change ports, theme targets or environments, or touch live theme/store data. **Don't run `shopify theme check`** unless the developer explicitly asks for it in the current task (then never with `--auto-correct` / `-a`).
 - **Other tools:** no project-wide formatting, `--fix` / `--write` / auto-correct modes, global search-and-replace, cross-file refactoring, builds or scripts that overwrite shared files or regenerate config, dependency installs or upgrades, or cleanup of untracked/modified files. Before any command that writes files, check whether it could affect other sessions; if so, limit it to your files or ask. Prefer read-only inspection and targeted validation.
 
 ## 9. Unexpected changes

@@ -12,7 +12,7 @@ Theme-specific details for each area are in the theme file under the T-heading n
 - Don't add settings with no merchant value. Reuse the theme's section scaffold (theme file → T8) instead of inventing new systems.
 - **Localization:** merchant-edited content needs no locale keys. Theme-owned UI strings use `{{ '<session>_ns.key' | t }}` — add **your own `<session>_` keys only**, to `en.default.json` first, then every peer locale with the identical path (missing peer → default-language fallback; a key only in a non-default locale never shows). Edits follow 05 §4–§5.
 - **Schema labels:** match the file you're editing (plain text vs `"t:"` keys); never reference a `t:` key that doesn't exist.
-- **Schema locale files (developer decision):** add or change `<session>_` schema keys **only** in `locales/en.default.schema.json` and `locales/ar.schema.json`. Never edit any other `locales/*.schema.json` file — other admin languages fall back to English. `MatchingTranslations` results from `shopify theme check` for those other schema locales are expected: report them, don't fix them.
+- **Schema locale files (developer decision):** add or change `<session>_` schema keys **only** in `locales/en.default.schema.json` and `locales/ar.schema.json`. Never edit any other `locales/*.schema.json` file — other admin languages fall back to English. If the developer asks for `shopify theme check`, its `MatchingTranslations` results for those other schema locales are expected: report them, don't fix them.
 
 ## 2. Breakpoints and responsive
 
@@ -56,6 +56,19 @@ Theme-specific details for each area are in the theme file under the T-heading n
 - `image_tag` / `image_url` with `widths`/`sizes` and explicit `width`/`height`; lazy-load below the fold; avoid layout shift; correct alt text.
 - `placeholder_svg_tag` so a blank picker never breaks.
 - Don't export what CSS can draw. Decorative elements: pseudo-elements where fitting, `pointer-events: none`, `aria-hidden="true"`. Meaningful images are never CSS backgrounds.
+
+### 6.1 Icons — one SVG-code setting per icon (generic rule for every section and block — developer decision, important)
+
+Applies to every icon you add anywhere (section, block, snippet), so the merchant can replace any icon by pasting new SVG code.
+
+- **Never** a boolean "Show <name> icon" toggle that switches a hardcoded asset or inline SVG on/off, and never a fixed icon select or hardcoded `inline_asset_content` / `asset_url` icon you built yourself.
+- **Each icon is one `html` setting holding the SVG code** (`html` = multi-line field for markup; `text` is single-line and unsuitable): id `<role>_icon_svg` (e.g. `icon_svg`, `badge_icon_svg`), label "<Role> icon (SVG code)", info "Paste SVG code. Leave empty to hide the icon." **Empty = no icon**: render nothing, not even the wrapper.
+- **Default** = the Figma icon as optimized SVG: keep `viewBox`, remove `width`/`height`, no scripts, event attributes, external references or comments. Fill the live template instance with the same code (01 §8).
+- **Render** inside a decorative wrapper: `{%- if block.settings.icon_svg != blank -%}<span class="<session>-x__icon" aria-hidden="true">{{ block.settings.icon_svg }}</span>{%- endif -%}`. If the icon carries meaning, add a text/label setting for it — never rely on the SVG alone.
+- **Size and color in your session CSS:** size the wrapper with tokens (or a size `range` when Figma needs it); `.<session>-x__icon svg { display: block; inline-size: 100%; block-size: 100%; }`. Single-color icons use `currentColor` for `fill`/`stroke` so they follow the text-color settings. Multi-color or gradient icons keep their colors, with unique `id`s for gradients/clip paths (repeated blocks would duplicate them).
+- **Keep icon SVGs small** (optimized, normally under ~2 KB). This is the allowed exception to "no large raw SVG in templates" (02 §1). Illustrations and photos are images (`image_picker`), not SVG code.
+- Native Horizon icon controls (the `icon` block's icon list, accordion icons) stay as they are — this rule is for icons you add.
+- Existing toggles of the old kind (e.g. the announcement bar's "Show sparkle icon") are converted only in a task that asks for it: add the SVG setting beside the old one, never rename or remove the old setting (01 §7).
 
 ## 7. Sliders and carousels
 

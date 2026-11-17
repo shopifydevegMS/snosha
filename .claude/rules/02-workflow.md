@@ -8,7 +8,7 @@ Inspect the **exact** desktop and mobile nodes with Figma MCP before any code: `
 
 Read: Auto Layout direction, gap, padding · fixed/hug/fill sizing, min/max · constraints, alignment · components and variants · variables/tokens · typography (size, weight, line height, letter spacing, alignment) · colors, opacity, fills, gradients · borders, radii, shadows, effects · image crop/fit/position · desktop/mobile differences · hidden layers · decorative and exportable assets.
 
-- **Figma asset URLs are short-lived** — never put a `figma.com` or `api/mcp/asset` URL in Liquid, CSS, JS or JSON. Download icons/glyphs once and store them in the repo (naming: 05 §1). Never store a large raw SVG in `templates/*.json`.
+- **Figma asset URLs are short-lived** — never put a `figma.com` or `api/mcp/asset` URL in Liquid, CSS, JS or JSON. Icons go into an SVG-code setting (04 §6.1); other graphics are downloaded once and stored in the repo (naming: 05 §1). Never store a large raw SVG in `templates/*.json` — small optimized icon SVGs in icon settings are the only exception.
 - Hidden layers are not built unless the developer asks (see `03-project.md` → design notes).
 
 ### 1.1 Frames without Auto Layout
@@ -62,7 +62,7 @@ No build or tests exist — run targeted checks and report exactly what ran. Mar
 - Theme stylesheets, minified JS and `settings_data.json` unchanged (except an additive color entry).
 - Computed values of overrides checked in the browser.
 - Target instance filled; nothing else in that JSON changed; other sessions' entries intact.
-- `shopify theme check` may be run (read-only, never `-a`); report its real output.
+- `shopify theme check`: **don't run it** unless the developer explicitly asks for it in the current task — report it as "Not run". When asked: read-only, never `-a`, report its real output.
 
 Runtime, visual, responsive, RTL, slider, cart and editor-lifecycle behavior → **Requires storefront QA (Not run)** unless actually checked in the live preview. Remember the preview also shows other sessions' changes.
 

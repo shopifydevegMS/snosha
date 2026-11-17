@@ -20,12 +20,12 @@ A Shopify Online Store 2.0 theme for **Snosha** (store theme name not verified, 
 ## Commands
 
 - `shopify theme dev` — the **developer** runs the preview (http://127.0.0.1:9292/). Never run `dev`, `pull`, `push`, `publish` or `share`.
-- `shopify theme check` — allowed, read-only; never with `--auto-correct` / `-a`.
+- `shopify theme check` — **do not run it** unless the developer explicitly asks for it in the current task (then read-only, never `--auto-correct` / `-a`). Otherwise report it as "Not run".
 - Git — read-only only (`status`, `diff`, `log`, `show`, `blame`).
 
 ## Hard rules (one line each — details in `.claude/rules/`)
 
-1. Get your **session name** from the developer before creating or editing any file. Everything new carries it as the prefix: `<session>-` classes and files, `--<session>-` variables, `<session>_` JSON and locale IDs.
+1. Get your **session name** from the developer before creating or editing any file. Everything new carries it as the prefix: `<session>-` classes, `--<session>-` variables, `<session>_` JSON and locale IDs. **New section, block and snippet files are NOT prefixed** (`blocks/_trust-strip.liquid`, not `_dev3-trust-strip.liquid`) (05 §1).
 2. One section per task. Never start the next section.
 3. Figma section nodes (desktop + mobile) are the source of truth; read node data, not screenshots.
 4. Work autonomously: plan, then implement — never "should I start?". Ask only when Figma is genuinely unclear (e.g. what a button does), before duplicating or creating a section, or for the critical cases in 05 §2. Never duplicate a section to edit it.
@@ -38,3 +38,5 @@ A Shopify Online Store 2.0 theme for **Snosha** (store theme name not verified, 
 11. Breakpoints come from the theme file only. Frames without Auto Layout are rebuilt with flex/grid.
 12. Never claim something was tested when it was only read.
 13. Never edit `CLAUDE.md` or any `.claude/rules/` file unless the developer explicitly asks.
+14. **Never run `shopify theme check`** unless the developer explicitly asks for it in the current task. Validate with targeted read-only checks instead and report theme check as "Not run".
+15. **Every icon you add is an `html` "SVG code" setting** (empty = hidden), never a "Show icon" toggle or a hardcoded icon file — so merchants can replace it by pasting SVG (04 §6.1). Design-option labels are "Design 1", "Design 2"… without the session name (01 §4).

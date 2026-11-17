@@ -30,7 +30,7 @@ Use the **earliest** step that safely satisfies the design. Move down only after
 4. A **new schema setting beside** existing settings.
 5. A **new schema option beside** existing options.
 6. **Extend** the closest block/snippet safely.
-7. **Duplicate** the closest block/snippet only when extension is unsafe — as a `<session>-` file; record the steps tried and why each failed in the final report, then proceed.
+7. **Duplicate** the closest block/snippet only when extension is unsafe — as a new unprefixed file (05 §1); record the steps tried and why each failed in the final report, then proceed.
 8. **Carefully modify an original section** — minimal, gated (§4), impossible to isolate otherwise.
 9. **Duplicate a section** — only for a materially different structure that can't be another instance. **Ask the developer first.**
 10. **Create a new section** — last resort. **Ask the developer first.**
@@ -42,15 +42,16 @@ Use the **earliest** step that safely satisfies the design. Move down only after
 - "The design looks different", "it's easier", "it keeps the original untouched" are **not** reasons to duplicate.
 - An additive setting defaulting to blank/false is almost always safer than a duplicate — prove it by listing every instance of the file in `templates/*.json` and `sections/*-group.json` and confirming the default is inert for each.
 - Same principle for every file type (section, snippet, block, component, JS, CSS): reuse → extend → duplicate → create. Justify any new file. Avoid duplicate code, helper files, wrappers, custom elements and abstractions.
-- An approved new or duplicated section is a `<session>-` file that still uses the theme's conventions (theme file → T8 scaffold, image filters, placeholders, the theme's color system, container classes, block lifecycle, tokens) and leaves shared files untouched.
+- An approved new or duplicated section is a new unprefixed file (05 §1) that still uses the theme's conventions (theme file → T8 scaffold, image filters, placeholders, the theme's color system, container classes, block lifecycle, tokens) and leaves shared files untouched.
 
 ## 4. Design options, and original theme files stay reusable
 
 **Project styling is switched on by a design option, never by a "Custom CSS class" text setting.**
 
 - **The section already has a design/style select** (any id or label, e.g. `*_des`, `*_style`, "Product design"): add **one option beside the existing ones**; never add a second design select.
-  - Numeric select: the next free number, label `"<n> - <session>"` (options 1–11 → `{ "value": "12", "label": "12 - <session>" }`).
-  - Named select: `{ "value": "<session>", "label": "Design - <session>" }`.
+  - Numeric select: the next free number, label in the same style as the existing options (options 1–11 → `{ "value": "12", "label": "Design 12" }`).
+  - Named select: `{ "value": "<session>", "label": "Design <n>" }`, where `<n>` is the next free design number among the existing labels.
+  - **Labels never contain the session name (developer decision — important).** Merchants see plain numbered designs: "Design 1", "Design 2"… — never "Design - dev1" or "design-dev1". The session name stays only in the technical `value`.
   - Never change or remove existing options or the default.
 - If the new value builds on an existing design, share its code path (`when '7', '12'`) to keep native markup, and keep your options inactive for the native value.
 - **No design/style select at all:** add as the first setting:
@@ -63,10 +64,12 @@ Use the **earliest** step that safely satisfies the design. Move down only after
   "default": "default",
   "options": [
     { "value": "default", "label": "Default" },
-    { "value": "<session>", "label": "Design - <session>" }
+    { "value": "<session>", "label": "Design 1" }
   ]
 }
 ```
+
+- The next session adding a design to the same select uses the next number: `{ "value": "<its-session>", "label": "Design 2" }`.
 
 - If `design` is already a native setting with another purpose, use id `custom_design` (label "Custom design"). If another session already added such a select, add your option to it.
 - The option adds your scope class to the **outermost section wrapper**, keeping native classes: `{% if section.settings.design == '<session>' %} <session>-hero-slider{% endif %}`. All your CSS for the section is anchored on it.
