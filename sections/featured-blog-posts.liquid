@@ -10,6 +10,57 @@
   endif
 %}
 
+{%- liquid
+  # dev4: Design 1 ("13 Blog") — subtitle, view-all links and the mobile progress bar
+  assign dev4_blog = false
+  if section.settings.design == 'dev4'
+    assign dev4_blog = true
+  endif
+-%}
+
+{%- if dev4_blog -%}
+  {%- comment -%} dev4: per-instance values for assets/dev4.css (Design 1 only) {%- endcomment -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} {
+      --dev4-columns-tablet: {{ section.settings.dev4_columns_tablet }};
+      --dev4-padding-top-mobile: {{ section.settings.dev4_padding_top_mobile }}px;
+      --dev4-padding-bottom-mobile: {{ section.settings.dev4_padding_bottom_mobile }}px;
+      {%- if section.settings.dev4_title_color != blank %}
+        --dev4-blog-title: {{ section.settings.dev4_title_color }};
+      {%- endif %}
+      {%- if section.settings.dev4_subtitle_color != blank %}
+        --dev4-blog-subtitle: {{ section.settings.dev4_subtitle_color }};
+      {%- endif %}
+      {%- if section.settings.dev4_link_color != blank %}
+        --dev4-blog-link: {{ section.settings.dev4_link_color }};
+      {%- endif %}
+      {%- if section.settings.dev4_progress_track != blank %}
+        --dev4-progress-track: {{ section.settings.dev4_progress_track }};
+      {%- endif %}
+      {%- if section.settings.dev4_progress_start != blank %}
+        --dev4-progress-start: {{ section.settings.dev4_progress_start }};
+      {%- endif %}
+      {%- if section.settings.dev4_progress_end != blank %}
+        --dev4-progress-end: {{ section.settings.dev4_progress_end }};
+      {%- endif %}
+    }
+  {%- endstyle -%}
+  <script src="{{ 'dev4.js' | asset_url }}" type="module"></script>
+
+  {%- liquid
+    assign dev4_view_all = blank
+    if section.settings.blog != blank and section.settings.dev4_view_all_label != blank
+      assign dev4_view_all_label = section.settings.dev4_view_all_label | escape
+      capture dev4_view_all
+        echo '<span>' | append: dev4_view_all_label | append: '</span>'
+        if section.settings.dev4_arrow_svg != blank
+          echo '<span class="dev4-blog__arrow" aria-hidden="true">' | append: section.settings.dev4_arrow_svg | append: '</span>'
+        endif
+      endcapture
+    endif
+  -%}
+{%- endif -%}
+
 <div
   class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
 ></div>
@@ -22,13 +73,34 @@
     section-resource-list
     spacing-style
     gap-style
+    {% if dev4_blog %}dev4-blog{% endif %}
   "
   style="
     {%- render 'spacing-style', settings: section.settings -%}
     {%- render 'gap-style', value: section.settings.gap -%}
   "
 >
-  {% content_for 'block', id: 'static-blog-title', type: '_featured-blog-posts-title' %}
+  {%- capture blog_title_block -%}
+    {% content_for 'block', id: 'static-blog-title', type: '_featured-blog-posts-title' %}
+  {%- endcapture -%}
+
+  {%- if dev4_blog -%}
+    <div class="dev4-blog__header">
+      <div class="dev4-blog__heading">
+        {{ blog_title_block }}
+        {%- if section.settings.dev4_subtitle != blank -%}
+          <p class="dev4-blog__subtitle">{{ section.settings.dev4_subtitle | escape }}</p>
+        {%- endif -%}
+      </div>
+      {%- if dev4_view_all != blank -%}
+        <a class="dev4-blog__view-all dev4-blog__view-all--desktop" href="{{ section.settings.blog.url }}">
+          {{- dev4_view_all -}}
+        </a>
+      {%- endif -%}
+    </div>
+  {%- else -%}
+    {{ blog_title_block }}
+  {%- endif %}
 
   {% if section.settings.blog != blank and section.settings.blog.articles_count > 0 %}
     {% paginate section.settings.blog.articles by max_items %}
@@ -66,6 +138,18 @@
     content_type: 'articles',
     test_id: 'featured-blog-posts'
   %}
+
+  {%- if dev4_blog -%}
+    {%- comment -%} dev4: visual-only mobile scroll indicator (assets/dev4.js) and the mobile view-all link {%- endcomment -%}
+    <dev4-carousel-progress class="dev4-blog__progress" aria-hidden="true">
+      <span class="dev4-blog__progress-fill"></span>
+    </dev4-carousel-progress>
+    {%- if dev4_view_all != blank -%}
+      <a class="dev4-blog__view-all dev4-blog__view-all--mobile" href="{{ section.settings.blog.url }}">
+        {{- dev4_view_all -}}
+      </a>
+    {%- endif -%}
+  {%- endif %}
 </div>
 
 {% schema %}
@@ -88,6 +172,22 @@
     }
   ],
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "t:dev4_settings.design",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:dev4_settings.design_default"
+        },
+        {
+          "value": "dev4",
+          "label": "t:dev4_settings.design_dev4"
+        }
+      ],
+      "default": "default"
+    },
     {
       "type": "blog",
       "id": "blog",
@@ -313,6 +413,113 @@
       "step": 1,
       "unit": "px",
       "default": 32
+    },
+    {
+      "type": "header",
+      "content": "t:dev4_settings.dev4_design_header",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "text",
+      "id": "dev4_subtitle",
+      "label": "t:dev4_settings.blog_subtitle",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "text",
+      "id": "dev4_read_more_label",
+      "label": "t:dev4_settings.read_more_label",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "text",
+      "id": "dev4_view_all_label",
+      "label": "t:dev4_settings.view_all_label",
+      "info": "t:dev4_settings.view_all_info",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "html",
+      "id": "dev4_arrow_svg",
+      "label": "t:dev4_settings.arrow_svg",
+      "info": "t:dev4_settings.arrow_svg_info",
+      "default": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19 12H5M11 18L5 12L11 6\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev4_columns_tablet",
+      "label": "t:dev4_settings.columns_tablet",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2,
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev4_padding_top_mobile",
+      "label": "t:dev4_settings.padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 56,
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev4_padding_bottom_mobile",
+      "label": "t:dev4_settings.padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 40,
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_title_color",
+      "label": "t:dev4_settings.title_color",
+      "info": "t:dev4_settings.title_color_info",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_subtitle_color",
+      "label": "t:dev4_settings.subtitle_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_link_color",
+      "label": "t:dev4_settings.link_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_progress_track",
+      "label": "t:dev4_settings.progress_track",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_progress_start",
+      "label": "t:dev4_settings.progress_start",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_progress_end",
+      "label": "t:dev4_settings.progress_end",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4' }}"
     }
   ],
   "presets": [

@@ -96,11 +96,14 @@
 }
 
 /* Mobile progress indicator: visual only, never interactive. */
-.dev4-collections__progress {
+/* Shared with the blog carousel (dev4-blog__progress) — same element, same behavior. */
+.dev4-collections__progress,
+.dev4-blog__progress {
   display: none;
 }
 
-.dev4-collections__progress-fill {
+.dev4-collections__progress-fill,
+.dev4-blog__progress-fill {
   position: absolute;
   inset-block: 0;
   inset-inline-start: calc(var(--dev4-progress-offset, 0) * 100%);
@@ -135,7 +138,8 @@
     line-height: var(--font-h6--line-height);
   }
 
-  .dev4-collections__progress {
+  .dev4-collections__progress,
+  .dev4-blog__progress {
     display: block;
     position: relative;
     block-size: var(--dev4-progress-height);
@@ -145,7 +149,8 @@
     background-color: var(--dev4-progress-track, rgb(var(--color-foreground-rgb) / var(--opacity-10)));
   }
 
-  .dev4-collections__progress[data-overflow='false'] {
+  .dev4-collections__progress[data-overflow='false'],
+  .dev4-blog__progress[data-overflow='false'] {
     visibility: hidden;
   }
 }
@@ -411,5 +416,195 @@ dev4-comparison-slider {
 
   .dev4-before-after.dev4-before-after .comparison-slider__text > div {
     font-size: var(--font-size--2xs);
+  }
+}
+
+/* ==== dev4-blog — "13 Blog" (sections/featured-blog-posts.liquid, Design 1) ==== */
+
+.dev4-blog {
+  /* Desktop shows exactly N full cards (Figma: 3) — no peek inside the content width. */
+  --peek-next-slide-size: 0px;
+  --dev4-blog-arrow-size: 18px;
+}
+
+/* Heading row: text centered, desktop "view all" physically on the left (Figma) in every locale.
+   The grid is geometry-only (ltr); the heading and the link restore rtl for their Arabic text. */
+.dev4-blog__header {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, max-content) 1fr;
+  align-items: end;
+  column-gap: var(--gap-xl);
+  direction: ltr;
+}
+
+.dev4-blog__heading {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-inline-size: 0;
+  text-align: center;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Title color for the section heading and the article titles (neither native block has a color setting).
+   The text blocks read --color, so it is set on their wrappers only. */
+.dev4-blog__heading,
+.dev4-blog.dev4-blog .featured-blog-posts-card__content > h4 {
+  --color: var(--dev4-blog-title, var(--color-foreground));
+}
+
+.dev4-blog__subtitle {
+  margin: 0;
+  font-family: var(--font-body--family);
+  font-style: var(--font-body--style);
+  font-weight: var(--font-body--weight);
+  font-size: var(--font-size--lg);
+  line-height: calc(32 / 18);
+  color: var(--dev4-blog-subtitle, var(--color-foreground));
+}
+
+.dev4-blog__view-all,
+.dev4-blog__read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-sm);
+  font-family: var(--font-accent--family);
+  font-style: var(--font-accent--style);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--md);
+  line-height: calc(26 / 16);
+  color: var(--dev4-blog-link, var(--color-foreground));
+  white-space: nowrap;
+  text-decoration: none;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.dev4-blog__view-all--desktop {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+  margin-block-end: var(--padding-2xs);
+}
+
+.dev4-blog__view-all--mobile {
+  display: none;
+}
+
+.dev4-blog__arrow {
+  display: block;
+  flex: 0 0 auto;
+  inline-size: var(--dev4-blog-arrow-size);
+  block-size: var(--dev4-blog-arrow-size);
+  pointer-events: none;
+}
+
+.dev4-blog__arrow svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* Card: image → text 16px, text inset 4px, Arabic text boundary, date shown above the title (Figma order). */
+.dev4-blog.dev4-blog .featured-blog-posts-card__inner {
+  gap: var(--gap-lg);
+}
+
+.dev4-blog.dev4-blog .featured-blog-posts-card__content {
+  flex-direction: column;
+  padding-inline: var(--padding-2xs);
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* The date block renders inside a .shopify-block wrapper — move that wrapper above the title. */
+.dev4-blog.dev4-blog .featured-blog-posts-card__content > .blog-post-details,
+.dev4-blog.dev4-blog .featured-blog-posts-card__content > :has(> .blog-post-details) {
+  order: -1;
+}
+
+/* base.css `.h6.h6 { color: var(--color) }` out-ranks the native `.blog-post-details` color — restore the block's own text color. */
+.dev4-blog.dev4-blog .featured-blog-posts-card__content .blog-post-details {
+  color: var(--color-details, var(--color-foreground-muted));
+}
+
+/* Figma image frame 429.33 × 268 (desktop); both image layers fill it with object-fit: cover. */
+.dev4-blog.dev4-blog .featured-blog-posts-card__image {
+  aspect-ratio: 429.33 / 268;
+}
+
+.dev4-blog.dev4-blog .featured-blog-posts-card__image .resource-image__image {
+  aspect-ratio: auto;
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .dev4-blog.dev4-blog .resource-list__carousel .resource-list__slide {
+    --column-count: var(--dev4-columns-tablet, 2);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .dev4-blog.dev4-blog {
+    row-gap: var(--gap-md);
+    padding-block-start: var(--dev4-padding-top-mobile);
+    padding-block-end: var(--dev4-padding-bottom-mobile);
+  }
+
+  .dev4-blog__header {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dev4-blog__heading {
+    grid-column: 1;
+  }
+
+  .dev4-blog__subtitle {
+    font-size: var(--font-size--xs);
+    line-height: calc(22 / 13);
+  }
+
+  .dev4-blog__view-all--desktop {
+    display: none;
+  }
+
+  .dev4-blog__view-all--mobile {
+    display: inline-flex;
+    justify-self: center;
+  }
+
+  .dev4-blog__progress {
+    margin-block-start: var(--padding-2xl);
+  }
+
+  /* Mobile card width = Figma 280 of 390 (fluid), capped by the native max slide width. */
+  .dev4-blog.dev4-blog .resource-list__carousel .resource-list__slide {
+    --slide-width: clamp(150px, calc(100cqw * 280 / 390), var(--slide-width-max));
+  }
+
+  .dev4-blog.dev4-blog slideshow-arrows {
+    display: none;
+  }
+
+  /* Figma keeps the desktop card type on mobile (the theme's mobile presets are smaller). */
+  .dev4-blog.dev4-blog .featured-blog-posts-card__image {
+    aspect-ratio: 280 / 268;
+  }
+
+  .dev4-blog.dev4-blog .featured-blog-posts-card__content > .blog-post-details {
+    font-size: var(--font-size--2xs);
+    line-height: calc(18 / 12);
+  }
+
+  .dev4-blog.dev4-blog .featured-blog-posts-card__content .text-block.h4 > * {
+    font-size: var(--font-size--xl);
+    line-height: calc(34 / 20);
+  }
+
+  .dev4-blog.dev4-blog .featured-blog-posts-card__content .blog-post-card__content-text {
+    font-size: var(--font-size--md);
+    line-height: calc(28 / 16);
   }
 }

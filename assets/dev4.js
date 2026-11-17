@@ -8,7 +8,7 @@ import { prefersReducedMotion } from '@theme/utilities';
 
 /**
  * <dev4-carousel-progress>
- * Visual-only scroll indicator for the dev4 collections carousel (shown below 750px by assets/dev4.css).
+ * Visual-only scroll indicator for dev4 carousels (collections, blog; shown below 750px by assets/dev4.css).
  * It reads the scroll position of the section's native <slideshow-slides> scroller and never handles input.
  * Sets on itself: --dev4-progress-size (visible share, 0–1), --dev4-progress-offset (0–1 of the track),
  * data-overflow="true|false" (false hides the bar when nothing scrolls).
@@ -37,7 +37,8 @@ class Dev4CarouselProgress extends HTMLElement {
     this.#retryFrame = 0;
     if (this.#scroller || !this.isConnected) return;
 
-    const scroller = this.closest('.dev4-collections')?.querySelector('slideshow-slides');
+    // The bar is a direct child of its section wrapper, next to the carousel it tracks.
+    const scroller = this.parentElement?.querySelector('slideshow-slides');
 
     if (!(scroller instanceof HTMLElement)) {
       // Children may not be parsed yet (editor re-render, morph): retry briefly.

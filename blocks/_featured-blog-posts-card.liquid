@@ -101,6 +101,15 @@
       <h4>{{ title }}</h4>
       {{ details }}
       {{ description }}
+      {%- if section.settings.design == 'dev4' and section.settings.dev4_read_more_label != blank %}
+        {%- comment -%} dev4: visual "read more" row; the card's own overlay link already goes to the article {%- endcomment -%}
+        <span class="dev4-blog__read-more">
+          <span>{{ section.settings.dev4_read_more_label | escape }}</span>
+          {%- if section.settings.dev4_arrow_svg != blank -%}
+            <span class="dev4-blog__arrow" aria-hidden="true">{{ section.settings.dev4_arrow_svg }}</span>
+          {%- endif -%}
+        </span>
+      {%- endif %}
     </div>
   </div>
 </div>
