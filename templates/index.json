@@ -212,7 +212,7 @@
         "dev3_hero_content",
         "dev3_trust_strip"
       ],
-      "name": "t:names.hero",
+      "name": "Hero + Trust",
       "settings": {
         "design": "dev3",
         "dev3_background": "linear-gradient(57.82deg, rgba(99, 205, 255, 1) 7.84%, rgba(23, 107, 176, 1) 50%, rgba(15, 100, 168, 1) 92.16%)",
@@ -564,7 +564,7 @@
           ]
         }
       },
-      "name": "مجموعات SNOSHA",
+      "name": "Collections",
       "settings": {
         "design": "dev4",
         "columns": 4,
@@ -857,7 +857,7 @@
           ]
         }
       },
-      "name": "t:names.product_list",
+      "name": "Featured Collection",
       "settings": {
         "design": "dev1",
         "dev1_card_badge": "الأكثر مبيعًا",
@@ -897,6 +897,7 @@
     },
     "dev2_f1_banner": {
       "type": "media-with-content",
+      "name": "F1 Banner",
       "blocks": {
         "media": {
           "type": "_media-without-appearance",
@@ -1408,7 +1409,7 @@
           ]
         }
       },
-      "name": "t:names.product_list",
+      "name": "Featured Collection 2",
       "settings": {
         "design": "dev1",
         "dev1_card_badge": "الأكثر مبيعًا",
@@ -1714,7 +1715,7 @@
         "dev4_ba_compare",
         "dev4_ba_content"
       ],
-      "name": "قبل وبعد",
+      "name": "Before After",
       "settings": {
         "design": "dev4",
         "content_direction": "row",
@@ -2194,7 +2195,7 @@
           ]
         }
       },
-      "name": "t:names.carousel",
+      "name": "Reels",
       "settings": {
         "design": "dev1",
         "columns": 5,
@@ -2232,6 +2233,7 @@
     },
     "dev2_choose_care": {
       "type": "carousel",
+      "name": "Choose Your Care",
       "blocks": {
         "static-header": {
           "type": "group",
@@ -3341,7 +3343,7 @@
         "dev3_bundle_visual",
         "dev3_bundle_content"
       ],
-      "name": "t:names.section",
+      "name": "Bundle",
       "settings": {
         "design": "dev3",
         "content_direction": "row",
@@ -3500,7 +3502,7 @@
           "block_order": []
         }
       },
-      "name": "نصائح أذكى للعناية بفمك",
+      "name": "Blog",
       "settings": {
         "design": "dev4",
         "blog": "news",

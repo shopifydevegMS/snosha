@@ -143,6 +143,6 @@ Bugfix: same header plus the reported issue and where it appears. End with: `Do 
 - [ ] All CSS in `assets/<session>.css`, prefixed, anchored, out-ranking native rules, computed values checked.
 - [ ] Colors from the theme's color system; tokens, logical properties, the theme's event bus and shared snippets used; no Figma URLs.
 - [ ] Blank states, mobile media fallback, preset handled.
-- [ ] Instance filled from Figma; demo blocks disabled; range values on step; line endings kept; developer told to commit.
+- [ ] Instance filled from Figma; editor `name` = English Figma section name (01 §8); demo blocks disabled; range values on step; line endings kept; developer told to commit.
 - [ ] Final report complete and honest about inspected vs validated.
 - [ ] **Did not start the next section.**
