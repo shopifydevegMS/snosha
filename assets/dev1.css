@@ -410,6 +410,31 @@
     line-height: 1.5;
   }
 
+  /* (added by dev2, approved by the developer 2026-11-17) One-line price row on mobile — see
+     "dev1-card — one-line price row" below the media query. Mobile: no extra inset, 4px gaps and badge
+     inset, sizes capped at the mobile sizes above. */
+  .dev1-card.dev1-card .product-card__content > product-price:has(> .dev1-discount-badge) {
+    padding-inline: 0;
+  }
+
+  .dev1-card.dev1-card product-price:has(> .dev1-discount-badge),
+  .dev1-card.dev1-card product-price:has(> .dev1-discount-badge) > [ref='priceContainer'] {
+    gap: var(--padding-2xs);
+  }
+
+  .dev1-card.dev1-card product-price:has(> .dev1-discount-badge) .price {
+    font-size: min(var(--font-size--sm), calc(8cqi - 1.5px));
+  }
+
+  .dev1-card.dev1-card product-price:has(> .dev1-discount-badge) .compare-at-price {
+    font-size: min(var(--font-size--2xs), calc(6.8cqi - 1.3px));
+  }
+
+  .dev1-card.dev1-card product-price:has(> .dev1-discount-badge) > .dev1-discount-badge {
+    padding-inline: var(--padding-2xs);
+    font-size: min(var(--font-size--3xs), calc(5.6cqi - 1px));
+  }
+
   .dev1-card .dev1-card-badge {
     top: var(--padding-xs);
     left: auto;
@@ -454,6 +479,39 @@
   }
 }
 
+/* ==== dev1-card — one-line price row (added by dev2, approved by the developer 2026-11-17) ==== */
+/* Price, compare-at price and discount badge stay on ONE line (Figma) at every width. The store's long
+   money format ("LE 2,499.00") didn't fit narrow cards (2 columns on mobile, 4 columns at 990–1279px),
+   so the row wrapped the badge onto a second line. Only rows that show a discount badge: no wrapping,
+   and sizes that follow the row's own width (cqi of product-price), capped at the normal sizes — the
+   calc() terms keep the whole row (texts + gaps + badge inset) inside it. Mobile values: media query above. */
+.dev1-card.dev1-card .product-card__content > product-price:has(> .dev1-discount-badge) {
+  container-type: inline-size;
+}
+
+.dev1-card.dev1-card product-price:has(> .dev1-discount-badge),
+.dev1-card.dev1-card product-price:has(> .dev1-discount-badge) > [ref='priceContainer'] {
+  flex-wrap: nowrap;
+}
+
+.dev1-card.dev1-card product-price:has(> .dev1-discount-badge) > .dev1-discount-badge {
+  flex-shrink: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .dev1-card.dev1-card product-price:has(> .dev1-discount-badge) .price {
+    font-size: min(var(--font-size--lg), calc(8.4cqi - 4.2px));
+  }
+
+  .dev1-card.dev1-card product-price:has(> .dev1-discount-badge) .compare-at-price {
+    font-size: min(var(--font-size--sm), calc(6.5cqi - 3.3px));
+  }
+
+  .dev1-card.dev1-card product-price:has(> .dev1-discount-badge) > .dev1-discount-badge {
+    font-size: min(var(--font-size--2xs), calc(5.6cqi - 2.8px));
+  }
+}
+
 /* ==== dev1-featured (continued) — section-only layout ==== */
 
 /* Tablet: the native 4 desktop columns are too narrow at 750–989px. */
@@ -464,7 +522,8 @@
 }
 
 /* Mobile progress (visual only — assets/dev1.js mirrors the native slider's scroll position). */
-.dev1-featured .dev1-featured__progress {
+/* Shared with dev1-reels (12 Reels, carousel section Design 2). */
+:is(.dev1-featured, .dev1-reels) .dev1-featured__progress {
   display: block;
   position: relative;
   block-size: 4px;
@@ -474,7 +533,7 @@
   pointer-events: none;
 }
 
-.dev1-featured .dev1-featured__progress-fill {
+:is(.dev1-featured, .dev1-reels) .dev1-featured__progress-fill {
   position: absolute;
   inset-block: 0;
   inline-size: calc(var(--dev1-progress-size, 1) * 100%);
@@ -531,3 +590,165 @@
     padding-block-end: var(--padding-sm);
   }
 }
+
+/* ==== dev1-reels — 12 Reels (sections/carousel.liquid, Design 2) ==== */
+/* Figma 190:3935 (desktop) / 190:4254 (mobile) — values from the task spec (Figma MCP unavailable).
+   Structure: native carousel → _carousel-content → one _card per reel → native video block
+   (deferred-media: poster, inline playback, native controls) + reel-product block. */
+
+/* Heading → carousel: 24px (native section gap is a fixed 12px). */
+.dev1-reels.dev1-reels {
+  row-gap: var(--padding-2xl);
+}
+
+/* Reel card: video on top, product row 12px below (card gap setting). */
+.dev1-reels .carousel-content .card {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Portrait video frame (Figma 248 × 440), poster and video both cover it. Radius comes from the
+   video block's border-radius setting (border-style on deferred-media clips it natively). */
+.dev1-reels.dev1-reels .card :is(deferred-media, .video-placeholder-wrapper) {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 248 / 440;
+  overflow: hidden;
+}
+
+.dev1-reels.dev1-reels .card deferred-media > .deferred-media__poster-button {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+}
+
+.dev1-reels.dev1-reels .card deferred-media :is(img, video, iframe),
+.dev1-reels.dev1-reels .card .video-placeholder-wrapper > :is(img, svg) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Play button: 52px brand-blue circle with the native white play icon (matches Figma's). */
+.dev1-reels.dev1-reels .card :is(.deferred-media__poster-icon, .video-placeholder-wrapper__poster-icon) {
+  width: 52px;
+  height: 52px;
+  background: var(--color-primary-button-background);
+  color: var(--color-primary-button-text);
+}
+
+.dev1-reels.dev1-reels .card :is(.deferred-media__poster-icon, .video-placeholder-wrapper__poster-icon) svg {
+  width: 24px;
+  height: 24px;
+  color: currentColor;
+  filter: none;
+}
+
+/* Product row (blocks/reel-product.liquid): thumbnail right, title + price left of it (RTL). */
+.dev1-reel-product {
+  display: flex;
+  align-items: center;
+  gap: 14px; /* Figma */
+  padding: 10px; /* Figma */
+  direction: rtl;
+  unicode-bidi: isolate;
+  min-width: 0;
+  align-self: stretch; /* full card width even when the parent aligns children to the start */
+}
+
+.dev1-reel-product__thumb {
+  flex: none;
+  display: block;
+  inline-size: 43px;
+  block-size: 43px;
+  border-radius: 6px;
+  border: 1px solid var(--dev1-reel-thumb-border, rgb(var(--color-foreground-rgb) / var(--opacity-10, 0.1)));
+  overflow: hidden;
+}
+
+.dev1-reel-product__thumb :is(img, svg) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dev1-reel-product__info {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: start;
+}
+
+/* Long titles: one line with an ellipsis so rows stay aligned (Figma desktop). */
+.dev1-reel-product .dev1-reel-product__title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--dev1-reel-title-color, var(--color-foreground));
+  font-family: var(--font-body--family);
+  font-weight: var(--font-body--weight);
+  font-size: var(--font-size--sm);
+  line-height: calc(24 / 14);
+  text-decoration: none;
+}
+
+.dev1-reel-product .dev1-reel-product__title:hover {
+  text-decoration: underline;
+}
+
+.dev1-reel-product .dev1-reel-product__price {
+  color: var(--dev1-reel-price-color, var(--color-foreground));
+  font-family: var(--font-heading--family);
+  font-weight: var(--font-heading--weight);
+  font-size: var(--font-size--sm);
+  line-height: calc(24 / 14);
+}
+
+/* Figma shows the current price only. */
+.dev1-reel-product .dev1-reel-product__price .compare-at-price {
+  display: none;
+}
+
+.dev1-reel-product .dev1-reel-product__price :is(.price, .price-item__group) {
+  font: inherit;
+  color: inherit;
+}
+
+/* Tablet: 5 desktop columns are too narrow at 750–989px. */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .dev1-reels.dev1-reels .carousel-content slideshow-slides > .card {
+    width: calc(
+      (100% - (var(--carousel-gap, 8px) * (var(--dev1-columns-tablet, 3) - 1)) - var(--peek-next-slide-size, 0px)) /
+        var(--dev1-columns-tablet, 3)
+    );
+  }
+}
+
+@media screen and (max-width: 749px) {
+  /* Figma mobile: 48.5px / 40px section padding (settings; 0 = native scaling). */
+  .dev1-reels.dev1-reels {
+    padding-block-start: calc(var(--dev1-padding-mobile-top, var(--padding-block-start)) + var(--section-top-offset, 0px));
+    padding-block-end: var(--dev1-padding-mobile-bottom, var(--padding-block-end));
+  }
+
+  /* Centre-focused carousel: one reel in the middle (Figma 290 of 390 ≈ 74vw) with an equal
+     peek on both sides. Equal gutters + centre snapping keep the first and last reels centred too. */
+  .dev1-reels.dev1-reels .carousel-content slideshow-slides {
+    --gutter-slide-width: calc((100vw - 74vw) / 2);
+    scroll-padding-inline: 0;
+  }
+
+  .dev1-reels.dev1-reels .carousel-content slideshow-slides > .card {
+    width: 74vw;
+    scroll-snap-align: center;
+  }
+
+  /* Figma: 24px from the screen edge = page margin (20px) + 4px. */
+  .dev1-reels .dev1-featured__progress {
+    margin-inline: var(--padding-2xs);
+  }
+}
+

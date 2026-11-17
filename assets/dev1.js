@@ -2,7 +2,7 @@
  * dev1.js — scripts for session "dev1". Loaded as a module only by sections whose Design is "Design 1".
  */
 
-/* ==== dev1-carousel-progress — 06 Featured Collection (sections/product-list.liquid) ==== */
+/* ==== dev1-carousel-progress — 06 Featured Collection (product-list) and 12 Reels (carousel) ==== */
 /* Visual-only progress bar for the native mobile product carousel. It reads the scroll position of
    the visible native <slideshow-slides> scroller and never moves it, so it cannot drift from the slider. */
 class Dev1CarouselProgress extends HTMLElement {
@@ -14,7 +14,7 @@ class Dev1CarouselProgress extends HTMLElement {
   #onScroll = () => this.#schedule();
 
   connectedCallback() {
-    this.#scope = this.closest('.dev1-featured');
+    this.#scope = this.closest('.dev1-featured, .dev1-reels');
     this.#bind();
   }
 
@@ -26,7 +26,14 @@ class Dev1CarouselProgress extends HTMLElement {
 
   #bind() {
     this.#unbind();
-    const scrollers = this.#scope ? [...this.#scope.querySelectorAll('.resource-list__carousel slideshow-slides')] : [];
+    // Only the section's own slider track — never the image slideshows nested inside product cards.
+    const scrollers = this.#scope
+      ? [
+          ...this.#scope.querySelectorAll(
+            ':is(.resource-list__carousel, .carousel-content) > slideshow-container > slideshow-slides'
+          ),
+        ]
+      : [];
 
     if (!scrollers.length) {
       // Slides may not be upgraded yet (or the section is re-rendering): try again on the next frame.

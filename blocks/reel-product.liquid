@@ -1,0 +1,109 @@
+<!-- reel-product.liquid -->
+{%- doc -%}
+  Compact product row for video reels: linked thumbnail, title and price of a picked product.
+  Price uses the native price snippet (theme money format); unavailable products show the
+  theme's sold-out label instead of a price. Styles: assets/dev1.css (.dev1-reel-product).
+{%- enddoc -%}
+
+{%- liquid
+  assign block_settings = block.settings
+  assign product = block_settings.product
+
+  capture reel_product_style
+    if block_settings.title_color != blank
+      echo '--dev1-reel-title-color: ' | append: block_settings.title_color | append: ';'
+    endif
+    if block_settings.price_color != blank
+      echo ' --dev1-reel-price-color: ' | append: block_settings.price_color | append: ';'
+    endif
+    if block_settings.thumbnail_border != blank
+      echo ' --dev1-reel-thumb-border: ' | append: block_settings.thumbnail_border | append: ';'
+    endif
+  endcapture
+-%}
+
+{%- if product != blank -%}
+  <div
+    class="dev1-reel-product"
+    style="{{ reel_product_style | strip }}"
+    {{ block.shopify_attributes }}
+  >
+    <a
+      class="dev1-reel-product__thumb"
+      href="{{ product.url }}"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      {%- if product.featured_image != blank -%}
+        {{-
+          product.featured_image
+          | image_url: width: 129
+          | image_tag: widths: '43, 86, 129', sizes: '43px', loading: 'lazy', alt: ''
+        -}}
+      {%- else -%}
+        {{- 'product-1' | placeholder_svg_tag: 'dev1-reel-product__placeholder' -}}
+      {%- endif -%}
+    </a>
+    <div class="dev1-reel-product__info">
+      <a class="dev1-reel-product__title" href="{{ product.url }}">{{ product.title | escape }}</a>
+      <div class="dev1-reel-product__price">
+        {%- if product.available -%}
+          {% render 'price', product_resource: product %}
+        {%- else -%}
+          {{ 'content.product_badge_sold_out' | t }}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- elsif request.design_mode -%}
+  <div
+    class="dev1-reel-product"
+    style="{{ reel_product_style | strip }}"
+    {{ block.shopify_attributes }}
+  >
+    <span class="dev1-reel-product__thumb">
+      {{- 'product-1' | placeholder_svg_tag: 'dev1-reel-product__placeholder' -}}
+    </span>
+    <div class="dev1-reel-product__info">
+      <span class="dev1-reel-product__title">{{ 'placeholders.product_title' | t }}</span>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:dev1_settings.reel_product",
+  "tag": null,
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "t:dev1_settings.product"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "t:dev1_settings.title_color",
+      "default": "{{ settings.color_palette.snosha_deep_blue }}"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "t:dev1_settings.price_color",
+      "default": "{{ settings.color_palette.snosha_secondary_blue }}"
+    },
+    {
+      "type": "color",
+      "id": "thumbnail_border",
+      "label": "t:dev1_settings.thumbnail_border",
+      "default": "{{ settings.color_palette.color2 }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:dev1_settings.reel_product",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

@@ -1,6 +1,6 @@
 
 
-{% assign block_settings = block.settings %}
+{% assign block_settings = block.settings %}{% assign dev1_video_poster = block_settings.dev1_poster_image | default: block_settings.video.preview_image %}
 
 {% capture video_style %}
   {%  render 'spacing-style', settings: block_settings %}
@@ -15,7 +15,7 @@
     video_class: 'spacing-style size-style border-style',
     video_loop: block_settings.video_loop,
     video_style: video_style,
-    video_preview_image: block_settings.video.preview_image,
+    video_preview_image: dev1_video_poster,
     additional_attributes: block.shopify_attributes
   %}
 {% else %}
@@ -62,6 +62,13 @@
       "type": "video",
       "id": "video",
       "label": "t:settings.video",
+      "visible_if": "{{ block.settings.source == 'uploaded' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "dev1_poster_image",
+      "label": "t:dev1_settings.poster_image",
+      "info": "t:dev1_settings.poster_image_info",
       "visible_if": "{{ block.settings.source == 'uploaded' }}"
     },
     {
