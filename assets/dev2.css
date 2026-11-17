@@ -781,3 +781,371 @@
   font-size: var(--font-size--2xs);
   line-height: calc(20 / 12);
 }
+
+/* Row layout (Layout → Row): plain 20px icon + 14 / 24 text line, full width (Figma "Spec Row").
+   The 24px glyph overflows its 20px box exactly as in Figma. */
+.dev2-spec-badge.dev2-spec-badge--row {
+  display: flex;
+  inline-size: 100%;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+
+.dev2-spec-badge--row .dev2-spec-badge__icon {
+  inline-size: 20px;
+  block-size: 20px;
+  border-radius: 0;
+  overflow: visible;
+  background: none;
+  color: var(--dev2-spec-icon-color, var(--color-primary-button-background));
+}
+
+.dev2-spec-badge--row .dev2-spec-badge__label {
+  flex: 1 1 auto;
+  font-family: var(--font-body--family);
+  font-weight: var(--font-body--weight);
+  font-size: var(--font-size--sm);
+  line-height: calc(24 / 14);
+}
+
+/* ==== dev2-care — 08 Choose Your Care (sections/carousel.liquid, "Design 3") ==== */
+/* Figma 190:3943 (desktop) and 190:4265 (mobile). Scope class on the carousel section's .section wrapper.
+   Native structure: static header group (heading + subtitle) and the native slideshow (_carousel-content)
+   with one _card per product, each holding a native product-card (product picker) with gallery, title,
+   description (product description), spec rows (spec-badge, Layout → Row), price (with the discount badge
+   from blocks/price.liquid) and the product link block as the button. Product cards also carry the
+   project-wide .dev1-card styles (assets/dev1.css); rules here out-rank them only where Figma differs.
+   The featured card is the slide whose product card shows the section's "Featured product": that
+   product card renders a hidden .dev2-care-featured marker (blocks/product-card.liquid) and the slide is
+   matched with .card:has(.dev2-care-featured). Any card can show a .dev2-care-badge (product card
+   "Badge" setting). Colors: --dev2-care-* from the section settings. */
+.dev2-care {
+  --dev2-care-start: var(--dev2-care-accent-start, var(--color-primary-button-background));
+  --dev2-care-end: var(--dev2-care-accent-end, var(--color-primary-button-background));
+  --dev2-care-bg-end: var(--dev2-care-background-end, var(--color-background));
+}
+
+/* Figma: section background #F7FBFE → #DCF2FB (top to bottom); 56px from the heading to the cards.
+   Out-ranks `.shopify-section:not(.header-section) :is(.section, …) { background: transparent }`. */
+.shopify-section .dev2-care.dev2-care.dev2-care {
+  /* row-gap only: .section is a 3-column grid (margin / content / margin) */
+  row-gap: 56px;
+  background-image: linear-gradient(to bottom, var(--color-background), var(--dev2-care-bg-end));
+}
+
+/* Heading + subtitle: centered, 6px apart (Figma) */
+.dev2-care.dev2-care > .group-block > .group-block-content {
+  row-gap: 6px;
+}
+
+/* The native slideshow container paints the section's flat background over the gradient */
+.dev2-care.dev2-care slideshow-container {
+  background-color: transparent;
+}
+
+/* Figma cards have no quick-add button (each card links to its product with "عرض المنتج");
+   the global quick-add setting is unchanged everywhere else. */
+.dev2-care.dev2-care .card .product-card .quick-add__button {
+  display: none;
+}
+
+/* -- Slides: room for the card shadows and the featured glow inside the scroller (no clipping) -- */
+.dev2-care.dev2-care .carousel-content slideshow-slides {
+  --slideshow-gap: 40px;
+
+  padding-block: 24px 72px;
+  margin-block: -24px -72px;
+}
+
+.dev2-care.dev2-care .carousel-content slideshow-slides > .card {
+  overflow: visible;
+}
+
+/* Desktop (≥ 990px): three cards in one row; the featured card is wider in Figma's 462 : 400 ratio.
+   Figma's card row is the 1376px container minus its 20px padding: widen the native slideshow gutters
+   (--gutter-slide-width, the slides' inline padding) by --padding-xl. */
+@media screen and (min-width: 990px) {
+  .dev2-care.dev2-care .carousel-content slideshow-slides {
+    --gutter-slide-width: calc(var(--util-page-margin-offset, 0px) + var(--padding-xl));
+  }
+
+  .dev2-care.dev2-care .carousel-content slideshow-slides > .card {
+    flex: 400 1 0;
+    width: auto;
+    min-width: 0;
+  }
+
+  .dev2-care.dev2-care .carousel-content slideshow-slides > .card:has(.dev2-care-featured) {
+    flex-grow: 462;
+  }
+}
+
+/* Tablet (750–989px): the native slideshow scrolls; cards keep a readable width with the next one peeking */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .dev2-care.dev2-care .carousel-content slideshow-slides > .card {
+    width: min(400px, 44%);
+  }
+}
+
+/* -- Standard card (Figma "Care Card"): white, 24px radius and padding from the product card settings,
+   soft brand shadow at rest (Figma Shadow/Soft: 0 12 32 #0F64A8 at 10%) -- */
+.dev2-care.dev2-care .product-card__content {
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--dev2-care-end) 10%, transparent);
+}
+
+/* Image: Figma 352 × 240 (featured 408 × 300); product photos are shown whole (contain) */
+.dev2-care.dev2-care .card-gallery {
+  --gallery-aspect-ratio: calc(352 / 240);
+
+  overflow: hidden;
+}
+
+.dev2-care.dev2-care .card-gallery * {
+  --gallery-aspect-ratio: calc(352 / 240);
+}
+
+.dev2-care.dev2-care .card-gallery img {
+  object-fit: contain;
+}
+
+/* Title: Figma Desktop/H3 (24 / 40) = the theme's h3 preset; one line reserved (Figma), two at most */
+.dev2-care.dev2-care .product-card__content a.contents > .text-block {
+  --dev1-card-lh: var(--font-h3--line-height);
+
+  min-block-size: 0;
+  font-family: var(--font-h3--family);
+  font-weight: var(--font-h3--weight);
+  font-size: var(--font-h3--size);
+}
+
+/* Spec rows: 10px apart, 4px extra above the first row (Figma), inside the card's 16px gap */
+.dev2-care.dev2-care .product-card__content > .dev2-spec-badge--row {
+  margin-block-start: 4px;
+}
+
+.dev2-care.dev2-care .product-card__content > .dev2-spec-badge--row + .dev2-spec-badge--row {
+  margin-block-start: calc(10px - var(--product-card-gap, 16px));
+}
+
+/* Purchase area pinned to the bottom (Figma SPACE_BETWEEN): price, then the full-width button */
+.dev2-care.dev2-care .product-card__content > product-price {
+  margin-block-start: auto;
+}
+
+/* Button: Figma outlined (secondary button colors, 1.5px border) on standard cards, solid on the featured one */
+.dev2-care.dev2-care .product-card__content > .dev1-card-cta {
+  align-self: stretch;
+  justify-content: center;
+  margin: 0;
+  padding: 13px var(--padding-3xl);
+  border: var(--style-border-width-secondary, 1.5px) solid var(--color-secondary-button-border);
+  border-radius: var(--style-border-radius-buttons-secondary, var(--style-border-radius-buttons-primary));
+  background-color: var(--color-secondary-button-background);
+  color: var(--color-secondary-button-text);
+  text-align: center;
+  transition: background-color var(--animation-speed) var(--animation-easing),
+    color var(--animation-speed) var(--animation-easing);
+}
+
+/* Hover / keyboard focus: the outlined button fills with the primary button color (clear feedback) */
+.dev2-care.dev2-care .product-card__content > .dev1-card-cta:is(:hover, :focus-visible) {
+  border-color: var(--color-primary-button-border, var(--color-primary-button-background));
+  background-color: var(--color-primary-button-background);
+  color: var(--color-primary-button-text);
+}
+
+.dev2-care.dev2-care .product-card__content > .dev1-card-cta:hover .dev1-card-cta__label {
+  text-decoration: none;
+}
+
+/* -- Featured card (Figma "Featured Glow Border"): 3px gradient frame, 27px outer radius, glow + shadow -- */
+.dev2-care.dev2-care .carousel-content slideshow-slides > .card:has(.dev2-care-featured) {
+  padding: 3px;
+  border-radius: calc(var(--dev2-care-card-radius, 24px) + 3px);
+  background-image: conic-gradient(
+    from 90deg,
+    var(--dev2-care-start) 0%,
+    var(--dev2-care-end) 35%,
+    var(--color-background) 55%,
+    var(--dev2-care-end) 75%,
+    var(--dev2-care-start) 100%
+  );
+  box-shadow: 0 24px 48px color-mix(in srgb, var(--dev2-care-end) 18%, transparent),
+    0 0 36px color-mix(in srgb, var(--dev2-care-start) 45%, transparent);
+}
+
+.dev2-care.dev2-care .card:has(.dev2-care-featured) .product-card__content {
+  box-shadow: none;
+}
+
+.dev2-care.dev2-care .card:has(.dev2-care-featured) .card-gallery,
+.dev2-care.dev2-care .card:has(.dev2-care-featured) .card-gallery * {
+  --gallery-aspect-ratio: calc(408 / 300);
+}
+
+/* Featured title: Figma Desktop/H2 (32 / 52) = the theme's h2 preset */
+.dev2-care.dev2-care .card:has(.dev2-care-featured) .product-card__content a.contents > .text-block {
+  --dev1-card-lh: var(--font-h2--line-height);
+
+  font-family: var(--font-h2--family);
+  font-weight: var(--font-h2--weight);
+  font-size: var(--font-h2--size);
+}
+
+/* Featured price: Figma 24 / 40 semibold. Follows the price row's width (cqi, container set in
+   assets/dev1.css) so price, compare-at price and discount badge stay on one line on narrow cards. */
+.dev2-care.dev2-care .card:has(.dev2-care-featured) product-price .price {
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: min(var(--font-h3--size), calc(8.6cqi - 4px));
+  line-height: var(--font-h3--line-height);
+}
+
+.dev2-care.dev2-care .card:has(.dev2-care-featured) .product-card__content > product-price {
+  padding-block-start: 6px;
+}
+
+.dev2-care.dev2-care .card:has(.dev2-care-featured) .product-card__content > .dev1-card-cta {
+  border-color: var(--color-primary-button-border, var(--color-primary-button-background));
+  background-color: var(--color-primary-button-background);
+  color: var(--color-primary-button-text);
+}
+
+.dev2-care.dev2-care .card:has(.dev2-care-featured) .product-card__content > .dev1-card-cta:is(:hover, :focus-visible) {
+  border-color: var(--color-primary-button-hover-background, var(--color-primary-button-background));
+  background-color: var(--color-primary-button-hover-background, var(--color-primary-button-background));
+  color: var(--color-primary-button-hover-text, var(--color-primary-button-text));
+}
+
+/* Card badge (product card "Badge" setting; the featured card falls back to the section's "Featured badge"):
+   on the image's top start corner, 13px in (Figma) — positioned in .card__content, past the 24px card padding.
+   Above --layer-raised: the theme raises a hovered .product-card to that layer, which painted over the badge. */
+.dev2-care .dev2-care-badge {
+  position: absolute;
+  z-index: var(--layer-heightened);
+  inset-block-start: calc(var(--padding-2xl) + 13px);
+  inset-inline-start: calc(var(--padding-2xl) + 13px);
+  padding: var(--padding-2xs) var(--padding-md);
+  border-radius: 8px;
+  background-color: var(--color-primary-button-background);
+  color: var(--color-primary-button-text);
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--2xs);
+  line-height: calc(18 / 12);
+  white-space: nowrap;
+  direction: rtl;
+  unicode-bidi: isolate;
+  pointer-events: none;
+}
+
+/* -- Progress indicator (below 990px, only while the cards scroll): Figma white 4px track, accent fill -- */
+.dev2-care .dev2-care__progress {
+  display: none;
+}
+
+@media screen and (max-width: 989px) {
+  .dev2-care .dev2-care__progress[data-overflow='true'] {
+    position: relative;
+    display: block;
+    block-size: 4px;
+    margin-inline: max(0px, calc(var(--padding-2xl) - var(--page-margin)));
+    border-radius: 99px;
+    background-color: var(--color-background);
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .dev2-care .dev2-care__progress-fill {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: calc((100% - var(--dev2-progress-size, 1) * 100%) * var(--dev2-progress-position, 0));
+    inline-size: calc(var(--dev2-progress-size, 1) * 100%);
+    border-radius: inherit;
+    background-image: linear-gradient(to right, var(--dev2-care-start), var(--dev2-care-end));
+  }
+}
+
+/* -- Mobile (< 750px): Figma 190:4265 — 262px cards with the neighbours peeking, 12px apart;
+   56px top / 40px bottom padding, 22px between heading, cards and progress. Card text keeps readable
+   sizes (the Figma mobile cards are the desktop cards scaled to 65%: 9px text). -- */
+@media screen and (max-width: 749px) {
+  .shopify-section .dev2-care.dev2-care.dev2-care {
+    row-gap: 22px;
+    padding-block: 56px 40px;
+  }
+
+  /* Centre-focused carousel (same pattern as dev1's 12 Reels): one card in the middle (Figma 262 of 390
+     ≈ 67vw) with an equal peek of its neighbours on both sides. Equal gutters (the native slides' inline
+     padding) + centre snapping keep every card centred, the first and last too; assets/dev2.js opens
+     the carousel on the featured card. */
+  .dev2-care.dev2-care .carousel-content slideshow-slides {
+    --slideshow-gap: 12px;
+    --gutter-slide-width: calc((100vw - 67vw) / 2);
+
+    scroll-padding-inline: 0;
+  }
+
+  .dev2-care.dev2-care .carousel-content slideshow-slides > .card {
+    width: 67vw;
+    scroll-snap-align: center;
+  }
+
+  .dev2-care.dev2-care .product-card__content a.contents > .text-block {
+    --dev1-card-lh: var(--font-h4--line-height);
+
+    font-family: var(--font-h4--family);
+    font-weight: var(--font-h4--weight);
+    font-size: var(--font-h4--size);
+  }
+
+  .dev2-care.dev2-care .card:has(.dev2-care-featured) .product-card__content a.contents > .text-block {
+    --dev1-card-lh: var(--font-h3--line-height);
+
+    font-family: var(--font-h3--family);
+    font-weight: var(--font-h3--weight);
+    font-size: var(--font-h3--size);
+  }
+
+  .dev2-care.dev2-care .dev2-spec-badge--row .dev2-spec-badge__label {
+    font-size: var(--font-size--xs);
+    line-height: calc(22 / 13);
+  }
+
+  /* Price row on one line: price, compare-at price and discount badge (Figma). The native row wraps
+     (flex-wrap: wrap) once the store's long money format ("LE 2,499.00") doesn't fit the narrow card:
+     no wrapping, no extra inset (flush with the spec rows), and the three sizes follow the row's own
+     width (cqi of product-price) — Figma sizes from ~390px, slightly smaller on narrower phones. */
+  .dev2-care.dev2-care.dev2-care .product-card__content > product-price {
+    container-type: inline-size;
+    flex-wrap: nowrap;
+    padding-inline: 0;
+  }
+
+  .dev2-care.dev2-care.dev2-care product-price > [ref='priceContainer'] {
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Four scope classes: out-rank dev1's matching mobile price-row rules (assets/dev1.css) */
+  .dev2-care.dev2-care.dev2-care.dev2-care product-price .price {
+    font-size: min(var(--font-size--sm), 6.6cqi);
+  }
+
+  .dev2-care.dev2-care.dev2-care.dev2-care product-price .compare-at-price {
+    font-size: min(var(--font-size--2xs), 5.4cqi);
+  }
+
+  .dev2-care.dev2-care.dev2-care.dev2-care product-price .dev1-discount-badge {
+    flex-shrink: 0;
+    font-size: min(var(--font-size--3xs), 4.5cqi);
+  }
+
+  .dev2-care.dev2-care .card:has(.dev2-care-featured) product-price .price {
+    font-size: min(var(--font-size--xl), 7.4cqi);
+    line-height: calc(32 / 20);
+  }
+}

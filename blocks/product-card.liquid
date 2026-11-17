@@ -2,7 +2,29 @@
 
 {% liquid
   assign product = block.settings.product
+
+  # dev2: carousel "Design 3" (Choose your care) — the card showing the section's featured product is highlighted.
+  # Matched by product, so the highlight stays with the product when cards are reordered.
+  assign dev2_featured = false
+  assign dev2_badge = ''
+  if section.settings.design == 'dev2'
+    if section.settings.dev2_featured_product != blank and product != blank
+      if product.id == section.settings.dev2_featured_product.id
+        assign dev2_featured = true
+      endif
+    endif
+
+    # Badge: only this card's own "Badge" setting (empty = no badge).
+    assign dev2_badge = block.settings.dev2_badge
+  endif
 -%}
+
+{%- if dev2_featured -%}
+  <span class="dev2-care-featured" hidden></span>
+{%- endif -%}
+{%- if dev2_badge != blank -%}
+  <span class="dev2-care-badge">{{ dev2_badge | escape }}</span>
+{%- endif -%}
 
 {% capture children %}
   {% content_for 'blocks', closest.product: product %}
@@ -46,6 +68,12 @@
     },
     {
       "type": "custom-liquid"
+    },
+    {
+      "type": "spec-badge"
+    },
+    {
+      "type": "_product-card-link"
     },
     {
       "type": "@app"
@@ -242,6 +270,14 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "text",
+      "id": "dev2_badge",
+      "label": "t:dev2_settings.card_badge",
+      "info": "t:dev2_settings.card_badge_info",
+      "default": "الأكثر مبيعًا",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
     }
   ],
   "presets": [

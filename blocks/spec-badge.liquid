@@ -1,6 +1,8 @@
 <!-- spec-badge.liquid -->
 {%- doc -%}
-  Renders a small specification badge: an icon tile (SVG code setting) and a short label.
+  Renders a small specification: an icon (SVG code setting) and a short label.
+  Layout "badge": bordered tile with a gradient icon tile (F1 banner). Layout "row": plain icon + text
+  line, used in product cards (Choose your care).
   Static and informational. Colors fall back to the parent section's accent colors
   (--dev2-f1-accent-*) and then to the theme's color variables.
 
@@ -18,8 +20,9 @@
 
 {%- if block_settings.label != blank or has_icon -%}
   <div
-    class="dev2-spec-badge"
+    class="dev2-spec-badge{% if block_settings.layout == 'row' %} dev2-spec-badge--row{% endif %}"
     style="
+      {%- if block_settings.icon_color != blank %} --dev2-spec-icon-color: {{ block_settings.icon_color }};{% endif -%}
       {%- if block_settings.text_color != blank %} --dev2-spec-text: {{ block_settings.text_color }};{% endif -%}
       {%- if block_settings.background_color != blank %} --dev2-spec-background: {{ block_settings.background_color }};{% endif -%}
       {%- if block_settings.border_color != blank %} --dev2-spec-border: {{ block_settings.border_color }};{% endif -%}
@@ -42,6 +45,22 @@
   "name": "t:dev2_settings.spec_badge",
   "tag": null,
   "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "t:dev2_settings.spec_layout",
+      "options": [
+        {
+          "value": "badge",
+          "label": "t:dev2_settings.spec_layout_badge"
+        },
+        {
+          "value": "row",
+          "label": "t:dev2_settings.spec_layout_row"
+        }
+      ],
+      "default": "badge"
+    },
     {
       "type": "text",
       "id": "label",
@@ -74,6 +93,12 @@
       "type": "color",
       "id": "border_color",
       "label": "t:dev2_settings.border_color"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "t:dev2_settings.icon_color",
+      "visible_if": "{{ block.settings.layout == 'row' }}"
     },
     {
       "type": "color",
