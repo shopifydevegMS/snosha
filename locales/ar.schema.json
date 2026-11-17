@@ -1203,6 +1203,16 @@
     "mobile_typography_info": "يُطبَّق على الشاشات الأصغر من 750px عندما يكون تصميم شريط الإعلانات \"Design 1\".",
     "same_as_desktop": "مثل سطح المكتب"
   },
+  "dev2_settings": {
+    "design": "التصميم",
+    "design_default": "افتراضي",
+    "design_dev2": "Design 1",
+    "dev2_design_header": "Design 1",
+    "icon_color_mobile": "لون الأيقونات على الجوال",
+    "nav_active_color": "رابط القائمة النشط",
+    "nav_marker_color": "تمييز الرابط النشط",
+    "colors_info": "يُستخدم عندما يكون تصميم الهيدر \"Design 1\". اتركه فارغًا لاستخدام لون نص الصف."
+  },
   "dev4_settings": {
     "design": "التصميم",
     "design_default": "افتراضي",

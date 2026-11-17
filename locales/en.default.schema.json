@@ -1310,6 +1310,16 @@
     "mobile_typography_info": "Applies below 750px when the announcement bar Design is \"Design 1\".",
     "same_as_desktop": "Same as desktop"
   },
+  "dev2_settings": {
+    "design": "Design",
+    "design_default": "Default",
+    "design_dev2": "Design 1",
+    "dev2_design_header": "Design 1",
+    "icon_color_mobile": "Mobile icon color",
+    "nav_active_color": "Active menu link",
+    "nav_marker_color": "Active link highlight",
+    "colors_info": "Used when the header Design is \"Design 1\". Leave empty to use the row text color."
+  },
   "dev4_settings": {
     "design": "Design",
     "design_default": "Default",
