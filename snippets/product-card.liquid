@@ -59,8 +59,9 @@
   endif
 %}
 
+{%- comment -%} dev1-card: Snosha card design on every product card (developer decision, 2026-11-17) — assets/dev1.css {%- endcomment -%}
 <product-card
-  class="product-card size-style"
+  class="product-card size-style dev1-card"
   style="{% render 'size-style', settings: block_settings %}"
   data-product-id="{{ product.id }}"
   id="product-card-{{ block.id }}"

@@ -96,7 +96,7 @@
           </svg>
         {%- endfor -%}
       {% endif %}
-    </div>
+    </div>{% if section.settings.design == 'dev1' and section.settings.dev1_rating_label != blank %}<span class="dev1-rating-label">{{ section.settings.dev1_rating_label | escape }}</span>{% endif %}
 
     {%- if block_settings.show_number or block_settings.stars_style == 'single' -%}
       <p class="rating-count {{ block_settings.type_preset }}">

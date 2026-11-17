@@ -4,7 +4,7 @@
 {% assign button_url = button_collection.url %}
 
 {% if button_collection.products_count > section.settings.max_products %}
-  {% render 'button', link: button_url %}
+  {% if section.settings.design == 'dev1' and section.settings.dev1_link_icon_svg != blank %}{% render 'button', link: button_url, icon_html: section.settings.dev1_link_icon_svg %}{% else %}{% render 'button', link: button_url %}{% endif %}
 {% endif %}
 
 {% schema %}

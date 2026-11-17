@@ -78,3 +78,456 @@
     line-height: var(--dev1-announcement-line-height-mobile);
   }
 }
+
+/* ==== dev1-featured — 06 Featured Collection (sections/product-list.liquid, Design 1) ==== */
+/* Figma 190:3844 (desktop) / 190:4149 (mobile). Scope class on the .section wrapper of the native
+   product list; card parts come from native blocks (+ gated dev1 markup in _product-card-gallery,
+   price, review, button snippet and the _product-card-link block). Per-instance values arrive as
+   --dev1-* variables from the section's inline {% style %}. */
+
+/* Header: title + subtitle centred, "View all" pinned to the physical left as in Figma (every locale). */
+.dev1-featured .section-resource-list__header {
+  position: relative;
+}
+
+.dev1-featured.dev1-featured .section-resource-list__header .group-block-content > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px; /* Figma; no exact gap token (--gap-xs 8px, --gap-sm 11.2px) */
+  direction: rtl;
+  unicode-bidi: isolate;
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--md);
+  line-height: calc(26 / 16);
+  text-decoration: none;
+}
+
+.dev1-featured .dev1-link-icon,
+.dev1-card .dev1-card-cta__icon {
+  display: inline-flex;
+  flex: none;
+  inline-size: 18px;
+  block-size: 18px;
+}
+
+.dev1-featured .dev1-link-icon svg,
+.dev1-card .dev1-card-cta__icon svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+@media screen and (min-width: 750px) {
+  /* Physical left on purpose: Figma keeps the link on the left edge of the heading row. */
+  .dev1-featured.dev1-featured .section-resource-list__header .group-block-content > a {
+    position: absolute;
+    left: var(--gap-2xs);
+    bottom: var(--gap-2xs);
+  }
+}
+
+/* ==== dev1-card — Snosha product card on EVERY product card (developer decision, 2026-11-17) ==== */
+/* .dev1-card is added to <product-card> in snippets/product-card.liquid. Card frame (border, radius,
+   padding) stays on each card's native settings; the discount badge comes from blocks/price.liquid.
+   Section-only parts (promo badge text, add-to-cart label/icon) stay on product lists set to Design 1. */
+
+/* Shadow colour: the section's setting in Design 1 lists, otherwise derived from the primary button colour. */
+.dev1-card {
+  --dev1-card-shadow-color: var(--dev1-shadow-color, color-mix(in srgb, var(--color-primary-button-background) 35%, transparent));
+}
+
+/* Equal heights, Arabic text boundary, details pinned so price + link align across a row. */
+.dev1-card.dev1-card .product-card__content {
+  height: 100%;
+  overflow: clip;
+  direction: rtl;
+  unicode-bidi: isolate;
+  transition: box-shadow var(--animation-speed, 0.2s) ease;
+}
+
+/* Rating and the product link have no native padding settings: align them with the text blocks (12px). */
+.dev1-card.dev1-card .product-card__content > :is(.rating-wrapper, .dev1-card-cta) {
+  margin-inline: var(--padding-md);
+}
+
+@media (hover: hover) and (min-width: 750px) {
+  .dev1-card:is(:hover, :focus-within) .product-card__content {
+    /* Figma "Shadow/Soft": 0 12 32 at 10% of the brand blue (the colour holds the 35% variant). */
+    box-shadow: 0 12px 32px color-mix(in srgb, var(--dev1-card-shadow-color) 30%, transparent);
+  }
+}
+
+/* The image "Sale" badge is replaced by the discount badge in the price row (Figma); sold out stays. */
+.dev1-card:has(.dev1-discount-badge) .product-badges__badge.color-custom-badge-sale {
+  display: none;
+}
+
+/* Title + description: each always reserves exactly 2 lines (cards stay aligned), longer text
+   is cut after line 2 with an ellipsis. --dev1-card-lh is the unitless line height per breakpoint. */
+.dev1-card.dev1-card a.contents > .text-block,
+.dev1-card.dev1-card .product-card__content > .text-block:not(product-price) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: var(--dev1-card-lh);
+  min-block-size: calc(2em * var(--dev1-card-lh));
+  max-block-size: calc(2em * var(--dev1-card-lh));
+  text-align: start;
+}
+
+.dev1-card.dev1-card a.contents > .text-block > *,
+.dev1-card.dev1-card .product-card__content > .text-block:not(product-price) > * {
+  margin: 0;
+  font: inherit;
+}
+
+/* Title */
+.dev1-card.dev1-card a.contents > .text-block {
+  --dev1-card-lh: calc(27 / 16);
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--md);
+}
+
+/* Description (any text block directly in the card, e.g. connected to the product description) */
+.dev1-card.dev1-card .product-card__content > .text-block:not(product-price) {
+  --dev1-card-lh: calc(24 / 14);
+  font-size: var(--font-size--sm);
+}
+
+/* Rating: stars, then the label (on the left in RTL, as in Figma). */
+.dev1-card.dev1-card .rating-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* Figma */
+}
+
+.dev1-card .dev1-rating-label {
+  font-size: var(--font-size--2xs);
+  line-height: calc(20 / 12);
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-70));
+}
+
+/* Price row: sale price, compare-at price, discount badge (right → left in RTL).
+   product-price is also a native .text-block (display: flex; flex-direction: column in
+   snippets/text.liquid), so the row direction must be set explicitly. */
+.dev1-card.dev1-card product-price {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px; /* Figma */
+}
+
+.dev1-card.dev1-card product-price > [ref='priceContainer'] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px; /* Figma */
+}
+
+/* product-price is a native .text-block: its children get width: 100% (.text-block > *) and the
+   h6 preset's heading margins, which pushed the badge onto its own full-width line. */
+.dev1-card.dev1-card product-price > :is([ref='priceContainer'], .dev1-discount-badge) {
+  width: auto;
+  margin: 0;
+}
+
+.dev1-card.dev1-card product-price .price {
+  font-family: var(--font-heading--family);
+  font-weight: var(--font-heading--weight);
+  font-size: var(--font-size--lg);
+  line-height: calc(28 / 18);
+}
+
+.dev1-card.dev1-card product-price .compare-at-price {
+  font-family: var(--font-body--family);
+  font-weight: var(--font-body--weight);
+  font-size: var(--font-size--sm);
+  line-height: calc(22 / 14);
+  /* Figma: muted grey (#5A5A59 ≈ foreground at 70%), not the price's blue. */
+  color: rgb(var(--color-foreground-rgb) / var(--opacity-70));
+  text-decoration-color: currentColor;
+}
+
+.dev1-card .dev1-discount-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--padding-2xs) var(--padding-md);
+  border: 1px solid var(--dev1-discount-border, currentColor);
+  border-radius: 8px;
+  background: var(--dev1-discount-background, transparent);
+  color: var(--dev1-discount-text, currentColor);
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--2xs);
+  line-height: calc(18 / 12);
+  white-space: nowrap;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* "View product" link — sits at the bottom of every card, above the card's overlay link. */
+.dev1-card .dev1-card-cta {
+  position: relative;
+  z-index: var(--layer-raised);
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 10px; /* Figma */
+  margin-block-start: auto;
+  color: var(--dev1-card-cta-color, var(--color-foreground));
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--md);
+  line-height: calc(26 / 16);
+  text-decoration: none;
+}
+
+.dev1-card .dev1-card-cta:hover .dev1-card-cta__label {
+  text-decoration: underline;
+}
+
+/* Promo badge on the image ("الأكثر مبيعًا", Design 1 lists): physical top-left on desktop, top-right on mobile (Figma). */
+.dev1-card .dev1-card-badge {
+  position: absolute;
+  z-index: var(--layer-raised);
+  top: var(--padding-lg);
+  left: var(--padding-md);
+  padding: var(--padding-2xs) var(--padding-md);
+  border-radius: 8px;
+  background: var(--color-primary-button-background);
+  color: var(--color-primary-button-text);
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--2xs);
+  line-height: calc(18 / 12);
+  white-space: nowrap;
+  direction: rtl;
+  unicode-bidi: isolate;
+  pointer-events: none;
+}
+
+/* Native quick add, restyled: Figma "AddToCart" bar, revealed on hover by the native rule. */
+.dev1-card.dev1-card .quick-add__button {
+  inset-inline: var(--padding-lg);
+  inset-block-end: var(--padding-lg);
+  width: auto;
+  max-inline-size: none;
+  height: auto;
+  min-height: var(--button-size-md);
+  justify-content: center;
+  gap: 10px; /* Figma */
+  padding: var(--padding-md) var(--padding-xl);
+  border: 0;
+  border-radius: var(--style-border-radius-buttons-primary);
+  background: var(--color-primary-button-background);
+  color: var(--color-primary-button-text);
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--md);
+  line-height: calc(26 / 16);
+  backdrop-filter: none;
+}
+
+.dev1-card.dev1-card .quick-add__button:hover {
+  scale: 1;
+  background: var(--color-primary-button-hover-background);
+  color: var(--color-primary-button-hover-text);
+}
+
+.dev1-card.dev1-card .quick-add__button > .add-to-cart-icon {
+  order: 1; /* icon after the label: on the left in RTL */
+  width: 18px;
+  height: 18px;
+}
+
+.dev1-card .quick-add__button > .add-to-cart-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Collection "zoom out" grid view: keep the native image-only tiles (native rule is weaker than ours). */
+[product-grid-view='zoom-out'] .dev1-card.dev1-card .product-card__content > :is(.text-block, product-price, .rating-wrapper, .dev1-card-cta),
+[product-grid-view='zoom-out'] .dev1-card.dev1-card .quick-add__button {
+  display: none;
+}
+
+@media screen and (max-width: 749px) {
+  /* Compact mobile card. Figma's mobile card is the desktop card scaled to 52% (6–9px text);
+     sizes below are the smallest theme tokens that stay legible. */
+  .dev1-card.dev1-card a.contents > .text-block {
+    --dev1-card-lh: 1.5;
+    font-size: var(--font-size--xs);
+  }
+
+  .dev1-card.dev1-card .product-card__content > .text-block:not(product-price) {
+    --dev1-card-lh: 1.6;
+    font-size: var(--font-size--2xs);
+  }
+
+  /* Tighter card insets on mobile (Figma ≈ 6px; --padding-xs is the closest token). */
+  .dev1-card.dev1-card .product-card__content > :is(.text-block, product-price),
+  .dev1-card.dev1-card .product-card__content > a.contents > .text-block {
+    padding-inline: var(--padding-xs);
+  }
+
+  .dev1-card.dev1-card .product-card__content > :is(.rating-wrapper, .dev1-card-cta) {
+    margin-inline: var(--padding-xs);
+  }
+
+  .dev1-card .dev1-rating-label {
+    font-size: var(--font-size--3xs);
+    line-height: 1.6;
+  }
+
+  .dev1-card.dev1-card product-price,
+  .dev1-card.dev1-card product-price > [ref='priceContainer'] {
+    gap: var(--gap-2xs);
+  }
+
+  .dev1-card.dev1-card product-price .price {
+    font-size: var(--font-size--sm);
+    line-height: 1.5;
+  }
+
+  .dev1-card.dev1-card product-price .compare-at-price {
+    font-size: var(--font-size--2xs);
+    line-height: 1.5;
+  }
+
+  .dev1-card .dev1-discount-badge,
+  .dev1-card .dev1-card-badge {
+    padding: var(--padding-3xs) var(--padding-xs);
+    border-radius: 4px;
+    font-size: var(--font-size--3xs);
+    line-height: 1.5;
+  }
+
+  .dev1-card .dev1-card-badge {
+    top: var(--padding-xs);
+    left: auto;
+    right: var(--padding-xs);
+  }
+
+  .dev1-card .dev1-card-cta {
+    gap: var(--gap-2xs);
+    font-size: var(--font-size--xs);
+    line-height: 1.5;
+  }
+
+  .dev1-card .dev1-card-cta__icon {
+    inline-size: 14px;
+    block-size: 14px;
+  }
+
+  /* Mobile cart button: always visible 32px circle, top-left of the image (Figma "Cart FAB").
+     The label stays in the DOM (font-size 0) so the button keeps its accessible name. */
+  .dev1-card.dev1-card .quick-add__button {
+    display: flex;
+    opacity: 1;
+    inset: var(--padding-xs) auto auto var(--padding-xs);
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    min-height: 32px;
+    padding: 0;
+    gap: 0;
+    border-radius: 50%;
+    font-size: 0;
+    box-shadow: 0 6px 12px var(--dev1-card-shadow-color);
+  }
+
+  .dev1-card.dev1-card .quick-add__button:disabled {
+    opacity: var(--opacity-muted-text, 0.5);
+  }
+
+  .dev1-card.dev1-card .quick-add__button > .add-to-cart-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ==== dev1-featured (continued) — section-only layout ==== */
+
+/* Tablet: the native 4 desktop columns are too narrow at 750–989px. */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .dev1-featured.dev1-featured .resource-list--grid {
+    grid-template-columns: repeat(var(--dev1-columns-tablet, 2), minmax(0, 1fr));
+  }
+}
+
+/* Mobile progress (visual only — assets/dev1.js mirrors the native slider's scroll position). */
+.dev1-featured .dev1-featured__progress {
+  display: block;
+  position: relative;
+  block-size: 4px;
+  border-radius: 99px;
+  background: var(--dev1-progress-track, rgb(var(--color-foreground-rgb) / var(--opacity-10, 0.1)));
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.dev1-featured .dev1-featured__progress-fill {
+  position: absolute;
+  inset-block: 0;
+  inline-size: calc(var(--dev1-progress-size, 1) * 100%);
+  inset-inline-start: calc(var(--dev1-progress-position, 0) * (100% - var(--dev1-progress-size, 1) * 100%));
+  border-radius: inherit;
+  background: linear-gradient(to right, var(--dev1-progress-start, currentColor), var(--dev1-progress-end, currentColor));
+}
+
+@media screen and (max-width: 749px) {
+  /* Figma mobile: 56px top/bottom (settings; 0 = native scaling) and 14px between every row. */
+  .dev1-featured.dev1-featured {
+    padding-block-start: calc(var(--dev1-padding-mobile-top, var(--padding-block-start)) + var(--section-top-offset, 0px));
+    padding-block-end: var(--dev1-padding-mobile-bottom, var(--padding-block-end));
+    row-gap: var(--gap-md);
+  }
+
+  /* Header blocks join the section grid so "View all" can move below the carousel (Figma mobile). */
+  .dev1-featured .section-resource-list__header,
+  .dev1-featured .section-resource-list__header > .group-block,
+  .dev1-featured .section-resource-list__header .group-block-content {
+    display: contents;
+  }
+
+  .dev1-featured .section-resource-list__header .group-block__media-wrapper {
+    display: none;
+  }
+
+  .dev1-featured.dev1-featured .section-resource-list__header .group-block-content > * {
+    grid-column: 2;
+    justify-self: center;
+  }
+
+  .dev1-featured.dev1-featured.section--full-width .section-resource-list__header .group-block-content > * {
+    grid-column: 1 / -1;
+  }
+
+  .dev1-featured.dev1-featured .section-resource-list__header .group-block-content > a {
+    order: 1;
+  }
+
+  /* Subtitle: desktop uses the h5 preset (18/32); Figma mobile matches the paragraph preset (15/26). */
+  .dev1-featured.dev1-featured .section-resource-list__header .text-block.h5 {
+    font-size: var(--font-paragraph--size);
+    line-height: var(--font-paragraph--line-height);
+  }
+
+  /* Figma carousel frame: 11px above and below the cards. */
+  .dev1-featured .resource-list.resource-list__carousel {
+    margin-block: var(--padding-sm);
+  }
+
+  /* Featured cards' bottom inset on mobile (other cards keep their own padding setting). */
+  .dev1-featured .dev1-card.dev1-card .product-card__content {
+    padding-block-end: var(--padding-sm);
+  }
+}

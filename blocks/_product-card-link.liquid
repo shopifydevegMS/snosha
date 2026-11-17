@@ -1,0 +1,68 @@
+<!-- _product-card-link.liquid -->
+{%- doc -%}
+  Product link with an optional SVG icon, used inside product cards ("View product").
+  Links to closest.product; renders a disabled link on onboarding cards.
+{%- enddoc -%}
+
+{%- liquid
+  assign product = closest.product
+  assign block_settings = block.settings
+-%}
+
+{%- if block_settings.label != blank or block_settings.icon_svg != blank -%}
+  <a
+    class="dev1-card-cta"
+    {% if product != blank %}
+      href="{{ product.url }}"
+    {% else %}
+      role="link"
+      aria-disabled="true"
+    {% endif %}
+    {% if block_settings.text_color != blank %}
+      style="--dev1-card-cta-color: {{ block_settings.text_color }};"
+    {% endif %}
+    {{ block.shopify_attributes }}
+  >
+    {%- if block_settings.label != blank -%}
+      <span class="dev1-card-cta__label">{{ block_settings.label }}</span>
+    {%- endif -%}
+    {%- if product != blank -%}
+      <span class="visually-hidden">: {{ product.title | escape }}</span>
+    {%- endif -%}
+    {%- if block_settings.icon_svg != blank -%}
+      <span class="dev1-card-cta__icon" aria-hidden="true">{{ block_settings.icon_svg }}</span>
+    {%- endif -%}
+  </a>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:dev1_settings.card_link",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:dev1_settings.card_link_label",
+      "default": "t:dev1_settings.card_link_label_default"
+    },
+    {
+      "type": "html",
+      "id": "icon_svg",
+      "label": "t:dev1_settings.icon_svg",
+      "info": "t:dev1_settings.icon_svg_info"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:dev1_settings.text_color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:dev1_settings.card_link",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

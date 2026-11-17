@@ -4,11 +4,16 @@
   @param {object} product - The product object
   @param {string} section_id - The section ID
   @param {object} [block] - The block object
+  @param {string} [add_label] - dev1: optional label for the "Add" button (default: theme translation)
+  @param {string} [icon_html] - dev1: optional SVG markup replacing the default cart icon on both buttons
 {%- enddoc -%}
 
 {% liquid
   assign product_form_id = 'QuickAdd-ProductForm-' | append: product.id | append: '-' | append: block.id
   assign add_to_cart_text = 'actions.add' | t
+  if add_label != blank
+    assign add_to_cart_text = add_label
+  endif
   assign choose_options_text = 'actions.choose' | t
   # Logic to determine which variant to use (matching swatch selection logic from product-card)
   assign variant = product.selected_or_first_available_variant
@@ -121,6 +126,7 @@
           class: 'quick-add__button quick-add__button--add add-to-cart-button',
           can_add_to_cart: can_add_to_cart,
           show_icon: true,
+          icon_html: icon_html,
           product: product
         %}
       {%- endform -%}
@@ -137,7 +143,11 @@
         aria-hidden="true"
         class="svg-wrapper add-to-cart-icon"
       >
-        {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
+        {%- if icon_html != blank -%}
+          {{- icon_html -}}
+        {%- else -%}
+          {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
+        {%- endif -%}
       </span>
       {{- choose_options_text -}}
     </button>

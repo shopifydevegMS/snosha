@@ -4,7 +4,10 @@
 
 {% capture children %}
   {% unless product == blank %}
-    {%- if product.available == false or product.compare_at_price > product.price -%}
+    {%- if section.settings.design == 'dev1' and section.settings.dev1_card_badge != blank and product.available -%}
+      {%- comment -%} dev1: product list "Design 1" promo badge (the discount shows in the price row instead) {%- endcomment -%}
+      <div class="dev1-card-badge">{{ section.settings.dev1_card_badge | escape }}</div>
+    {%- elsif product.available == false or product.compare_at_price > product.price -%}
       <div
         class="product-badges product-badges--{{ settings.badge_position }}"
         style="
@@ -27,7 +30,7 @@
       </div>
     {%- endif -%}
     {% if product.available and settings.quick_add or settings.mobile_quick_add %}
-      {% render 'quick-add', product: product, section_id: section.id %}
+      {% if section.settings.design == 'dev1' %}{% render 'quick-add', product: product, section_id: section.id, add_label: section.settings.dev1_add_to_cart_label, icon_html: section.settings.dev1_cart_icon_svg %}{% else %}{% render 'quick-add', product: product, section_id: section.id %}{% endif %}
     {% endif %}
   {% endunless %}
 {% endcapture %}

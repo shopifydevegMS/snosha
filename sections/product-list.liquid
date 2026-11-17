@@ -5,7 +5,23 @@
   if section.settings.background_color != blank
     render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
   endif
-%}
+%}{% if section.settings.design == 'dev1' %}
+  {%- comment -%} dev1: "Design 1" (06 Featured Collection) — per-instance values for assets/dev1.css {%- endcomment -%}
+  {% style %}
+    #shopify-section-{{ section.id }} {
+      --dev1-columns-tablet: {{ section.settings.dev1_columns_tablet }};
+      {%- if section.settings.dev1_padding_mobile_top > 0 %} --dev1-padding-mobile-top: {{ section.settings.dev1_padding_mobile_top }}px;{% endif %}
+      {%- if section.settings.dev1_padding_mobile_bottom > 0 %} --dev1-padding-mobile-bottom: {{ section.settings.dev1_padding_mobile_bottom }}px;{% endif %}
+      {%- if section.settings.dev1_discount_background != blank %} --dev1-discount-background: {{ section.settings.dev1_discount_background }};{% endif %}
+      {%- if section.settings.dev1_discount_border != blank %} --dev1-discount-border: {{ section.settings.dev1_discount_border }};{% endif %}
+      {%- if section.settings.dev1_discount_text != blank %} --dev1-discount-text: {{ section.settings.dev1_discount_text }};{% endif %}
+      {%- if section.settings.dev1_progress_track != blank %} --dev1-progress-track: {{ section.settings.dev1_progress_track }};{% endif %}
+      {%- if section.settings.dev1_progress_start != blank %} --dev1-progress-start: {{ section.settings.dev1_progress_start }};{% endif %}
+      {%- if section.settings.dev1_progress_end != blank %} --dev1-progress-end: {{ section.settings.dev1_progress_end }};{% endif %}
+      {%- if section.settings.dev1_shadow_color != blank %} --dev1-shadow-color: {{ section.settings.dev1_shadow_color }};{% endif %}
+    }
+  {% endstyle %}
+{% endif %}
 
 <div
   class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
@@ -18,7 +34,7 @@
     {% if section.settings.background_color != blank %}color-custom-{{ section.id }}{% endif %}
     section-resource-list
     spacing-style
-    gap-style
+    gap-style{% if section.settings.design == 'dev1' %} dev1-featured{% endif %}
   "
   style="
     {% render 'spacing-style', settings: section.settings %}
@@ -76,7 +92,18 @@
     slide_count: max_items,
     content_type: 'products',
     test_id: 'resource-list-grid'
-  %}
+  %}{% if section.settings.design == 'dev1' %}{% liquid
+      assign dev1_has_mobile_carousel = section.settings.carousel_on_mobile
+      if section.settings.layout_type == 'carousel'
+        assign dev1_has_mobile_carousel = true
+      endif
+    %}{% if dev1_has_mobile_carousel %}
+  {%- comment -%} dev1: visual-only progress for the native mobile carousel (assets/dev1.js) {%- endcomment -%}
+  <dev1-carousel-progress class="dev1-featured__progress hidden--desktop" aria-hidden="true">
+    <span class="dev1-featured__progress-fill"></span>
+  </dev1-carousel-progress>
+  <script src="{{ 'dev1.js' | asset_url }}" type="module"></script>
+{% endif %}{% endif %}
 
   <div
     class="section-resource-list__content"
@@ -105,6 +132,156 @@
     "groups": ["header", "footer"]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "t:dev1_settings.design",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:dev1_settings.design_default"
+        },
+        {
+          "value": "dev1",
+          "label": "t:dev1_settings.design_dev1"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "header",
+      "content": "t:dev1_settings.dev1_design_header",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "text",
+      "id": "dev1_card_badge",
+      "label": "t:dev1_settings.card_badge",
+      "info": "t:dev1_settings.card_badge_info",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "text",
+      "id": "dev1_add_to_cart_label",
+      "label": "t:dev1_settings.add_to_cart_label",
+      "info": "t:dev1_settings.add_to_cart_label_info",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "html",
+      "id": "dev1_cart_icon_svg",
+      "label": "t:dev1_settings.cart_icon_svg",
+      "info": "t:dev1_settings.cart_icon_svg_info",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "text",
+      "id": "dev1_discount_label",
+      "label": "t:dev1_settings.discount_label",
+      "info": "t:dev1_settings.discount_label_info",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "text",
+      "id": "dev1_rating_label",
+      "label": "t:dev1_settings.rating_label",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "html",
+      "id": "dev1_link_icon_svg",
+      "label": "t:dev1_settings.link_icon_svg",
+      "info": "t:dev1_settings.icon_svg_info",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev1_columns_tablet",
+      "label": "t:dev1_settings.columns_tablet",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2,
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev1_padding_mobile_top",
+      "label": "t:dev1_settings.padding_mobile_top",
+      "info": "t:dev1_settings.padding_mobile_info",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev1_padding_mobile_bottom",
+      "label": "t:dev1_settings.padding_mobile_bottom",
+      "info": "t:dev1_settings.padding_mobile_info",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:dev1_settings.colors_header",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_discount_background",
+      "label": "t:dev1_settings.discount_background",
+      "default": "{{ settings.color_palette.snosha_pale_tint }}",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_discount_border",
+      "label": "t:dev1_settings.discount_border",
+      "default": "{{ settings.color_palette.color2 }}",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_discount_text",
+      "label": "t:dev1_settings.discount_text",
+      "default": "{{ settings.color_palette.snosha_secondary_blue }}",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_progress_track",
+      "label": "t:dev1_settings.progress_track",
+      "default": "{{ settings.color_palette.color2 }}",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_progress_start",
+      "label": "t:dev1_settings.progress_start",
+      "default": "{{ settings.color_palette.snosha_gradient_start }}",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_progress_end",
+      "label": "t:dev1_settings.progress_end",
+      "default": "{{ settings.color_palette.snosha_gradient_end }}",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_shadow_color",
+      "label": "t:dev1_settings.shadow_color",
+      "alpha": true,
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
     {
       "type": "collection",
       "id": "collection",

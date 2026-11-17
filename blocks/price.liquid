@@ -57,7 +57,31 @@
     show_unit_price: true,
     product_resource: product_resource,
     show_sale_price_first: block_settings.show_sale_price_first
-  %}
+  %}{% liquid
+      # dev1: discount badge on every product card (developer decision, 2026-11-17), computed from the
+      # same variant the price snippet uses. Never on the product's own price on its product page.
+      assign dev1_discount_percent = 0
+      assign dev1_is_main_product = false
+      if template.name == 'product' and product.id == product_resource.id
+        assign dev1_is_main_product = true
+      endif
+      if block_settings.dev1_show_discount and dev1_is_main_product == false and selected_variant.compare_at_price > selected_variant.price
+        assign dev1_discount_percent = selected_variant.compare_at_price | minus: selected_variant.price | times: 100.0 | divided_by: selected_variant.compare_at_price | round
+      endif
+      assign dev1_section_design = false
+      if section.settings.design == 'dev1'
+        assign dev1_section_design = true
+      endif
+    %}{% if dev1_discount_percent > 0 %}<span
+      class="dev1-discount-badge"
+      {% unless dev1_section_design %}style="{% if block_settings.dev1_discount_background != blank %}--dev1-discount-background: {{ block_settings.dev1_discount_background }};{% endif %}{% if block_settings.dev1_discount_border != blank %} --dev1-discount-border: {{ block_settings.dev1_discount_border }};{% endif %}{% if block_settings.dev1_discount_text != blank %} --dev1-discount-text: {{ block_settings.dev1_discount_text }};{% endif %}"{% endunless %}
+    >
+      {%- if dev1_section_design and section.settings.dev1_discount_label != blank -%}
+        {{- section.settings.dev1_discount_label | escape | replace: '[percent]', dev1_discount_percent -}}
+      {%- else -%}
+        {{- 'dev1_product.discount_badge' | t: percent: dev1_discount_percent -}}
+      {%- endif -%}
+    </span>{% endif %}
 
   {% if block_settings.show_tax_info %}
     <div class="tax-note">
@@ -365,6 +389,38 @@
       "id": "text_color",
       "label": "t:settings.text_color",
       "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:dev1_settings.discount_header"
+    },
+    {
+      "type": "checkbox",
+      "id": "dev1_show_discount",
+      "label": "t:dev1_settings.show_discount",
+      "info": "t:dev1_settings.show_discount_info",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "dev1_discount_background",
+      "label": "t:dev1_settings.discount_background",
+      "default": "{{ settings.color_palette.snosha_pale_tint }}",
+      "visible_if": "{{ block.settings.dev1_show_discount }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_discount_border",
+      "label": "t:dev1_settings.discount_border",
+      "default": "{{ settings.color_palette.color2 }}",
+      "visible_if": "{{ block.settings.dev1_show_discount }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_discount_text",
+      "label": "t:dev1_settings.discount_text",
+      "default": "{{ settings.color_palette.snosha_secondary_blue }}",
+      "visible_if": "{{ block.settings.dev1_show_discount }}"
     },
     {
       "type": "header",

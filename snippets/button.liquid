@@ -3,6 +3,7 @@
 
   @param {string} link - link to render
   @param {object} [block] - The block
+  @param {string} [icon_html] - dev1: optional SVG markup rendered after the label (decorative)
 
   @example
   {% render 'button', link: '/collections/all' %}
@@ -30,5 +31,5 @@
   {%- endif -%}
   {{ block.shopify_attributes }}
 >
-  {{ block_settings.label }}
+  {{ block_settings.label }}{% if icon_html != blank %}<span class="dev1-link-icon" aria-hidden="true">{{ icon_html }}</span>{% endif %}
 </a>
