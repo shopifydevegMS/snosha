@@ -17,6 +17,7 @@
     video_style: video_style,
     video_preview_image: dev1_video_poster,
     dev3_sound_on_play: block_settings.dev3_sound_on_play,
+    dev3_one_at_a_time: block_settings.dev3_one_at_a_time,
     additional_attributes: block.shopify_attributes
   %}
 {% else %}
@@ -100,6 +101,14 @@
       "info": "t:dev3_settings.sound_on_play_info",
       "default": false,
       "visible_if": "{{ block.settings.source == 'uploaded' and block.settings.video_autoplay == false }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "dev3_one_at_a_time",
+      "label": "t:dev3_settings.one_at_a_time",
+      "info": "t:dev3_settings.one_at_a_time_info",
+      "default": false,
+      "visible_if": "{{ block.settings.source == 'uploaded' }}"
     },
     {
       "type": "image_picker",

@@ -17,6 +17,7 @@
   @param {object} video - The Shopify video object or a string containing a YouTube ID or Vimeo ID
   @param {object} [block] - The block object
   @param {boolean} [dev3_sound_on_play] - dev3: start an uploaded video unmuted after the poster click (default: muted, native)
+  @param {boolean} [dev3_one_at_a_time] - dev3: pause other opted-in videos when this one plays, and pause it when scrolled out of view (default: off, native)
 
   Video from URL:
 
@@ -132,6 +133,11 @@
     {% endif %}
     {{ additional_attributes }}
   >
+    {%- if dev3_one_at_a_time -%}
+      {%- comment -%} dev3: playback coordination only (assets/dev3.js); renders nothing visible {%- endcomment -%}
+      <dev3-solo-video hidden></dev3-solo-video>
+      <script src="{{ 'dev3.js' | asset_url }}" type="module"></script>
+    {%- endif -%}
     {% if video_preview_image != blank %}
       <button
         class="button deferred-media__poster-button button-unstyled"
