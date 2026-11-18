@@ -14,6 +14,14 @@
   if section.settings.design == 'dev3'
     assign section_class = 'dev3-bundle'
   endif
+  # dev1: Design 3 (10 Why SNOSHA) scope class for assets/dev1.css
+  if section.settings.design == 'dev1'
+    assign section_class = 'dev1-why'
+  endif
+  # dev2: Design 4 (14 FAQ) scope class for assets/dev2.css
+  if section.settings.design == 'dev2'
+    assign section_class = 'dev2-faq'
+  endif
 -%}
 
 {%- if section.settings.design == 'dev3' -%}
@@ -46,6 +54,33 @@
     }
   {%- endstyle -%}
   <script src="{{ 'dev4.js' | asset_url }}" type="module"></script>
+{%- endif -%}
+
+{%- if section.settings.design == 'dev1' -%}
+  {%- comment -%} dev1: per-instance values for assets/dev1.css (Design 3 — 10 Why SNOSHA) {%- endcomment -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} {
+      {%- if section.settings.dev1_feature_title_color != blank %} --dev1-why-title: {{ section.settings.dev1_feature_title_color }};{% endif %}
+      {%- if section.settings.dev1_padding_mobile_top > 0 %} --dev1-padding-mobile-top: {{ section.settings.dev1_padding_mobile_top }}px;{% endif %}
+      {%- if section.settings.dev1_padding_mobile_bottom > 0 %} --dev1-padding-mobile-bottom: {{ section.settings.dev1_padding_mobile_bottom }}px;{% endif %}
+    }
+  {%- endstyle -%}
+{%- endif -%}
+
+{%- if section.settings.design == 'dev2' -%}
+  {%- comment -%} dev2: per-instance colors for assets/dev2.css (Design 4 — 14 FAQ) {%- endcomment -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} {
+      {%- if section.settings.dev2_faq_border_color != blank %} --dev2-faq-border: {{ section.settings.dev2_faq_border_color }};{% endif %}
+      {%- if section.settings.dev2_faq_open_background != blank %} --dev2-faq-open-background: {{ section.settings.dev2_faq_open_background }};{% endif %}
+      {%- if section.settings.dev2_faq_icon_color != blank %} --dev2-faq-icon: {{ section.settings.dev2_faq_icon_color }};{% endif %}
+    }
+  {%- endstyle -%}
+  {%- if section.settings.dev2_faq_open_first -%}
+    {%- comment -%} dev2: opens the first question in reading order (desktop and mobile), assets/dev2.js {%- endcomment -%}
+    <dev2-faq-open-first hidden></dev2-faq-open-first>
+    <script src="{{ 'dev2.js' | asset_url }}" type="module"></script>
+  {%- endif -%}
 {%- endif -%}
 
 {% render 'section',
@@ -91,6 +126,14 @@
         {
           "value": "dev3",
           "label": "t:dev3_settings.design_2"
+        },
+        {
+          "value": "dev1",
+          "label": "t:dev1_settings.design_3"
+        },
+        {
+          "value": "dev2",
+          "label": "t:dev2_settings.design_4"
         }
       ],
       "default": "default"
@@ -574,6 +617,77 @@
       "unit": "px",
       "default": 40,
       "visible_if": "{{ section.settings.design == 'dev3' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:dev1_settings.design_3_header",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_feature_title_color",
+      "label": "t:dev1_settings.feature_title_color",
+      "default": "{{ settings.color_palette.snosha_deep_blue }}",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev1_padding_mobile_top",
+      "label": "t:dev1_settings.padding_mobile_top",
+      "info": "t:dev1_settings.padding_mobile_info",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "range",
+      "id": "dev1_padding_mobile_bottom",
+      "label": "t:dev1_settings.padding_mobile_bottom",
+      "info": "t:dev1_settings.padding_mobile_info",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0,
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:dev2_settings.faq_header",
+      "info": "t:dev2_settings.faq_info",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_faq_border_color",
+      "label": "t:dev2_settings.faq_border_color",
+      "default": "{{ settings.color_palette.color2 }}",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_faq_open_background",
+      "label": "t:dev2_settings.faq_open_background",
+      "default": "{{ settings.color_palette.snosha_pale_tint }}",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_faq_icon_color",
+      "label": "t:dev2_settings.icon_color",
+      "default": "{{ settings.color_palette.snosha_secondary_blue }}",
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "dev2_faq_open_first",
+      "label": "t:dev2_settings.faq_open_first",
+      "info": "t:dev2_settings.faq_open_first_info",
+      "default": false,
+      "visible_if": "{{ section.settings.design == 'dev2' }}"
     }
   ],
   "presets": [

@@ -24,7 +24,7 @@
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 6,
+            "gap": 14,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -52,7 +52,8 @@
             "text_LWt8Pz": {
               "type": "text",
               "settings": {
-                "text": "<h2>Join our email list</h2>",
+                "text": "<h2>اشترك في النشرة</h2>",
+                "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -76,11 +77,12 @@
             "text_f9CFLH": {
               "type": "text",
               "settings": {
-                "text": "<p>Get exclusive deals and early access to new products.</p>",
+                "text": "<p>نصائح للعناية بالفم وعروض SNOSHA مباشرة على بريدك.</p>",
+                "text_color": "{{ settings.color_palette.color1 }}",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "rte",
+                "type_preset": "paragraph",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
                 "line_height": "normal",
@@ -96,51 +98,165 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "email_signup_crihX7": {
+              "type": "email-signup",
+              "settings": {
+                "width": "fill",
+                "custom_width": 100,
+                "heading_preset": "h3",
+                "border_style": "all",
+                "input_style": "custom",
+                "border_width": 1,
+                "border_radius": 12,
+                "input_background_color": "{{ settings.color_palette.background }}",
+                "input_text_color": "{{ settings.color_palette.color1 }}",
+                "input_border_color": "{{ settings.color_palette.color2 }}",
+                "input_type_preset": "paragraph",
+                "dev3_placeholder": "البريد الإلكتروني",
+                "style_class": "button-custom",
+                "custom_button_background": "{{ settings.color_palette.snosha_secondary_blue }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.snosha_secondary_blue }}",
+                "display_type": "text",
+                "label": "اشترك",
+                "integrated_button": false,
+                "button_type_preset": "paragraph",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [
             "text_LWt8Pz",
-            "text_f9CFLH"
+            "text_f9CFLH",
+            "email_signup_crihX7"
           ]
         },
-        "email_signup_crihX7": {
-          "type": "email-signup",
+        "dev3_footer_brand": {
+          "type": "group",
           "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
-            "heading_preset": "h3",
-            "border_style": "all",
-            "input_style": "custom",
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "border": "none",
             "border_width": 1,
-            "border_radius": 100,
-            "input_background_color": "{{ settings.color_palette.background }}",
-            "input_text_color": "{{ settings.color_palette.color1 }}",
-            "input_border_color": "{{ settings.color_palette.color2 }}",
-            "input_type_preset": "paragraph",
-            "style_class": "button-unstyled",
-            "display_type": "arrow",
-            "label": "Sign up",
-            "integrated_button": true,
-            "button_type_preset": "paragraph",
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
+          "blocks": {
+            "dev3_footer_logo": {
+              "type": "logo",
+              "settings": {
+                "inverse": false,
+                "unit": "percent",
+                "percent_width": 59,
+                "custom_mobile_size": true,
+                "unit_mobile": "percent",
+                "percent_width_mobile": 51,
+                "padding-block-start": 4,
+                "padding-block-end": 5,
+                "padding-inline-start": 4,
+                "padding-inline-end": 4
+              },
+              "blocks": {}
+            },
+            "dev3_footer_brand_text": {
+              "type": "text",
+              "settings": {
+                "text": "<p>عناية ذكية بالفم — تكنولوجيا وتصميم مدروس يجعلان روتينك اليومي أسهل.</p>",
+                "text_color": "{{ settings.color_palette.color1 }}",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "wrap": "pretty",
+                "background": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dev3_footer_logo",
+            "dev3_footer_brand_text"
+          ]
+        },
+        "dev3_footer_menu_shop": {
+          "type": "menu",
+          "settings": {
+            "menu": "link-list",
+            "heading": "التسوق",
+            "menu_spacing": 12,
+            "show_as_accordion": false,
+            "heading_preset": "h3",
+            "link_preset": "paragraph"
+          },
+          "blocks": {}
+        },
+        "dev3_footer_menu_help": {
+          "type": "menu",
+          "settings": {
+            "menu": "link-list-1",
+            "heading": "المساعدة",
+            "menu_spacing": 12,
+            "show_as_accordion": false,
+            "heading_preset": "h3",
+            "link_preset": "paragraph"
+          },
+          "blocks": {}
+        },
+        "dev3_footer_menu_about": {
+          "type": "menu",
+          "settings": {
+            "menu": "snosha",
+            "heading": "عن SNOSHA",
+            "menu_spacing": 12,
+            "show_as_accordion": false,
+            "heading_preset": "h3",
+            "link_preset": "paragraph"
+          },
           "blocks": {}
         }
       },
       "block_order": [
-        "group_H6VpwJ",
-        "email_signup_crihX7"
+        "dev3_footer_brand",
+        "dev3_footer_menu_shop",
+        "dev3_footer_menu_help",
+        "dev3_footer_menu_about",
+        "group_H6VpwJ"
       ],
-      "name": "t:names.footer",
+      "name": "Footer",
       "settings": {
+        "design": "dev3",
         "section_width": "page-width",
-        "gap": 20,
-        "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 30,
-        "padding-block-end": 30
+        "gap": 48,
+        "background_color": "{{ settings.color_palette.snosha_pale_tint }}",
+        "padding-block-start": 60,
+        "padding-block-end": 73
       }
     },
     "footer_utilities_jLGE8U": {
@@ -149,7 +265,9 @@
         "footer_copyright_jweRK8": {
           "type": "footer-copyright",
           "settings": {
-            "show_powered_by": true,
+            "show_powered_by": false,
+            "dev3_copyright_text": "SNOSHA — جميع الحقوق محفوظة.",
+            "text_color": "{{ settings.color_palette.color1 }}",
             "font_size": "0.75rem",
             "case": "none"
           },
@@ -157,6 +275,7 @@
         },
         "footer_policy_list_VCdnpa": {
           "type": "footer-policy-list",
+          "disabled": true,
           "settings": {
             "font_size": "0.75rem",
             "case": "none"
@@ -165,6 +284,7 @@
         },
         "social_links_Ew63Kq": {
           "type": "social-links",
+          "disabled": true,
           "settings": {
             "facebook_url": "https://www.facebook.com/",
             "instagram_url": "https://www.instagram.com/",
@@ -180,15 +300,16 @@
         "footer_policy_list_VCdnpa",
         "social_links_Ew63Kq"
       ],
-      "name": "t:names.utilities",
+      "name": "Footer Bottom",
       "settings": {
+        "design": "dev3",
         "section_width": "page-width",
         "gap": 24,
         "divider_thickness": 1,
         "divider_color": "{{ settings.color_palette.color2 }}",
-        "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 20,
-        "padding-block-end": 48
+        "background_color": "{{ settings.color_palette.snosha_pale_tint }}",
+        "padding-block-start": 48,
+        "padding-block-end": 60
       }
     }
   },

@@ -1349,7 +1349,10 @@
     "product": "Product",
     "title_color": "Title color",
     "price_color": "Price color",
-    "thumbnail_border": "Thumbnail border"
+    "thumbnail_border": "Thumbnail border",
+    "design_3": "Design 3",
+    "design_3_header": "Design 3",
+    "feature_title_color": "Feature title color"
   },
   "dev2_settings": {
     "design": "Design",
@@ -1394,7 +1397,14 @@
     "spec_layout_row": "Row",
     "icon_color": "Icon color",
     "card_badge": "Badge",
-    "card_badge_info": "Carousel section, Design 3 only: shown on this card's image. Leave empty to hide the badge."
+    "card_badge_info": "Carousel section, Design 3 only: shown on this card's image. Leave empty to hide the badge.",
+    "design_4": "Design 4",
+    "faq_header": "Design 4 — FAQ cards",
+    "faq_info": "Only one question stays open at a time. To choose the question that opens first, turn on \"Open row by default\" on that question's row.",
+    "faq_border_color": "Card border",
+    "faq_open_background": "Open card background",
+    "faq_open_first": "Open the first question automatically",
+    "faq_open_first_info": "Opens the first question in reading order: the top of the right column on desktop, the top of the list on mobile. While on, the rows' \"Open row by default\" is ignored."
   },
   "dev4_settings": {
     "design": "Design",
@@ -1456,6 +1466,10 @@
     "design_2": "Design 2",
     "design_2_header": "Design 2",
     "padding_top_mobile": "Mobile top padding",
-    "padding_bottom_mobile": "Mobile bottom padding"
+    "padding_bottom_mobile": "Mobile bottom padding",
+    "copyright_text": "Copyright text",
+    "copyright_text_info": "Shown after the © and the current year, in place of the store name. Leave empty to use the store name.",
+    "email_placeholder": "Placeholder",
+    "email_placeholder_info": "Leave empty to use the default placeholder."
   }
 }

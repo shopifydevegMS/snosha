@@ -3535,6 +3535,503 @@
         "dev4_progress_start": "{{ settings.color_palette.snosha_gradient_start }}",
         "dev4_progress_end": "{{ settings.color_palette.snosha_gradient_end }}"
       }
+    },
+    "dev1_why": {
+      "type": "section",
+      "name": "Why SNOSHA",
+      "blocks": {
+        "dev1_why_heading": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "center",
+            "vertical_alignment": "flex-start",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 6,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "dev1_why_title": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>لماذا SNOSHA؟</h2>",
+                "type_preset": "h2",
+                "font": "var(--font-body--family)",
+                "wrap": "pretty",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "text_color": "{{ settings.color_palette.snosha_deep_blue }}"
+              },
+              "blocks": {}
+            },
+            "dev1_why_description": {
+              "type": "text",
+              "settings": {
+                "text": "<p>تكنولوجيا ذكية وتصميم مدروس ، من أجل روتين عناية أبسط كل يوم.</p>",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "wrap": "pretty",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "center",
+                "text_color": "{{ settings.color_palette.color1 }}"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dev1_why_title",
+            "dev1_why_description"
+          ]
+        },
+        "dev1_why_grid": {
+          "type": "group",
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "center",
+            "vertical_alignment": "flex-start",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 32,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "dev1_why_item_1": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 64 64\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M27 23.3C28.539 24.1722 29.8191 25.437 30.7097 26.9654C31.6003 28.4938 32.0695 30.2311 32.0695 32C32.0695 33.7689 31.6003 35.5062 30.7097 37.0346C29.8191 38.563 28.539 39.8278 27 40.7L20 32L27 23.3Z\" fill=\"#DCF2FB\" fill-opacity=\"0.9\"/><path d=\"M25.5 22.5C27.1599 23.4689 28.537 24.8559 29.4941 26.5227C30.4511 28.1895 30.9547 30.078 30.9547 32C30.9547 33.922 30.4511 35.8105 29.4941 37.4773C28.537 39.1441 27.1599 40.5311 25.5 41.5\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"url(#dev1why-tech-0)\"/><path d=\"M31 17.5C33.2739 19.1725 35.1225 21.3564 36.3966 23.8752C37.6708 26.3941 38.3346 29.1773 38.3346 32C38.3346 34.8227 37.6708 37.6059 36.3966 40.1248C35.1225 42.6436 33.2739 44.8275 31 46.5\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"url(#dev1why-tech-1)\"/><path d=\"M36.5 12.5C39.4198 14.8425 41.7764 17.8109 43.3956 21.1859C45.0149 24.561 45.8555 28.2566 45.8555 32C45.8555 35.7434 45.0149 39.439 43.3956 42.8141C41.7764 46.1891 39.4198 49.1575 36.5 51.5\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"url(#dev1why-tech-2)\"/><path d=\"M19 35.2C20.7673 35.2 22.2 33.7673 22.2 32C22.2 30.2327 20.7673 28.8 19 28.8C17.2327 28.8 15.8 30.2327 15.8 32C15.8 33.7673 17.2327 35.2 19 35.2Z\" fill=\"url(#dev1why-tech-3)\"/><path d=\"M51 12L52.2 15L55.2 16.2L52.2 17.4L51 20.4L49.8 17.4L46.8 16.2L49.8 15L51 12Z\" fill=\"#60C1E1\"/><defs><linearGradient id=\"dev1why-tech-0\" x1=\"25.5\" y1=\"22.5\" x2=\"32.6268\" y2=\"24.546\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#63CDFF\"/><stop offset=\"1\" stop-color=\"#0F64A8\"/></linearGradient><linearGradient id=\"dev1why-tech-1\" x1=\"31\" y1=\"17.5\" x2=\"40.7492\" y2=\"19.9658\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#63CDFF\"/><stop offset=\"1\" stop-color=\"#0F64A8\"/></linearGradient><linearGradient id=\"dev1why-tech-2\" x1=\"36.5\" y1=\"12.5\" x2=\"49.0109\" y2=\"15.5012\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#63CDFF\"/><stop offset=\"1\" stop-color=\"#0F64A8\"/></linearGradient><linearGradient id=\"dev1why-tech-3\" x1=\"15.8\" y1=\"28.8\" x2=\"20.3255\" y2=\"33.3255\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#63CDFF\"/><stop offset=\"1\" stop-color=\"#0F64A8\"/></linearGradient></defs></svg>",
+                "title": "تقنية أذكى",
+                "text": "تكنولوجيا ذكية مصممة لتجعل العناية اليومية بالفم أسهل.",
+                "tile_color": "{{ settings.color_palette.background }}",
+                "tile_border_color": "{{ settings.color_palette.color2 }}",
+                "description_color": "{{ settings.color_palette.color1 }}"
+              },
+              "blocks": {}
+            },
+            "dev1_why_item_2": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 64 64\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M13 20H51M13 32H51M13 44H51\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"#60C1E1\" stroke-opacity=\"0.55\"/><path d=\"M25 25.5C28.0376 25.5 30.5 23.0376 30.5 20C30.5 16.9624 28.0376 14.5 25 14.5C21.9624 14.5 19.5 16.9624 19.5 20C19.5 23.0376 21.9624 25.5 25 25.5Z\" fill=\"white\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"url(#dev1why-sliders-0)\"/><path d=\"M41 37.5C44.0376 37.5 46.5 35.0376 46.5 32C46.5 28.9624 44.0376 26.5 41 26.5C37.9624 26.5 35.5 28.9624 35.5 32C35.5 35.0376 37.9624 37.5 41 37.5Z\" fill=\"#DCF2FB\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"url(#dev1why-sliders-1)\"/><path d=\"M30 49.5C33.0376 49.5 35.5 47.0376 35.5 44C35.5 40.9624 33.0376 38.5 30 38.5C26.9624 38.5 24.5 40.9624 24.5 44C24.5 47.0376 26.9624 49.5 30 49.5Z\" fill=\"white\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"url(#dev1why-sliders-2)\"/><path d=\"M41 33.8C41.9941 33.8 42.8 32.9941 42.8 32C42.8 31.0059 41.9941 30.2 41 30.2C40.0059 30.2 39.2 31.0059 39.2 32C39.2 32.9941 40.0059 33.8 41 33.8Z\" fill=\"url(#dev1why-sliders-3)\"/><defs><linearGradient id=\"dev1why-sliders-0\" x1=\"19.5\" y1=\"14.5\" x2=\"27.2782\" y2=\"22.2782\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#63CDFF\"/><stop offset=\"1\" stop-color=\"#0F64A8\"/></linearGradient><linearGradient id=\"dev1why-sliders-1\" x1=\"35.5\" y1=\"26.5\" x2=\"43.2782\" y2=\"34.2782\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#63CDFF\"/><stop offset=\"1\" stop-color=\"#0F64A8\"/></linearGradient><linearGradient id=\"dev1why-sliders-2\" x1=\"24.5\" y1=\"38.5\" x2=\"32.2782\" y2=\"46.2782\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#63CDFF\"/><stop offset=\"1\" stop-color=\"#0F64A8\"/></linearGradient><linearGradient id=\"dev1why-sliders-3\" x1=\"39.2\" y1=\"30.2\" x2=\"41.7456\" y2=\"32.7456\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#63CDFF\"/><stop offset=\"1\" stop-color=\"#0F64A8\"/></linearGradient></defs></svg>",
+                "title": "مصممة لاحتياجاتك",
+                "text": "حلول مصممة لروتينات مختلفة وابتسامات مختلفة.",
+                "tile_color": "{{ settings.color_palette.background }}",
+                "tile_border_color": "{{ settings.color_palette.color2 }}",
+                "description_color": "{{ settings.color_palette.color1 }}"
+              },
+              "blocks": {}
+            },
+            "dev1_why_item_3": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 64 64\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M32 12C33.2 22.8 41.2 30.8 52 32C41.2 33.2 33.2 41.2 32 52C30.8 41.2 22.8 33.2 12 32C22.8 30.8 30.8 22.8 32 12Z\" fill=\"#DCF2FB\" fill-opacity=\"0.8\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"url(#dev1why-spark-0)\"/><path d=\"M50 44C50.4 47.2 52.9 49.7 56 50.1C52.9 50.5 50.4 53 50 56.1C49.6 53 47.1 50.5 44 50.1C47.1 49.7 49.6 47.2 50 44Z\" fill=\"white\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"#60C1E1\"/><path d=\"M14 16.2C15.215 16.2 16.2 15.215 16.2 14C16.2 12.785 15.215 11.8 14 11.8C12.785 11.8 11.8 12.785 11.8 14C11.8 15.215 12.785 16.2 14 16.2Z\" fill=\"#60C1E1\"/><defs><linearGradient id=\"dev1why-spark-0\" x1=\"12\" y1=\"12\" x2=\"40.2845\" y2=\"40.2845\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#63CDFF\"/><stop offset=\"1\" stop-color=\"#0F64A8\"/></linearGradient></defs></svg>",
+                "title": "تفاصيل تصنع الفرق",
+                "text": "خصائص مدروسة مصممة حول الاستخدام اليومي الحقيقي.",
+                "tile_color": "{{ settings.color_palette.background }}",
+                "tile_border_color": "{{ settings.color_palette.color2 }}",
+                "description_color": "{{ settings.color_palette.color1 }}"
+              },
+              "blocks": {}
+            },
+            "dev1_why_item_4": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 64 64\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M30 51C39.3888 51 47 43.3888 47 34C47 24.6112 39.3888 17 30 17C20.6112 17 13 24.6112 13 34C13 43.3888 20.6112 51 30 51Z\" fill=\"#DCF2FB\" fill-opacity=\"0.8\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"url(#dev1why-check-0)\"/><path d=\"M22.5 34.5L28 40L39 28.5\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"url(#dev1why-check-1)\"/><path d=\"M42 13.5C44.8324 15.0917 47.312 17.2419 49.2888 19.8202C51.2656 22.3986 52.6982 25.3515 53.5 28.5\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"#60C1E1\"/><path d=\"M48.3 26.3L53.5 28.5L55.6 23.4\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"#60C1E1\"/><defs><linearGradient id=\"dev1why-check-0\" x1=\"13\" y1=\"17\" x2=\"37.0419\" y2=\"41.0419\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#63CDFF\"/><stop offset=\"1\" stop-color=\"#0F64A8\"/></linearGradient><linearGradient id=\"dev1why-check-1\" x1=\"22.5\" y1=\"28.5\" x2=\"30.1292\" y2=\"39.4463\" gradientUnits=\"userSpaceOnUse\"><stop stop-color=\"#63CDFF\"/><stop offset=\"1\" stop-color=\"#0F64A8\"/></linearGradient></defs></svg>",
+                "title": "روتين أبسط",
+                "text": "وظائف ذكية بدون تعقيد غير ضروري.",
+                "tile_color": "{{ settings.color_palette.background }}",
+                "tile_border_color": "{{ settings.color_palette.color2 }}",
+                "description_color": "{{ settings.color_palette.color1 }}"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dev1_why_item_1",
+            "dev1_why_item_2",
+            "dev1_why_item_3",
+            "dev1_why_item_4"
+          ]
+        }
+      },
+      "block_order": [
+        "dev1_why_heading",
+        "dev1_why_grid"
+      ],
+      "settings": {
+        "design": "dev1",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "flex-start",
+        "gap": 26,
+        "section_width": "page-width",
+        "section_height": "",
+        "background_media": "none",
+        "background_color": "{{ settings.color_palette.snosha_pale_tint }}",
+        "toggle_overlay": false,
+        "border": "none",
+        "padding-block-start": 60,
+        "padding-block-end": 60,
+        "dev1_feature_title_color": "{{ settings.color_palette.snosha_deep_blue }}",
+        "dev1_padding_mobile_top": 60,
+        "dev1_padding_mobile_bottom": 48
+      }
+    },
+    "dev2_faq": {
+      "type": "section",
+      "name": "FAQ",
+      "blocks": {
+        "dev2_faq_header": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 6,
+            "width": "fill",
+            "width_mobile": "fill",
+            "height": "fit",
+            "background_media": "none",
+            "border": "none",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "dev2_faq_heading": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>الأسئلة الشائعة</h2>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "center",
+                "type_preset": "h2",
+                "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "dev2_faq_subtitle": {
+              "type": "text",
+              "settings": {
+                "text": "<p>إجابات سريعة عن الشحن والضمان والاسترجاع والدفع.</p>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "center",
+                "type_preset": "h5",
+                "text_color": "{{ settings.color_palette.color1 }}",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dev2_faq_heading",
+            "dev2_faq_subtitle"
+          ]
+        },
+        "dev2_faq_columns": {
+          "type": "group",
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
+            "align_baseline": false,
+            "gap": 24,
+            "width": "fill",
+            "width_mobile": "fill",
+            "height": "fit",
+            "background_media": "none",
+            "border": "none",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "dev2_faq_column_1": {
+              "type": "accordion",
+              "settings": {
+                "icon": "caret",
+                "dividers": false,
+                "type_preset": "h6",
+                "border": "none",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev2_faq_payment": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "ما طرق الدفع المتاحة؟",
+                    "open_by_default": false
+                  },
+                  "blocks": {
+                    "dev2_faq_payment_answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "text_color": "{{ settings.color_palette.color1 }}",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "dev2_faq_payment_answer"
+                  ]
+                },
+                "dev2_faq_cod": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "هل يوجد دفع عند الاستلام؟",
+                    "open_by_default": false
+                  },
+                  "blocks": {
+                    "dev2_faq_cod_answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "text_color": "{{ settings.color_palette.color1 }}",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "dev2_faq_cod_answer"
+                  ]
+                },
+                "dev2_faq_original": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "هل منتجات SNOSHA أصلية ومعتمدة؟",
+                    "open_by_default": false
+                  },
+                  "blocks": {
+                    "dev2_faq_original_answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "text_color": "{{ settings.color_palette.color1 }}",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "dev2_faq_original_answer"
+                  ]
+                }
+              },
+              "block_order": [
+                "dev2_faq_payment",
+                "dev2_faq_cod",
+                "dev2_faq_original"
+              ]
+            },
+            "dev2_faq_column_2": {
+              "type": "accordion",
+              "settings": {
+                "icon": "caret",
+                "dividers": false,
+                "type_preset": "h6",
+                "border": "none",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev2_faq_warranty": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "هل يوجد ضمان على المنتجات؟",
+                    "open_by_default": false
+                  },
+                  "blocks": {
+                    "dev2_faq_warranty_answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>نعم، جميع منتجات SNOSHA تأتي بضمان لمدة سنة ضد عيوب الصناعة.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "text_color": "{{ settings.color_palette.color1 }}",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "dev2_faq_warranty_answer"
+                  ]
+                },
+                "dev2_faq_returns": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "ما مدة الاستبدال والاسترجاع؟",
+                    "open_by_default": false
+                  },
+                  "blocks": {
+                    "dev2_faq_returns_answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "text_color": "{{ settings.color_palette.color1 }}",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "dev2_faq_returns_answer"
+                  ]
+                },
+                "dev2_faq_shipping": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "هل يوجد شحن مجاني؟",
+                    "open_by_default": false
+                  },
+                  "blocks": {
+                    "dev2_faq_shipping_answer": {
+                      "type": "text",
+                      "settings": {
+                        "text": "",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "text_color": "{{ settings.color_palette.color1 }}",
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "dev2_faq_shipping_answer"
+                  ]
+                }
+              },
+              "block_order": [
+                "dev2_faq_warranty",
+                "dev2_faq_returns",
+                "dev2_faq_shipping"
+              ]
+            }
+          },
+          "block_order": [
+            "dev2_faq_column_1",
+            "dev2_faq_column_2"
+          ]
+        }
+      },
+      "block_order": [
+        "dev2_faq_header",
+        "dev2_faq_columns"
+      ],
+      "settings": {
+        "design": "dev2",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 61,
+        "section_width": "page-width",
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 60,
+        "padding-block-end": 60,
+        "dev2_faq_border_color": "{{ settings.color_palette.color2 }}",
+        "dev2_faq_open_background": "{{ settings.color_palette.snosha_pale_tint }}",
+        "dev2_faq_icon_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+        "dev2_faq_open_first": true
+      }
     }
   },
   "order": [
@@ -3547,6 +4044,8 @@
     "dev1_reels",
     "dev2_choose_care",
     "dev3_bundle",
-    "dev4_blog"
+    "dev4_blog",
+    "dev1_why",
+    "dev2_faq"
   ]
 }
