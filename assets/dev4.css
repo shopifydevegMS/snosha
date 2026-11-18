@@ -935,3 +935,165 @@ dev4-comparison-slider {
     line-height: calc(16 / 10);
   }
 }
+
+/* ==== dev4-howto — product "09 How To Use" (sections/section.liquid Design 8 + blocks/how-to-steps.liquid) ==== */
+
+/* Section heading (native text block, h2 preset 32/52): Figma Cairo Bold (700) — the global h2 weight is
+   lighter and the text block has no weight setting; out-ranks base.css `.text-block.h2 :is(h1…h6)` (0,2,1).
+   Figma mobile 22 → nearest token. */
+.dev4-howto.dev4-howto .text-block.h2 :is(h1, h2, h3, h4, h5, h6) {
+  font-weight: 700;
+}
+
+@media screen and (max-width: 749px) {
+  .dev4-howto.dev4-howto .text-block.h2 :is(h1, h2, h3, h4, h5, h6) {
+    font-size: var(--font-size--xl);
+  }
+}
+
+/* Figma desktop "How To Use Container" is the 1376 page container with 20px inner padding (content 1336).
+   The inset only applies at full page width (content capped at page content width − 2 × 20px), so
+   narrower desktops keep the page margin like the other sections. Mobile/tablet sit on the page margin.
+   Out-ranks base.css `.spacing-style { padding-inline }` (0,1,0). */
+@media screen and (min-width: 990px) {
+  .dev4-howto.dev4-howto .section-content-wrapper {
+    padding-inline: max(0px, calc((100% - var(--page-content-width)) / 2 + var(--padding-xl)));
+  }
+}
+
+/*
+  Static panel — every step always visible, no tabs/accordion. Arabic content boundary:
+  direction rtl puts the number badge on the right in every locale; text stays start (right) aligned.
+*/
+.dev4-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+  inline-size: 100%;
+  padding-block: var(--padding-4xl) var(--padding-2xl);
+  padding-inline: var(--padding-2xl);
+  border-radius: var(--style-border-radius-lg);
+  background-color: var(--dev4-steps-bg, var(--color-background));
+  box-shadow:
+    inset 0 0 0 1px var(--dev4-steps-border, var(--color-border)),
+    0 8px 18px var(--dev4-steps-shadow, transparent);
+  direction: rtl;
+  unicode-bidi: isolate;
+  text-align: start;
+}
+
+/* Numbering: a CSS counter on the visible <li> order, so add/remove/reorder renumbers automatically. */
+.dev4-steps__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: dev4-step;
+}
+
+.dev4-steps__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-sm);
+  margin: 0;
+  counter-increment: dev4-step;
+}
+
+/* Badge: 30px circle, vertical palette gradient, aligned with the first text line. */
+.dev4-steps__item::before {
+  content: counter(dev4-step);
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  inline-size: 30px;
+  block-size: 30px;
+  border-radius: var(--style-border-radius-50);
+  background-image: linear-gradient(
+    to bottom,
+    var(--dev4-steps-badge-start, var(--color-foreground)),
+    var(--dev4-steps-badge-end, var(--color-foreground))
+  );
+  color: var(--dev4-steps-badge-text, var(--color-background));
+  font-family: var(--font-heading--family);
+  font-style: var(--font-heading--style);
+  font-weight: var(--font-heading--weight);
+  font-size: var(--font-size--sm);
+  line-height: 1;
+}
+
+.dev4-steps__text {
+  flex: 1 1 0;
+  min-inline-size: 0;
+  font-family: var(--font-body--family);
+  font-style: var(--font-body--style);
+  font-weight: var(--font-body--weight);
+  font-size: var(--font-size--md);
+  line-height: calc(28 / 16);
+  color: var(--dev4-steps-text, var(--color-foreground));
+  overflow-wrap: break-word;
+}
+
+/* Note: white card, same hairline as the panel, icon on the right (first in RTL order). */
+.dev4-steps__note {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+  padding-block: var(--padding-md);
+  padding-inline: var(--padding-xl);
+  border-radius: var(--style-border-radius-md);
+  background-color: var(--dev4-steps-note-bg, var(--color-background));
+  box-shadow: inset 0 0 0 1px var(--dev4-steps-border, var(--color-border));
+}
+
+.dev4-steps__note-icon {
+  display: block;
+  flex: 0 0 auto;
+  inline-size: 18px;
+  block-size: 18px;
+  color: var(--dev4-steps-note-icon, var(--dev4-steps-note-text, currentColor));
+  pointer-events: none;
+}
+
+.dev4-steps__note-icon :is(svg, img) {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+}
+
+.dev4-steps__note-text {
+  flex: 1 1 0;
+  min-inline-size: 0;
+  margin: 0;
+  font-family: var(--font-accent--family);
+  font-style: var(--font-accent--style);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--sm);
+  line-height: calc(24 / 14);
+  color: var(--dev4-steps-note-text, var(--color-foreground));
+  overflow-wrap: break-word;
+}
+
+/* Mobile (< 750px): Figma panel inline padding 14, text 12.5 / 28, badge 11, note 11 / 24 (nearest tokens). */
+@media screen and (max-width: 749px) {
+  .dev4-steps {
+    padding-inline: var(--padding-md);
+  }
+
+  .dev4-steps__item::before {
+    font-size: var(--font-size--2xs);
+  }
+
+  .dev4-steps__text {
+    font-size: var(--font-size--xs);
+    line-height: calc(28 / 13);
+  }
+
+  .dev4-steps__note-text {
+    font-size: var(--font-size--2xs);
+    line-height: 2;
+  }
+}

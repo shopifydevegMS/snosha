@@ -1,0 +1,182 @@
+<!-- how-to-steps.liquid -->
+{%- comment -%}
+  dev4: "How To Use" panel (product page, styles: assets/dev4.css → dev4-steps).
+  Static content — no tabs, accordion or JS: an ordered list of _how-to-step child blocks
+  (numbered by a CSS counter, so numbers follow the block order) and an optional note with an icon.
+  Icon: image override first, then the SVG code; both empty = no icon.
+{%- endcomment -%}
+
+{%- liquid
+  assign bs = block.settings
+  assign note = bs.note | strip
+-%}
+
+{%- capture steps -%}
+  {% content_for 'blocks' %}
+{%- endcapture -%}
+
+<div
+  class="dev4-steps"
+  style="
+    {%- if bs.panel_background_color != blank %}--dev4-steps-bg: {{ bs.panel_background_color }};{% endif -%}
+    {%- if bs.panel_border_color != blank %}--dev4-steps-border: {{ bs.panel_border_color }};{% endif -%}
+    {%- if bs.panel_shadow_color != blank %}--dev4-steps-shadow: rgb({{ bs.panel_shadow_color.rgba }});{% endif -%}
+    {%- if bs.badge_start_color != blank %}--dev4-steps-badge-start: {{ bs.badge_start_color }};{% endif -%}
+    {%- if bs.badge_end_color != blank %}--dev4-steps-badge-end: {{ bs.badge_end_color }};{% endif -%}
+    {%- if bs.badge_text_color != blank %}--dev4-steps-badge-text: {{ bs.badge_text_color }};{% endif -%}
+    {%- if bs.step_text_color != blank %}--dev4-steps-text: {{ bs.step_text_color }};{% endif -%}
+    {%- if bs.note_background_color != blank %}--dev4-steps-note-bg: {{ bs.note_background_color }};{% endif -%}
+    {%- if bs.note_text_color != blank %}--dev4-steps-note-text: {{ bs.note_text_color }};{% endif -%}
+    {%- if bs.note_icon_color != blank %}--dev4-steps-note-icon: {{ bs.note_icon_color }};{% endif -%}
+  "
+  {{ block.shopify_attributes }}
+>
+  {%- if steps != blank -%}
+    <ol class="dev4-steps__list" role="list">
+      {{ steps }}
+    </ol>
+  {%- endif -%}
+
+  {%- if bs.show_note and note != blank -%}
+    <div class="dev4-steps__note">
+      {%- if bs.note_icon_image != blank -%}
+        <span class="dev4-steps__note-icon" aria-hidden="true">
+          {{- bs.note_icon_image | image_url: width: 72 | image_tag: alt: '', width: 18, height: 18, loading: 'lazy' -}}
+        </span>
+      {%- elsif bs.note_icon_svg != blank -%}
+        <span class="dev4-steps__note-icon" aria-hidden="true">{{ bs.note_icon_svg }}</span>
+      {%- endif -%}
+      <p class="dev4-steps__note-text">{{ note | newline_to_br }}</p>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:dev4_settings.howto_panel",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_how-to-step"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:dev4_settings.howto_note_header"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_note",
+      "label": "t:dev4_settings.howto_show_note",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "note",
+      "label": "t:dev4_settings.howto_note"
+    },
+    {
+      "type": "html",
+      "id": "note_icon_svg",
+      "label": "t:dev4_settings.howto_note_icon_svg",
+      "info": "t:dev4_settings.icon_svg_info",
+      "default": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z\"/><path d=\"M19 17l.7 1.8 1.8.7-1.8.7L19 22l-.7-1.8-1.8-.7 1.8-.7z\"/></svg>"
+    },
+    {
+      "type": "image_picker",
+      "id": "note_icon_image",
+      "label": "t:dev4_settings.howto_note_icon_image",
+      "info": "t:dev4_settings.howto_note_icon_image_info"
+    },
+    {
+      "type": "header",
+      "content": "t:dev4_settings.howto_colors_header"
+    },
+    {
+      "type": "color",
+      "id": "panel_background_color",
+      "label": "t:dev4_settings.howto_panel_background",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "panel_border_color",
+      "label": "t:dev4_settings.howto_panel_border",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "panel_shadow_color",
+      "label": "t:dev4_settings.howto_panel_shadow",
+      "alpha": true
+    },
+    {
+      "type": "color",
+      "id": "badge_start_color",
+      "label": "t:dev4_settings.howto_badge_start",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "badge_end_color",
+      "label": "t:dev4_settings.howto_badge_end",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "t:dev4_settings.howto_badge_text",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "step_text_color",
+      "label": "t:dev4_settings.howto_step_text_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "note_background_color",
+      "label": "t:dev4_settings.howto_note_background",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "note_text_color",
+      "label": "t:dev4_settings.howto_note_text",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "note_icon_color",
+      "label": "t:dev4_settings.howto_note_icon_color",
+      "placeholder": "t:settings.default"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:dev4_settings.howto_panel",
+      "category": "t:categories.text",
+      "settings": {
+        "note": "Note"
+      },
+      "blocks": {
+        "step_1": {
+          "type": "_how-to-step",
+          "settings": {
+            "text": "Instruction"
+          }
+        },
+        "step_2": {
+          "type": "_how-to-step",
+          "settings": {
+            "text": "Instruction"
+          }
+        }
+      },
+      "block_order": ["step_1", "step_2"]
+    }
+  ]
+}
+{% endschema %}

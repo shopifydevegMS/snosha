@@ -1,0 +1,34 @@
+<!-- _how-to-step.liquid -->
+{%- comment -%}
+  dev4: one instruction of the "How To Use" panel (child of blocks/how-to-steps.liquid).
+  Rendered as an <li>; its number comes from the CSS counter in assets/dev4.css (dev4-steps),
+  so numbering follows the visible block order automatically. Empty text = the row is skipped.
+{%- endcomment -%}
+{%- assign step_text = block.settings.text | strip -%}
+{%- if step_text != blank -%}
+  <li class="dev4-steps__item" {{ block.shopify_attributes }}>
+    <span class="dev4-steps__text">{{ step_text | newline_to_br }}</span>
+  </li>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:dev4_settings.howto_step",
+  "tag": null,
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "t:dev4_settings.howto_step_text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:dev4_settings.howto_step",
+      "settings": {
+        "text": "Instruction"
+      }
+    }
+  ]
+}
+{% endschema %}
