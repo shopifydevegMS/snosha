@@ -3068,6 +3068,503 @@
         "dev2_cmp_shadow_color": "#001433"
       }
     },
+    "section_PhHrWg": {
+      "type": "section",
+      "blocks": {
+        "group_6pcT9V": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 6,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_8p8A4y": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>الأسئلة الشائعة</h2>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "center",
+                "type_preset": "h2",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_3Tj3EX": {
+              "type": "text",
+              "settings": {
+                "text": "<p>إجابات سريعة عن الشحن والضمان والاسترجاع والدفع.</p>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "center",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.color1 }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_8p8A4y",
+            "text_3Tj3EX"
+          ]
+        },
+        "group_tykVdj": {
+          "type": "group",
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 24,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "accordion_aGW6C4": {
+              "type": "accordion",
+              "settings": {
+                "icon": "caret",
+                "dividers": false,
+                "divider_color": "",
+                "type_preset": "h6",
+                "background_color": "",
+                "text_color": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "accordion_row_9wcea9": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "ما طرق الدفع المتاحة؟",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "dev1_icon_svg": ""
+                  },
+                  "blocks": {
+                    "text_6grMX9": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>نعم، جميع منتجات SNOSHA تأتي بضمان لمدة سنة ضد عيوب الصناعة.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "{{ settings.color_palette.color1 }}",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_6grMX9"
+                  ]
+                },
+                "accordion_row_6CVrgH": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "هل يوجد دفع عند الاستلام؟",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "dev1_icon_svg": ""
+                  },
+                  "blocks": {
+                    "text_rM3TTd": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>نعم، جميع منتجات SNOSHA تأتي بضمان لمدة سنة ضد عيوب الصناعة.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "{{ settings.color_palette.color1 }}",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_rM3TTd"
+                  ]
+                },
+                "accordion_row_jmUjxn": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "هل منتجات SNOSHA أصلية ومعتمدة؟",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "dev1_icon_svg": ""
+                  },
+                  "blocks": {
+                    "text_RMgKMY": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>نعم، جميع منتجات SNOSHA تأتي بضمان لمدة سنة ضد عيوب الصناعة.<br/></p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "{{ settings.color_palette.color1 }}",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_RMgKMY"
+                  ]
+                }
+              },
+              "block_order": [
+                "accordion_row_9wcea9",
+                "accordion_row_6CVrgH",
+                "accordion_row_jmUjxn"
+              ]
+            },
+            "accordion_8WbnFq": {
+              "type": "accordion",
+              "settings": {
+                "icon": "caret",
+                "dividers": false,
+                "divider_color": "",
+                "type_preset": "h6",
+                "background_color": "",
+                "text_color": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "accordion_row_mkxrCx": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "هل يوجد ضمان على المنتجات؟",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "dev1_icon_svg": ""
+                  },
+                  "blocks": {
+                    "text_3CinVD": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>نعم، جميع منتجات SNOSHA تأتي بضمان لمدة سنة ضد عيوب الصناعة.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "{{ settings.color_palette.color1 }}",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_3CinVD"
+                  ]
+                },
+                "accordion_row_hUE9aU": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "ما مدة الاستبدال والاسترجاع؟",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "dev1_icon_svg": ""
+                  },
+                  "blocks": {
+                    "text_8ebULW": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>نعم، جميع منتجات SNOSHA تأتي بضمان لمدة سنة ضد عيوب الصناعة.<br/><br/></p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "{{ settings.color_palette.color1 }}",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_8ebULW"
+                  ]
+                },
+                "accordion_row_PUXDDN": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "هل يوجد شحن مجاني؟",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "dev1_icon_svg": ""
+                  },
+                  "blocks": {
+                    "text_bBBMmc": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>نعم، جميع منتجات SNOSHA تأتي بضمان لمدة سنة ضد عيوب الصناعة.<br/><br/></p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "{{ settings.color_palette.color1 }}",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_bBBMmc"
+                  ]
+                }
+              },
+              "block_order": [
+                "accordion_row_mkxrCx",
+                "accordion_row_hUE9aU",
+                "accordion_row_PUXDDN"
+              ]
+            }
+          },
+          "block_order": [
+            "accordion_aGW6C4",
+            "accordion_8WbnFq"
+          ]
+        }
+      },
+      "block_order": [
+        "group_6pcT9V",
+        "group_tykVdj"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "design": "dev2",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 61,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "{{ settings.color_palette.background }}",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 60,
+        "padding-block-end": 60,
+        "dev4_compare_start": 50,
+        "dev4_padding_top_mobile": 56,
+        "dev4_padding_bottom_mobile": 40,
+        "dev4_shadow_color": "",
+        "dev3_padding_top_mobile": 56,
+        "dev3_padding_bottom_mobile": 40,
+        "dev1_feature_title_color": "{{ settings.color_palette.snosha_deep_blue }}",
+        "dev1_padding_mobile_top": 0,
+        "dev1_padding_mobile_bottom": 0,
+        "dev2_faq_border_color": "{{ settings.color_palette.color2 }}",
+        "dev2_faq_open_background": "{{ settings.color_palette.snosha_pale_tint }}",
+        "dev2_faq_icon_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+        "dev2_faq_open_first": true,
+        "dev4_ld_gradient_start": "{{ settings.color_palette.background }}",
+        "dev4_ld_gradient_end": "{{ settings.color_palette.color2 }}",
+        "dev4_ld_heading_color": "",
+        "dev4_ld_text_color": "",
+        "dev4_ld_icon_color": "",
+        "dev4_ld_tile_border_color": "",
+        "dev4_ld_tile_shadow": "",
+        "dev2_cmp_gradient_start": "#0e3b6b",
+        "dev2_cmp_gradient_middle": "{{ settings.color_palette.snosha_deep_blue }}",
+        "dev2_cmp_gradient_end": "#0a2e55",
+        "dev2_cmp_shadow_color": "#001433"
+      }
+    },
     "product_recommendations_qggXJq": {
       "type": "product-recommendations",
       "blocks": {
@@ -3224,6 +3721,7 @@
     "dev3_reels",
     "dev4_how_to_use",
     "dev2_reviews",
+    "section_PhHrWg",
     "product_recommendations_qggXJq"
   ]
 }
