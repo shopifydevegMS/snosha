@@ -387,6 +387,8 @@
     }
   },
   "dev1_product": {
-    "discount_badge": "خصم {{ percent }}%"
+    "discount_badge": "خصم {{ percent }}%",
+    "breadcrumb": "مسار التنقل",
+    "breadcrumb_home": "الرئيسية"
   }
 }

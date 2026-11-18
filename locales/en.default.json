@@ -387,6 +387,8 @@
     }
   },
   "dev1_product": {
-    "discount_badge": "Save {{ percent }}%"
+    "discount_badge": "Save {{ percent }}%",
+    "breadcrumb": "Breadcrumb",
+    "breadcrumb_home": "Home"
   }
 }

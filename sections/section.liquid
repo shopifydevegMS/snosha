@@ -22,6 +22,18 @@
   if section.settings.design == 'dev2'
     assign section_class = 'dev2-faq'
   endif
+  # dev4: Design 5 (product Long Description) scope class for assets/dev4.css
+  if section.settings.design == 'dev4_long'
+    assign section_class = 'dev4-ld'
+  endif
+  # dev3: Design 6 (product How To Use Video) scope class for assets/dev3.css
+  if section.settings.design == 'dev3_video'
+    assign section_class = 'dev3-howto'
+  endif
+  # dev2: Design 7 (product 06 Comparison) scope class for assets/dev2.css
+  if section.settings.design == 'dev2_compare'
+    assign section_class = 'dev2-cmp-section'
+  endif
 -%}
 
 {%- if section.settings.design == 'dev3' -%}
@@ -83,6 +95,49 @@
   {%- endif -%}
 {%- endif -%}
 
+{%- if section.settings.design == 'dev4_long' -%}
+  {%- comment -%} dev4: per-instance colors for assets/dev4.css (Design 5 — product Long Description) {%- endcomment -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} {
+      {%- if section.settings.dev4_ld_gradient_start != blank %} --dev4-ld-gradient-start: {{ section.settings.dev4_ld_gradient_start }};{% endif %}
+      {%- if section.settings.dev4_ld_gradient_end != blank %} --dev4-ld-gradient-end: {{ section.settings.dev4_ld_gradient_end }};{% endif %}
+      {%- if section.settings.dev4_ld_heading_color != blank %} --dev4-ld-heading: {{ section.settings.dev4_ld_heading_color }};{% endif %}
+      {%- if section.settings.dev4_ld_text_color != blank %} --dev4-ld-text: {{ section.settings.dev4_ld_text_color }};{% endif %}
+      {%- if section.settings.dev4_ld_icon_color != blank %} --dev4-ld-icon: {{ section.settings.dev4_ld_icon_color }};{% endif %}
+      {%- if section.settings.dev4_ld_tile_border_color != blank %} --dev4-ld-tile-border: {{ section.settings.dev4_ld_tile_border_color }};{% endif %}
+      {%- if section.settings.dev4_ld_tile_shadow != blank %} --dev4-ld-tile-shadow: rgb({{ section.settings.dev4_ld_tile_shadow.rgba }});{% endif %}
+    }
+  {%- endstyle -%}
+{%- endif -%}
+
+{%- if section.settings.design == 'dev3_video' -%}
+  {%- comment -%} dev3: palette colors for assets/dev3.css (Design 6 — How To Use Video) {%- endcomment -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} {
+      --dev3-howto-button: {{ settings.color_palette.background }};
+      --dev3-howto-icon: {{ settings.color_palette.snosha_secondary_blue | default: settings.color_palette.foreground }};
+      --dev3-howto-shade-rgb: {{ settings.color_palette.snosha_deep_blue.rgb | default: settings.color_palette.foreground.rgb }};
+    }
+  {%- endstyle -%}
+{%- endif -%}
+
+{%- if section.settings.design == 'dev2_compare' -%}
+  {%- comment -%} dev2: background gradient, shadow and palette colors for assets/dev2.css (Design 7 — 06 Comparison) {%- endcomment -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} {
+      {%- if section.settings.dev2_cmp_gradient_start != blank %} --dev2-cmp-bg-start: {{ section.settings.dev2_cmp_gradient_start }};{% endif %}
+      {%- if section.settings.dev2_cmp_gradient_middle != blank %} --dev2-cmp-bg-middle: {{ section.settings.dev2_cmp_gradient_middle }};{% endif %}
+      {%- if section.settings.dev2_cmp_gradient_end != blank %} --dev2-cmp-bg-end: {{ section.settings.dev2_cmp_gradient_end }};{% endif %}
+      {%- if section.settings.dev2_cmp_shadow_color != blank %} --dev2-cmp-shadow-rgb: {{ section.settings.dev2_cmp_shadow_color.rgb }};{% endif %}
+      --dev2-cmp-light-rgb: {{ settings.color_palette.background.rgb }};
+      --dev2-cmp-tint: {{ settings.color_palette.snosha_pale_tint | default: settings.color_palette.background }};
+      --dev2-cmp-strong: {{ settings.color_palette.snosha_deep_blue | default: settings.color_palette.foreground }};
+      --dev2-cmp-line-rgb: {{ settings.color_palette.snosha_secondary_blue.rgb | default: settings.color_palette.foreground.rgb }};
+      --dev2-cmp-glow-rgb: {{ settings.color_palette.snosha_gradient_start.rgb | default: settings.color_palette.background.rgb }};
+    }
+  {%- endstyle -%}
+{%- endif -%}
+
 {% render 'section',
   section: section,
   children: children,
@@ -134,6 +189,18 @@
         {
           "value": "dev2",
           "label": "t:dev2_settings.design_4"
+        },
+        {
+          "value": "dev4_long",
+          "label": "t:dev4_settings.design_5"
+        },
+        {
+          "value": "dev3_video",
+          "label": "t:dev3_settings.design_6"
+        },
+        {
+          "value": "dev2_compare",
+          "label": "t:dev2_settings.design_7"
         }
       ],
       "default": "default"
@@ -688,6 +755,95 @@
       "info": "t:dev2_settings.faq_open_first_info",
       "default": false,
       "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:dev4_settings.ld_section_header",
+      "visible_if": "{{ section.settings.design == 'dev4_long' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_ld_gradient_start",
+      "label": "t:dev4_settings.ld_gradient_start",
+      "default": "{{ settings.color_palette.background }}",
+      "visible_if": "{{ section.settings.design == 'dev4_long' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_ld_gradient_end",
+      "label": "t:dev4_settings.ld_gradient_end",
+      "default": "{{ settings.color_palette.color2 }}",
+      "visible_if": "{{ section.settings.design == 'dev4_long' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_ld_heading_color",
+      "label": "t:dev4_settings.ld_heading_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4_long' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_ld_text_color",
+      "label": "t:dev4_settings.ld_text_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4_long' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_ld_icon_color",
+      "label": "t:dev4_settings.ld_icon_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4_long' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_ld_tile_border_color",
+      "label": "t:dev4_settings.tile_border_color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4_long' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev4_ld_tile_shadow",
+      "label": "t:dev4_settings.ld_tile_shadow",
+      "alpha": true,
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.design == 'dev4_long' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:dev2_settings.cmp_header",
+      "info": "t:dev2_settings.cmp_info",
+      "visible_if": "{{ section.settings.design == 'dev2_compare' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_cmp_gradient_start",
+      "label": "t:dev2_settings.cmp_gradient_start",
+      "default": "#0E3B6B",
+      "visible_if": "{{ section.settings.design == 'dev2_compare' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_cmp_gradient_middle",
+      "label": "t:dev2_settings.cmp_gradient_middle",
+      "default": "{{ settings.color_palette.snosha_deep_blue }}",
+      "visible_if": "{{ section.settings.design == 'dev2_compare' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_cmp_gradient_end",
+      "label": "t:dev2_settings.cmp_gradient_end",
+      "default": "#0A2E55",
+      "visible_if": "{{ section.settings.design == 'dev2_compare' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev2_cmp_shadow_color",
+      "label": "t:dev2_settings.cmp_shadow_color",
+      "default": "#001433",
+      "visible_if": "{{ section.settings.design == 'dev2_compare' }}"
     }
   ],
   "presets": [

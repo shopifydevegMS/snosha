@@ -11,6 +11,15 @@
     "main": {
       "type": "product-information",
       "blocks": {
+        "dev1_breadcrumbs": {
+          "type": "breadcrumbs",
+          "settings": {
+            "home_label": "الرئيسية",
+            "show_collection": true,
+            "text_color": "{{ settings.color_palette.color1 }}"
+          },
+          "blocks": {}
+        },
         "disclosures_g9mWze": {
           "type": "disclosures",
           "name": "t:names.disclosures",
@@ -34,23 +43,27 @@
           "type": "_product-media-gallery",
           "static": true,
           "settings": {
-            "media_presentation": "grid",
+            "media_presentation": "carousel",
             "media_columns": "two",
             "image_gap": 4,
             "large_first_image": false,
-            "slideshow_controls_style": "counter",
-            "slideshow_mobile_controls_style": "dots",
-            "thumbnail_position": "right",
-            "thumbnail_width": 44,
-            "thumbnail_radius": 0,
-            "aspect_ratio": "adapt",
-            "constrain_to_viewport": true,
+            "icons_style": "arrow",
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "thumbnails",
+            "thumbnail_position": "bottom",
+            "thumbnail_width": 72,
+            "thumbnail_radius": 14,
+            "aspect_ratio": "1",
+            "constrain_to_viewport": false,
             "media_fit": "contain",
-            "media_radius": 0,
+            "media_radius": 28,
             "extend_media": false,
             "zoom": true,
             "video_loop": false,
             "hide_variants": true,
+            "dev1_badge_text": "الأكثر مبيعًا",
+            "dev1_badge_tag": "best-seller",
+            "dev1_zoom_icon_svg": "<svg viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M14 7.5C14 11.09 11.09 14 7.5 14C3.91 14 1 11.09 1 7.5C1 3.91 3.91 1 7.5 1C11.09 1 14 3.91 14 7.5Z' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/><path d='M16.5 16.5L12.2 12.2' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -68,7 +81,7 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "details_position": "flex-start",
-            "gap": 28,
+            "gap": 20,
             "sticky_details_desktop": true,
             "background_media": "none",
             "background_color": "",
@@ -79,8 +92,8 @@
             "border_opacity": 100,
             "border_color": "",
             "border_radius": 0,
-            "padding-block-start": 24,
-            "padding-block-end": 24,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
@@ -96,7 +109,7 @@
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
-                "gap": 12,
+                "gap": 20,
                 "width": "fill",
                 "custom_width": 100,
                 "width_mobile": "fill",
@@ -124,22 +137,34 @@
                 "padding-inline-end": 0
               },
               "blocks": {
+                "dev1_rating": {
+                  "type": "review",
+                  "settings": {
+                    "stars_style": "shaded",
+                    "show_number": false,
+                    "text_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                    "type_preset": "paragraph",
+                    "width": "100%",
+                    "alignment": "left"
+                  },
+                  "blocks": {}
+                },
                 "text_xrnftG": {
                   "type": "text",
                   "name": "t:names.product_title",
                   "settings": {
                     "text": "<h1>{{ closest.product.title }}</h1>",
                     "width": "100%",
-                    "max_width": "normal",
+                    "max_width": "none",
                     "alignment": "left",
-                    "type_preset": "h3",
+                    "type_preset": "h1",
                     "font": "var(--font-body--family)",
                     "font_size": "1rem",
                     "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
                     "wrap": "pretty",
-                    "text_color": "",
+                    "text_color": "{{ settings.color_palette.snosha_secondary_blue }}",
                     "background": false,
                     "background_color": "#00000026",
                     "corner_radius": 0,
@@ -156,6 +181,7 @@
                     "show_sale_price_first": true,
                     "show_installments": false,
                     "show_tax_info": false,
+                    "dev1_show_discount": true,
                     "type_preset": "paragraph",
                     "width": "100%",
                     "alignment": "left",
@@ -174,13 +200,143 @@
                 }
               },
               "block_order": [
+                "dev1_rating",
                 "text_xrnftG",
                 "price_tVjtKg"
+              ]
+            },
+            "dev1_offer": {
+              "type": "spec-badge",
+              "name": "Offer",
+              "settings": {
+                "layout": "badge",
+                "label": "وفّر 10% عند شراء فرشتين معًا",
+                "icon_svg": "<svg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><g stroke='currentColor' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'><path d='M14 8C14 11.31 11.31 14 8 14C4.69 14 2 11.31 2 8C2 4.69 4.69 2 8 2C11.31 2 14 4.69 14 8Z'/><path d='M5.73 10.27L10.27 5.73'/><path d='M7.13 6.27C7.13 6.75 6.75 7.13 6.27 7.13C5.79 7.13 5.4 6.75 5.4 6.27C5.4 5.79 5.79 5.4 6.27 5.4C6.75 5.4 7.13 5.79 7.13 6.27Z'/><path d='M10.6 9.73C10.6 10.21 10.21 10.6 9.73 10.6C9.25 10.6 8.87 10.21 8.87 9.73C8.87 9.25 9.25 8.87 9.73 8.87C10.21 8.87 10.6 9.25 10.6 9.73Z'/></g></svg>",
+                "text_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                "background_color": "{{ settings.color_palette.snosha_pale_tint }}",
+                "border_color": "{{ settings.color_palette.snosha_secondary_blue }}"
+              },
+              "blocks": {}
+            },
+            "dev1_benefits": {
+              "type": "group",
+              "name": "Benefits",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 8,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev1_benefit_1": {
+                  "type": "spec-badge",
+                  "settings": {
+                    "layout": "row",
+                    "label": "سهلة الاستخدام من أول يوم",
+                    "icon_svg": "<svg viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 10.33L7.86 13L15 7' stroke='currentColor' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+                    "text_color": "{{ settings.color_palette.foreground }}",
+                    "icon_color": "{{ settings.color_palette.snosha_secondary_blue }}"
+                  },
+                  "blocks": {}
+                },
+                "dev1_benefit_2": {
+                  "type": "spec-badge",
+                  "settings": {
+                    "layout": "row",
+                    "label": "تنظيف أعمق بـ42,000 اهتزازة/دقيقة",
+                    "icon_svg": "<svg viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 10.33L7.86 13L15 7' stroke='currentColor' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+                    "text_color": "{{ settings.color_palette.foreground }}",
+                    "icon_color": "{{ settings.color_palette.snosha_secondary_blue }}"
+                  },
+                  "blocks": {}
+                },
+                "dev1_benefit_3": {
+                  "type": "spec-badge",
+                  "settings": {
+                    "layout": "row",
+                    "label": "بطارية واحدة تدوم حتى 120 يوم",
+                    "icon_svg": "<svg viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 10.33L7.86 13L15 7' stroke='currentColor' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+                    "text_color": "{{ settings.color_palette.foreground }}",
+                    "icon_color": "{{ settings.color_palette.snosha_secondary_blue }}"
+                  },
+                  "blocks": {}
+                },
+                "dev1_benefit_4": {
+                  "type": "spec-badge",
+                  "settings": {
+                    "layout": "row",
+                    "label": "مقاومة تمامًا للماء (IPX7)",
+                    "icon_svg": "<svg viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 10.33L7.86 13L15 7' stroke='currentColor' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+                    "text_color": "{{ settings.color_palette.foreground }}",
+                    "icon_color": "{{ settings.color_palette.snosha_secondary_blue }}"
+                  },
+                  "blocks": {}
+                },
+                "dev1_benefit_5": {
+                  "type": "spec-badge",
+                  "settings": {
+                    "layout": "row",
+                    "label": "5 أوضاع تناسب كل احتياج",
+                    "icon_svg": "<svg viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 10.33L7.86 13L15 7' stroke='currentColor' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+                    "text_color": "{{ settings.color_palette.foreground }}",
+                    "icon_color": "{{ settings.color_palette.snosha_secondary_blue }}"
+                  },
+                  "blocks": {}
+                },
+                "dev1_benefit_6": {
+                  "type": "spec-badge",
+                  "settings": {
+                    "layout": "row",
+                    "label": "ضمان سنة كاملة",
+                    "icon_svg": "<svg viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 10.33L7.86 13L15 7' stroke='currentColor' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+                    "text_color": "{{ settings.color_palette.foreground }}",
+                    "icon_color": "{{ settings.color_palette.snosha_secondary_blue }}"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "dev1_benefit_1",
+                "dev1_benefit_2",
+                "dev1_benefit_3",
+                "dev1_benefit_4",
+                "dev1_benefit_5",
+                "dev1_benefit_6"
               ]
             },
             "divider_VJhene": {
               "type": "_divider",
               "name": "t:names.divider",
+              "disabled": true,
               "settings": {
                 "thickness": 1,
                 "corner_radius": "square",
@@ -195,8 +351,8 @@
               "type": "variant-picker",
               "settings": {
                 "variant_style": "buttons",
-                "show_swatches": false,
-                "option_label_text_color": "",
+                "show_swatches": true,
+                "option_label_text_color": "{{ settings.color_palette.snosha_deep_blue }}",
                 "variant_style_class": "default",
                 "custom_variant_background": "{{ settings.color_palette.background }}",
                 "custom_variant_text": "{{ settings.color_palette.foreground }}",
@@ -216,7 +372,7 @@
             "buy_buttons_eYQEYi": {
               "type": "buy-buttons",
               "settings": {
-                "stacking": true,
+                "stacking": false,
                 "text_color": "",
                 "show_pickup_availability": false,
                 "gift_card_form": true,
@@ -260,7 +416,8 @@
                     "style_class": "button",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
                     "custom_button_text": "{{ settings.color_palette.background }}",
-                    "custom_button_border": "{{ settings.color_palette.background }}"
+                    "custom_button_border": "{{ settings.color_palette.background }}",
+                    "dev1_label": "أضف إلى السلة"
                   },
                   "blocks": {}
                 },
@@ -273,9 +430,242 @@
               },
               "block_order": []
             },
+            "dev1_trust": {
+              "type": "group",
+              "name": "Trust badges",
+              "settings": {
+                "content_direction": "row",
+                "vertical_on_mobile": false,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 8,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev1_trust_1": {
+                  "type": "spec-badge",
+                  "settings": {
+                    "layout": "badge",
+                    "label": "ضمان لمدة سنة علي الآجهزة",
+                    "icon_svg": "<svg viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9 1.88L14.63 4.13V8.03C14.63 12.08 11.78 14.78 9 15.75C6.23 14.78 3.38 12.08 3.38 8.03V4.13L9 1.88Z' fill='white' fill-opacity='.75' stroke='#176BB0' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/><path d='M6.45 8.93L8.25 10.73L11.7 7.13' stroke='#176BB0' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+                    "text_color": "{{ settings.color_palette.foreground }}",
+                    "background_color": "{{ settings.color_palette.background }}",
+                    "border_color": "{{ settings.color_palette.color2 }}",
+                    "icon_background_start": "{{ settings.color_palette.color2 }}",
+                    "icon_background_end": "{{ settings.color_palette.snosha_pale_tint }}"
+                  },
+                  "blocks": {}
+                },
+                "dev1_trust_2": {
+                  "type": "spec-badge",
+                  "settings": {
+                    "layout": "badge",
+                    "label": "استبدال واسترجاع خلال 7 أيام",
+                    "icon_svg": "<svg viewBox='0 0 14.5 15.49' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9.13 6.91L8.12 7.07C8 7.08 7.9 6.99 7.9 6.88L7.91 4.65C7.91 4.07 7.14 3.88 6.87 4.39L4.6 8.64C4.39 9.05 4.72 9.52 5.17 9.45L6.18 9.29C6.3 9.28 6.4 9.37 6.4 9.48L6.39 11.71C6.39 12.29 7.16 12.48 7.43 11.97L9.7 7.72C9.92 7.31 9.58 6.84 9.13 6.91Z' fill='#156BAF'/><path d='M1.2 8.18C1.2 4.91 3.86 2.24 7.13 2.24H8.73V2.86C8.73 3.02 8.81 3.17 8.95 3.25C9.02 3.28 9.09 3.3 9.16 3.3C9.25 3.3 9.33 3.28 9.4 3.23L11.3 2.02C11.42 1.94 11.5 1.8 11.5 1.65C11.5 1.5 11.42 1.36 11.3 1.28L9.4 .07C9.26 -.02 9.09 -.02 8.95 .05C8.81 .13 8.72 .28 8.72 .44V1.06H7.13C3.2 1.06 0 4.25 0 8.18C0 8.51 .27 8.78 .6 8.78C.93 8.78 1.19 8.51 1.19 8.18L1.2 8.18Z' fill='#156BAF'/><g stroke='#156BAF' stroke-width='.5' stroke-miterlimit='10'><path d='M14.12 6.73C14.06 6.44 13.81 6.25 13.53 6.25C13.49 6.25 13.45 6.25 13.41 6.26C13.09 6.33 12.89 6.65 12.95 6.97C13 7.22 13.04 7.48 13.06 7.73C13.08 8.04 13.34 8.29 13.65 8.29H13.7C14.02 8.26 14.27 7.97 14.25 7.65C14.23 7.34 14.18 7.03 14.12 6.73H14.12Z'/><path d='M12.19 5.06C12.35 5.33 12.74 5.43 13.01 5.26C13.14 5.18 13.24 5.04 13.27 4.89C13.31 4.73 13.28 4.57 13.2 4.44C13.04 4.18 12.86 3.92 12.66 3.68C12.56 3.56 12.42 3.48 12.26 3.46C12.24 3.46 12.22 3.46 12.2 3.46C12.06 3.46 11.93 3.51 11.82 3.59C11.69 3.69 11.62 3.84 11.6 4C11.58 4.16 11.63 4.31 11.73 4.43C11.89 4.63 12.04 4.85 12.18 5.06H12.19Z'/><path d='M13.58 9.37C13.53 9.35 13.48 9.35 13.43 9.35C13.16 9.35 12.92 9.52 12.85 9.78C12.78 10.03 12.7 10.27 12.59 10.51C12.47 10.82 12.61 11.16 12.91 11.3C13.2 11.43 13.56 11.28 13.69 10.98C13.81 10.7 13.92 10.41 14 10.11C14.04 9.95 14.02 9.79 13.94 9.65C13.87 9.51 13.74 9.41 13.58 9.37Z'/><path d='M11.91 12.04C11.73 12.05 11.58 12.12 11.47 12.23C11.3 12.42 11.11 12.6 10.91 12.76C10.65 12.97 10.61 13.35 10.82 13.6C11.03 13.84 11.42 13.88 11.66 13.68C11.9 13.48 12.13 13.27 12.34 13.05C12.56 12.81 12.55 12.43 12.31 12.2C12.2 12.1 12.05 12.04 11.91 12.04Z'/><path d='M6.32 14.06C6.07 14.02 5.81 13.97 5.56 13.9C5.51 13.89 5.46 13.88 5.41 13.88C5.3 13.88 5.2 13.91 5.11 13.96C4.97 14.04 4.87 14.16 4.83 14.32C4.75 14.64 4.93 14.97 5.25 15.05C5.55 15.13 5.85 15.19 6.16 15.24C6.49 15.28 6.79 15.05 6.83 14.73C6.85 14.57 6.82 14.41 6.72 14.28C6.62 14.16 6.48 14.07 6.32 14.06Z'/><path d='M3.11 12.54C3 12.44 2.85 12.38 2.7 12.38C2.52 12.39 2.37 12.45 2.26 12.57C2.16 12.69 2.1 12.84 2.1 13C2.11 13.16 2.18 13.31 2.3 13.42C2.52 13.63 2.76 13.83 3.02 14C3.28 14.19 3.67 14.12 3.85 13.86C4.04 13.59 3.97 13.22 3.71 13.03C3.5 12.88 3.3 12.72 3.11 12.54Z'/><path d='M1.55 10.2C1.5 10.05 1.39 9.93 1.24 9.86C1.16 9.82 1.08 9.8 .99 9.8C.92 9.8 .85 9.82 .79 9.84C.48 9.95 .32 10.29 .43 10.6C.54 10.89 .66 11.18 .81 11.46C.95 11.74 1.32 11.86 1.61 11.71C1.9 11.56 2.02 11.2 1.86 10.9C1.75 10.68 1.64 10.44 1.55 10.2Z'/><path d='M9.58 13.8C9.49 13.76 9.41 13.74 9.32 13.74C9.25 13.74 9.19 13.75 9.12 13.77C8.87 13.86 8.62 13.93 8.38 13.98C8.22 14.01 8.08 14.1 8 14.24C7.91 14.37 7.88 14.53 7.92 14.69C7.99 15 8.31 15.21 8.62 15.15C8.93 15.08 9.23 15 9.52 14.89C9.67 14.84 9.79 14.73 9.86 14.59C9.93 14.44 9.94 14.28 9.88 14.13C9.83 13.98 9.72 13.86 9.58 13.8Z'/></g></svg>",
+                    "text_color": "{{ settings.color_palette.foreground }}",
+                    "background_color": "{{ settings.color_palette.background }}",
+                    "border_color": "{{ settings.color_palette.color2 }}",
+                    "icon_background_start": "{{ settings.color_palette.color2 }}",
+                    "icon_background_end": "{{ settings.color_palette.snosha_pale_tint }}"
+                  },
+                  "blocks": {}
+                },
+                "dev1_trust_3": {
+                  "type": "spec-badge",
+                  "settings": {
+                    "layout": "badge",
+                    "label": "شحن مجاني من 2000 جنيه",
+                    "icon_svg": "<svg viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'><g stroke='#176BB0' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M3 6.15L9 3.38L15 6.15V12.08L9 14.85L3 12.08V6.15Z' fill='white' fill-opacity='.6'/><path d='M3 6.15L9 8.85L15 6.15'/><path d='M9 8.85V14.78'/></g><path d='M14.85 1.95L15.3 3.08L16.43 3.53L15.3 3.98L14.85 5.1L14.4 3.98L13.28 3.53L14.4 3.08L14.85 1.95Z' fill='#60C1E1'/></svg>",
+                    "text_color": "{{ settings.color_palette.foreground }}",
+                    "background_color": "{{ settings.color_palette.background }}",
+                    "border_color": "{{ settings.color_palette.color2 }}",
+                    "icon_background_start": "{{ settings.color_palette.color2 }}",
+                    "icon_background_end": "{{ settings.color_palette.snosha_pale_tint }}"
+                  },
+                  "blocks": {}
+                },
+                "dev1_trust_4": {
+                  "type": "spec-badge",
+                  "settings": {
+                    "layout": "badge",
+                    "label": "الدفع عند الاستلام",
+                    "icon_svg": "<svg viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'><g stroke='#176BB0' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M4.5 4.88H13.5C14.74 4.88 15.75 5.88 15.75 7.13V12.38C15.75 13.62 14.74 14.63 13.5 14.63H4.5C3.26 14.63 2.25 13.62 2.25 12.38V7.13C2.25 5.88 3.26 4.88 4.5 4.88Z' fill='#DCF2FB' fill-opacity='.6'/><path d='M2.25 7.5H15.75'/></g><path d='M12.38 12.15C12.95 12.15 13.43 11.68 13.43 11.1C13.43 10.52 12.95 10.05 12.38 10.05C11.8 10.05 11.33 10.52 11.33 11.1C11.33 11.68 11.8 12.15 12.38 12.15Z' fill='#176BB0'/></svg>",
+                    "text_color": "{{ settings.color_palette.foreground }}",
+                    "background_color": "{{ settings.color_palette.background }}",
+                    "border_color": "{{ settings.color_palette.color2 }}",
+                    "icon_background_start": "{{ settings.color_palette.color2 }}",
+                    "icon_background_end": "{{ settings.color_palette.snosha_pale_tint }}"
+                  },
+                  "blocks": {}
+                },
+                "dev1_trust_5": {
+                  "type": "spec-badge",
+                  "settings": {
+                    "layout": "badge",
+                    "label": "شحن مجاني عند الدفع أونلاين",
+                    "icon_svg": "<svg viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'><g stroke='#176BB0' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'><path d='M2.25 3H3.75L5.55 11.25H13.8L15.3 6H5.25'/><circle cx='6.75' cy='14.25' r='1.13'/><circle cx='12.75' cy='14.25' r='1.13'/></g></svg>",
+                    "text_color": "{{ settings.color_palette.foreground }}",
+                    "background_color": "{{ settings.color_palette.background }}",
+                    "border_color": "{{ settings.color_palette.color2 }}",
+                    "icon_background_start": "{{ settings.color_palette.color2 }}",
+                    "icon_background_end": "{{ settings.color_palette.snosha_pale_tint }}"
+                  },
+                  "blocks": {}
+                },
+                "dev1_trust_6": {
+                  "type": "spec-badge",
+                  "settings": {
+                    "layout": "badge",
+                    "label": "توصيل سريع لجميع أنحاء مصر",
+                    "icon_svg": "<svg viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'><g stroke='#176BB0' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M3 5.48H10.65V11.93H4.65' fill='white' fill-opacity='.55'/><path d='M10.65 7.73H13.28L15.38 9.82V11.93H10.65V7.73Z'/><circle cx='6.15' cy='13.58' r='1.35' fill='white'/><circle cx='12.45' cy='13.58' r='1.35' fill='white'/></g><path d='M.9 7.65H3.15M.6 9.9H3.15' stroke='#60C1E1' stroke-width='1.7' stroke-linecap='round'/></svg>",
+                    "text_color": "{{ settings.color_palette.foreground }}",
+                    "background_color": "{{ settings.color_palette.background }}",
+                    "border_color": "{{ settings.color_palette.color2 }}",
+                    "icon_background_start": "{{ settings.color_palette.color2 }}",
+                    "icon_background_end": "{{ settings.color_palette.snosha_pale_tint }}"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "dev1_trust_1",
+                "dev1_trust_2",
+                "dev1_trust_3",
+                "dev1_trust_4",
+                "dev1_trust_5",
+                "dev1_trust_6"
+              ]
+            },
+            "dev1_routine_title": {
+              "type": "text",
+              "name": "Complete your routine",
+              "settings": {
+                "text": "<p>كمّل روتينك</p>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-accent--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "dev1_routine": {
+              "type": "group",
+              "name": "Routine products",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 10,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev1_upsell_1": {
+                  "type": "reel-product",
+                  "settings": {
+                    "product": "",
+                    "title_color": "{{ settings.color_palette.foreground }}",
+                    "price_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                    "thumbnail_border": "{{ settings.color_palette.color2 }}",
+                    "subtitle": "روتين كامل لسنة من الاستخدام",
+                    "background_color": "{{ settings.color_palette.snosha_pale_tint }}",
+                    "show_add_button": true,
+                    "add_icon_svg": "<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M12 3.5V20.5M3.5 12H20.5' stroke='currentColor' stroke-width='1.6' stroke-linecap='round'/></svg>"
+                  },
+                  "blocks": {}
+                },
+                "dev1_upsell_2": {
+                  "type": "reel-product",
+                  "settings": {
+                    "product": "snosha-tongue-cleaner",
+                    "title_color": "{{ settings.color_palette.foreground }}",
+                    "price_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                    "thumbnail_border": "{{ settings.color_palette.color2 }}",
+                    "subtitle": "عناية متكاملة بالفم واللسان",
+                    "background_color": "{{ settings.color_palette.snosha_pale_tint }}",
+                    "show_add_button": true,
+                    "add_icon_svg": "<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M12 3.5V20.5M3.5 12H20.5' stroke='currentColor' stroke-width='1.6' stroke-linecap='round'/></svg>"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "dev1_upsell_1",
+                "dev1_upsell_2"
+              ]
+            },
             "text_aEtTtq": {
               "type": "text",
               "name": "t:names.product_description",
+              "disabled": true,
               "settings": {
                 "text": "{{ closest.product.description }}",
                 "width": "100%",
@@ -298,30 +688,1021 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "dev1_policies_title": {
+              "type": "text",
+              "name": "Description and policies",
+              "settings": {
+                "text": "<p>الوصف والسياسات</p>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-accent--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.foreground }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "dev1_accordion": {
+              "type": "accordion",
+              "settings": {
+                "icon": "caret",
+                "dividers": false,
+                "divider_color": "",
+                "type_preset": "paragraph",
+                "background_color": "",
+                "text_color": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev1_acc_description": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "الوصف",
+                    "open_by_default": true,
+                    "icon": "none",
+                    "width": 20,
+                    "dev1_icon_svg": "<svg viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'><g stroke='#176BB0' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M5.63 2.25H10.5L13.5 5.25V15C13.5 15.3 13.38 15.58 13.17 15.8C12.96 16.01 12.67 16.13 12.38 16.13H5.63C5.33 16.13 5.04 16.01 4.83 15.8C4.62 15.58 4.5 15.3 4.5 15V3.38C4.5 3.08 4.62 2.79 4.83 2.58C5.04 2.37 5.33 2.25 5.63 2.25Z' fill='#DCF2FB' fill-opacity='.6'/><path d='M10.5 2.25V5.25H13.5'/><path d='M7.13 9H10.88M7.13 11.63H10.88'/></g></svg>"
+                  },
+                  "blocks": {
+                    "dev1_acc_description_text": {
+                      "type": "text",
+                      "settings": {
+                        "text": "{{ closest.product.description }}",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "dev1_acc_description_text"
+                  ]
+                },
+                "dev1_acc_suitable": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "مناسبة لمين؟",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "dev1_icon_svg": "<svg viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M5 10.33L7.86 13L15 7' stroke='currentColor' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'/></svg>"
+                  },
+                  "blocks": {
+                    "dev1_acc_suitable_text": {
+                      "type": "text",
+                      "settings": {
+                        "text": "",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "dev1_acc_suitable_text"
+                  ]
+                },
+                "dev1_acc_not_suitable": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "غير مناسبة لمين؟",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "dev1_icon_svg": "<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M6 6.09L18 18.09M18 6.09L6 18.09' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>"
+                  },
+                  "blocks": {
+                    "dev1_acc_not_suitable_text": {
+                      "type": "text",
+                      "settings": {
+                        "text": "",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "dev1_acc_not_suitable_text"
+                  ]
+                },
+                "dev1_acc_shipping": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "الشحن والتوصيل",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "dev1_icon_svg": "<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g stroke='#176BB0' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M4 7.3H14.2V15.9H6.2' fill='white' fill-opacity='.55'/><path d='M14.2 10.3H17.7L20.5 13.1V15.9H14.2V10.3Z'/><circle cx='8.2' cy='18.1' r='1.8' fill='white'/><circle cx='16.6' cy='18.1' r='1.8' fill='white'/></g><path d='M1.2 10.2H4.2M.8 13.2H4.2' stroke='#60C1E1' stroke-width='1.7' stroke-linecap='round'/></svg>"
+                  },
+                  "blocks": {
+                    "dev1_acc_shipping_text": {
+                      "type": "text",
+                      "settings": {
+                        "text": "",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "dev1_acc_shipping_text"
+                  ]
+                },
+                "dev1_acc_returns": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "الاستبدال والاسترجاع",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "dev1_icon_svg": "<svg viewBox='0 0 14.5 15.49' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M9.13 6.91L8.12 7.07C8 7.08 7.9 6.99 7.9 6.88L7.91 4.65C7.91 4.07 7.14 3.88 6.87 4.39L4.6 8.64C4.39 9.05 4.72 9.52 5.17 9.45L6.18 9.29C6.3 9.28 6.4 9.37 6.4 9.48L6.39 11.71C6.39 12.29 7.16 12.48 7.43 11.97L9.7 7.72C9.92 7.31 9.58 6.84 9.13 6.91Z' fill='#156BAF'/><path d='M1.2 8.18C1.2 4.91 3.86 2.24 7.13 2.24H8.73V2.86C8.73 3.02 8.81 3.17 8.95 3.25C9.02 3.28 9.09 3.3 9.16 3.3C9.25 3.3 9.33 3.28 9.4 3.23L11.3 2.02C11.42 1.94 11.5 1.8 11.5 1.65C11.5 1.5 11.42 1.36 11.3 1.28L9.4 .07C9.26 -.02 9.09 -.02 8.95 .05C8.81 .13 8.72 .28 8.72 .44V1.06H7.13C3.2 1.06 0 4.25 0 8.18C0 8.51 .27 8.78 .6 8.78C.93 8.78 1.19 8.51 1.19 8.18L1.2 8.18Z' fill='#156BAF'/><g stroke='#156BAF' stroke-width='.5' stroke-miterlimit='10'><path d='M14.12 6.73C14.06 6.44 13.81 6.25 13.53 6.25C13.49 6.25 13.45 6.25 13.41 6.26C13.09 6.33 12.89 6.65 12.95 6.97C13 7.22 13.04 7.48 13.06 7.73C13.08 8.04 13.34 8.29 13.65 8.29H13.7C14.02 8.26 14.27 7.97 14.25 7.65C14.23 7.34 14.18 7.03 14.12 6.73H14.12Z'/><path d='M12.19 5.06C12.35 5.33 12.74 5.43 13.01 5.26C13.14 5.18 13.24 5.04 13.27 4.89C13.31 4.73 13.28 4.57 13.2 4.44C13.04 4.18 12.86 3.92 12.66 3.68C12.56 3.56 12.42 3.48 12.26 3.46C12.24 3.46 12.22 3.46 12.2 3.46C12.06 3.46 11.93 3.51 11.82 3.59C11.69 3.69 11.62 3.84 11.6 4C11.58 4.16 11.63 4.31 11.73 4.43C11.89 4.63 12.04 4.85 12.18 5.06H12.19Z'/><path d='M13.58 9.37C13.53 9.35 13.48 9.35 13.43 9.35C13.16 9.35 12.92 9.52 12.85 9.78C12.78 10.03 12.7 10.27 12.59 10.51C12.47 10.82 12.61 11.16 12.91 11.3C13.2 11.43 13.56 11.28 13.69 10.98C13.81 10.7 13.92 10.41 14 10.11C14.04 9.95 14.02 9.79 13.94 9.65C13.87 9.51 13.74 9.41 13.58 9.37Z'/><path d='M11.91 12.04C11.73 12.05 11.58 12.12 11.47 12.23C11.3 12.42 11.11 12.6 10.91 12.76C10.65 12.97 10.61 13.35 10.82 13.6C11.03 13.84 11.42 13.88 11.66 13.68C11.9 13.48 12.13 13.27 12.34 13.05C12.56 12.81 12.55 12.43 12.31 12.2C12.2 12.1 12.05 12.04 11.91 12.04Z'/><path d='M6.32 14.06C6.07 14.02 5.81 13.97 5.56 13.9C5.51 13.89 5.46 13.88 5.41 13.88C5.3 13.88 5.2 13.91 5.11 13.96C4.97 14.04 4.87 14.16 4.83 14.32C4.75 14.64 4.93 14.97 5.25 15.05C5.55 15.13 5.85 15.19 6.16 15.24C6.49 15.28 6.79 15.05 6.83 14.73C6.85 14.57 6.82 14.41 6.72 14.28C6.62 14.16 6.48 14.07 6.32 14.06Z'/><path d='M3.11 12.54C3 12.44 2.85 12.38 2.7 12.38C2.52 12.39 2.37 12.45 2.26 12.57C2.16 12.69 2.1 12.84 2.1 13C2.11 13.16 2.18 13.31 2.3 13.42C2.52 13.63 2.76 13.83 3.02 14C3.28 14.19 3.67 14.12 3.85 13.86C4.04 13.59 3.97 13.22 3.71 13.03C3.5 12.88 3.3 12.72 3.11 12.54Z'/><path d='M1.55 10.2C1.5 10.05 1.39 9.93 1.24 9.86C1.16 9.82 1.08 9.8 .99 9.8C.92 9.8 .85 9.82 .79 9.84C.48 9.95 .32 10.29 .43 10.6C.54 10.89 .66 11.18 .81 11.46C.95 11.74 1.32 11.86 1.61 11.71C1.9 11.56 2.02 11.2 1.86 10.9C1.75 10.68 1.64 10.44 1.55 10.2Z'/><path d='M9.58 13.8C9.49 13.76 9.41 13.74 9.32 13.74C9.25 13.74 9.19 13.75 9.12 13.77C8.87 13.86 8.62 13.93 8.38 13.98C8.22 14.01 8.08 14.1 8 14.24C7.91 14.37 7.88 14.53 7.92 14.69C7.99 15 8.31 15.21 8.62 15.15C8.93 15.08 9.23 15 9.52 14.89C9.67 14.84 9.79 14.73 9.86 14.59C9.93 14.44 9.94 14.28 9.88 14.13C9.83 13.98 9.72 13.86 9.58 13.8Z'/></g></svg>"
+                  },
+                  "blocks": {
+                    "dev1_acc_returns_text": {
+                      "type": "text",
+                      "settings": {
+                        "text": "",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "dev1_acc_returns_text"
+                  ]
+                },
+                "dev1_acc_warranty": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "الضمان",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20,
+                    "dev1_icon_svg": "<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><g stroke='#176BB0' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M12 2.5L19.5 5.5V10.7C19.5 16.1 15.7 19.7 12 21C8.3 19.7 4.5 16.1 4.5 10.7V5.5L12 2.5Z' fill='white' fill-opacity='.75'/><path d='M8.6 11.9L11 14.3L15.6 9.5'/></g></svg>"
+                  },
+                  "blocks": {
+                    "dev1_acc_warranty_text": {
+                      "type": "text",
+                      "settings": {
+                        "text": "",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "dev1_acc_warranty_text"
+                  ]
+                }
+              },
+              "block_order": [
+                "dev1_acc_description",
+                "dev1_acc_suitable",
+                "dev1_acc_not_suitable",
+                "dev1_acc_shipping",
+                "dev1_acc_returns",
+                "dev1_acc_warranty"
+              ]
             }
           },
           "block_order": [
             "group_icgrde",
+            "dev1_offer",
+            "dev1_benefits",
             "divider_VJhene",
             "variant_picker_R3rGDr",
             "buy_buttons_eYQEYi",
-            "text_aEtTtq"
+            "dev1_trust",
+            "dev1_routine_title",
+            "dev1_routine",
+            "text_aEtTtq",
+            "dev1_policies_title",
+            "dev1_accordion"
           ]
         }
       },
       "block_order": [
+        "dev1_breadcrumbs",
         "disclosures_g9mWze"
       ],
+      "name": "Product Hero",
       "settings": {
+        "design": "dev1",
         "content_width": "content-center-aligned",
-        "desktop_media_position": "left",
+        "desktop_media_position": "right",
         "equal_columns": false,
         "limit_details_width": false,
-        "gap": 48,
+        "gap": 24,
         "enable_sticky_add_to_cart": true,
         "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-start": 40,
+        "padding-block-end": 60,
+        "dev1_tint_color": "{{ settings.color_palette.snosha_pale_tint }}",
+        "dev1_stage_color": "#EBEDEED9",
+        "dev1_single_open": true,
+        "dev1_show_rating_value": true,
+        "dev1_padding_mobile_top": 10,
+        "dev1_padding_mobile_bottom": 24
+      }
+    },
+    "dev3_how_to_use_video": {
+      "type": "section",
+      "name": "How To Use Video",
+      "blocks": {
+        "dev3_howto_heading": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>طريقة الاستخدام</h2>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "dev3_howto_video": {
+          "type": "video",
+          "settings": {
+            "source": "uploaded",
+            "video": "shopify://files/videos/632f1bdd13364e1f8c55181a8b976818.HD-1080p-7.2Mbps-100583611.mp4",
+            "dev1_poster_image": "",
+            "video_autoplay": false,
+            "video_loop": false,
+            "dev3_sound_on_play": true,
+            "custom_width": 100,
+            "custom_width_mobile": 100,
+            "aspect_ratio": "auto",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 24,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "dev3_howto_heading",
+        "dev3_howto_video"
+      ],
+      "settings": {
+        "design": "dev3_video",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 28,
+        "section_width": "page-width",
+        "section_height": "",
+        "background_media": "none",
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 60,
+        "padding-block-end": 60
+      }
+    },
+    "dev4_long_description": {
+      "type": "section",
+      "name": "Long Description",
+      "blocks": {
+        "dev4_ld_intro": {
+          "type": "long-description-group",
+          "settings": {
+            "copy_offset": 0,
+            "list_offset": 0,
+            "column_gap": 16,
+            "vertical_alignment": "top",
+            "media_position": "center",
+            "tile_size": 48,
+            "tile_size_mobile": 44,
+            "list_gap": 20,
+            "list_max_width": 392,
+            "layout": "text",
+            "mobile_layout": "stacked",
+            "heading": "وصف المنتج",
+            "copy_max_width": 960,
+            "text": "<p>فرشاة أسنان Snosha N2 مصممة لتقدّم تجربة تنظيف احترافية داخل المنزل، بتقنية سونيك تجمع بين القوة والأمان على الأسنان واللثة. صُنعت الفرشاة طبقًا لمعايير السلامة الصينية المعتمدة GB4706.1-2005 وGB4706.59-2008 وGB39669-2020 — وهي تفاصيل تعكس جدية سنوشا في اختيار منتج آمن وموثوق لعملائها.</p>"
+          },
+          "blocks": {},
+          "block_order": []
+        },
+        "dev4_ld_sonic": {
+          "type": "long-description-group",
+          "settings": {
+            "copy_offset": 72,
+            "list_offset": 60,
+            "column_gap": 16,
+            "vertical_alignment": "top",
+            "media_position": "center",
+            "tile_size": 56,
+            "tile_size_mobile": 44,
+            "list_gap": 64,
+            "list_max_width": 364,
+            "layout": "list_media_copy",
+            "mobile_layout": "stacked",
+            "heading": "التقنية المستخدمة — تنظيف سونيك",
+            "text": "<p>تعمل N2 بتقنية الاهتزاز السونيك (Sonic) بمعدل يصل إلى 42,000 اهتزازة في الدقيقة. هذا المعدل العالي يحرّك اللعاب ومعجون الأسنان ليصلا إلى مناطق بين الأسنان يصعب على الفرشاة اليدوية الوصول إليها، فتحصل على تنظيف أعمق دون الحاجة للضغط بقوة.</p>",
+            "image_alt": "رأس فرشاة SNOSHA N2 مع رذاذ الماء",
+            "copy_max_width": 420,
+            "image_max_width": 410,
+            "image_max_width_mobile": 350
+          },
+          "blocks": {
+            "dev4_ld_sonic_row_1": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 17.72 17\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M9.06 1.20C9.01 1.14 8.94 1.11 8.86 1.11C8.79 1.10 8.72 1.13 8.66 1.19C8.55 1.31 5.86 4.22 5.86 6.48C5.86 8.15 7.21 9.51 8.86 9.51C10.51 9.51 11.85 8.15 11.85 6.48C11.85 4.44 9.17 1.32 9.06 1.20ZM8.86 8.97C7.50 8.97 6.40 7.85 6.40 6.48C6.40 4.77 8.23 2.50 8.86 1.78C9.10 2.09 9.56 2.67 10.00 3.34C10.86 4.65 11.32 5.73 11.32 6.48C11.32 7.86 10.22 8.97 8.86 8.97Z\" fill=\"currentColor\"/><path d=\"M10.00 3.34C9.55 2.67 9.10 2.09 8.86 1.78C8.23 2.50 6.40 4.76 6.40 6.48C6.40 7.85 7.50 8.97 8.86 8.97C10.22 8.97 11.32 7.85 11.32 6.48C11.32 5.73 10.86 4.64 10.00 3.34ZM8.66 8.49H8.63C7.73 8.38 6.99 7.64 6.88 6.72C6.87 6.57 6.97 6.44 7.12 6.42C7.26 6.41 7.40 6.51 7.41 6.66C7.49 7.33 8.03 7.88 8.69 7.95C8.84 7.97 8.94 8.10 8.93 8.25C8.91 8.39 8.80 8.49 8.66 8.49H8.66Z\" fill=\"currentColor\"/><path d=\"M5.16 7.48C5.24 7.48 5.33 7.47 5.42 7.47C5.57 7.45 5.67 7.32 5.66 7.17C5.64 7.03 5.51 6.92 5.37 6.93C5.30 6.94 5.23 6.95 5.16 6.95C3.97 6.95 3.01 5.98 3.01 4.78C3.01 3.29 4.58 1.34 5.15 0.67C5.47 1.07 6.12 1.92 6.63 2.82C6.70 2.95 6.86 2.99 6.99 2.92C7.12 2.85 7.16 2.69 7.09 2.56C6.38 1.27 5.40 0.13 5.35 0.09C5.31 0.03 5.24 0 5.16 0C5.08 0 5.01 0.02 4.96 0.08C4.86 0.19 2.48 2.76 2.48 4.78C2.48 6.27 3.68 7.48 5.16 7.48V7.48Z\" fill=\"currentColor\"/><path d=\"M10.81 2.92C10.94 2.99 11.10 2.95 11.18 2.82C11.66 2.00 12.25 1.27 12.55 0.92C12.78 1.19 13.16 1.69 13.54 2.27C14.30 3.41 14.70 4.37 14.70 5.02C14.70 6.22 13.74 7.19 12.56 7.19C12.48 7.19 12.41 7.19 12.33 7.18C12.18 7.16 12.05 7.27 12.04 7.42C12.02 7.57 12.13 7.70 12.28 7.71C12.37 7.73 12.47 7.73 12.56 7.73C14.04 7.73 15.24 6.52 15.24 5.03C15.24 3.21 12.86 0.45 12.76 0.33C12.72 0.28 12.65 0.24 12.57 0.24C12.49 0.24 12.42 0.27 12.37 0.33C12.33 0.37 11.43 1.34 10.72 2.55C10.64 2.68 10.69 2.85 10.82 2.92L10.81 2.92Z\" fill=\"currentColor\"/><path d=\"M17.72 16.67L16.06 9.25C16.03 9.13 15.92 9.04 15.80 9.04H14.09C13.95 9.04 13.83 9.16 13.83 9.31C13.83 9.46 13.95 9.58 14.09 9.58H15.58L17.12 16.46H0.59L2.13 9.58H3.62C3.77 9.58 3.89 9.46 3.89 9.31C3.89 9.16 3.77 9.04 3.62 9.04H1.92C1.80 9.04 1.69 9.13 1.66 9.25L0.00 16.67C-0.01 16.75 0.00 16.83 0.05 16.90C0.10 16.96 0.18 17 0.26 17H17.45C17.53 17 17.61 16.96 17.66 16.90C17.71 16.83 17.73 16.75 17.71 16.67H17.72Z\" fill=\"currentColor\"/><path d=\"M4.95 9.53C4.81 9.53 4.69 9.65 4.69 9.80V12.86L3.89 11.87C3.80 11.75 3.62 11.74 3.51 11.83C3.39 11.92 3.38 12.09 3.47 12.21L4.75 13.78C4.80 13.85 4.87 13.88 4.95 13.88C5.03 13.88 5.11 13.85 5.16 13.78L6.44 12.21C6.53 12.09 6.51 11.92 6.40 11.83C6.28 11.74 6.11 11.75 6.02 11.87L5.22 12.86V9.80C5.22 9.65 5.10 9.53 4.95 9.53Z\" fill=\"currentColor\"/><path d=\"M8.86 10.94C8.71 10.94 8.59 11.06 8.59 11.21V14.27L7.79 13.28C7.70 13.16 7.53 13.15 7.41 13.24C7.30 13.33 7.28 13.50 7.37 13.62L8.65 15.19C8.70 15.25 8.78 15.29 8.86 15.29C8.94 15.29 9.01 15.25 9.07 15.19L10.35 13.62C10.44 13.50 10.42 13.33 10.31 13.24C10.19 13.15 10.02 13.16 9.93 13.28L9.13 14.27V11.21C9.13 11.06 9.01 10.94 8.86 10.94Z\" fill=\"currentColor\"/><path d=\"M12.76 9.53C12.62 9.53 12.50 9.65 12.50 9.80V12.86L11.68 11.87C11.59 11.75 11.42 11.74 11.31 11.83C11.19 11.93 11.17 12.10 11.27 12.21L12.56 13.79C12.61 13.85 12.69 13.88 12.76 13.88C12.84 13.88 12.92 13.85 12.97 13.79L14.26 12.21C14.36 12.10 14.34 11.93 14.22 11.83C14.11 11.74 13.94 11.75 13.85 11.87L13.03 12.86V9.80C13.03 9.65 12.91 9.53 12.76 9.53Z\" fill=\"currentColor\"/></svg>",
+                "title": "42,000 اهتزازة/دقيقة",
+                "text": "معدل سونيك عالي وثابت"
+              }
+            },
+            "dev4_ld_sonic_row_2": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 3C12 3 18 9.5 18 14C18 15.59 17.36 17.11 16.24 18.24C15.11 19.36 13.59 20 12 20C10.40 20 8.88 19.36 7.75 18.24C6.63 17.11 6 15.59 6 14C6 9.5 12 3 12 3Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M9.5 14.5C9.5 15.16 9.76 15.79 10.23 16.26C10.70 16.73 11.33 17 12 17\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/></svg>",
+                "title": "يحرّك اللعاب والمعجون",
+                "text": "ليصلا بين الأسنان وأماكن يصعب الوصول لها"
+              }
+            },
+            "dev4_ld_sonic_row_3": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M19 17L19.7 18.8L21.5 19.5L19.7 20.2L19 22L18.3 20.2L16.5 19.5L18.3 18.8L19 17Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/></svg>",
+                "title": "تنظيف أعمق بدون ضغط",
+                "text": "من غير أي جهد إضافي منك"
+              }
+            }
+          },
+          "block_order": [
+            "dev4_ld_sonic_row_1",
+            "dev4_ld_sonic_row_2",
+            "dev4_ld_sonic_row_3"
+          ]
+        },
+        "dev4_ld_box": {
+          "type": "long-description-group",
+          "settings": {
+            "copy_offset": 8,
+            "list_offset": 10,
+            "column_gap": 0,
+            "vertical_alignment": "top",
+            "media_position": "center",
+            "tile_size": 48,
+            "tile_size_mobile": 38,
+            "list_gap": 22,
+            "list_max_width": 392,
+            "layout": "media_copy_list",
+            "mobile_layout": "beside",
+            "heading": "محتويات العبوة",
+            "text": "<p>كل اللي محتاجه في علبة واحدة — جاهزة للاستخدام والسفر من أول يوم.</p>",
+            "image_alt": "محتويات عبوة SNOSHA N2: الفرشاة والرؤوس وحقيبة السفر والكابل",
+            "copy_max_width": 420,
+            "image_max_width": 800,
+            "image_max_width_mobile": 160
+          },
+          "blocks": {
+            "dev4_ld_box_row_1": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 22 22\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M11 2.29C12.51 2.29 13.75 3.52 13.75 5.04V16.95C13.75 18.47 12.51 19.70 11 19.70C9.48 19.70 8.25 18.47 8.25 16.95V5.04C8.25 3.52 9.48 2.29 11 2.29Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M12.46 7.33C12.46 8.14 11.81 8.79 11 8.79C10.19 8.79 9.53 8.14 9.53 7.33C9.53 6.52 10.19 5.86 11 5.86C11.81 5.86 12.46 6.52 12.46 7.33Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M11 11V12.37M11 14.20V15.58\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\" stroke-opacity=\"0.55\"/></svg>",
+                "title": "جسم الفرشاة × 1",
+                "text": ""
+              }
+            },
+            "dev4_ld_box_row_2": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 24 7\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M0.0102435 3.70769L0.0204865 5.73846C0.0204865 5.83077 0.0563383 5.91282 0.117798 5.97436C0.179258 6.0359 0.261204 6.07179 0.353393 6.07179L9.61332 6.03077C9.64405 6.03077 9.67478 6.0359 9.70038 6.05128L11.1293 6.72308C11.5186 6.90769 11.9488 7 12.379 7L23.6671 6.94872C23.7542 6.94872 23.8412 6.91282 23.9027 6.85128C23.9641 6.78974 24 6.70256 24 6.61539L23.9898 4.58461C23.9898 4.4 23.8361 4.25128 23.6517 4.25128H22.8067L22.7913 0.333333C22.7913 0.148718 22.6376 0 22.4533 0L18.4072 0.0205123L16.2151 0.030769L13.7567 0.0410256C13.5723 0.0410256 13.4238 0.194872 13.4238 0.379487L13.4392 4.29744H12.3585C12.3278 4.29744 12.2971 4.29743 12.2714 4.28205L10.8425 3.61026C10.4533 3.42564 10.023 3.33333 9.59283 3.33333L0.332907 3.37436C0.148528 3.37436 0 3.5282 0 3.71282L0.0102435 3.70769ZM15.8924 0.697436L15.9027 2.73846C15.9027 2.83077 15.9385 2.91282 16 2.97436C16.0615 3.0359 16.1434 3.07179 16.2356 3.07179C16.42 3.07179 16.5685 2.91795 16.5685 2.73333L16.5583 0.692308H18.0794L18.0896 2.7282C18.0896 2.82051 18.1255 2.90256 18.1869 2.9641C18.2484 3.02564 18.3303 3.06154 18.4225 3.06154C18.6069 3.06154 18.7554 2.90769 18.7554 2.72308L18.7452 0.682051H20.2663L20.2766 2.71795C20.2766 2.81026 20.3124 2.89231 20.3739 2.95385C20.4353 3.01538 20.5173 3.05128 20.6095 3.05128C20.7939 3.05128 20.9424 2.89744 20.9424 2.71282L20.9321 0.671795H22.1152L22.1306 4.25128L14.105 4.28718L14.0896 0.702564L15.8822 0.692308L15.8924 0.697436ZM9.6082 4C9.9411 4 10.2689 4.0718 10.5711 4.21538L12 4.88718C12.1178 4.94359 12.2458 4.96923 12.3739 4.96923L23.3291 4.91795V6.27692L12.3841 6.3282C12.0563 6.3282 11.7234 6.25641 11.4213 6.11795L9.99232 5.44615C9.87452 5.38974 9.74648 5.3641 9.61844 5.3641L0.691421 5.40513V4.04615L9.61332 4.00513L9.6082 4Z\" fill=\"currentColor\"/></svg>",
+                "title": "8 رؤوس فرشاة",
+                "text": "6 للتنظيف العميق + 2 للأسنان الحساسة",
+                "description_color": "{{ settings.color_palette.snosha_gradient_end }}"
+              }
+            },
+            "dev4_ld_box_row_3": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4 8.2L12 4.5L20 8.2V16.1L12 19.8L4 16.1V8.2Z\" fill=\"white\" fill-opacity=\"0.6\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M4 8.2L12 4.5L20 8.2V16.1L12 19.8L4 16.1V8.2Z\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M4 8.2L12 11.8L20 8.2\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M12 11.8V19.7\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M19.8 2.6L20.4 4.1L21.9 4.7L20.4 5.3L19.8 6.8L19.2 5.3L17.7 4.7L19.2 4.1L19.8 2.6Z\" fill=\"#60C1E1\"/></svg>",
+                "title": "حقيبة سفر × 1",
+                "text": ""
+              }
+            },
+            "dev4_ld_box_row_4": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 22 22\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M6.18 8.25H15.81C17.45 8.25 18.79 9.58 18.79 11.22C18.79 12.87 17.45 14.20 15.81 14.20H6.18C4.54 14.20 3.20 12.87 3.20 11.22C3.20 9.58 4.54 8.25 6.18 8.25Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M7.33 11.22H14.66\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\" stroke-opacity=\"0.55\"/></svg>",
+                "title": "كابل شحن Type-C × 1",
+                "text": ""
+              }
+            },
+            "dev4_ld_box_row_5": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 22 22\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M9.16 2.75H12.83V12.83H9.16V2.75Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M6.41 19.25C6.41 16.50 7.79 14.66 11 14.66C14.20 14.66 15.58 16.50 15.58 19.25H6.41Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/></svg>",
+                "title": "حامل الفرشاة × 1",
+                "text": ""
+              }
+            }
+          },
+          "block_order": [
+            "dev4_ld_box_row_1",
+            "dev4_ld_box_row_2",
+            "dev4_ld_box_row_3",
+            "dev4_ld_box_row_4",
+            "dev4_ld_box_row_5"
+          ]
+        },
+        "dev4_ld_modes": {
+          "type": "long-description-group",
+          "settings": {
+            "copy_offset": 130,
+            "list_offset": 20,
+            "column_gap": 0,
+            "vertical_alignment": "top",
+            "media_position": "center",
+            "tile_size": 56,
+            "tile_size_mobile": 44,
+            "list_gap": 52,
+            "list_max_width": 364,
+            "layout": "list_media_copy",
+            "mobile_layout": "behind",
+            "heading": "5 أوضاع تنظيف",
+            "subtitle": "احتياجات مختلفة… فرشاة واحدة.",
+            "text": "<p>فرشاة SNOSHA N2 بتديك 5 أوضاع تختار منها الوضع المثالي لروتينك — من التنظيف اليومي لحد العناية باللثة.</p>",
+            "image_alt": "جسم فرشاة SNOSHA N2 وعليه أوضاع التنظيف الخمسة",
+            "copy_max_width": 410,
+            "image_max_width": 290,
+            "image_max_width_mobile": 150,
+            "tile_border_color": "#EFEDED"
+          },
+          "blocks": {
+            "dev4_ld_modes_row_1": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7 3.5C9 3.5 10 4.5 12 4.5C14 4.5 15 3.5 17 3.5C19.5 3.5 21 5.7 20 9.5C19.3 12.2 18.5 17.1 17 21C16.4 22.6 14.6 22.6 14 20.5C13.6 19 13 16 12 16C11 16 10.4 19 10 20.5C9.4 22.6 7.6 22.6 7 21C5.5 17.1 4.7 12.2 4 9.5C3 5.7 4.5 3.5 7 3.5Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/></svg>",
+                "title": "Clean",
+                "text": "للتنظيف اليومي"
+              }
+            },
+            "dev4_ld_modes_row_2": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5 19C13 21 19 15 19 5C9 5 3 11 5 19Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M5 19C8 13 12 10 16 8\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/></svg>",
+                "title": "Sensitive",
+                "text": "تنظيف ألطف للأسنان الحساسة"
+              }
+            },
+            "dev4_ld_modes_row_3": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M19 17L19.7 18.8L21.5 19.5L19.7 20.2L19 22L18.3 20.2L16.5 19.5L18.3 18.8L19 17Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/></svg>",
+                "title": "White",
+                "text": "يستهدف التصبغات السطحية"
+              }
+            },
+            "dev4_ld_modes_row_4": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7 4H17L21 9L12 20L3 9L7 4Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M3 9H21\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M12 20L8.5 9L12 4L15.5 9L12 20Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/></svg>",
+                "title": "Polish",
+                "text": "لإحساس أنعم ولمعان أوضح"
+              }
+            },
+            "dev4_ld_modes_row_5": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M3 9C6 7 9 11 12 9C15 7 18 7 21 9\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M3 15C6 13 9 17 12 15C15 13 18 13 21 15\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/></svg>",
+                "title": "Massage",
+                "text": "عناية لطيفة باللثة"
+              }
+            }
+          },
+          "block_order": [
+            "dev4_ld_modes_row_1",
+            "dev4_ld_modes_row_2",
+            "dev4_ld_modes_row_3",
+            "dev4_ld_modes_row_4",
+            "dev4_ld_modes_row_5"
+          ]
+        },
+        "dev4_ld_heads": {
+          "type": "long-description-group",
+          "settings": {
+            "copy_offset": 22,
+            "list_offset": 26,
+            "column_gap": 0,
+            "vertical_alignment": "top",
+            "media_position": "left",
+            "tile_size": 48,
+            "tile_size_mobile": 44,
+            "list_gap": 20,
+            "list_max_width": 392,
+            "layout": "media_copy_list",
+            "mobile_layout": "stacked",
+            "heading": "رؤوس الفرشاة",
+            "text": "<p>تأتي الفرشاة مع 8 رؤوس دوبونت: 6 رؤوس للتنظيف العميق اليومي، ورأسان مخصصان للأسنان الحساسة — مع مؤشر تلاشي لون يُنبّهك عند اقتراب موعد التغيير.</p>",
+            "image_alt": "ثلاثة رؤوس بديلة لفرشاة SNOSHA N2",
+            "copy_max_width": 450,
+            "image_max_width": 640,
+            "image_max_width_mobile": 250
+          },
+          "blocks": {
+            "dev4_ld_heads_row_1": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19.5 13C19.5 17.14 16.14 20.5 12 20.5C7.85 20.5 4.5 17.14 4.5 13C4.5 8.85 7.85 5.5 12 5.5C16.14 5.5 19.5 8.85 19.5 13Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M12 9.5V13L14.5 14.5\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M10 3H14M12 3V5.5\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/></svg>",
+                "title": "استبدال كل 3 شهور",
+                "text": "مؤشر تلاشي اللون ينبّهك تلقائيًا"
+              }
+            },
+            "dev4_ld_heads_row_2": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5 10.33L7.85 13L15 7\" stroke-width=\"1.3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/></svg>",
+                "title": "تركيب بسيط",
+                "text": "ضع الرأس موازيًا لزر التشغيل واضغط بلطف حتى يثبت"
+              }
+            },
+            "dev4_ld_heads_row_3": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M6.5 13.5C7.32 13.5 8 12.82 8 12C8 11.17 7.32 10.5 6.5 10.5C5.67 10.5 5 11.17 5 12C5 12.82 5.67 13.5 6.5 13.5Z\" fill=\"currentColor\"/><path d=\"M10.5 8.5C11.41 9.43 11.92 10.69 11.92 12C11.92 13.30 11.41 14.56 10.5 15.5\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M14 5.5C15.65 7.26 16.57 9.58 16.57 12C16.57 14.41 15.65 16.73 14 18.5\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/></svg>",
+                "title": "الفجوة الطفيفة طبيعية",
+                "text": "مقصودة للسماح بالاهتزاز أثناء الاستخدام"
+              }
+            },
+            "dev4_ld_heads_row_4": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 22 22\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M11 17.41V4.58\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M5.5 10.08L11 4.58L16.5 10.08\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/></svg>",
+                "title": "للإزالة",
+                "text": "اسحب الرأس للأعلى برفق"
+              }
+            }
+          },
+          "block_order": [
+            "dev4_ld_heads_row_1",
+            "dev4_ld_heads_row_2",
+            "dev4_ld_heads_row_3",
+            "dev4_ld_heads_row_4"
+          ]
+        },
+        "dev4_ld_battery": {
+          "type": "long-description-group",
+          "settings": {
+            "copy_offset": 0,
+            "list_offset": 0,
+            "column_gap": 64,
+            "vertical_alignment": "center",
+            "media_position": "center",
+            "tile_size": 52,
+            "tile_size_mobile": 52,
+            "list_gap": 18,
+            "list_max_width": 404,
+            "layout": "list_media_copy",
+            "mobile_layout": "stacked",
+            "heading": "البطارية والشحن",
+            "text": "<p>تعمل الفرشاة ببطارية ليثيوم 18650 سعة 1200 مللي أمبير، تدوم حتى 120 يومًا من الاستخدام اليومي بشحنة واحدة كاملة. الشحن عبر منفذ Type-C ويستغرق من ساعتين إلى 3 ساعات فقط — من الشاحن أو بنك الطاقة أو أي منفذ USB.</p>",
+            "note": "يُنصح بفصل الجهاز عن الشاحن بعد اكتمال الشحن، والتأكد من شحنه بالكامل قبل أول استخدام.",
+            "list_heading": "مؤشرات الإضاءة",
+            "image_alt": "قاعدة فرشاة SNOSHA N2 وبيانات البطارية",
+            "copy_max_width": 400,
+            "image_max_width": 400,
+            "image_max_width_mobile": 350
+          },
+          "blocks": {
+            "dev4_ld_battery_row_1": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 28 28\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"14\" cy=\"14\" r=\"13\" stroke=\"currentColor\" stroke-opacity=\".55\" stroke-dasharray=\"3.4 3.4\"/><circle cx=\"14\" cy=\"14\" r=\"10\" fill=\"currentColor\" fill-opacity=\".16\"/><circle cx=\"14\" cy=\"14\" r=\"7.8\" fill=\"currentColor\"/></svg>",
+                "title": "وميض أحمر",
+                "text": "بطارية منخفضة — وقت الشحن",
+                "icon_color": "#E5484D"
+              }
+            },
+            "dev4_ld_battery_row_2": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"11\" fill=\"currentColor\" fill-opacity=\".16\"/><circle cx=\"12\" cy=\"12\" r=\"7.7\" fill=\"currentColor\"/></svg>",
+                "title": "ثبات أحمر",
+                "text": "جاري الشحن الآن",
+                "icon_color": "#E5484D"
+              }
+            },
+            "dev4_ld_battery_row_3": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"12\" r=\"11\" fill=\"currentColor\" fill-opacity=\".16\"/><circle cx=\"12\" cy=\"12\" r=\"7.7\" fill=\"currentColor\"/></svg>",
+                "title": "ثبات أخضر",
+                "text": "اكتمل الشحن بالكامل",
+                "icon_color": "#22C55E"
+              }
+            }
+          },
+          "block_order": [
+            "dev4_ld_battery_row_1",
+            "dev4_ld_battery_row_2",
+            "dev4_ld_battery_row_3"
+          ]
+        },
+        "dev4_ld_water": {
+          "type": "long-description-group",
+          "settings": {
+            "copy_offset": 0,
+            "list_offset": 26,
+            "column_gap": 0,
+            "vertical_alignment": "top",
+            "media_position": "left",
+            "tile_size": 48,
+            "tile_size_mobile": 44,
+            "list_gap": 20,
+            "list_max_width": 392,
+            "layout": "media_copy_list",
+            "mobile_layout": "behind",
+            "heading": "مقاومة الماء وزر التشغيل",
+            "text": "<p>تحمل N2 تصنيف مقاومة ماء IPX7، ما يجعلها آمنة تمامًا للاستخدام والشطف داخل الحمام — وزر واحد بسيط يتحكم في كل شيء.</p>",
+            "image_alt": "فرشاة SNOSHA N2 تحت الماء",
+            "copy_max_width": 450,
+            "image_max_width": 540,
+            "image_max_width_mobile": 190
+          },
+          "blocks": {
+            "dev4_ld_water_row_1": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 3C12 3 18 9.5 18 14C18 15.59 17.36 17.11 16.24 18.24C15.11 19.36 13.59 20 12 20C10.40 20 8.88 19.36 7.75 18.24C6.63 17.11 6 15.59 6 14C6 9.5 12 3 12 3Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M9.5 14.5C9.5 15.16 9.76 15.79 10.23 16.26C10.70 16.73 11.33 17 12 17\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/></svg>",
+                "title": "IPX7 مقاومة للماء",
+                "text": "اشطفها تحت الماء الجاري بأمان تام"
+              }
+            },
+            "dev4_ld_water_row_2": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 22 22\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M11 2.75V10.08\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M5.77 5.95C4.76 6.98 4.07 8.29 3.79 9.71C3.52 11.13 3.67 12.60 4.23 13.93C4.79 15.26 5.73 16.40 6.93 17.20C8.14 18.00 9.55 18.43 11 18.43C12.44 18.43 13.85 18.00 15.06 17.20C16.26 16.40 17.20 15.26 17.76 13.93C18.32 12.60 18.47 11.13 18.20 9.71C17.92 8.29 17.23 6.98 16.22 5.95\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/></svg>",
+                "title": "ضغطة واحدة",
+                "text": "لتشغيل الفرشاة"
+              }
+            },
+            "dev4_ld_water_row_3": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19.5 13C19.5 17.14 16.14 20.5 12 20.5C7.85 20.5 4.5 17.14 4.5 13C4.5 8.85 7.85 5.5 12 5.5C16.14 5.5 19.5 8.85 19.5 13Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M12 9.5V13L14.5 14.5\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M10 3H14M12 3V5.5\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/></svg>",
+                "title": "ضغطة مطوّلة (3 ثوانٍ)",
+                "text": "لإيقاف التشغيل"
+              }
+            },
+            "dev4_ld_water_row_4": {
+              "type": "benefit-item",
+              "settings": {
+                "icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4 7H14M18 7H20M4 17H8M12 17H20\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M18 7C18 8.10 17.10 9 16 9C14.89 9 14 8.10 14 7C14 5.89 14.89 5 16 5C17.10 5 18 5.89 18 7Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/><path d=\"M12 17C12 18.10 11.10 19 10 19C8.89 19 8 18.10 8 17C8 15.89 8.89 15 10 15C11.10 15 12 15.89 12 17Z\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/></svg>",
+                "title": "ضغطة أثناء التشغيل",
+                "text": "للتنقل بين الأوضاع الخمسة"
+              }
+            }
+          },
+          "block_order": [
+            "dev4_ld_water_row_1",
+            "dev4_ld_water_row_2",
+            "dev4_ld_water_row_3",
+            "dev4_ld_water_row_4"
+          ]
+        }
+      },
+      "block_order": [
+        "dev4_ld_intro",
+        "dev4_ld_sonic",
+        "dev4_ld_box",
+        "dev4_ld_modes",
+        "dev4_ld_heads",
+        "dev4_ld_battery",
+        "dev4_ld_water"
+      ],
+      "settings": {
+        "design": "dev4_long",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 60,
+        "section_width": "page-width",
+        "section_height": "",
+        "background_media": "none",
+        "background_color": "",
+        "border": "none",
+        "border_radius": 0,
+        "padding-block-start": 60,
+        "padding-block-end": 60,
+        "dev4_ld_gradient_start": "{{ settings.color_palette.background }}",
+        "dev4_ld_gradient_end": "{{ settings.color_palette.color2 }}",
+        "dev4_ld_heading_color": "{{ settings.color_palette.snosha_deep_blue }}",
+        "dev4_ld_text_color": "#4C85B3",
+        "dev4_ld_icon_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+        "dev4_ld_tile_border_color": "{{ settings.color_palette.color2 }}",
+        "dev4_ld_tile_shadow": "#0D408014"
+      }
+    },
+    "dev2_comparison": {
+      "type": "section",
+      "name": "Comparison",
+      "blocks": {
+        "dev2_cmp_header": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 6,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "dev2_cmp_heading": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>ليه تشتري SNOSHA N2؟</h2>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "center",
+                "type_preset": "h2",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.background }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "dev2_cmp_subtitle": {
+              "type": "text",
+              "settings": {
+                "text": "<p>قارن وشوف الفرق بنفسك</p>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "center",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.background }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dev2_cmp_heading",
+            "dev2_cmp_subtitle"
+          ]
+        },
+        "dev2_cmp_table": {
+          "type": "comparison-table",
+          "settings": {
+            "criterion_heading": "المعيار",
+            "manual_heading": "الفرشاة اليدوية العادية",
+            "manual_heading_mobile": "اليدوية العادية",
+            "logo_alt": "SNOSHA",
+            "logo_width": 178,
+            "logo_width_mobile": 114,
+            "image_alt": ""
+          },
+          "blocks": {
+            "dev2_cmp_row_vibrations": {
+              "type": "_comparison-row",
+              "settings": {
+                "criterion": "عدد الاهتزازات",
+                "snosha": "42,000 اهتزازة في الدقيقة",
+                "manual": "حركة يدوية غير منتظمة بدون معدل ثابت",
+                "criterion_mobile": "",
+                "snosha_mobile": "",
+                "manual_mobile": "حركة غير منتظمة"
+              },
+              "blocks": {}
+            },
+            "dev2_cmp_row_plaque": {
+              "type": "_comparison-row",
+              "settings": {
+                "criterion": "إزالة الجير والبلاك",
+                "snosha": "تنظيف أعمق وأكثر انتظامًا في كل استخدام",
+                "manual": "يعتمد كليًا على مجهود ومهارة اليد",
+                "criterion_mobile": "",
+                "snosha_mobile": "تنظيف أعمق وأكثر انتظامًا",
+                "manual_mobile": "يعتمد على مهارة اليد"
+              },
+              "blocks": {}
+            },
+            "dev2_cmp_row_modes": {
+              "type": "_comparison-row",
+              "settings": {
+                "criterion": "أوضاع التنظيف",
+                "snosha": "5 أوضاع: يومي – حساس – تبييض – تلميع – تدليك",
+                "manual": "وضع واحد فقط، لا يوجد تخصيص",
+                "criterion_mobile": "",
+                "snosha_mobile": "5 أوضاع لكل احتياج",
+                "manual_mobile": "وضع واحد فقط"
+              },
+              "blocks": {}
+            },
+            "dev2_cmp_row_gums": {
+              "type": "_comparison-row",
+              "settings": {
+                "criterion": "العناية باللثة",
+                "snosha": "مؤقت ذكي كل 30 ثانية يوجّهك ويمنع الضغط الزائد",
+                "manual": "لا يوجد تحكم، وخطر الفرك الزائد وارد",
+                "criterion_mobile": "",
+                "snosha_mobile": "مؤقت ذكي كل 30 ثانية",
+                "manual_mobile": "خطر الفرك الزائد"
+              },
+              "blocks": {}
+            },
+            "dev2_cmp_row_water": {
+              "type": "_comparison-row",
+              "settings": {
+                "criterion": "مقاومة الماء",
+                "snosha": "IPX7 — استخدام آمن داخل الحمام",
+                "manual": "لا ينطبق",
+                "criterion_mobile": "",
+                "snosha_mobile": "IPX7 — آمنة في الحمام",
+                "manual_mobile": ""
+              },
+              "blocks": {}
+            },
+            "dev2_cmp_row_travel": {
+              "type": "_comparison-row",
+              "settings": {
+                "criterion": "ملاءمة السفر",
+                "snosha": "حقيبة سفر مدمجة وبطارية تدوم حتى 120 يوم",
+                "manual": "تحتاج غطاء منفصل وعرضة للتلوث",
+                "criterion_mobile": "",
+                "snosha_mobile": "حقيبة سفر وبطارية 120 يوم",
+                "manual_mobile": "عرضة للتلوث"
+              },
+              "blocks": {}
+            },
+            "dev2_cmp_row_cost": {
+              "type": "_comparison-row",
+              "settings": {
+                "criterion": "التكلفة على المدى الطويل",
+                "snosha": "استبدال الرأس فقط كل 3 شهور",
+                "manual": "استبدال الفرشاة بالكامل كل 3 شهور تقريبًا",
+                "criterion_mobile": "التكلفة طويلة المدى",
+                "snosha_mobile": "استبدال الرأس فقط",
+                "manual_mobile": "استبدال كامل كل 3 شهور"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dev2_cmp_row_vibrations",
+            "dev2_cmp_row_plaque",
+            "dev2_cmp_row_modes",
+            "dev2_cmp_row_gums",
+            "dev2_cmp_row_water",
+            "dev2_cmp_row_travel",
+            "dev2_cmp_row_cost"
+          ]
+        }
+      },
+      "block_order": [
+        "dev2_cmp_header",
+        "dev2_cmp_table"
+      ],
+      "settings": {
+        "design": "dev2_compare",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 36,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "{{ settings.color_palette.snosha_deep_blue }}",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 60,
+        "padding-block-end": 52,
+        "dev2_cmp_gradient_start": "#0E3B6B",
+        "dev2_cmp_gradient_middle": "{{ settings.color_palette.snosha_deep_blue }}",
+        "dev2_cmp_gradient_end": "#0A2E55",
+        "dev2_cmp_shadow_color": "#001433"
       }
     },
     "product_recommendations_qggXJq": {
@@ -469,6 +1850,9 @@
   },
   "order": [
     "main",
+    "dev3_how_to_use_video",
+    "dev4_long_description",
+    "dev2_comparison",
     "product_recommendations_qggXJq"
   ]
 }
