@@ -1,5 +1,16 @@
 
 
+{%- liquid
+  # dev1: section "Design 10" (product 09 Before After) — on the live store a comparison needs both images;
+  # with one missing nothing renders (no placeholder posing as a result). The theme editor keeps the placeholders.
+  assign dev1_hide_slider = false
+  if section.settings.design == 'dev1_results' and request.design_mode == false
+    if block.settings.before_image == blank or block.settings.after_image == blank
+      assign dev1_hide_slider = true
+    endif
+  endif
+-%}
+{%- unless dev1_hide_slider -%}
 <script
   src="{{ 'comparison-slider.js' | asset_url }}"
   type="module"
@@ -203,6 +214,7 @@
     </div>
   </div>
 </{{ cs_tag }}>
+{%- endunless -%}
 
 {% stylesheet %}
   comparison-slider-component {

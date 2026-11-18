@@ -1777,4 +1777,199 @@
   }
 }
 
+/* ==== dev1-results — 09 Before After, product page (sections/section.liquid, Design 10) ==== */
+/* Figma 190:10376 (desktop) / 190:11087 (mobile). Native section (column, centred) → heading text,
+   description text, native comparison-slider block (two image pickers, range input, assets/comparison-slider.js).
+   Before on the right, After on the left in every locale; the divider value is its distance from the left edge. */
+
+.dev1-results {
+  --dev1-results-shadow: 0 12px 32px color-mix(in srgb, var(--color-primary-button-background) 10%, transparent);
+  --dev1-results-handle-width: 34px;
+  --dev1-results-handle-height: 58px;
+  --dev1-results-chip-top: 26px;
+  --dev1-results-chip-before: 21px;
+  --dev1-results-chip-after: 23px;
+}
+
+/* Content column: Figma 1336px wide (1376px container minus 20px gutters), centred. */
+.dev1-results.dev1-results .section-content-wrapper {
+  inline-size: 100%;
+  max-inline-size: 1336px;
+  justify-self: center;
+}
+
+/* Arabic copy: one direction boundary per text block (alignment comes from the block settings). */
+.dev1-results .section-content-wrapper > .text-block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Heading: Figma 32 / 52 semibold; description 18 / 32, at most 860px wide. */
+.dev1-results.dev1-results .section-content-wrapper > .text-block.h2 > * {
+  font-size: var(--font-size--3xl);
+  line-height: calc(52 / 32);
+}
+
+.dev1-results.dev1-results .section-content-wrapper > .text-block:not(.h2) {
+  max-inline-size: 860px; /* Figma */
+}
+
+.dev1-results.dev1-results .section-content-wrapper > .text-block:not(.h2) > * {
+  font-size: var(--font-size--lg);
+  line-height: calc(32 / 18);
+}
+
+/* Comparison viewport: Figma 1336 × 560 (desktop), 358 × 260 (mobile); both layers fill it with the same crop,
+   so the two images stay registered while the divider moves. */
+.dev1-results.dev1-results .comparison-slider {
+  inline-size: 100%;
+  aspect-ratio: 1336 / 560;
+}
+
+.dev1-results.dev1-results .comparison-slider :is(.before-image, .after-image, .comparison-slider__placeholder) {
+  aspect-ratio: auto;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Before on the right, After on the left (Figma). The range input is pinned to LTR so its value — and the
+   arrow keys — always follow the physical divider position, whatever the page direction. */
+.dev1-results.dev1-results [data-orientation='horizontal'] .comparison-slider__layer--before {
+  clip-path: inset(0 0 0 calc(var(--compare) * 1%));
+}
+
+.dev1-results.dev1-results [data-orientation='horizontal'] .comparison-slider__layer--after {
+  clip-path: inset(0 calc((100 - var(--compare)) * 1%) 0 0);
+}
+
+.dev1-results.dev1-results .cs-slider {
+  direction: ltr;
+  /* Horizontal drags move the divider; vertical swipes keep scrolling the page. */
+  touch-action: pan-y;
+}
+
+/* Divider: 3px white line, no shadow. */
+.dev1-results.dev1-results .comparison-slider__media-wrapper[data-orientation='horizontal']::after {
+  width: 3px;
+  box-shadow: none;
+}
+
+/* Handle: white 34 × 58 pill with three 2 × 16 grips 4px apart (drawn in CSS; native chevrons hidden).
+   Kept fully inside the image at the 0 and 100 ends. */
+.dev1-results.dev1-results [data-orientation='horizontal'] .cs-slider__handle {
+  left: clamp(
+    calc(var(--dev1-results-handle-width) / 2),
+    calc(var(--compare) * 1%),
+    calc(100% - var(--dev1-results-handle-width) / 2)
+  );
+  width: var(--dev1-results-handle-width);
+  height: var(--dev1-results-handle-height);
+  padding: 0;
+  gap: 0;
+  border-radius: 17px;
+  background: var(--color-background);
+  box-shadow: var(--dev1-results-shadow);
+}
+
+.dev1-results.dev1-results .cs-slider__chevron {
+  display: none;
+}
+
+.dev1-results.dev1-results .cs-slider__handle::before {
+  --dev1-results-grip: rgb(var(--color-foreground-rgb) / 0.85);
+
+  content: '';
+  width: 2px;
+  height: 16px;
+  border-radius: 1px;
+  background: var(--dev1-results-grip);
+  box-shadow:
+    -6px 0 0 var(--dev1-results-grip),
+    6px 0 0 var(--dev1-results-grip);
+}
+
+/* Keyboard focus on the invisible range input shows on the handle. */
+.dev1-results.dev1-results .comparison-slider__media-wrapper:has(.cs-slider:focus-visible) .cs-slider__handle {
+  outline: var(--focus-outline-width) solid var(--color-foreground);
+  outline-offset: var(--focus-outline-offset);
+}
+
+/* Labels: white pills fixed in the top corners — Before top-right, After top-left (physical on purpose:
+   they name physically placed images). Text color and background come from the block settings. */
+.dev1-results.dev1-results .comparison-slider__text {
+  top: var(--dev1-results-chip-top);
+  bottom: auto;
+  padding: 8px 20px;
+  border-radius: 999px;
+  box-shadow: var(--dev1-results-shadow);
+  white-space: nowrap;
+}
+
+.dev1-results.dev1-results .comparison-slider__text--before {
+  right: var(--dev1-results-chip-before);
+  left: auto;
+}
+
+.dev1-results.dev1-results .comparison-slider__text--after {
+  left: var(--dev1-results-chip-after);
+  right: auto;
+}
+
+.dev1-results.dev1-results .comparison-slider__text > div {
+  margin: 0;
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--xl);
+  line-height: calc(18 / 20);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dev1-results.dev1-results .comparison-slider__layer,
+  .dev1-results.dev1-results .cs-slider__handle,
+  .dev1-results.dev1-results .comparison-slider__media-wrapper::after {
+    transition: none;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .dev1-results {
+    --dev1-results-handle-width: 29px;
+    --dev1-results-handle-height: 48px;
+    --dev1-results-chip-top: 12px;
+    --dev1-results-chip-before: 19px;
+    --dev1-results-chip-after: 32px;
+  }
+
+  /* Figma mobile: 40px / 40px padding (settings; 0 = native scaling) and 12px between items. */
+  .dev1-results.dev1-results .section-content-wrapper {
+    gap: 12px;
+    padding-block-start: calc(var(--dev1-padding-mobile-top, var(--padding-block-start)) + var(--section-top-offset, 0px));
+    padding-block-end: var(--dev1-padding-mobile-bottom, var(--padding-block-end));
+  }
+
+  .dev1-results.dev1-results .section-content-wrapper > .text-block.h2 > * {
+    font-size: 1.375rem; /* Figma 22px — no theme token */
+    line-height: calc(52 / 22);
+  }
+
+  .dev1-results.dev1-results .section-content-wrapper > .text-block:not(.h2) > * {
+    font-size: var(--font-size--2xs);
+    line-height: calc(32 / 12);
+  }
+
+  .dev1-results.dev1-results .comparison-slider {
+    aspect-ratio: 358 / 260;
+  }
+
+  .dev1-results.dev1-results .comparison-slider__text {
+    padding: 2px 12px;
+    border-radius: 20px;
+  }
+
+  .dev1-results.dev1-results .comparison-slider__text > div {
+    font-size: var(--font-size--2xs);
+    line-height: calc(18 / 12);
+  }
+}
+
 
