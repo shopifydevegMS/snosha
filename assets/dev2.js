@@ -108,3 +108,57 @@ class Dev2CarouselProgress extends HTMLElement {
 if (!customElements.get('dev2-carousel-progress')) {
   customElements.define('dev2-carousel-progress', Dev2CarouselProgress);
 }
+
+/**
+ * <dev2-faq-open-first>: section "Design 4" (14 FAQ), setting "Open the first question automatically".
+ * Rendered next to the section's .dev2-faq wrapper only while the setting is on.
+ *
+ * Opens the first question in reading order, through the native accordion's own breakpoint flags
+ * (accordion-custom `open-by-default-on-mobile` / `open-by-default-on-desktop`, which the native
+ * component re-applies when the screen crosses its 750px breakpoint):
+ *   - mobile (one list): the first row in page order;
+ *   - desktop (columns side by side): the first row of the column where reading starts —
+ *     the right column for RTL (Arabic) questions, the left one for LTR.
+ * The rows' own "Open row by default" is ignored while this is on. Runs again whenever the section
+ * re-renders (Theme Editor: rows added, removed or reordered).
+ */
+class Dev2FaqOpenFirst extends HTMLElement {
+  #frame = 0;
+
+  connectedCallback() {
+    this.#frame = requestAnimationFrame(this.#apply);
+  }
+
+  disconnectedCallback() {
+    cancelAnimationFrame(this.#frame);
+  }
+
+  #apply = () => {
+    const scope = this.parentElement?.querySelector('.dev2-faq');
+    if (!scope) return;
+
+    const accordions = [...scope.querySelectorAll('.accordion')];
+    const firstRow = (accordion) => accordion.querySelector(':scope > accordion-custom');
+    const rows = accordions.flatMap((accordion) => [...accordion.querySelectorAll(':scope > accordion-custom')]);
+    if (!rows.length) return;
+
+    const rtl = getComputedStyle(accordions[0]).direction === 'rtl';
+    const mobileFirst = rows[0];
+    const desktopFirst = (rtl ? [...accordions].reverse() : accordions).map(firstRow).find(Boolean);
+
+    for (const row of rows) {
+      row.toggleAttribute('open-by-default-on-mobile', row === mobileFirst);
+      row.toggleAttribute('open-by-default-on-desktop', row === desktopFirst);
+    }
+
+    // Same 750px breakpoint as the native accordion. The rows share one <details name>,
+    // so opening this one closes any other row the native component opened first.
+    const isDesktop = window.matchMedia('(min-width: 750px)').matches;
+    const details = (isDesktop ? desktopFirst : mobileFirst)?.querySelector('details');
+    if (details) details.open = true;
+  };
+}
+
+if (!customElements.get('dev2-faq-open-first')) {
+  customElements.define('dev2-faq-open-first', Dev2FaqOpenFirst);
+}

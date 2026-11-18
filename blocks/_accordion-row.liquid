@@ -8,6 +8,13 @@
     {% if block_settings.open_by_default %}
       open
     {% endif %}
+    {%- comment -%}
+      dev2: section "Design 4" (14 FAQ) — every row of the section shares one name, so the browser
+      keeps only one row open at a time, across all accordion blocks (columns) of the section.
+    {%- endcomment -%}
+    {% if section.settings.design == 'dev2' %}
+      name="dev2-faq-{{ section.id }}"
+    {% endif %}
     {{ block.shopify_attributes }}
   >
     <summary class="details__header">

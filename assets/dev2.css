@@ -1149,3 +1149,112 @@
     line-height: calc(32 / 20);
   }
 }
+
+/* ==== dev2-faq — 14 FAQ (sections/section.liquid, "Design 4") ==== */
+/* Figma 217:14604 (desktop) and 217:14813 (mobile). Scope class on the section's .section wrapper.
+   Native structure: header group (heading + subtitle text blocks) and a columns group holding two native
+   accordion blocks (one per desktop column); each accordion row is one question, its answer a nested
+   text block. DOM order = Figma mobile order (payment, COD, authenticity, warranty, returns, shipping).
+   One row open at a time: blocks/_accordion-row.liquid gives every row of the section the same
+   <details name>. Colors: --dev2-faq-* from the section settings (palette defaults). */
+.dev2-faq {
+  --dev2-faq-line: var(--dev2-faq-border, var(--color-border));
+  --dev2-faq-open: var(--dev2-faq-open-background, var(--color-background));
+  --dev2-faq-chevron: var(--dev2-faq-icon, var(--color-primary-button-background));
+}
+
+/* Columns: Figma puts the first column (payment …) on the physical left in the Arabic layout. The row's
+   geometry is pinned to LTR (04 §3 allowed pattern); each accordion restores RTL for its text. Columns
+   stack independently (align-items from the group's vertical alignment: top). */
+.dev2-faq.dev2-faq .group-block-content:has(> .accordion) {
+  direction: ltr;
+}
+
+/* One column: 12px between cards (Figma); Arabic text boundary */
+.dev2-faq.dev2-faq .accordion {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Card (Figma "FAQ Item"): white, 1px light-blue border, 14px radius; pale blue while open.
+   Spacing sits on the summary and the content, never on <details> (accordion-custom, T15). */
+.dev2-faq.dev2-faq .accordion .details {
+  border: var(--style-border-width) solid var(--dev2-faq-line);
+  border-radius: 14px;
+  background-color: var(--color-background);
+  transition: background-color var(--animation-speed) var(--animation-easing);
+}
+
+.dev2-faq.dev2-faq .accordion .details[open] {
+  background-color: var(--dev2-faq-open);
+}
+
+/* Question row: 14px / 16px padding, 12px to the chevron; Figma 16 / 27 semibold */
+.dev2-faq.dev2-faq .accordion .details__header {
+  gap: 12px;
+  padding: 14px 16px;
+  color: var(--color-foreground);
+  font-family: var(--font-accent--family);
+  font-style: var(--font-accent--style);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--md);
+  line-height: calc(27 / 16);
+  text-transform: none;
+  text-align: start;
+  transition: padding-block var(--animation-speed-slow) var(--animation-easing);
+}
+
+/* Native caret (same chevron as Figma) at the row's end — the physical left in Arabic; 18px, brand blue */
+.dev2-faq.dev2-faq .accordion .details__header > .icon-caret {
+  flex-shrink: 0;
+  inline-size: 18px;
+  block-size: 18px;
+  color: var(--dev2-faq-chevron);
+}
+
+/* Answer: 10px under the question, 14px bottom padding (Figma), same inline padding as the question */
+.dev2-faq.dev2-faq .accordion .details-content {
+  padding-inline: 16px;
+}
+
+.dev2-faq.dev2-faq .accordion .details[open] > .details__header {
+  padding-block-end: 10px;
+}
+
+.dev2-faq.dev2-faq .accordion .details[open] .details-content {
+  padding-block-end: 14px;
+}
+
+/* -- Mobile (< 750px): Figma 217:14813 — 56 / 40 section padding, 12px from the heading to the list and
+   between all cards (one column), 20px card padding, subtitle 13 / 22, answers stay 16 / 28. -- */
+@media screen and (max-width: 749px) {
+  .dev2-faq.dev2-faq .section-content-wrapper {
+    row-gap: 12px;
+    padding-block: 56px 40px;
+  }
+
+  .dev2-faq.dev2-faq .group-block-content:has(> .accordion) {
+    gap: 12px;
+  }
+
+  .dev2-faq.dev2-faq :is(.text-block.h5, .text-block.h5 > *) {
+    font-size: var(--font-size--xs);
+    line-height: calc(22 / 13);
+  }
+
+  .dev2-faq.dev2-faq .accordion .details__header {
+    padding-inline: 20px;
+  }
+
+  .dev2-faq.dev2-faq .accordion .details-content {
+    padding-inline: 20px;
+  }
+
+  .dev2-faq.dev2-faq .accordion .details-content :is(.text-block.paragraph, .text-block.paragraph > *) {
+    font-size: var(--font-size--md);
+    line-height: calc(28 / 16);
+  }
+}
