@@ -6,6 +6,12 @@
   if block_settings.input_style == 'custom'
     assign is_custom_input = true
   endif
+
+  # dev3: optional placeholder override; blank keeps the native translation
+  assign email_placeholder = 'blocks.email_signup.placeholder' | t
+  if block_settings.dev3_placeholder != blank
+    assign email_placeholder = block_settings.dev3_placeholder | escape
+  endif
 %}
 {% render 'button-custom-styles', block_settings: block_settings, block_id: block.id %}
 <div
@@ -64,7 +70,7 @@
         autocorrect="off"
         autocapitalize="off"
         autocomplete="email"
-        placeholder="{{ 'blocks.email_signup.placeholder' | t }}"
+        placeholder="{{ email_placeholder }}"
         required
         {% if form.errors and form.id == blank %}
           autofocus
@@ -511,6 +517,12 @@
     {
       "type": "header",
       "content": "t:content.input"
+    },
+    {
+      "type": "text",
+      "id": "dev3_placeholder",
+      "label": "t:dev3_settings.email_placeholder",
+      "info": "t:dev3_settings.email_placeholder_info"
     },
     {
       "type": "select",

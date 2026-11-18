@@ -14,7 +14,11 @@
 >
   <span class="footer-utilities__text">
     &copy; {{ 'now' | date: '%Y' }}
+    {% if block_settings.dev3_copyright_text != blank -%}
+      {{- block_settings.dev3_copyright_text | escape -}}
+    {%- else -%}
     {{ shop.name | link_to: routes.root_url -}}
+    {%- endif -%}
     {%- if block_settings.show_powered_by -%}
       , {{ powered_by_link }}
     {%- endif -%}
@@ -37,6 +41,12 @@
       "id": "show_powered_by",
       "label": "t:settings.show_powered_by_shopify",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "dev3_copyright_text",
+      "label": "t:dev3_settings.copyright_text",
+      "info": "t:dev3_settings.copyright_text_info"
     },
     {
       "type": "paragraph",

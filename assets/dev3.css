@@ -933,3 +933,261 @@
   color: var(--dev3-bundle-muted, var(--color-foreground));
   font-size: 0.875rem;
 }
+
+/* ==== dev3-footer — 15 Footer (Figma 190:4048 desktop / 190:14491 mobile) ====
+   Native footer section + blocks. Expected block order: Brand group (logo + text), Shopping menu,
+   Help menu, About menu, Newsletter group (texts + email signup).
+   The content is Arabic, so the footer grid is pinned RTL in every locale: brand on the right,
+   newsletter on the left (Figma), and every text inside reads RTL. */
+.dev3-footer.dev3-footer .footer-content {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Brand / newsletter group gaps (Figma 16 / 14; the native gap would shrink by the gap scale) */
+.dev3-footer.dev3-footer .footer-content > .group-block:has(.logo-block) > .group-block-content {
+  gap: 16px;
+}
+
+.dev3-footer.dev3-footer .footer-content > .group-block:has(.email-signup-block) > .group-block-content {
+  gap: 14px;
+}
+
+/* Text blocks: Cairo body font; colors come from the blocks' native text color settings */
+.dev3-footer.dev3-footer .text-block {
+  font-family: var(--font-body--family);
+}
+
+.dev3-footer.dev3-footer .text-block > * {
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+.dev3-footer.dev3-footer .text-block.paragraph {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+/* Newsletter heading: Figma H4 20 / 34 (17 / 34 on mobile) */
+.dev3-footer.dev3-footer .text-block.h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 34px;
+}
+
+/* Menus: blue 16 / 27 heading, muted 14 / 24 links, 12px gaps (native menu spacing) */
+.dev3-footer.dev3-footer .menu__heading,
+.dev3-footer.dev3-footer .menu__heading__default {
+  padding-block: 0;
+  color: var(--dev3-footer-heading);
+  font-family: var(--font-body--family);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 27px;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.dev3-footer.dev3-footer .menu__item {
+  font-family: var(--font-body--family);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.dev3-footer.dev3-footer .menu__item a {
+  color: var(--dev3-footer-muted);
+  text-decoration: none;
+  transition: color var(--animation-speed) var(--animation-easing);
+}
+
+.dev3-footer.dev3-footer .menu__item a:hover {
+  color: var(--dev3-footer-brand);
+}
+
+/* Newsletter form: input on the right, button on the left, 8px apart (also on mobile) */
+.dev3-footer.dev3-footer .email-signup-block {
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+/* Out-ranks the native mobile stacking rule (.email-signup__input-group:not():not():not(), 0-4-0) */
+.dev3-footer.dev3-footer .email-signup-block .email-signup__input-group.email-signup__input-group {
+  flex-direction: row;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.dev3-footer.dev3-footer .email-signup__input {
+  flex: 1 1 0;
+  inline-size: auto;
+  min-inline-size: 0;
+  padding-block: 13px;
+  padding-inline: 16px;
+  border-radius: 12px;
+  font-family: var(--font-body--family);
+  font-size: 0.875rem;
+  line-height: 24px;
+  text-align: start;
+}
+
+.dev3-footer.dev3-footer .email-signup__input::placeholder {
+  color: var(--color-input-text);
+}
+
+.dev3-footer.dev3-footer .email-signup__button.email-signup__button--text {
+  flex: none;
+  inline-size: auto;
+  padding-block: 13px;
+  padding-inline: 28px;
+  border-radius: 12px;
+  font-family: var(--font-body--family);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+@media screen and (max-width: 749px) {
+  /* Figma mobile: 48 / 20 vertical padding (copyright follows 20px below); sides = page margin */
+  .dev3-footer.dev3-footer .footer-content {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    padding-block: 48px 20px;
+  }
+
+  /* Order: brand, newsletter, Help + About side by side, Shopping (first menu) below */
+  .dev3-footer.dev3-footer .footer-content > * {
+    grid-column: 1 / -1;
+    order: 3;
+  }
+
+  .dev3-footer.dev3-footer .footer-content > .group-block:has(.logo-block) {
+    order: 0;
+    max-inline-size: 342px; /* Figma mobile Footer Brand max width */
+  }
+
+  .dev3-footer.dev3-footer .footer-content > .group-block:has(.email-signup-block) {
+    order: 1;
+  }
+
+  .dev3-footer.dev3-footer .footer-content > accordion-custom {
+    grid-column: auto;
+    order: 2;
+  }
+
+  .dev3-footer.dev3-footer .footer-content > accordion-custom:first-of-type {
+    grid-column: 1 / -1;
+    order: 3;
+  }
+
+  .dev3-footer.dev3-footer .group-block:has(.email-signup-block) .text-block.paragraph {
+    font-size: 0.75rem;
+  }
+
+  .dev3-footer.dev3-footer .text-block.h4 {
+    font-size: 1.0625rem;
+  }
+
+  .dev3-footer.dev3-footer .menu__heading,
+  .dev3-footer.dev3-footer .menu__heading__default {
+    font-size: 0.875rem;
+  }
+
+  .dev3-footer.dev3-footer .menu__item {
+    font-size: 0.75rem;
+  }
+
+  .dev3-footer.dev3-footer .email-signup__input {
+    padding-inline: 20px;
+    font-size: 0.75rem;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  /* Tablet: brand + newsletter side by side, the three menus in one row below */
+  .dev3-footer.dev3-footer .footer-content {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 40px 32px;
+  }
+
+  .dev3-footer.dev3-footer .footer-content > * {
+    grid-column: 1 / -1;
+    order: 3;
+  }
+
+  .dev3-footer.dev3-footer .footer-content > .group-block:has(.logo-block) {
+    grid-column: span 3;
+    order: 0;
+  }
+
+  .dev3-footer.dev3-footer .footer-content > .group-block:has(.email-signup-block) {
+    grid-column: span 3;
+    order: 1;
+  }
+
+  .dev3-footer.dev3-footer .footer-content > accordion-custom {
+    grid-column: span 2;
+    order: 2;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  /* Figma Footer Top: one row, 48px gaps, brand 300px · menus share the rest · newsletter 340px */
+  .dev3-footer.dev3-footer .footer-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 48px;
+    padding-inline: var(--padding-xl);
+  }
+
+  .dev3-footer.dev3-footer .footer-content > * {
+    flex: 1 1 0;
+    min-inline-size: 0;
+  }
+
+  .dev3-footer.dev3-footer .footer-content > .group-block:has(.logo-block) {
+    flex: 0 1 300px;
+  }
+
+  .dev3-footer.dev3-footer .footer-content > .group-block:has(.email-signup-block) {
+    flex: 0 1 340px;
+  }
+}
+
+/* Footer bottom (footer-utilities): divider + copyright */
+.dev3-footer-bottom.dev3-footer-bottom .utilities {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.dev3-footer-bottom.dev3-footer-bottom .footer-utilities__group-copyright {
+  font-family: var(--font-body--family);
+  line-height: 20px;
+}
+
+/* Figma text box is dir="auto": the paragraph direction follows the first strong character */
+.dev3-footer-bottom.dev3-footer-bottom .footer-utilities__text {
+  unicode-bidi: plaintext;
+}
+
+@media screen and (max-width: 749px) {
+  /* Figma mobile: no divider, centered 11 / 20 copyright, 24px bottom padding */
+  .dev3-footer-bottom.dev3-footer-bottom .utilities {
+    padding-block: 0 24px;
+    border-block-start: 0;
+  }
+
+  .dev3-footer-bottom.dev3-footer-bottom .footer-utilities__group-copyright {
+    font-size: 0.6875rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  /* Figma divider spans the 1336px container (20px inside the page width) */
+  .dev3-footer-bottom.dev3-footer-bottom .utilities {
+    margin-inline: var(--padding-xl);
+    inline-size: auto;
+  }
+}

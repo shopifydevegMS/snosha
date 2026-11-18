@@ -10,7 +10,7 @@
   class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
 ></div>
 <div
-  class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
+  class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}{% if section.settings.design == 'dev3' %} dev3-footer-bottom{% endif %}"
   {{ section.shopify_attributes }}
 >
   <div
@@ -107,6 +107,22 @@
     "groups": ["footer"]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "t:dev3_settings.design",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:dev3_settings.design_default"
+        },
+        {
+          "value": "dev3",
+          "label": "t:dev3_settings.design_dev3"
+        }
+      ]
+    },
     {
       "type": "select",
       "id": "section_width",
