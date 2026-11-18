@@ -1106,6 +1106,7 @@
             "video_autoplay": false,
             "video_loop": false,
             "dev3_sound_on_play": true,
+            "dev3_one_at_a_time": false,
             "alt": "",
             "custom_width": 100,
             "custom_width_mobile": 100,
@@ -1182,6 +1183,157 @@
         "dev2_cmp_shadow_color": "#001433"
       }
     },
+    "dev1_results": {
+      "type": "section",
+      "blocks": {
+        "dev1_results_heading": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>النتيجة بعد الاستخدام المنتظم لفرشاة SNOSHA</h2>",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "center",
+            "type_preset": "h2",
+            "font": "var(--font-accent--family)",
+            "font_size": "2rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "dev1_results_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>التنظيف المنتظم مع فرشاة SNOSHA يساعدك على إزالة بقايا الطعام والتصبغات السطحية التي تتراكم مع الوقت لابتسامة تبدو أنظف وأكثر انتعاشًا. جرب SNOSHA وشوف الفرق بنفسك.</p>",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "center",
+            "type_preset": "paragraph",
+            "font": "var(--font-body--family)",
+            "font_size": "1.125rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.color1 }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "dev1_results_compare": {
+          "type": "comparison-slider",
+          "name": "قبل / بعد",
+          "settings": {
+            "before_image": "shopify://shop_images/last_before.webp",
+            "after_image": "shopify://shop_images/last_after.webp",
+            "slider_style": "horizontal",
+            "show_text": true,
+            "before_text": "قبل",
+            "after_text": "بعد",
+            "text_preset": "h6",
+            "text_position_horizontal": "start",
+            "text_position_vertical": "start",
+            "text_background": true,
+            "text_background_color": "{{ settings.color_palette.background }}",
+            "text_corner_radius": 50,
+            "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+            "image_ratio": "landscape",
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "slider_bg_color": "",
+            "slider_handle_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 24,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "dev1_results_heading",
+        "dev1_results_text",
+        "dev1_results_compare"
+      ],
+      "name": "Before After",
+      "settings": {
+        "design": "dev1_results",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 24,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "{{ settings.color_palette.background }}",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 60,
+        "padding-block-end": 60,
+        "dev4_compare_start": 50,
+        "dev4_padding_top_mobile": 56,
+        "dev4_padding_bottom_mobile": 40,
+        "dev4_shadow_color": "",
+        "dev3_padding_top_mobile": 56,
+        "dev3_padding_bottom_mobile": 40,
+        "dev1_feature_title_color": "{{ settings.color_palette.snosha_deep_blue }}",
+        "dev1_padding_mobile_top": 40,
+        "dev1_padding_mobile_bottom": 40,
+        "dev2_faq_border_color": "{{ settings.color_palette.color2 }}",
+        "dev2_faq_open_background": "{{ settings.color_palette.snosha_pale_tint }}",
+        "dev2_faq_icon_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+        "dev2_faq_open_first": false,
+        "dev4_ld_gradient_start": "{{ settings.color_palette.background }}",
+        "dev4_ld_gradient_end": "{{ settings.color_palette.color2 }}",
+        "dev4_ld_heading_color": "",
+        "dev4_ld_text_color": "",
+        "dev4_ld_icon_color": "",
+        "dev4_ld_tile_border_color": "",
+        "dev4_ld_tile_shadow": "",
+        "dev2_cmp_gradient_start": "#0e3b6b",
+        "dev2_cmp_gradient_middle": "{{ settings.color_palette.snosha_deep_blue }}",
+        "dev2_cmp_gradient_end": "#0a2e55",
+        "dev2_cmp_shadow_color": "#001433"
+      }
+    },
     "dev4_long_description": {
       "type": "section",
       "blocks": {
@@ -1201,6 +1353,14 @@
             "copy_max_width": 960,
             "image_max_width": 420,
             "image_max_width_mobile": 350,
+            "image_ratio": 0,
+            "image_zoom": 100,
+            "image_focus_x": 50,
+            "image_focus_y": 50,
+            "image_ratio_mobile": 0,
+            "image_zoom_mobile": 100,
+            "image_focus_x_mobile": 50,
+            "image_focus_y_mobile": 50,
             "column_gap": 16,
             "copy_offset": 0,
             "list_offset": 0,
@@ -1232,8 +1392,12 @@
             "image_max_width": 410,
             "image_max_width_mobile": 350,
             "image_ratio": 100,
+            "image_zoom": 100,
+            "image_focus_x": 50,
             "image_focus_y": 2,
             "image_ratio_mobile": 88,
+            "image_zoom_mobile": 100,
+            "image_focus_x_mobile": 50,
             "image_focus_y_mobile": 34,
             "column_gap": 16,
             "copy_offset": 72,
@@ -1311,9 +1475,13 @@
             "image_max_width": 800,
             "image_max_width_mobile": 160,
             "image_ratio": 68,
+            "image_zoom": 100,
             "image_focus_x": 73,
+            "image_focus_y": 50,
             "image_ratio_mobile": 136,
+            "image_zoom_mobile": 100,
             "image_focus_x_mobile": 15,
+            "image_focus_y_mobile": 50,
             "column_gap": 0,
             "copy_offset": 8,
             "list_offset": 10,
@@ -1418,8 +1586,13 @@
             "image_max_width": 210,
             "image_max_width_mobile": 150,
             "image_ratio": 308,
+            "image_zoom": 100,
             "image_focus_x": 20,
             "image_focus_y": 100,
+            "image_ratio_mobile": 0,
+            "image_zoom_mobile": 100,
+            "image_focus_x_mobile": 50,
+            "image_focus_y_mobile": 50,
             "column_gap": 0,
             "copy_offset": 130,
             "list_offset": 20,
@@ -1524,8 +1697,13 @@
             "image_max_width": 640,
             "image_max_width_mobile": 250,
             "image_ratio": 68,
+            "image_zoom": 100,
             "image_focus_x": 14,
+            "image_focus_y": 50,
             "image_ratio_mobile": 56,
+            "image_zoom_mobile": 100,
+            "image_focus_x_mobile": 50,
+            "image_focus_y_mobile": 50,
             "column_gap": 0,
             "copy_offset": 22,
             "list_offset": 26,
@@ -1620,6 +1798,8 @@
             "image_focus_x": 73,
             "image_focus_y": 28,
             "image_ratio_mobile": 52,
+            "image_zoom_mobile": 100,
+            "image_focus_x_mobile": 50,
             "image_focus_y_mobile": 41,
             "column_gap": 64,
             "copy_offset": 0,
@@ -1697,9 +1877,13 @@
             "image_max_width": 540,
             "image_max_width_mobile": 170,
             "image_ratio": 124,
+            "image_zoom": 100,
+            "image_focus_x": 50,
             "image_focus_y": 26,
             "image_ratio_mobile": 160,
+            "image_zoom_mobile": 100,
             "image_focus_x_mobile": 80,
+            "image_focus_y_mobile": 50,
             "column_gap": 0,
             "copy_offset": 0,
             "list_offset": 26,
@@ -2104,326 +2288,6 @@
         "dev2_cmp_shadow_color": "#001433"
       }
     },
-    "dev4_how_to_use": {
-      "type": "section",
-      "name": "How To Use",
-      "blocks": {
-        "dev4_howto_heading": {
-          "type": "text",
-          "settings": {
-            "text": "<h2>كيفية الاستخدام</h2>",
-            "width": "100%",
-            "max_width": "none",
-            "alignment": "center",
-            "type_preset": "h2",
-            "text_color": "{{ settings.color_palette.snosha_deep_blue }}"
-          },
-          "blocks": {}
-        },
-        "dev4_howto_panel": {
-          "type": "how-to-steps",
-          "settings": {
-            "show_note": true,
-            "note": "يحتاج بعض المستخدمين من 3 إلى 5 أيام للتأقلم مع الإحساس الجديد لفرشاة الأسنان الكهربائية — وهذا أمر طبيعي تمامًا.",
-            "note_icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z\"/><path d=\"M19 17l.7 1.8 1.8.7-1.8.7L19 22l-.7-1.8-1.8-.7 1.8-.7z\"/></svg>",
-            "panel_background_color": "{{ settings.color_palette.snosha_pale_tint }}",
-            "panel_border_color": "{{ settings.color_palette.color2 }}",
-            "panel_shadow_color": "#0d40800f",
-            "badge_start_color": "{{ settings.color_palette.snosha_gradient_start }}",
-            "badge_end_color": "{{ settings.color_palette.snosha_gradient_end }}",
-            "badge_text_color": "{{ settings.color_palette.background }}",
-            "step_text_color": "{{ settings.color_palette.color1 }}",
-            "note_background_color": "{{ settings.color_palette.background }}",
-            "note_text_color": "{{ settings.color_palette.snosha_secondary_blue }}"
-          },
-          "blocks": {
-            "dev4_howto_step_1": {
-              "type": "_how-to-step",
-              "settings": {
-                "text": "ضع كمية مناسبة من معجون الأسنان على رأس الفرشاة."
-              }
-            },
-            "dev4_howto_step_2": {
-              "type": "_how-to-step",
-              "settings": {
-                "text": "ضع الفرشاة داخل الفم أولًا، ثم شغّل الجهاز (لتجنب تناثر المعجون)."
-              }
-            },
-            "dev4_howto_step_3": {
-              "type": "_how-to-step",
-              "settings": {
-                "text": "اختر وضع التنظيف المناسب لاحتياجك."
-              }
-            },
-            "dev4_howto_step_4": {
-              "type": "_how-to-step",
-              "settings": {
-                "text": "حرّك الفرشاة بزاوية 45 درجة على خط اللثة، بحركة بطيئة ذهابًا وإيابًا."
-              }
-            },
-            "dev4_howto_step_5": {
-              "type": "_how-to-step",
-              "settings": {
-                "text": "لا داعي للضغط بقوة؛ الفرشاة مصممة لتنظيف فعّال دون أي جهد إضافي منك."
-              }
-            },
-            "dev4_howto_step_6": {
-              "type": "_how-to-step",
-              "settings": {
-                "text": "قسّم الفم إلى 4 أرباع، ونظّف كل ربع لمدة 30 ثانية تقريبًا — المؤقت الذكي ينبّهك تلقائيًا بنبضة خفيفة عند نهاية كل ربع."
-              }
-            },
-            "dev4_howto_step_7": {
-              "type": "_how-to-step",
-              "settings": {
-                "text": "بعد الانتهاء، اضغط مطولًا على زر التشغيل لمدة 3 ثوانٍ لإيقاف الجهاز."
-              }
-            },
-            "dev4_howto_step_8": {
-              "type": "_how-to-step",
-              "settings": {
-                "text": "لاستخدام حقيبة السفر: افتحها، ضع جسم الفرشاة مع إمكانية إضافة رأسين إضافيين، وأغلقها بإحكام لحماية الفرشاة أثناء السفر."
-              }
-            }
-          },
-          "block_order": [
-            "dev4_howto_step_1",
-            "dev4_howto_step_2",
-            "dev4_howto_step_3",
-            "dev4_howto_step_4",
-            "dev4_howto_step_5",
-            "dev4_howto_step_6",
-            "dev4_howto_step_7",
-            "dev4_howto_step_8"
-          ]
-        }
-      },
-      "block_order": [
-        "dev4_howto_heading",
-        "dev4_howto_panel"
-      ],
-      "settings": {
-        "design": "dev4_howto",
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 18,
-        "section_width": "page-width",
-        "background_color": "",
-        "padding-block-start": 60,
-        "padding-block-end": 60
-      }
-    },
-    "dev2_reviews": {
-      "type": "section",
-      "name": "Reviews",
-      "blocks": {
-        "dev2_reviews_heading": {
-          "type": "text",
-          "settings": {
-            "text": "<h2>تجارب حقيقية من عملاء SNOSHA</h2>",
-            "width": "100%",
-            "max_width": "none",
-            "alignment": "center",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "dev2_reviews_heading"
-      ],
-      "settings": {
-        "design": "dev2_reviews",
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 14,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 60,
-        "padding-block-end": 60
-      }
-    },
-    "product_recommendations_qggXJq": {
-      "type": "product-recommendations",
-      "blocks": {
-        "text_cbcgyb": {
-          "type": "text",
-          "name": "t:names.header",
-          "settings": {
-            "text": "<h3>You may also like </h3>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h4",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
-          "settings": {
-            "product_card_gap": 8,
-            "background_color": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 8,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_DNizbJ": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_color": "",
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_M7MJkb": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_gLWgA6": {
-              "type": "price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "text_color": "",
-                "dev1_show_discount": true,
-                "dev1_discount_background": "{{ settings.color_palette.snosha_pale_tint }}",
-                "dev1_discount_border": "{{ settings.color_palette.color2 }}",
-                "dev1_discount_text": "{{ settings.color_palette.snosha_secondary_blue }}",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_DNizbJ",
-            "product_title_M7MJkb",
-            "price_gLWgA6"
-          ]
-        }
-      },
-      "block_order": [
-        "text_cbcgyb"
-      ],
-      "name": "t:names.product_recommendations",
-      "settings": {
-        "product": "{{ closest.product }}",
-        "recommendation_type": "related",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 4,
-        "columns": 4,
-        "mobile_columns": "2",
-        "columns_gap": 12,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "gap": 28,
-        "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 48,
-        "padding-block-end": 48
-      }
-    },
     "dev3_reels": {
       "type": "carousel",
       "blocks": {
@@ -2577,7 +2441,11 @@
                     "product": "snosha-n2",
                     "title_color": "{{ settings.color_palette.snosha_deep_blue }}",
                     "price_color": "{{ settings.color_palette.snosha_secondary_blue }}",
-                    "thumbnail_border": "{{ settings.color_palette.color2 }}"
+                    "thumbnail_border": "{{ settings.color_palette.color2 }}",
+                    "subtitle": "",
+                    "background_color": "",
+                    "show_add_button": false,
+                    "add_icon_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 3.5V20.5M3.5 12H20.5\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\"></path></svg>"
                   },
                   "blocks": {}
                 }
@@ -2647,7 +2515,11 @@
                     "product": "snosha-n2",
                     "title_color": "{{ settings.color_palette.snosha_deep_blue }}",
                     "price_color": "{{ settings.color_palette.snosha_secondary_blue }}",
-                    "thumbnail_border": "{{ settings.color_palette.color2 }}"
+                    "thumbnail_border": "{{ settings.color_palette.color2 }}",
+                    "subtitle": "",
+                    "background_color": "",
+                    "show_add_button": false,
+                    "add_icon_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 3.5V20.5M3.5 12H20.5\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\"></path></svg>"
                   },
                   "blocks": {}
                 }
@@ -2717,7 +2589,11 @@
                     "product": "snosha-f1",
                     "title_color": "{{ settings.color_palette.snosha_deep_blue }}",
                     "price_color": "{{ settings.color_palette.snosha_secondary_blue }}",
-                    "thumbnail_border": "{{ settings.color_palette.color2 }}"
+                    "thumbnail_border": "{{ settings.color_palette.color2 }}",
+                    "subtitle": "",
+                    "background_color": "",
+                    "show_add_button": false,
+                    "add_icon_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 3.5V20.5M3.5 12H20.5\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\"></path></svg>"
                   },
                   "blocks": {}
                 }
@@ -2787,7 +2663,11 @@
                     "product": "snosha-n2",
                     "title_color": "{{ settings.color_palette.snosha_deep_blue }}",
                     "price_color": "{{ settings.color_palette.snosha_secondary_blue }}",
-                    "thumbnail_border": "{{ settings.color_palette.color2 }}"
+                    "thumbnail_border": "{{ settings.color_palette.color2 }}",
+                    "subtitle": "",
+                    "background_color": "",
+                    "show_add_button": false,
+                    "add_icon_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 3.5V20.5M3.5 12H20.5\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\"></path></svg>"
                   },
                   "blocks": {}
                 }
@@ -2857,7 +2737,11 @@
                     "product": "snosha-f1",
                     "title_color": "{{ settings.color_palette.snosha_deep_blue }}",
                     "price_color": "{{ settings.color_palette.snosha_secondary_blue }}",
-                    "thumbnail_border": "{{ settings.color_palette.color2 }}"
+                    "thumbnail_border": "{{ settings.color_palette.color2 }}",
+                    "subtitle": "",
+                    "background_color": "",
+                    "show_add_button": false,
+                    "add_icon_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 3.5V20.5M3.5 12H20.5\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\"></path></svg>"
                   },
                   "blocks": {}
                 }
@@ -2889,58 +2773,48 @@
         "icons_shape": "none",
         "padding-block-start": 60,
         "padding-block-end": 60,
+        "dev4_columns_tablet": 3,
+        "dev4_columns_mobile": 3,
+        "dev4_columns_gap_mobile": 10,
+        "dev4_section_gap": 40,
+        "dev4_section_gap_mobile": 28,
+        "dev4_padding_bottom_mobile": 9,
+        "dev4_arrow_border": "",
+        "dev4_arrow_icon": "",
+        "dev4_arrow_shadow": "",
+        "dev4_progress_track": "",
+        "dev4_progress_start": "",
+        "dev4_progress_end": "",
         "dev1_columns_tablet": 3,
         "dev1_padding_mobile_top": 40,
         "dev1_padding_mobile_bottom": 40,
         "dev1_progress_track": "{{ settings.color_palette.color2 }}",
         "dev1_progress_start": "{{ settings.color_palette.snosha_gradient_start }}",
-        "dev1_progress_end": "{{ settings.color_palette.snosha_gradient_end }}"
+        "dev1_progress_end": "{{ settings.color_palette.snosha_gradient_end }}",
+        "dev2_featured_product": "",
+        "dev2_accent_start": "",
+        "dev2_accent_end": "",
+        "dev2_background_end": ""
       }
     },
-    "dev1_results": {
+    "dev4_how_to_use": {
       "type": "section",
-      "name": "Before After",
       "blocks": {
-        "dev1_results_heading": {
+        "dev4_howto_heading": {
           "type": "text",
           "settings": {
-            "text": "<h2>النتيجة بعد الاستخدام المنتظم لفرشاة SNOSHA</h2>",
+            "text": "<h2>كيفية الاستخدام</h2>",
             "width": "100%",
             "max_width": "none",
             "alignment": "center",
             "type_preset": "h2",
-            "font": "var(--font-accent--family)",
-            "font_size": "2rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "dev1_results_text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>التنظيف المنتظم مع فرشاة SNOSHA يساعدك على إزالة بقايا الطعام والتصبغات السطحية التي تتراكم مع الوقت لابتسامة تبدو أنظف وأكثر انتعاشًا. جرب SNOSHA وشوف الفرق بنفسك.</p>",
-            "width": "100%",
-            "max_width": "none",
-            "alignment": "center",
-            "type_preset": "paragraph",
             "font": "var(--font-body--family)",
-            "font_size": "1.125rem",
+            "font_size": "1rem",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
-            "text_color": "{{ settings.color_palette.color1 }}",
+            "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -2951,51 +2825,100 @@
           },
           "blocks": {}
         },
-        "dev1_results_compare": {
-          "type": "comparison-slider",
-          "name": "قبل / بعد",
+        "dev4_howto_panel": {
+          "type": "how-to-steps",
           "settings": {
-            "before_image": "shopify://shop_images/last_before.webp",
-            "after_image": "shopify://shop_images/last_after.webp",
-            "slider_style": "horizontal",
-            "show_text": true,
-            "before_text": "قبل",
-            "after_text": "بعد",
-            "text_preset": "h6",
-            "text_position_horizontal": "start",
-            "text_position_vertical": "start",
-            "text_background": true,
-            "text_background_color": "{{ settings.color_palette.background }}",
-            "text_corner_radius": 50,
-            "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
-            "image_ratio": "landscape",
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "slider_bg_color": "",
-            "slider_handle_color": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_color": "",
-            "border_radius": 24,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "show_note": true,
+            "note": "يحتاج بعض المستخدمين من 3 إلى 5 أيام للتأقلم مع الإحساس الجديد لفرشاة الأسنان الكهربائية — وهذا أمر طبيعي تمامًا.",
+            "note_icon_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z\"></path><path d=\"M19 17l.7 1.8 1.8.7-1.8.7L19 22l-.7-1.8-1.8-.7 1.8-.7z\"></path></svg>",
+            "panel_background_color": "{{ settings.color_palette.snosha_pale_tint }}",
+            "panel_border_color": "{{ settings.color_palette.color2 }}",
+            "panel_shadow_color": "#0d40800f",
+            "badge_start_color": "{{ settings.color_palette.snosha_gradient_start }}",
+            "badge_end_color": "{{ settings.color_palette.snosha_gradient_end }}",
+            "badge_text_color": "{{ settings.color_palette.background }}",
+            "step_text_color": "{{ settings.color_palette.color1 }}",
+            "note_background_color": "{{ settings.color_palette.background }}",
+            "note_text_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+            "note_icon_color": ""
           },
-          "blocks": {}
+          "blocks": {
+            "dev4_howto_step_1": {
+              "type": "_how-to-step",
+              "settings": {
+                "text": "ضع كمية مناسبة من معجون الأسنان على رأس الفرشاة."
+              },
+              "blocks": {}
+            },
+            "dev4_howto_step_2": {
+              "type": "_how-to-step",
+              "settings": {
+                "text": "ضع الفرشاة داخل الفم أولًا، ثم شغّل الجهاز (لتجنب تناثر المعجون)."
+              },
+              "blocks": {}
+            },
+            "dev4_howto_step_3": {
+              "type": "_how-to-step",
+              "settings": {
+                "text": "اختر وضع التنظيف المناسب لاحتياجك."
+              },
+              "blocks": {}
+            },
+            "dev4_howto_step_4": {
+              "type": "_how-to-step",
+              "settings": {
+                "text": "حرّك الفرشاة بزاوية 45 درجة على خط اللثة، بحركة بطيئة ذهابًا وإيابًا."
+              },
+              "blocks": {}
+            },
+            "dev4_howto_step_5": {
+              "type": "_how-to-step",
+              "settings": {
+                "text": "لا داعي للضغط بقوة؛ الفرشاة مصممة لتنظيف فعّال دون أي جهد إضافي منك."
+              },
+              "blocks": {}
+            },
+            "dev4_howto_step_6": {
+              "type": "_how-to-step",
+              "settings": {
+                "text": "قسّم الفم إلى 4 أرباع، ونظّف كل ربع لمدة 30 ثانية تقريبًا — المؤقت الذكي ينبّهك تلقائيًا بنبضة خفيفة عند نهاية كل ربع."
+              },
+              "blocks": {}
+            },
+            "dev4_howto_step_7": {
+              "type": "_how-to-step",
+              "settings": {
+                "text": "بعد الانتهاء، اضغط مطولًا على زر التشغيل لمدة 3 ثوانٍ لإيقاف الجهاز."
+              },
+              "blocks": {}
+            },
+            "dev4_howto_step_8": {
+              "type": "_how-to-step",
+              "settings": {
+                "text": "لاستخدام حقيبة السفر: افتحها، ضع جسم الفرشاة مع إمكانية إضافة رأسين إضافيين، وأغلقها بإحكام لحماية الفرشاة أثناء السفر."
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dev4_howto_step_1",
+            "dev4_howto_step_2",
+            "dev4_howto_step_3",
+            "dev4_howto_step_4",
+            "dev4_howto_step_5",
+            "dev4_howto_step_6",
+            "dev4_howto_step_7",
+            "dev4_howto_step_8"
+          ]
         }
       },
       "block_order": [
-        "dev1_results_heading",
-        "dev1_results_text",
-        "dev1_results_compare"
+        "dev4_howto_heading",
+        "dev4_howto_panel"
       ],
+      "name": "How To Use",
       "settings": {
-        "design": "dev1_results",
+        "design": "dev4_howto",
         "content_direction": "column",
         "vertical_on_mobile": true,
         "horizontal_alignment": "flex-start",
@@ -3003,12 +2926,12 @@
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "center",
         "vertical_alignment_flex_direction_column": "center",
-        "gap": 24,
+        "gap": 18,
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "{{ settings.color_palette.background }}",
+        "background_color": "",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -3022,8 +2945,273 @@
         "border_radius": 0,
         "padding-block-start": 60,
         "padding-block-end": 60,
-        "dev1_padding_mobile_top": 40,
-        "dev1_padding_mobile_bottom": 40
+        "dev4_compare_start": 50,
+        "dev4_padding_top_mobile": 56,
+        "dev4_padding_bottom_mobile": 40,
+        "dev4_shadow_color": "",
+        "dev3_padding_top_mobile": 56,
+        "dev3_padding_bottom_mobile": 40,
+        "dev1_feature_title_color": "{{ settings.color_palette.snosha_deep_blue }}",
+        "dev1_padding_mobile_top": 0,
+        "dev1_padding_mobile_bottom": 0,
+        "dev2_faq_border_color": "{{ settings.color_palette.color2 }}",
+        "dev2_faq_open_background": "{{ settings.color_palette.snosha_pale_tint }}",
+        "dev2_faq_icon_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+        "dev2_faq_open_first": false,
+        "dev4_ld_gradient_start": "{{ settings.color_palette.background }}",
+        "dev4_ld_gradient_end": "{{ settings.color_palette.color2 }}",
+        "dev4_ld_heading_color": "",
+        "dev4_ld_text_color": "",
+        "dev4_ld_icon_color": "",
+        "dev4_ld_tile_border_color": "",
+        "dev4_ld_tile_shadow": "",
+        "dev2_cmp_gradient_start": "#0e3b6b",
+        "dev2_cmp_gradient_middle": "{{ settings.color_palette.snosha_deep_blue }}",
+        "dev2_cmp_gradient_end": "#0a2e55",
+        "dev2_cmp_shadow_color": "#001433"
+      }
+    },
+    "dev2_reviews": {
+      "type": "section",
+      "blocks": {
+        "dev2_reviews_heading": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>تجارب حقيقية من عملاء SNOSHA</h2>",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "center",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "judge_me_reviews_review_widget_hAp4GM": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "real_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "dev2_reviews_heading",
+        "judge_me_reviews_review_widget_hAp4GM"
+      ],
+      "name": "Reviews",
+      "settings": {
+        "design": "dev2_reviews",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 14,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 60,
+        "padding-block-end": 60,
+        "dev4_compare_start": 50,
+        "dev4_padding_top_mobile": 56,
+        "dev4_padding_bottom_mobile": 40,
+        "dev4_shadow_color": "",
+        "dev3_padding_top_mobile": 56,
+        "dev3_padding_bottom_mobile": 40,
+        "dev1_feature_title_color": "{{ settings.color_palette.snosha_deep_blue }}",
+        "dev1_padding_mobile_top": 0,
+        "dev1_padding_mobile_bottom": 0,
+        "dev2_faq_border_color": "{{ settings.color_palette.color2 }}",
+        "dev2_faq_open_background": "{{ settings.color_palette.snosha_pale_tint }}",
+        "dev2_faq_icon_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+        "dev2_faq_open_first": false,
+        "dev4_ld_gradient_start": "{{ settings.color_palette.background }}",
+        "dev4_ld_gradient_end": "{{ settings.color_palette.color2 }}",
+        "dev4_ld_heading_color": "",
+        "dev4_ld_text_color": "",
+        "dev4_ld_icon_color": "",
+        "dev4_ld_tile_border_color": "",
+        "dev4_ld_tile_shadow": "",
+        "dev2_cmp_gradient_start": "#0e3b6b",
+        "dev2_cmp_gradient_middle": "{{ settings.color_palette.snosha_deep_blue }}",
+        "dev2_cmp_gradient_end": "#0a2e55",
+        "dev2_cmp_shadow_color": "#001433"
+      }
+    },
+    "product_recommendations_qggXJq": {
+      "type": "product-recommendations",
+      "blocks": {
+        "text_cbcgyb": {
+          "type": "text",
+          "name": "t:names.header",
+          "settings": {
+            "text": "<h3>You may also like </h3>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h4",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 8,
+            "background_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 8,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_DNizbJ": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_M7MJkb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_gLWgA6": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "text_color": "",
+                "dev1_show_discount": true,
+                "dev1_discount_background": "{{ settings.color_palette.snosha_pale_tint }}",
+                "dev1_discount_border": "{{ settings.color_palette.color2 }}",
+                "dev1_discount_text": "{{ settings.color_palette.snosha_secondary_blue }}",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_DNizbJ",
+            "product_title_M7MJkb",
+            "price_gLWgA6"
+          ]
+        }
+      },
+      "block_order": [
+        "text_cbcgyb"
+      ],
+      "name": "t:names.product_recommendations",
+      "settings": {
+        "product": "{{ closest.product }}",
+        "recommendation_type": "related",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 4,
+        "columns": 4,
+        "mobile_columns": "2",
+        "columns_gap": 12,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "gap": 28,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 48,
+        "padding-block-end": 48
       }
     }
   },
