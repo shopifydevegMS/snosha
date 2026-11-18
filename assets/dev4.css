@@ -663,6 +663,24 @@ dev4-comparison-slider {
   block-size: auto;
 }
 
+/*
+  Image crop (group "Image crop" settings, Figma frame + fill offsets): the picture is the frame
+  (aspect-ratio; auto = original shape), the image covers it, zoomed around the focus point.
+  object-position / transform-origin are physical x/y like the Figma values — direction-independent.
+*/
+.dev4-ld-group__media picture {
+  aspect-ratio: var(--dev4-ld-ratio-m, auto);
+  overflow: hidden;
+}
+
+.dev4-ld-group__media picture > .dev4-ld-group__image {
+  block-size: 100%;
+  object-fit: cover;
+  object-position: var(--dev4-ld-focus-m, 50% 50%);
+  transform-origin: var(--dev4-ld-focus-m, 50% 50%);
+  scale: var(--dev4-ld-zoom-m, 1);
+}
+
 .dev4-ld-group__list {
   grid-area: list;
   display: flex;
@@ -819,6 +837,16 @@ dev4-comparison-slider {
   .dev4-ld-group__media {
     justify-self: var(--dev4-ld-media-justify);
     max-inline-size: var(--dev4-ld-media-max);
+  }
+
+  .dev4-ld-group__media picture {
+    aspect-ratio: var(--dev4-ld-ratio, auto);
+  }
+
+  .dev4-ld-group__media picture > .dev4-ld-group__image {
+    object-position: var(--dev4-ld-focus, 50% 50%);
+    transform-origin: var(--dev4-ld-focus, 50% 50%);
+    scale: var(--dev4-ld-zoom, 1);
   }
 
   /* Sonic / Cleaning modes / Battery: text (right) · image · list (left). */

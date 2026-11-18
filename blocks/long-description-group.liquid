@@ -48,6 +48,12 @@
     --dev4-ld-list-gap: {{ bs.list_gap }}px;
     --dev4-ld-tile: {{ bs.tile_size }}px;
     --dev4-ld-tile-mobile: {{ bs.tile_size_mobile }}px;
+    --dev4-ld-ratio: {% if bs.image_ratio > 0 %}100 / {{ bs.image_ratio }}{% else %}auto{% endif %};
+    --dev4-ld-ratio-m: {% if bs.image_ratio_mobile > 0 %}100 / {{ bs.image_ratio_mobile }}{% else %}auto{% endif %};
+    --dev4-ld-zoom: {{ bs.image_zoom | divided_by: 100.0 }};
+    --dev4-ld-zoom-m: {{ bs.image_zoom_mobile | divided_by: 100.0 }};
+    --dev4-ld-focus: {{ bs.image_focus_x }}% {{ bs.image_focus_y }}%;
+    --dev4-ld-focus-m: {{ bs.image_focus_x_mobile }}% {{ bs.image_focus_y_mobile }}%;
     --dev4-ld-row-title-weight: {{ bs.row_title_weight }};
     --dev4-ld-row-text-weight: {{ bs.row_text_weight }};
     {%- if bs.tile_border_color != blank %}--dev4-ld-tile-border: {{ bs.tile_border_color }};{% endif -%}
@@ -281,6 +287,97 @@
       "step": 10,
       "unit": "px",
       "default": 350
+    },
+    {
+      "type": "header",
+      "content": "t:dev4_settings.ld_crop_header",
+      "info": "t:dev4_settings.ld_crop_info"
+    },
+    {
+      "type": "range",
+      "id": "image_ratio",
+      "label": "t:dev4_settings.ld_image_ratio",
+      "info": "t:dev4_settings.ld_image_ratio_info",
+      "min": 0,
+      "max": 400,
+      "step": 4,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "image_zoom",
+      "label": "t:dev4_settings.ld_image_zoom",
+      "min": 100,
+      "max": 300,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "image_focus_x",
+      "label": "t:dev4_settings.ld_image_focus_x",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "image_focus_y",
+      "label": "t:dev4_settings.ld_image_focus_y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "image_ratio_mobile",
+      "label": "t:dev4_settings.ld_image_ratio_mobile",
+      "info": "t:dev4_settings.ld_image_ratio_info",
+      "min": 0,
+      "max": 400,
+      "step": 4,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "image_zoom_mobile",
+      "label": "t:dev4_settings.ld_image_zoom_mobile",
+      "min": 100,
+      "max": 300,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "image_focus_x_mobile",
+      "label": "t:dev4_settings.ld_image_focus_x_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "image_focus_y_mobile",
+      "label": "t:dev4_settings.ld_image_focus_y_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "t:dev4_settings.ld_spacing_header"
     },
     {
       "type": "range",
