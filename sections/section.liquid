@@ -34,6 +34,18 @@
   if section.settings.design == 'dev2_compare'
     assign section_class = 'dev2-cmp-section'
   endif
+  # dev4: Design 8 (product 09 How To Use) scope class for assets/dev4.css
+  if section.settings.design == 'dev4_howto'
+    assign section_class = 'dev4-howto'
+  endif
+  # dev2: Design 9 (product 08 Reviews, Judge.me app block) scope class for assets/dev2.css
+  if section.settings.design == 'dev2_reviews'
+    assign section_class = 'dev2-reviews'
+  endif
+  # dev1: Design 10 (product 09 Before After) scope class for assets/dev1.css
+  if section.settings.design == 'dev1_results'
+    assign section_class = 'dev1-results'
+  endif
 -%}
 
 {%- if section.settings.design == 'dev3' -%}
@@ -68,8 +80,8 @@
   <script src="{{ 'dev4.js' | asset_url }}" type="module"></script>
 {%- endif -%}
 
-{%- if section.settings.design == 'dev1' -%}
-  {%- comment -%} dev1: per-instance values for assets/dev1.css (Design 3 — 10 Why SNOSHA) {%- endcomment -%}
+{%- if section.settings.design == 'dev1' or section.settings.design == 'dev1_results' -%}
+  {%- comment -%} dev1: per-instance values for assets/dev1.css (Design 3 — 10 Why SNOSHA; Design 10 — product 09 Before After) {%- endcomment -%}
   {%- style -%}
     #shopify-section-{{ section.id }} {
       {%- if section.settings.dev1_feature_title_color != blank %} --dev1-why-title: {{ section.settings.dev1_feature_title_color }};{% endif %}
@@ -201,6 +213,18 @@
         {
           "value": "dev2_compare",
           "label": "t:dev2_settings.design_7"
+        },
+        {
+          "value": "dev4_howto",
+          "label": "t:dev4_settings.design_8"
+        },
+        {
+          "value": "dev2_reviews",
+          "label": "t:dev2_settings.design_9"
+        },
+        {
+          "value": "dev1_results",
+          "label": "t:dev1_settings.design_10"
         }
       ],
       "default": "default"
@@ -707,7 +731,7 @@
       "step": 1,
       "unit": "px",
       "default": 0,
-      "visible_if": "{{ section.settings.design == 'dev1' }}"
+      "visible_if": "{{ section.settings.design == 'dev1' or section.settings.design == 'dev1_results' }}"
     },
     {
       "type": "range",
@@ -719,7 +743,7 @@
       "step": 1,
       "unit": "px",
       "default": 0,
-      "visible_if": "{{ section.settings.design == 'dev1' }}"
+      "visible_if": "{{ section.settings.design == 'dev1' or section.settings.design == 'dev1_results' }}"
     },
     {
       "type": "header",

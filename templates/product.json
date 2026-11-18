@@ -1057,6 +1057,7 @@
         "limit_details_width": false,
         "gap": 24,
         "enable_sticky_add_to_cart": true,
+        "dev2_sticky_label": "أضف إلى السلة",
         "background_color": "{{ settings.color_palette.background }}",
         "padding-block-start": 40,
         "padding-block-end": 60,
@@ -2103,6 +2104,180 @@
         "dev2_cmp_shadow_color": "#001433"
       }
     },
+    "dev4_how_to_use": {
+      "type": "section",
+      "name": "How To Use",
+      "blocks": {
+        "dev4_howto_heading": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>كيفية الاستخدام</h2>",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "center",
+            "type_preset": "h2",
+            "text_color": "{{ settings.color_palette.snosha_deep_blue }}"
+          },
+          "blocks": {}
+        },
+        "dev4_howto_panel": {
+          "type": "how-to-steps",
+          "settings": {
+            "show_note": true,
+            "note": "يحتاج بعض المستخدمين من 3 إلى 5 أيام للتأقلم مع الإحساس الجديد لفرشاة الأسنان الكهربائية — وهذا أمر طبيعي تمامًا.",
+            "note_icon_svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z\"/><path d=\"M19 17l.7 1.8 1.8.7-1.8.7L19 22l-.7-1.8-1.8-.7 1.8-.7z\"/></svg>",
+            "panel_background_color": "{{ settings.color_palette.snosha_pale_tint }}",
+            "panel_border_color": "{{ settings.color_palette.color2 }}",
+            "panel_shadow_color": "#0d40800f",
+            "badge_start_color": "{{ settings.color_palette.snosha_gradient_start }}",
+            "badge_end_color": "{{ settings.color_palette.snosha_gradient_end }}",
+            "badge_text_color": "{{ settings.color_palette.background }}",
+            "step_text_color": "{{ settings.color_palette.color1 }}",
+            "note_background_color": "{{ settings.color_palette.background }}",
+            "note_text_color": "{{ settings.color_palette.snosha_secondary_blue }}"
+          },
+          "blocks": {
+            "dev4_howto_step_1": {
+              "type": "_how-to-step",
+              "settings": {
+                "text": "ضع كمية مناسبة من معجون الأسنان على رأس الفرشاة."
+              }
+            },
+            "dev4_howto_step_2": {
+              "type": "_how-to-step",
+              "settings": {
+                "text": "ضع الفرشاة داخل الفم أولًا، ثم شغّل الجهاز (لتجنب تناثر المعجون)."
+              }
+            },
+            "dev4_howto_step_3": {
+              "type": "_how-to-step",
+              "settings": {
+                "text": "اختر وضع التنظيف المناسب لاحتياجك."
+              }
+            },
+            "dev4_howto_step_4": {
+              "type": "_how-to-step",
+              "settings": {
+                "text": "حرّك الفرشاة بزاوية 45 درجة على خط اللثة، بحركة بطيئة ذهابًا وإيابًا."
+              }
+            },
+            "dev4_howto_step_5": {
+              "type": "_how-to-step",
+              "settings": {
+                "text": "لا داعي للضغط بقوة؛ الفرشاة مصممة لتنظيف فعّال دون أي جهد إضافي منك."
+              }
+            },
+            "dev4_howto_step_6": {
+              "type": "_how-to-step",
+              "settings": {
+                "text": "قسّم الفم إلى 4 أرباع، ونظّف كل ربع لمدة 30 ثانية تقريبًا — المؤقت الذكي ينبّهك تلقائيًا بنبضة خفيفة عند نهاية كل ربع."
+              }
+            },
+            "dev4_howto_step_7": {
+              "type": "_how-to-step",
+              "settings": {
+                "text": "بعد الانتهاء، اضغط مطولًا على زر التشغيل لمدة 3 ثوانٍ لإيقاف الجهاز."
+              }
+            },
+            "dev4_howto_step_8": {
+              "type": "_how-to-step",
+              "settings": {
+                "text": "لاستخدام حقيبة السفر: افتحها، ضع جسم الفرشاة مع إمكانية إضافة رأسين إضافيين، وأغلقها بإحكام لحماية الفرشاة أثناء السفر."
+              }
+            }
+          },
+          "block_order": [
+            "dev4_howto_step_1",
+            "dev4_howto_step_2",
+            "dev4_howto_step_3",
+            "dev4_howto_step_4",
+            "dev4_howto_step_5",
+            "dev4_howto_step_6",
+            "dev4_howto_step_7",
+            "dev4_howto_step_8"
+          ]
+        }
+      },
+      "block_order": [
+        "dev4_howto_heading",
+        "dev4_howto_panel"
+      ],
+      "settings": {
+        "design": "dev4_howto",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 18,
+        "section_width": "page-width",
+        "background_color": "",
+        "padding-block-start": 60,
+        "padding-block-end": 60
+      }
+    },
+    "dev2_reviews": {
+      "type": "section",
+      "name": "Reviews",
+      "blocks": {
+        "dev2_reviews_heading": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>تجارب حقيقية من عملاء SNOSHA</h2>",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "center",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "dev2_reviews_heading"
+      ],
+      "settings": {
+        "design": "dev2_reviews",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 14,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 60,
+        "padding-block-end": 60
+      }
+    },
     "product_recommendations_qggXJq": {
       "type": "product-recommendations",
       "blocks": {
@@ -2248,13 +2423,619 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "dev3_reels": {
+      "type": "carousel",
+      "blocks": {
+        "static-header": {
+          "type": "group",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "center",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 0,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "dev3_reels_heading": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>تقييمات من عملاء SNOSHA</h2>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h2",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "dev3_reels_heading"
+          ]
+        },
+        "static-carousel-content": {
+          "type": "_carousel-content",
+          "name": "t:names.carousel_content",
+          "static": true,
+          "settings": {
+            "background_color": "",
+            "height": "fit",
+            "position": "top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "dev3_reel_1": {
+              "type": "_card",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 12,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "aspect_ratio": "adapt",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev3_reel_1_video": {
+                  "type": "video",
+                  "settings": {
+                    "source": "uploaded",
+                    "video": "shopify://files/videos/632f1bdd13364e1f8c55181a8b976818.HD-1080p-7.2Mbps-100583611.mp4",
+                    "video_url": "",
+                    "video_autoplay": false,
+                    "video_loop": false,
+                    "dev3_sound_on_play": true,
+                    "dev3_one_at_a_time": true,
+                    "alt": "",
+                    "custom_width": 100,
+                    "custom_width_mobile": 100,
+                    "aspect_ratio": "auto",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_color": "",
+                    "border_radius": 18,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "dev3_reel_1_product": {
+                  "type": "reel-product",
+                  "settings": {
+                    "product": "snosha-n2",
+                    "title_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                    "price_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                    "thumbnail_border": "{{ settings.color_palette.color2 }}"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "dev3_reel_1_video",
+                "dev3_reel_1_product"
+              ]
+            },
+            "dev3_reel_2": {
+              "type": "_card",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 12,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "aspect_ratio": "adapt",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev3_reel_2_video": {
+                  "type": "video",
+                  "settings": {
+                    "source": "uploaded",
+                    "video": "shopify://files/videos/632f1bdd13364e1f8c55181a8b976818.HD-1080p-7.2Mbps-100583611.mp4",
+                    "video_url": "",
+                    "video_autoplay": false,
+                    "video_loop": false,
+                    "dev3_sound_on_play": true,
+                    "dev3_one_at_a_time": true,
+                    "alt": "",
+                    "custom_width": 100,
+                    "custom_width_mobile": 100,
+                    "aspect_ratio": "auto",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_color": "",
+                    "border_radius": 18,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "dev3_reel_2_product": {
+                  "type": "reel-product",
+                  "settings": {
+                    "product": "snosha-n2",
+                    "title_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                    "price_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                    "thumbnail_border": "{{ settings.color_palette.color2 }}"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "dev3_reel_2_video",
+                "dev3_reel_2_product"
+              ]
+            },
+            "dev3_reel_3": {
+              "type": "_card",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 12,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "aspect_ratio": "adapt",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev3_reel_3_video": {
+                  "type": "video",
+                  "settings": {
+                    "source": "uploaded",
+                    "video": "shopify://files/videos/632f1bdd13364e1f8c55181a8b976818.HD-1080p-7.2Mbps-100583611.mp4",
+                    "video_url": "",
+                    "video_autoplay": false,
+                    "video_loop": false,
+                    "dev3_sound_on_play": true,
+                    "dev3_one_at_a_time": true,
+                    "alt": "",
+                    "custom_width": 100,
+                    "custom_width_mobile": 100,
+                    "aspect_ratio": "auto",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_color": "",
+                    "border_radius": 18,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "dev3_reel_3_product": {
+                  "type": "reel-product",
+                  "settings": {
+                    "product": "snosha-f1",
+                    "title_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                    "price_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                    "thumbnail_border": "{{ settings.color_palette.color2 }}"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "dev3_reel_3_video",
+                "dev3_reel_3_product"
+              ]
+            },
+            "dev3_reel_4": {
+              "type": "_card",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 12,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "aspect_ratio": "adapt",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev3_reel_4_video": {
+                  "type": "video",
+                  "settings": {
+                    "source": "uploaded",
+                    "video": "shopify://files/videos/632f1bdd13364e1f8c55181a8b976818.HD-1080p-7.2Mbps-100583611.mp4",
+                    "video_url": "",
+                    "video_autoplay": false,
+                    "video_loop": false,
+                    "dev3_sound_on_play": true,
+                    "dev3_one_at_a_time": true,
+                    "alt": "",
+                    "custom_width": 100,
+                    "custom_width_mobile": 100,
+                    "aspect_ratio": "auto",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_color": "",
+                    "border_radius": 18,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "dev3_reel_4_product": {
+                  "type": "reel-product",
+                  "settings": {
+                    "product": "snosha-n2",
+                    "title_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                    "price_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                    "thumbnail_border": "{{ settings.color_palette.color2 }}"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "dev3_reel_4_video",
+                "dev3_reel_4_product"
+              ]
+            },
+            "dev3_reel_5": {
+              "type": "_card",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "flex-start",
+                "gap": 12,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "aspect_ratio": "adapt",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "dev3_reel_5_video": {
+                  "type": "video",
+                  "settings": {
+                    "source": "uploaded",
+                    "video": "shopify://files/videos/632f1bdd13364e1f8c55181a8b976818.HD-1080p-7.2Mbps-100583611.mp4",
+                    "video_url": "",
+                    "video_autoplay": false,
+                    "video_loop": false,
+                    "dev3_sound_on_play": true,
+                    "dev3_one_at_a_time": true,
+                    "alt": "",
+                    "custom_width": 100,
+                    "custom_width_mobile": 100,
+                    "aspect_ratio": "auto",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_color": "",
+                    "border_radius": 18,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "dev3_reel_5_product": {
+                  "type": "reel-product",
+                  "settings": {
+                    "product": "snosha-f1",
+                    "title_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                    "price_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+                    "thumbnail_border": "{{ settings.color_palette.color2 }}"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "dev3_reel_5_video",
+                "dev3_reel_5_product"
+              ]
+            }
+          },
+          "block_order": [
+            "dev3_reel_1",
+            "dev3_reel_2",
+            "dev3_reel_3",
+            "dev3_reel_4",
+            "dev3_reel_5"
+          ]
+        }
+      },
+      "name": "Reels",
+      "settings": {
+        "design": "dev1",
+        "columns": 5,
+        "mobile_columns": "1",
+        "section_width": "page-width",
+        "columns_gap": 24,
+        "background_color": "{{ settings.color_palette.background }}",
+        "icons_style": "none",
+        "icons_shape": "none",
+        "padding-block-start": 60,
+        "padding-block-end": 60,
+        "dev1_columns_tablet": 3,
+        "dev1_padding_mobile_top": 40,
+        "dev1_padding_mobile_bottom": 40,
+        "dev1_progress_track": "{{ settings.color_palette.color2 }}",
+        "dev1_progress_start": "{{ settings.color_palette.snosha_gradient_start }}",
+        "dev1_progress_end": "{{ settings.color_palette.snosha_gradient_end }}"
+      }
+    },
+    "dev1_results": {
+      "type": "section",
+      "name": "Before After",
+      "blocks": {
+        "dev1_results_heading": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>النتيجة بعد الاستخدام المنتظم لفرشاة SNOSHA</h2>",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "center",
+            "type_preset": "h2",
+            "font": "var(--font-accent--family)",
+            "font_size": "2rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "dev1_results_text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>التنظيف المنتظم مع فرشاة SNOSHA يساعدك على إزالة بقايا الطعام والتصبغات السطحية التي تتراكم مع الوقت لابتسامة تبدو أنظف وأكثر انتعاشًا. جرب SNOSHA وشوف الفرق بنفسك.</p>",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "center",
+            "type_preset": "paragraph",
+            "font": "var(--font-body--family)",
+            "font_size": "1.125rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.color1 }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "dev1_results_compare": {
+          "type": "comparison-slider",
+          "name": "قبل / بعد",
+          "settings": {
+            "before_image": "shopify://shop_images/last_before.webp",
+            "after_image": "shopify://shop_images/last_after.webp",
+            "slider_style": "horizontal",
+            "show_text": true,
+            "before_text": "قبل",
+            "after_text": "بعد",
+            "text_preset": "h6",
+            "text_position_horizontal": "start",
+            "text_position_vertical": "start",
+            "text_background": true,
+            "text_background_color": "{{ settings.color_palette.background }}",
+            "text_corner_radius": 50,
+            "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+            "image_ratio": "landscape",
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "slider_bg_color": "",
+            "slider_handle_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 24,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "dev1_results_heading",
+        "dev1_results_text",
+        "dev1_results_compare"
+      ],
+      "settings": {
+        "design": "dev1_results",
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 24,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "{{ settings.color_palette.background }}",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 60,
+        "padding-block-end": 60,
+        "dev1_padding_mobile_top": 40,
+        "dev1_padding_mobile_bottom": 40
+      }
     }
   },
   "order": [
     "main",
     "dev3_how_to_use_video",
+    "dev1_results",
     "dev4_long_description",
     "dev2_comparison",
+    "dev3_reels",
+    "dev4_how_to_use",
+    "dev2_reviews",
     "product_recommendations_qggXJq"
   ]
 }
