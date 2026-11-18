@@ -608,3 +608,302 @@ dev4-comparison-slider {
     line-height: calc(28 / 16);
   }
 }
+
+/* ==== dev4-ld — product "Long Description" (sections/section.liquid Design 5 + blocks/long-description-group.liquid) ==== */
+
+/*
+  One continuous gradient behind all groups (palette colors from the section's Design 5 settings).
+  Painted on the native .section-background sibling: base.css forces `.section { background: transparent }`
+  (`.shopify-section:not(.header-section) :is(.section, …)`), so a background on .dev4-ld itself is wiped.
+*/
+.shopify-section:has(> .section.dev4-ld) > .section-background {
+  background-image: linear-gradient(
+    to bottom,
+    var(--dev4-ld-gradient-start, transparent),
+    var(--dev4-ld-gradient-end, transparent)
+  );
+}
+
+/*
+  Group = Arabic content boundary. The grid keeps direction: rtl so the copy column stays on the right
+  in every locale; DOM order (copy, image, list) is also the mobile reading order.
+*/
+.dev4-ld-group {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: 'copy' 'media' 'list';
+  align-items: start;
+  row-gap: var(--gap-md);
+  inline-size: 100%;
+  direction: rtl;
+  unicode-bidi: isolate;
+  text-align: start;
+}
+
+.dev4-ld-group__copy {
+  grid-area: copy;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+  min-inline-size: 0;
+}
+
+.dev4-ld-group__media {
+  grid-area: media;
+  justify-self: center;
+  inline-size: 100%;
+  max-inline-size: var(--dev4-ld-media-max-mobile);
+  min-inline-size: 0;
+}
+
+.dev4-ld-group__media picture,
+.dev4-ld-group__image {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.dev4-ld-group__list {
+  grid-area: list;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+  inline-size: 100%;
+  max-inline-size: var(--dev4-ld-list-max);
+  min-inline-size: 0;
+}
+
+/* Typography — Figma desktop: heading 32/52 bold, subtitle 24/40, body 16/28 (intro 18/32), note 14/24. */
+.dev4-ld-group__heading {
+  margin: 0;
+  font-family: var(--font-heading--family);
+  font-style: var(--font-heading--style);
+  font-weight: var(--font-heading--weight);
+  font-size: var(--font-size--3xl);
+  line-height: calc(52 / 32);
+  color: var(--dev4-ld-heading, var(--color-foreground));
+}
+
+.dev4-ld-group__subtitle {
+  margin: 0;
+  font-family: var(--font-accent--family);
+  font-style: var(--font-accent--style);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--2xl);
+  line-height: calc(40 / 24);
+  color: var(--dev4-ld-heading, var(--color-foreground));
+}
+
+.dev4-ld-group__text {
+  max-inline-size: var(--dev4-ld-copy-max);
+  font-family: var(--font-body--family);
+  font-style: var(--font-body--style);
+  font-weight: var(--font-body--weight);
+  font-size: var(--font-size--md);
+  line-height: calc(28 / 16);
+  color: var(--dev4-ld-text, var(--color-foreground));
+  overflow-wrap: break-word;
+}
+
+.dev4-ld-group__text > * {
+  margin: 0;
+}
+
+.dev4-ld-group--text .dev4-ld-group__text {
+  font-size: var(--font-size--lg);
+  line-height: calc(32 / 18);
+}
+
+.dev4-ld-group__note,
+.dev4-ld-group__list-heading {
+  margin: 0;
+  font-family: var(--font-accent--family);
+  font-style: var(--font-accent--style);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--sm);
+  line-height: calc(24 / 14);
+  color: var(--dev4-ld-heading, var(--color-foreground));
+}
+
+/* Rows (blocks/benefit-item.liquid): round white tile, pale border, soft shadow (Figma Icon Tile). */
+.dev4-ld-group .dev4-benefit {
+  --dev4-benefit-tile-size: var(--dev4-ld-tile);
+  --dev4-benefit-icon-size: calc(var(--dev4-ld-tile) * 0.45);
+
+  align-items: center;
+}
+
+.dev4-ld-group .dev4-benefit__tile {
+  border-radius: 50%;
+  color: var(--dev4-benefit-icon, var(--dev4-ld-icon, var(--color-foreground)));
+  background-image: none;
+  background-color: var(--dev4-benefit-tile, var(--color-background));
+  box-shadow:
+    inset 0 0 0 1px var(--dev4-benefit-tile-border, var(--dev4-ld-tile-border, var(--color-border))),
+    0 8px 16px var(--dev4-ld-tile-shadow, transparent);
+}
+
+.dev4-ld-group .dev4-benefit__title {
+  font-weight: var(--dev4-ld-row-title-weight, 700);
+  color: var(--dev4-ld-heading, var(--color-foreground));
+}
+
+.dev4-ld-group .dev4-benefit__description {
+  font-weight: var(--dev4-ld-row-text-weight, 400);
+  color: var(--dev4-benefit-description, var(--dev4-ld-text, var(--color-foreground)));
+}
+
+/* No image picked: theme placeholder at a square ratio. */
+.dev4-ld-group .dev4-ld-group__placeholder {
+  aspect-ratio: 1;
+  block-size: auto;
+  background-color: rgb(var(--color-foreground-rgb) / var(--opacity-5, 0.05));
+}
+
+/* Mobile and tablet compositions (< 990px): copy first, then image and list per the group's mobile layout. */
+@media screen and (max-width: 989px) {
+  /* Text, then list (right) beside the image (left) — Figma Box Contents 178 / 160. */
+  .dev4-ld-group--m-beside {
+    grid-template-columns: minmax(0, 1fr) minmax(0, var(--dev4-ld-media-max-mobile));
+    grid-template-areas: 'copy copy' 'list media';
+    column-gap: var(--gap-md);
+  }
+
+  .dev4-ld-group--m-beside .dev4-ld-group__media,
+  .dev4-ld-group--m-beside .dev4-ld-group__list {
+    align-self: center;
+  }
+
+  /* Text, then the list drawn over the image; the image sits on the left edge under the rows. */
+  .dev4-ld-group--m-behind {
+    grid-template-areas: 'copy' 'stack';
+  }
+
+  .dev4-ld-group--m-behind .dev4-ld-group__list {
+    grid-area: stack;
+    position: relative;
+    z-index: 1;
+    max-inline-size: none;
+  }
+
+  .dev4-ld-group--m-behind .dev4-ld-group__media {
+    grid-area: stack;
+    justify-self: end;
+    align-self: start;
+    pointer-events: none;
+  }
+}
+
+/* Desktop compositions (>= 990px). */
+@media screen and (min-width: 990px) {
+  .dev4-ld-group {
+    column-gap: var(--dev4-ld-column-gap);
+    row-gap: 0;
+    padding-inline: var(--padding-xl);
+  }
+
+  .dev4-ld-group--v-center {
+    align-items: center;
+  }
+
+  .dev4-ld-group__copy {
+    padding-block-start: var(--dev4-ld-copy-offset);
+  }
+
+  /* Row spacing = the group's "Row gap" setting (Figma 64 / 22 / 52 / 20 / 18 / 20). */
+  .dev4-ld-group__list {
+    gap: var(--dev4-ld-list-gap, var(--gap-md));
+    margin-block-start: var(--dev4-ld-list-offset);
+  }
+
+  .dev4-ld-group__media {
+    justify-self: var(--dev4-ld-media-justify);
+    max-inline-size: var(--dev4-ld-media-max);
+  }
+
+  /* Sonic / Cleaning modes / Battery: text (right) · image · list (left). */
+  .dev4-ld-group--list_media_copy {
+    grid-template-columns:
+      minmax(0, var(--dev4-ld-copy-max))
+      minmax(0, var(--dev4-ld-media-max))
+      minmax(0, 1fr);
+    grid-template-areas: 'copy media list';
+  }
+
+  .dev4-ld-group--list_media_copy .dev4-ld-group__list {
+    justify-self: end;
+  }
+
+  /* Box contents / Brush heads / Water: image (left) · text with the list under it (right). */
+  .dev4-ld-group--media_copy_list {
+    grid-template-columns: minmax(0, var(--dev4-ld-copy-max)) minmax(0, 1fr);
+    grid-template-areas: 'copy media' 'list media';
+    grid-template-rows: auto 1fr;
+  }
+
+  .dev4-ld-group--media_copy_list .dev4-ld-group__media {
+    align-self: center;
+  }
+
+  .dev4-ld-group--media_copy_list .dev4-ld-group__list {
+    max-inline-size: min(100%, var(--dev4-ld-list-max));
+  }
+}
+
+/* Mobile type (< 750px): Figma heading 21, subtitle 16, body 13.5, note 12, rows 14.5 / 12 (nearest tokens). */
+@media screen and (max-width: 749px) {
+  .dev4-ld-group .dev4-benefit {
+    --dev4-benefit-tile-size: var(--dev4-ld-tile-mobile);
+    --dev4-benefit-icon-size: calc(var(--dev4-ld-tile-mobile) * 0.45);
+  }
+
+  .dev4-ld-group__copy {
+    gap: var(--gap-sm);
+  }
+
+  .dev4-ld-group__heading {
+    font-size: var(--font-size--xl);
+    line-height: calc(32 / 20);
+  }
+
+  .dev4-ld-group__subtitle {
+    font-size: var(--font-size--md);
+    line-height: calc(26 / 16);
+  }
+
+  .dev4-ld-group__text,
+  .dev4-ld-group--text .dev4-ld-group__text {
+    font-size: var(--font-size--sm);
+    line-height: 2;
+  }
+
+  .dev4-ld-group__note,
+  .dev4-ld-group__list-heading {
+    font-size: var(--font-size--2xs);
+    line-height: 2;
+  }
+
+  .dev4-ld-group .dev4-benefit__title {
+    font-size: var(--font-size--sm);
+    line-height: calc(27 / 14);
+  }
+
+  .dev4-ld-group .dev4-benefit__description {
+    font-size: var(--font-size--2xs);
+    line-height: 2;
+  }
+
+  /* Box contents list beside the image: Figma 12.5 / 10.5. */
+  .dev4-ld-group--m-beside .dev4-benefit {
+    gap: var(--gap-xs);
+  }
+
+  .dev4-ld-group--m-beside .dev4-benefit__title {
+    font-size: var(--font-size--xs);
+  }
+
+  .dev4-ld-group--m-beside .dev4-benefit__description {
+    font-size: var(--font-size--3xs);
+    line-height: calc(16 / 10);
+  }
+}
