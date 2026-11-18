@@ -1,0 +1,207 @@
+<!-- comparison-table.liquid -->
+{%- comment -%}
+  dev2: three-column comparison table (product page "06 Comparison", sections/section.liquid Design 7).
+  Columns, from the reading start (right in Arabic): criteria · highlighted product (logo column) ·
+  compared product. Rows are "Comparison row" child blocks: add, remove and reorder them freely; each
+  row keeps its three cells together, so the columns can never drift apart.
+  Decorations (panel, highlighted strip, glow, floor shadow) are aria-hidden layers behind the cells.
+  Styles: assets/dev2.css, "dev2-cmp".
+{%- endcomment -%}
+{%- liquid
+  assign bs = block.settings
+  assign manual_heading = bs.manual_heading | strip
+  assign manual_heading_mobile = bs.manual_heading_mobile | strip
+  assign has_manual_mobile = false
+  if manual_heading_mobile != blank and manual_heading_mobile != manual_heading
+    assign has_manual_mobile = true
+  endif
+  assign logo_sizes = '(min-width: 750px) ' | append: bs.logo_width | append: 'px, ' | append: bs.logo_width_mobile | append: 'px'
+-%}
+
+<div
+  class="dev2-cmp"
+  style="--dev2-cmp-logo-width: {{ bs.logo_width }}px; --dev2-cmp-logo-width-mobile: {{ bs.logo_width_mobile }}px;"
+  {{ block.shopify_attributes }}
+>
+  <div class="dev2-cmp__frame">
+    <span class="dev2-cmp__glow" aria-hidden="true"></span>
+
+    <div class="dev2-cmp__table" role="table">
+      <span class="dev2-cmp__panel" aria-hidden="true"></span>
+      <span class="dev2-cmp__strip" aria-hidden="true"></span>
+
+      <div class="dev2-cmp__row dev2-cmp__row--head" role="row">
+        <div class="dev2-cmp__cell dev2-cmp__cell--criterion" role="columnheader">
+          <span class="dev2-cmp__text">{{ bs.criterion_heading | escape }}</span>
+        </div>
+        <div class="dev2-cmp__cell dev2-cmp__cell--snosha" role="columnheader">
+          {%- if bs.logo != blank -%}
+            {{
+              bs.logo
+              | image_url: width: 480
+              | image_tag:
+                class: 'dev2-cmp__logo',
+                widths: '160, 240, 320, 480',
+                sizes: logo_sizes,
+                alt: bs.logo_alt
+            }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'dev2-cmp__logo dev2-cmp__logo--placeholder' }}
+          {%- endif -%}
+        </div>
+        <div class="dev2-cmp__cell dev2-cmp__cell--manual" role="columnheader">
+          <span class="dev2-cmp__text{% if has_manual_mobile %} dev2-cmp__text--desktop{% endif %}">
+            {{- manual_heading | escape -}}
+          </span>
+          {%- if has_manual_mobile -%}
+            <span class="dev2-cmp__text dev2-cmp__text--mobile">{{ manual_heading_mobile | escape }}</span>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {% content_for 'blocks' %}
+    </div>
+
+    <div class="dev2-cmp__product">
+      <span class="dev2-cmp__product-glow" aria-hidden="true"></span>
+      <span class="dev2-cmp__floor" aria-hidden="true"></span>
+      {%- if bs.image != blank -%}
+        {{
+          bs.image
+          | image_url: width: 500
+          | image_tag:
+            class: 'dev2-cmp__product-image',
+            widths: '60, 120, 180, 250, 360, 500',
+            sizes: '(min-width: 750px) 130px, 30px',
+            loading: 'lazy',
+            alt: bs.image_alt
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'dev2-cmp__product-image dev2-cmp__product-image--placeholder' }}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:dev2_settings.comparison_table",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_comparison-row"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:dev2_settings.cmp_head_header"
+    },
+    {
+      "type": "text",
+      "id": "criterion_heading",
+      "label": "t:dev2_settings.cmp_criterion_heading",
+      "default": "المعيار"
+    },
+    {
+      "type": "text",
+      "id": "manual_heading",
+      "label": "t:dev2_settings.cmp_manual_heading",
+      "default": "الفرشاة اليدوية العادية"
+    },
+    {
+      "type": "text",
+      "id": "manual_heading_mobile",
+      "label": "t:dev2_settings.cmp_manual_heading_mobile",
+      "info": "t:dev2_settings.cmp_mobile_info"
+    },
+    {
+      "type": "header",
+      "content": "t:dev2_settings.cmp_logo_header"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:dev2_settings.cmp_logo"
+    },
+    {
+      "type": "text",
+      "id": "logo_alt",
+      "label": "t:dev2_settings.cmp_logo_alt",
+      "default": "SNOSHA"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "t:dev2_settings.cmp_logo_width",
+      "min": 60,
+      "max": 240,
+      "step": 2,
+      "unit": "px",
+      "default": 178
+    },
+    {
+      "type": "range",
+      "id": "logo_width_mobile",
+      "label": "t:dev2_settings.cmp_logo_width_mobile",
+      "min": 40,
+      "max": 130,
+      "step": 2,
+      "unit": "px",
+      "default": 114
+    },
+    {
+      "type": "header",
+      "content": "t:dev2_settings.cmp_image_header"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:dev2_settings.cmp_image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "t:dev2_settings.cmp_image_alt",
+      "info": "t:dev2_settings.cmp_image_alt_info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:dev2_settings.comparison_table",
+      "category": "t:categories.layout",
+      "blocks": {
+        "row-1": {
+          "type": "_comparison-row",
+          "settings": {
+            "criterion": "عدد الاهتزازات",
+            "snosha": "42,000 اهتزازة في الدقيقة",
+            "manual": "حركة يدوية غير منتظمة بدون معدل ثابت",
+            "manual_mobile": "حركة غير منتظمة"
+          }
+        },
+        "row-2": {
+          "type": "_comparison-row",
+          "settings": {
+            "criterion": "أوضاع التنظيف",
+            "snosha": "5 أوضاع: يومي – حساس – تبييض – تلميع – تدليك",
+            "manual": "وضع واحد فقط، لا يوجد تخصيص",
+            "snosha_mobile": "5 أوضاع لكل احتياج",
+            "manual_mobile": "وضع واحد فقط"
+          }
+        },
+        "row-3": {
+          "type": "_comparison-row",
+          "settings": {
+            "criterion": "مقاومة الماء",
+            "snosha": "IPX7 — استخدام آمن داخل الحمام",
+            "manual": "لا ينطبق",
+            "snosha_mobile": "IPX7 — آمنة في الحمام"
+          }
+        }
+      },
+      "block_order": ["row-1", "row-2", "row-3"]
+    }
+  ]
+}
+{% endschema %}

@@ -1258,3 +1258,365 @@
     line-height: calc(28 / 16);
   }
 }
+
+/* ==== dev2-cmp — product "06 Comparison" (sections/section.liquid "Design 7" + blocks/comparison-table.liquid + blocks/_comparison-row.liquid) ==== */
+/* Section colors: --dev2-cmp-* from the Design 7 settings and the color palette (sections/section.liquid).
+   Geometry: .dev2-cmp__frame is a size container as wide as the table. Every horizontal measure is a
+   share of the Figma table (1120px desktop, 350px mobile) in cqi, so the layout scales with the table
+   instead of one viewport width. The block is pinned to RTL in every locale (Arabic content, criteria
+   at the physical right — 04 §3), so inset-inline-start is the right edge here. */
+.dev2-cmp-section {
+  --dev2-cmp-text: rgb(var(--dev2-cmp-light-rgb));
+  --dev2-cmp-shadow: var(--dev2-cmp-shadow-rgb, var(--color-foreground-rgb));
+  --dev2-cmp-angle: 69.29deg;
+}
+
+/* (0,4,0): out-ranks the native transparent `.shopify-section:not(.header-section) :is(.section, …)` */
+.dev2-cmp-section.dev2-cmp-section.dev2-cmp-section.dev2-cmp-section {
+  background: linear-gradient(
+    var(--dev2-cmp-angle),
+    var(--dev2-cmp-bg-start, var(--color-background)) 8.75%,
+    var(--dev2-cmp-bg-middle, var(--color-background)) 54.13%,
+    var(--dev2-cmp-bg-end, var(--color-background)) 91.25%
+  );
+  overflow-x: clip;
+}
+
+.dev2-cmp-section.dev2-cmp-section .text-block.h5 {
+  opacity: 0.88;
+}
+
+.dev2-cmp {
+  inline-size: 100%;
+  direction: rtl;
+  unicode-bidi: isolate;
+  /* 37px: the table starts below the strip, which rises 20px above it; 88px: room for the strip and
+     the product's floor shadow below the table (+ the section's bottom padding = Figma 140px). */
+  padding-block: 37px 88px;
+}
+
+.dev2-cmp__frame {
+  position: relative;
+  isolation: isolate;
+  container-type: inline-size;
+  inline-size: min(100%, 1120px);
+  margin-inline: auto;
+}
+
+.dev2-cmp__glow,
+.dev2-cmp__panel,
+.dev2-cmp__strip,
+.dev2-cmp__product,
+.dev2-cmp__product-glow,
+.dev2-cmp__floor {
+  position: absolute;
+  pointer-events: none;
+}
+
+.dev2-cmp__glow {
+  inset-block-start: -17px;
+  inset-inline-start: calc(50% - 1.071cqi);
+  inline-size: 62.5cqi;
+  block-size: 44.643cqi;
+  translate: 50% 0;
+  border-radius: 50%;
+  background: rgb(var(--dev2-cmp-glow-rgb) / 0.14);
+  filter: blur(80px);
+}
+
+.dev2-cmp__table {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  /* criteria · highlighted column · compared column (right → left) */
+  grid-template-columns: 22.857cqi 33.929cqi minmax(0, 1fr);
+  padding-inline: 13.571cqi 1.786cqi;
+  color: var(--dev2-cmp-text);
+}
+
+.dev2-cmp__panel {
+  z-index: 0;
+  inset: 0;
+  border: 1px solid rgb(var(--dev2-cmp-light-rgb) / 0.2);
+  border-radius: 24px;
+  background: rgb(var(--dev2-cmp-light-rgb) / 0.09);
+  box-shadow: 0 24px 60px rgb(var(--dev2-cmp-shadow) / 0.45);
+  backdrop-filter: blur(12px);
+}
+
+/* The highlighted column: one layer over the middle grid track, taller than the table. */
+.dev2-cmp__strip {
+  z-index: 1;
+  inset-block: -20px -32px;
+  inset-inline-start: 36.429cqi;
+  inline-size: 33.929cqi;
+  border: 1.5px solid rgb(var(--dev2-cmp-light-rgb) / 0.9);
+  border-radius: 20px;
+  background: linear-gradient(to bottom, rgb(var(--dev2-cmp-light-rgb)), var(--dev2-cmp-tint));
+  box-shadow:
+    0 26px 54px rgb(var(--dev2-cmp-shadow) / 0.5),
+    0 0 44px rgb(var(--dev2-cmp-glow-rgb) / 0.45);
+}
+
+/* Each row spans the three tracks (subgrid): its cells share one height, whatever wraps. */
+.dev2-cmp__row {
+  position: relative;
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  align-items: center;
+  min-block-size: 78px;
+}
+
+.dev2-cmp__row--head {
+  min-block-size: 64px;
+}
+
+.dev2-cmp__row:not(.dev2-cmp__row--head)::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  inset-block-start: 0;
+  inset-inline: -3.125cqi 0.804cqi;
+  block-size: 1px;
+  background: rgb(var(--dev2-cmp-light-rgb) / 0.14);
+}
+
+.dev2-cmp__cell {
+  position: relative;
+  z-index: 2;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-inline-size: 0;
+  padding-block: 8px;
+  line-height: normal;
+  overflow-wrap: anywhere;
+}
+
+.dev2-cmp__cell--criterion {
+  text-align: start;
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: clamp(var(--font-size--xs), 1.384cqi, 15.5px);
+}
+
+.dev2-cmp__cell--snosha {
+  padding-inline: 1.786cqi;
+  text-align: center;
+  color: var(--dev2-cmp-strong);
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: clamp(var(--font-size--xs), 1.339cqi, 15px);
+}
+
+.dev2-cmp__row:not(.dev2-cmp__row--head) > .dev2-cmp__cell--snosha {
+  box-shadow: inset 0 1px rgb(var(--dev2-cmp-line-rgb) / 0.14);
+}
+
+.dev2-cmp__cell--manual {
+  padding-inline: 1.786cqi;
+  text-align: center;
+  font-family: var(--font-body--family);
+  font-weight: var(--font-body--weight);
+  font-size: clamp(var(--font-size--xs), 1.295cqi, 14.5px);
+}
+
+.dev2-cmp__row--head > .dev2-cmp__cell--criterion {
+  font-family: var(--font-heading--family);
+  font-weight: var(--font-heading--weight);
+  font-size: clamp(var(--font-size--sm), 1.518cqi, 17px);
+}
+
+.dev2-cmp__row--head > .dev2-cmp__cell--manual {
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: clamp(var(--font-size--sm), 1.429cqi, var(--font-size--md));
+}
+
+.dev2-cmp__logo {
+  display: block;
+  inline-size: var(--dev2-cmp-logo-width);
+  max-inline-size: 100%;
+  block-size: auto;
+  margin-inline: auto;
+}
+
+/* Empty logo picker: placeholder at the Figma logo proportions (178 × 36). */
+.dev2-cmp__logo--placeholder {
+  aspect-ratio: 178 / 36;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--dev2-cmp-strong) 8%, transparent);
+}
+
+.dev2-cmp__text--mobile {
+  display: none;
+}
+
+/* Product image: above the table, its centre 25px inside the table's right edge (Figma). */
+.dev2-cmp__product {
+  z-index: 3;
+  inset-block-start: -7.232cqi;
+  inset-inline-start: 2.232cqi;
+  block-size: 63.929cqi;
+  aspect-ratio: 245 / 1400;
+  translate: 50% 0;
+}
+
+.dev2-cmp__product-image {
+  position: relative;
+  z-index: 1;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+}
+
+.dev2-cmp__product-image--placeholder {
+  border-radius: 12px;
+  background: rgb(var(--dev2-cmp-light-rgb) / 0.12);
+}
+
+.dev2-cmp__floor {
+  z-index: 0;
+  inset-block-end: -0.714cqi;
+  inset-inline-start: calc(50% - 1.161cqi);
+  inline-size: 21.429cqi;
+  block-size: 3.571cqi;
+  translate: 50% 0;
+  border-radius: 50%;
+  background: rgb(var(--dev2-cmp-shadow) / 0.5);
+  filter: blur(11px);
+}
+
+.dev2-cmp__product-glow {
+  display: none;
+}
+
+@media (max-width: 749px) {
+  .dev2-cmp-section {
+    --dev2-cmp-angle: 82.97deg;
+  }
+
+  /* Heading → strip: Figma 27px to the table, minus the 16px the strip rises above it. */
+  .dev2-cmp-section.dev2-cmp-section .section-content-wrapper {
+    row-gap: 11px;
+  }
+
+  /* Figma: 52px heading line overlapping the subtitle by 7px; 39px + the 6px group gap gives the same 77px. */
+  .dev2-cmp-section.dev2-cmp-section :is(.text-block.h2, .text-block.h2 > *) {
+    font-size: var(--font-size--xl);
+    line-height: 39px;
+  }
+
+  .dev2-cmp-section.dev2-cmp-section :is(.text-block.h5, .text-block.h5 > *) {
+    font-size: var(--font-size--2xs);
+    line-height: 32px;
+  }
+
+  .dev2-cmp {
+    padding-block: 16px;
+    padding-inline: max(0px, calc(20px - var(--page-margin)));
+  }
+
+  .dev2-cmp__glow,
+  .dev2-cmp__floor {
+    display: none;
+  }
+
+  /* Mobile measures: shares of the 350px Figma table (1cqi = 3.5px). */
+  .dev2-cmp__table {
+    grid-template-columns: 26cqi 39.429cqi minmax(0, 1fr);
+    padding-inline: 4.286cqi 1.429cqi;
+  }
+
+  .dev2-cmp__panel {
+    border-radius: 16px;
+  }
+
+  .dev2-cmp__strip {
+    inset-block: -16px;
+    inset-inline-start: 30.286cqi;
+    inline-size: 39.429cqi;
+    border-radius: 14px;
+    background: linear-gradient(
+      to bottom,
+      rgb(var(--dev2-cmp-light-rgb)),
+      color-mix(in srgb, rgb(var(--dev2-cmp-light-rgb)) 50%, var(--dev2-cmp-tint)),
+      var(--dev2-cmp-tint)
+    );
+    box-shadow:
+      0 14px 26px rgb(var(--dev2-cmp-shadow) / 0.5),
+      0 0 30px 4px rgb(var(--dev2-cmp-glow-rgb) / 0.65);
+  }
+
+  .dev2-cmp__row--head {
+    min-block-size: 45px;
+  }
+
+  .dev2-cmp__row:not(.dev2-cmp__row--head)::before {
+    inset-inline: -4px 4px;
+  }
+
+  .dev2-cmp__cell--criterion {
+    font-size: 11px;
+  }
+
+  .dev2-cmp__cell--snosha {
+    padding-inline: 8px;
+    font-size: var(--font-size--3xs);
+  }
+
+  .dev2-cmp__cell--manual {
+    padding-inline: 15px 0;
+    text-align: start;
+    font-size: var(--font-size--3xs);
+  }
+
+  .dev2-cmp__row--head > .dev2-cmp__cell--criterion {
+    font-size: 12.5px;
+  }
+
+  .dev2-cmp__row--head > .dev2-cmp__cell--manual {
+    text-align: center;
+    color: rgb(var(--dev2-cmp-light-rgb) / 0.8);
+    font-size: 11px;
+  }
+
+  .dev2-cmp__logo {
+    inline-size: var(--dev2-cmp-logo-width-mobile);
+  }
+
+  .dev2-cmp__text--desktop {
+    display: none;
+  }
+
+  .dev2-cmp__text--mobile {
+    display: inline;
+  }
+
+  /* Small product image at the top right, beside the heading and partly behind the glass table
+     (Figma draws the table over it). */
+  /* Centre 38px inside the table's right edge (Figma 390); moves toward the edge on narrower
+     screens so it never runs into the centred heading. */
+  .dev2-cmp__product {
+    z-index: -1;
+    inset-block-start: -117px;
+    inset-inline-start: clamp(10px, calc(100cqi - 312px), 38px);
+    block-size: 146px;
+  }
+
+  .dev2-cmp__product-glow {
+    display: block;
+    z-index: 0;
+    inset-block-start: calc(50% + 27px);
+    inset-inline-start: calc(50% - 16px);
+    inline-size: 150px;
+    block-size: 220px;
+    translate: 50% -50%;
+    border-radius: 50%;
+    background: rgb(var(--dev2-cmp-glow-rgb) / 0.25);
+    filter: blur(30px);
+  }
+}

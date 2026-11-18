@@ -1,0 +1,88 @@
+<!-- _comparison-row.liquid -->
+{%- comment -%}
+  One row of the comparison table (blocks/comparison-table.liquid). The three cells are children of
+  one row element, so they always share the row's height: a long value makes the whole row taller.
+  Each "… on mobile" value is optional; when empty (or equal to the desktop text) the desktop text
+  is shown on every screen.
+{%- endcomment -%}
+{%- liquid
+  assign bs = block.settings
+  assign keys = 'criterion,snosha,manual' | split: ','
+  assign has_content = false
+  if bs.criterion != blank or bs.snosha != blank or bs.manual != blank
+    assign has_content = true
+  endif
+-%}
+
+{%- if has_content or request.design_mode -%}
+  <div class="dev2-cmp__row" role="row" {{ block.shopify_attributes }}>
+    {%- for key in keys -%}
+      {%- liquid
+        assign mobile_key = key | append: '_mobile'
+        assign text = bs[key] | strip
+        assign text_mobile = bs[mobile_key] | strip
+        assign cell_role = 'cell'
+        if key == 'criterion'
+          assign cell_role = 'rowheader'
+        endif
+        assign has_mobile = false
+        if text_mobile != blank and text_mobile != text
+          assign has_mobile = true
+        endif
+      -%}
+      <div class="dev2-cmp__cell dev2-cmp__cell--{{ key }}" role="{{ cell_role }}">
+        <span class="dev2-cmp__text{% if has_mobile %} dev2-cmp__text--desktop{% endif %}">{{ text | escape }}</span>
+        {%- if has_mobile -%}
+          <span class="dev2-cmp__text dev2-cmp__text--mobile">{{ text_mobile | escape }}</span>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:dev2_settings.comparison_row",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "criterion",
+      "label": "t:dev2_settings.cmp_criterion"
+    },
+    {
+      "type": "text",
+      "id": "snosha",
+      "label": "t:dev2_settings.cmp_snosha"
+    },
+    {
+      "type": "text",
+      "id": "manual",
+      "label": "t:dev2_settings.cmp_manual"
+    },
+    {
+      "type": "text",
+      "id": "criterion_mobile",
+      "label": "t:dev2_settings.cmp_criterion_mobile",
+      "info": "t:dev2_settings.cmp_mobile_info"
+    },
+    {
+      "type": "text",
+      "id": "snosha_mobile",
+      "label": "t:dev2_settings.cmp_snosha_mobile",
+      "info": "t:dev2_settings.cmp_mobile_info"
+    },
+    {
+      "type": "text",
+      "id": "manual_mobile",
+      "label": "t:dev2_settings.cmp_manual_mobile",
+      "info": "t:dev2_settings.cmp_mobile_info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:dev2_settings.comparison_row"
+    }
+  ]
+}
+{% endschema %}
