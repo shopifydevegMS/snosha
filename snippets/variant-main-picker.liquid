@@ -148,6 +148,10 @@
                     variant_image: featured_media,
                     mode: 'unscaled'
                   %}
+                  {%- comment -%} dev1: product information "Design 1" shows each color name under its swatch {%- endcomment -%}
+                  {%- if section.settings.design == 'dev1' -%}
+                    <span class="dev1-swatch-label" aria-hidden="true">{{ product_option_value | escape }}</span>
+                  {%- endif -%}
                 {% else %}
                   {% if product_option_value.available == true %}
                     <span

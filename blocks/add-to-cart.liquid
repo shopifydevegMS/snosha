@@ -12,6 +12,11 @@
   assign scoped_class = block.settings.style_class | append: '--' | append: block.id
   assign class = 'add-to-cart-button ' | append: block.settings.style_class | append: ' ' | append: scoped_class
   assign id = 'BuyButtons-ProductSubmitButton-' | append: block.id
+
+  # dev1: product information "Design 1" (Product Hero) — own label while the product can be added; blank keeps the theme text
+  if section.settings.design == 'dev1' and can_add_to_cart and block.settings.dev1_label != blank
+    assign add_to_cart_text = block.settings.dev1_label | escape
+  endif
 %}
 {% render 'button-custom-styles', block_settings: block.settings, block_id: block.id %}
 {% render 'add-to-cart-button-styles' %}
@@ -86,6 +91,13 @@
       "default": "{{ settings.color_palette.background }}",
       "alpha": true,
       "visible_if": "{{ block.settings.style_class == 'button-custom' }}"
+    },
+    {
+      "type": "text",
+      "id": "dev1_label",
+      "label": "t:dev1_settings.add_to_cart_label",
+      "info": "t:dev1_settings.add_to_cart_label_info",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
     }
   ]
 }

@@ -59,20 +59,28 @@
     show_sale_price_first: block_settings.show_sale_price_first
   %}{% liquid
       # dev1: discount badge on every product card (developer decision, 2026-11-17), computed from the
-      # same variant the price snippet uses. Never on the product's own price on its product page.
+      # same variant the price snippet uses. On the product's own page only inside the product
+      # information section with Design 1 (Product Hero), where it is wrapped in <dev1-discount-sync>
+      # so it follows the selected variant (assets/dev1.js).
       assign dev1_discount_percent = 0
       assign dev1_is_main_product = false
       if template.name == 'product' and product.id == product_resource.id
         assign dev1_is_main_product = true
       endif
-      if block_settings.dev1_show_discount and dev1_is_main_product == false and selected_variant.compare_at_price > selected_variant.price
-        assign dev1_discount_percent = selected_variant.compare_at_price | minus: selected_variant.price | times: 100.0 | divided_by: selected_variant.compare_at_price | round
+      assign dev1_main_hero = false
+      if dev1_is_main_product and section.settings.design == 'dev1' and block_settings.dev1_show_discount
+        assign dev1_main_hero = true
+      endif
+      if block_settings.dev1_show_discount and selected_variant.compare_at_price > selected_variant.price
+        if dev1_is_main_product == false or dev1_main_hero
+          assign dev1_discount_percent = selected_variant.compare_at_price | minus: selected_variant.price | times: 100.0 | divided_by: selected_variant.compare_at_price | round
+        endif
       endif
       assign dev1_section_design = false
       if section.settings.design == 'dev1'
         assign dev1_section_design = true
       endif
-    %}{% if dev1_discount_percent > 0 %}<span
+    %}{% if dev1_main_hero %}<dev1-discount-sync class="dev1-discount-sync" data-block-id="{{ block.id }}">{% endif %}{% if dev1_discount_percent > 0 %}<span
       class="dev1-discount-badge"
       {% unless dev1_section_design %}style="{% if block_settings.dev1_discount_background != blank %}--dev1-discount-background: {{ block_settings.dev1_discount_background }};{% endif %}{% if block_settings.dev1_discount_border != blank %} --dev1-discount-border: {{ block_settings.dev1_discount_border }};{% endif %}{% if block_settings.dev1_discount_text != blank %} --dev1-discount-text: {{ block_settings.dev1_discount_text }};{% endif %}"{% endunless %}
     >
@@ -81,7 +89,7 @@
       {%- else -%}
         {{- 'dev1_product.discount_badge' | t: percent: dev1_discount_percent -}}
       {%- endif -%}
-    </span>{% endif %}
+    </span>{% endif %}{% if dev1_main_hero %}</dev1-discount-sync>{% endif %}
 
   {% if block_settings.show_tax_info %}
     <div class="tax-note">

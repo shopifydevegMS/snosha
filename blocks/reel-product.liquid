@@ -3,6 +3,10 @@
   Compact product row for video reels: linked thumbnail, title and price of a picked product.
   Price uses the native price snippet (theme money format); unavailable products show the
   theme's sold-out label instead of a price. Styles: assets/dev1.css (.dev1-reel-product).
+  Optional (off by default, so reels are unchanged): supporting text, a background tint and an
+  add button. The add button is the theme's own quick-add form (snippets/quick-add.liquid) for a
+  product with one variant and no selling plan, so it adds that product to the cart on its own;
+  any other product gets a link to its product page to choose options there.
 {%- enddoc -%}
 
 {%- liquid
@@ -19,7 +23,18 @@
     if block_settings.thumbnail_border != blank
       echo ' --dev1-reel-thumb-border: ' | append: block_settings.thumbnail_border | append: ';'
     endif
+    if block_settings.background_color != blank
+      echo ' --dev1-reel-background: ' | append: block_settings.background_color | append: ';'
+    endif
   endcapture
+
+  # Direct add only when one click can add the right thing; otherwise the visitor chooses on the product page.
+  assign reel_direct_add = false
+  if block_settings.show_add_button and product != blank
+    if product.variants_count == 1 and product.requires_selling_plan == false and product.selling_plan_groups.size == 0
+      assign reel_direct_add = true
+    endif
+  endif
 -%}
 
 {%- if product != blank -%}
@@ -46,6 +61,9 @@
     </a>
     <div class="dev1-reel-product__info">
       <a class="dev1-reel-product__title" href="{{ product.url }}">{{ product.title | escape }}</a>
+      {%- if block_settings.subtitle != blank -%}
+        <p class="dev1-reel-product__subtitle">{{ block_settings.subtitle | escape }}</p>
+      {%- endif -%}
       <div class="dev1-reel-product__price">
         {%- if product.available -%}
           {% render 'price', product_resource: product %}
@@ -54,6 +72,28 @@
         {%- endif -%}
       </div>
     </div>
+    {%- if block_settings.show_add_button -%}
+      <div class="dev1-reel-product__add">
+        {%- if reel_direct_add -%}
+          {% render 'quick-add',
+            product: product,
+            section_id: section.id,
+            block: block,
+            icon_html: block_settings.add_icon_svg
+          %}
+        {%- else -%}
+          <a
+            class="dev1-reel-product__add-link"
+            href="{{ product.url }}"
+            aria-label="{{ 'actions.choose' | t }}: {{ product.title | escape }}"
+          >
+            {%- if block_settings.add_icon_svg != blank -%}
+              <span class="dev1-reel-product__add-icon" aria-hidden="true">{{ block_settings.add_icon_svg }}</span>
+            {%- endif -%}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
   </div>
 {%- elsif request.design_mode -%}
   <div
@@ -97,6 +137,31 @@
       "id": "thumbnail_border",
       "label": "t:dev1_settings.thumbnail_border",
       "default": "{{ settings.color_palette.color2 }}"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "t:dev1_settings.subtitle"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:dev1_settings.background_color"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_add_button",
+      "label": "t:dev1_settings.show_add_button",
+      "info": "t:dev1_settings.show_add_button_info",
+      "default": false
+    },
+    {
+      "type": "html",
+      "id": "add_icon_svg",
+      "label": "t:dev1_settings.add_icon_svg",
+      "info": "t:dev1_settings.icon_svg_info",
+      "default": "<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M12 3.5V20.5M3.5 12H20.5' stroke='currentColor' stroke-width='1.6' stroke-linecap='round'/></svg>",
+      "visible_if": "{{ block.settings.show_add_button }}"
     }
   ],
   "presets": [

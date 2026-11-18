@@ -278,6 +278,32 @@
     },
     {
       "type": "header",
+      "content": "t:dev1_settings.badge_header",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "text",
+      "id": "dev1_badge_text",
+      "label": "t:dev1_settings.badge_text",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "text",
+      "id": "dev1_badge_tag",
+      "label": "t:dev1_settings.badge_tag",
+      "info": "t:dev1_settings.badge_tag_info",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "html",
+      "id": "dev1_zoom_icon_svg",
+      "label": "t:dev1_settings.zoom_icon_svg",
+      "info": "t:dev1_settings.zoom_icon_info",
+      "default": "<svg viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M14 7.5C14 11.09 11.09 14 7.5 14C3.91 14 1 11.09 1 7.5C1 3.91 3.91 1 7.5 1C11.09 1 14 3.91 14 7.5Z' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/><path d='M16.5 16.5L12.2 12.2' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/></svg>",
+      "visible_if": "{{ section.settings.design == 'dev1' and block.settings.zoom }}"
+    },
+    {
+      "type": "header",
       "content": "t:content.padding"
     },
     {

@@ -416,6 +416,35 @@
     data-presentation="{{ media_presentation }}"
     {{ block_shopify_attributes }}
   >
+    {%- comment -%}
+      dev1: product information section "Design 1" (Product Hero) — badge for tagged products and a
+      zoom icon over the main image. Visual only (pointer-events: none in assets/dev1.css): a click on
+      the icon reaches the native slide underneath, which opens the native zoom dialog on that slide.
+    {%- endcomment -%}
+    {%- if section.settings.design == 'dev1' and sorted_media.size > 0 -%}
+      {%- liquid
+        assign dev1_show_badge = false
+        if block_settings.dev1_badge_text != blank and block_settings.dev1_badge_tag != blank
+          if selected_product.tags contains block_settings.dev1_badge_tag
+            assign dev1_show_badge = true
+          endif
+        endif
+        assign dev1_show_zoom = false
+        if block_settings.zoom and block_settings.dev1_zoom_icon_svg != blank
+          assign dev1_show_zoom = true
+        endif
+      -%}
+      {%- if dev1_show_badge or dev1_show_zoom -%}
+        <div class="dev1-gallery-overlay">
+          {%- if dev1_show_badge -%}
+            <span class="dev1-gallery-overlay__badge">{{ block_settings.dev1_badge_text | escape }}</span>
+          {%- endif -%}
+          {%- if dev1_show_zoom -%}
+            <span class="dev1-gallery-overlay__zoom" aria-hidden="true">{{ block_settings.dev1_zoom_icon_svg }}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
     {% capture slides %}
       {% for media in sorted_media %}
         {% capture children %}

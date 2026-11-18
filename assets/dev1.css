@@ -852,4 +852,927 @@
   }
 }
 
+/* ==== dev1-breadcrumbs — breadcrumb block (blocks/breadcrumbs.liquid) ==== */
+/* Figma 190:10205 / 190:10915: Arabic trail, 8px between items and "/" separators, 14 / 24 (11 / 24 mobile).
+   Links use the block's text color (Figma secondary text), the current page the section's text color. */
+.dev1-breadcrumbs {
+  direction: rtl;
+  unicode-bidi: isolate;
+  color: var(--dev1-breadcrumbs-color, var(--color-foreground));
+  font-family: var(--font-body--family);
+  font-weight: var(--font-body--weight);
+  font-size: var(--font-size--sm);
+  line-height: calc(24 / 14);
+}
+
+.dev1-breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dev1-breadcrumbs__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-inline-size: 0;
+}
+
+/* Decorative separator; the empty alt text keeps it out of the accessible name. */
+.dev1-breadcrumbs__item + .dev1-breadcrumbs__item::before {
+  content: '/' / '';
+}
+
+.dev1-breadcrumbs .dev1-breadcrumbs__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.dev1-breadcrumbs .dev1-breadcrumbs__link:hover {
+  text-decoration: underline;
+}
+
+.dev1-breadcrumbs__current {
+  color: var(--color-foreground);
+}
+
+@media screen and (max-width: 749px) {
+  .dev1-breadcrumbs {
+    font-size: 0.6875rem; /* Figma mobile 11px — no theme token */
+    line-height: calc(24 / 11);
+  }
+}
+
+/* ==== dev1-product — 01 Product Hero (sections/product-information.liquid, Design 1) ==== */
+/* Figma 190:10204 (desktop) / 190:10914 (mobile). Native product information section: native gallery,
+   title, price, variant picker, buy buttons and accordion; spec-badge (dev2's block, as-is) for the offer,
+   benefits and trust badges; reel-product (Product row) for "Complete your routine"; breadcrumbs block.
+   Colors: --dev1-product-tint / --dev1-product-stage come from the section's Design 1 settings. */
+
+/* Breadcrumb: a section block, rendered after the product grid — shown first, as in Figma. */
+.dev1-product.dev1-product > .dev1-breadcrumbs {
+  order: -1;
+}
+
+/* Arabic content: the details column is one RTL text boundary in every locale. */
+.dev1-product .product-details {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Desktop: Figma physical order in every locale — buy box on the right, gallery on the left, 64px apart,
+   560 : 712. The track's direction is geometry only; the gallery keeps the page direction so the native
+   slideshow (which follows the page dir) scrolls correctly. */
+@media screen and (min-width: 990px) {
+  .dev1-product.dev1-product .product-information__grid.product-information__grid:not(.product-information--media-none) {
+    direction: rtl;
+    grid-template-columns: minmax(0, 560fr) minmax(0, 712fr);
+    column-gap: 64px;
+    align-items: start;
+  }
+
+  .dev1-product.dev1-product .product-information__grid.product-information__grid > :is(.product-details, .product-information__media) {
+    padding-inline: 0;
+  }
+
+  [dir='ltr'] .dev1-product.dev1-product .product-information__grid > .product-information__media {
+    direction: ltr;
+  }
+}
+
+/* Tablet (750–989px): two columns would squeeze the buy box, so gallery above details (like mobile). */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .dev1-product.dev1-product .product-information__grid.product-information__grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 24px;
+  }
+
+  .dev1-product.dev1-product .product-information__grid.product-information__grid > .product-information__media {
+    order: 0;
+    padding-inline: 0;
+  }
+
+  .dev1-product.dev1-product .product-information__grid.product-information__grid > .product-details {
+    order: 1;
+    padding-inline: 0;
+  }
+}
+
+/* Mobile: Figma 0 / 24 section padding with a 10px breadcrumb inset (settings; 0 = native scaling),
+   16px between breadcrumb, gallery and buy box; the gallery stays inside the page margins. */
+@media screen and (max-width: 749px) {
+  .dev1-product.dev1-product {
+    row-gap: 16px;
+    padding-block-start: calc(var(--dev1-padding-mobile-top, var(--padding-block-start)) + var(--section-top-offset, 0px));
+    padding-block-end: var(--dev1-padding-mobile-bottom, var(--padding-block-end));
+  }
+
+  .dev1-product.dev1-product .product-information__grid {
+    row-gap: 16px;
+  }
+
+  .dev1-product.dev1-product .product-information__grid > .product-information__media {
+    grid-column: 2;
+  }
+}
+
+/* -- Gallery: Figma "Main Stage" 712 × 660 (352 × 364 mobile), 28px (22px) radius, 1px light border, grey stage;
+   product photos are contained, never cropped. Thumbnails 104px (66px), 14px (12px) radius. -- */
+.dev1-product media-gallery {
+  --dev1-thumb-size: 104px;
+  --dev1-thumb-gap: 12px;
+  --dev1-thumb-offset: 23px;
+  --dev1-thumb-radius: 14px;
+  --dev1-stage-radius: 28px;
+}
+
+.dev1-product.dev1-product media-gallery slideshow-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--dev1-stage-radius);
+  background-color: var(--dev1-product-stage, transparent);
+}
+
+/* Border drawn above the slides (the slides fill the stage edge to edge). */
+.dev1-product.dev1-product media-gallery slideshow-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: 1px solid var(--color-input-border);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.dev1-product.dev1-product media-gallery slideshow-slide.product-media-container {
+  aspect-ratio: 712 / 660;
+  max-height: none;
+}
+
+.dev1-product.dev1-product media-gallery slideshow-slide.product-media-container .product-media {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  background: transparent;
+}
+
+.dev1-product.dev1-product media-gallery slideshow-slide.product-media-container :is(img, .deferred-media__poster-image) {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.dev1-product.dev1-product media-gallery .slideshow-controls__thumbnails {
+  gap: var(--dev1-thumb-gap);
+  margin-inline: 0;
+  padding-block: var(--dev1-thumb-offset) 2px;
+  padding-inline: 2px;
+}
+
+.dev1-product.dev1-product media-gallery .slideshow-controls__thumbnails .slideshow-control {
+  position: relative;
+  flex: none;
+  width: var(--dev1-thumb-size);
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: var(--dev1-thumb-radius);
+  background-color: var(--color-background);
+}
+
+.dev1-product.dev1-product media-gallery .slideshow-controls__thumbnails .slideshow-control[aria-selected='true']:not(:focus-visible) {
+  outline: none;
+  border: 0;
+}
+
+.dev1-product.dev1-product media-gallery .slideshow-controls__thumbnails .slideshow-control img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: inherit;
+}
+
+.dev1-product.dev1-product media-gallery .slideshow-controls__thumbnails .slideshow-control::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--color-input-border);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.dev1-product.dev1-product media-gallery .slideshow-controls__thumbnails .slideshow-control[aria-selected='true']::after {
+  border: 2px solid var(--color-primary-button-background);
+}
+
+/* No previous / next arrows on the stage (Figma): thumbnails, swipe and keyboard still change the image */
+.dev1-product.dev1-product media-gallery slideshow-arrows {
+  display: none;
+}
+
+/* Badge (top) and zoom icon (bottom) at the stage's right edge (Figma 19px / 25px insets). Visual only:
+   clicks go through to the native slide, which opens the native zoom dialog on the current image. */
+.dev1-product .dev1-gallery-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-block: 19px 27px;
+  padding-inline: 19px;
+  direction: rtl;
+  pointer-events: none;
+}
+
+.dev1-product media-gallery:has(slideshow-controls[thumbnails]) .dev1-gallery-overlay {
+  inset-block-end: calc(var(--dev1-thumb-size) + var(--dev1-thumb-offset) + 2px);
+}
+
+.dev1-product .dev1-gallery-overlay__badge {
+  padding: 4px 12px;
+  border-radius: 8px;
+  background-color: var(--color-primary-button-background);
+  color: var(--color-primary-button-text);
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--2xs);
+  line-height: calc(18 / 12);
+  white-space: nowrap;
+}
+
+.dev1-product .dev1-gallery-overlay__zoom {
+  display: grid;
+  place-items: center;
+  margin-block-start: auto;
+  margin-inline-start: 6px;
+  inline-size: 44px;
+  block-size: 44px;
+  border-radius: 50%;
+  background-color: rgb(var(--color-background-rgb) / 0.92);
+  color: var(--color-primary-button-background);
+  box-shadow: 0 12px 16px color-mix(in srgb, var(--color-primary-button-background) 10%, transparent);
+}
+
+.dev1-product .dev1-gallery-overlay__zoom svg {
+  display: block;
+  inline-size: 18px;
+  block-size: 18px;
+}
+
+/* -- Buy box: 20px between items (14px on mobile, set below) -- */
+
+/* Rating: stars then the value (Figma 18px stars, 3px apart, 16 / 27 value) */
+.dev1-product.dev1-product .rating-wrapper {
+  gap: 8px;
+}
+
+.dev1-product.dev1-product .rating {
+  gap: 3px;
+}
+
+.dev1-product.dev1-product .rating .stars {
+  height: 18px;
+}
+
+.dev1-product .dev1-rating-value {
+  color: var(--color-foreground);
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--md);
+  line-height: calc(27 / 16);
+}
+
+/* Title: Figma 38 / 64 bold desktop, 24 / 38 mobile (Mobile/H2) */
+.dev1-product.dev1-product .product-details .text-block.h1 > * {
+  font-size: 2.375rem; /* Figma 38px — no theme token */
+  line-height: calc(64 / 38);
+}
+
+/* Price row: price, compare-at price, discount badge on one line, 12px apart */
+.dev1-product.dev1-product product-price {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding-block-start: 0;
+}
+
+.dev1-product.dev1-product product-price > :is([ref='priceContainer'], .dev1-discount-sync) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  width: auto;
+  margin: 0;
+}
+
+.dev1-product.dev1-product product-price .price {
+  color: var(--color-foreground);
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--3xl);
+  line-height: calc(52 / 32);
+}
+
+.dev1-product.dev1-product product-price .compare-at-price {
+  color: var(--color-foreground-muted);
+  font-family: var(--font-body--family);
+  font-weight: var(--font-body--weight);
+  font-size: var(--font-size--sm);
+  line-height: calc(22 / 14);
+  text-decoration: line-through;
+}
+
+.dev1-product.dev1-product .dev1-discount-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border: 1px solid var(--color-input-border);
+  border-radius: 8px;
+  background-color: var(--dev1-product-tint, var(--color-background));
+  color: var(--color-primary-button-background);
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--2xs);
+  line-height: calc(18 / 12);
+  white-space: nowrap;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Offer banner (spec-badge "Badge" directly in the buy box): dashed 55% blue border, 10px radius, 12 / 20 */
+.dev1-product.dev1-product .product-details > .group-block > .group-block-content > .dev2-spec-badge:not(.dev2-spec-badge--row) {
+  align-self: flex-start;
+  inline-size: auto;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1.2px dashed color-mix(in srgb, var(--dev2-spec-border, var(--color-primary-button-background)) 55%, transparent);
+  border-radius: 10px;
+  background-color: var(--dev2-spec-background, var(--dev1-product-tint, var(--color-background)));
+}
+
+.dev1-product.dev1-product .product-details > .group-block > .group-block-content > .dev2-spec-badge:not(.dev2-spec-badge--row) .dev2-spec-badge__icon {
+  inline-size: 16px;
+  block-size: 16px;
+  border-radius: 0;
+  background: none;
+  /* No icon tile here, so the icon takes Figma's blue instead of the tile's white */
+  color: var(--dev2-spec-icon-color, var(--color-primary-button-background));
+}
+
+.dev1-product.dev1-product .product-details > .group-block > .group-block-content > .dev2-spec-badge:not(.dev2-spec-badge--row) .dev2-spec-badge__icon svg {
+  inline-size: 16px;
+  block-size: 16px;
+}
+
+/* Benefits (spec-badge "Row"): 22px tinted check tile, 14 / 24 text */
+.dev1-product.dev1-product .dev2-spec-badge.dev2-spec-badge--row {
+  align-items: center;
+  gap: 8px;
+}
+
+.dev1-product.dev1-product .dev2-spec-badge.dev2-spec-badge--row .dev2-spec-badge__icon {
+  inline-size: 22px;
+  block-size: 22px;
+  border-radius: 10px;
+  background-color: var(--dev1-product-tint, transparent);
+}
+
+.dev1-product.dev1-product .dev2-spec-badge.dev2-spec-badge--row .dev2-spec-badge__icon svg {
+  inline-size: 20px;
+  block-size: 20px;
+}
+
+.dev1-product.dev1-product .dev2-spec-badge.dev2-spec-badge--row .dev2-spec-badge__label {
+  font-size: var(--font-size--sm);
+  line-height: calc(24 / 14);
+}
+
+/* Trust badges (a group of spec-badge "Badge"): two columns of white pills, 28px gradient icon tile */
+.dev1-product.dev1-product .group-block-content:has(> .dev2-spec-badge:not(.dev2-spec-badge--row) + .dev2-spec-badge) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  padding-block: 2px;
+}
+
+.dev1-product.dev1-product .group-block-content:has(> .dev2-spec-badge:not(.dev2-spec-badge--row) + .dev2-spec-badge) > .dev2-spec-badge {
+  display: flex;
+  min-inline-size: 0;
+  gap: 3px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  box-shadow: 0 6px 6px color-mix(in srgb, var(--color-primary-button-background) 6%, transparent);
+}
+
+.dev1-product.dev1-product .group-block-content:has(> .dev2-spec-badge:not(.dev2-spec-badge--row) + .dev2-spec-badge) .dev2-spec-badge__icon {
+  inline-size: 28px;
+  block-size: 28px;
+  border-radius: 14px;
+}
+
+.dev1-product.dev1-product .group-block-content:has(> .dev2-spec-badge:not(.dev2-spec-badge--row) + .dev2-spec-badge) .dev2-spec-badge__icon svg {
+  inline-size: 18px;
+  block-size: 18px;
+}
+
+.dev1-product.dev1-product .group-block-content:has(> .dev2-spec-badge:not(.dev2-spec-badge--row) + .dev2-spec-badge) .dev2-spec-badge__label {
+  flex: 1 1 auto;
+}
+
+/* Colors: legend ("Color: value", Figma 16 / 27 deep blue) beside the swatches; name under each swatch */
+.dev1-product.dev1-product .variant-option--swatches {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* A floated legend is laid out as an ordinary flex item, so it can sit on the swatch row. */
+.dev1-product.dev1-product .variant-option--swatches > legend {
+  float: inline-start;
+  margin: 0;
+  margin-inline-end: 4px;
+  padding: 0;
+  color: var(--variant-option-label-color, var(--color-foreground));
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--md);
+  line-height: calc(27 / 16);
+}
+
+.dev1-product.dev1-product .variant-option--swatches > legend .variant-option__swatch-value {
+  color: inherit;
+}
+
+/* Figma "اللون: وردي" — colon between the option name and the selected value */
+.dev1-product.dev1-product .variant-option--swatches > legend .variant-option__swatch-value::before {
+  content: ': ';
+}
+
+.dev1-product.dev1-product .variant-option__button-label--has-swatch:has(.dev1-swatch-label) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  outline: none;
+}
+
+.dev1-product.dev1-product .variant-option__button-label--has-swatch:has(.dev1-swatch-label)::after {
+  content: none;
+}
+
+/* Figma "Color Swatch": a 24px color dot inside a 34px ring (1px light border, 4px white gap).
+   The ring is an outline on the dot, so the native selected / hover color only changes the ring. */
+.dev1-product.dev1-product .variant-option__button-label--has-swatch:has(.dev1-swatch-label) .swatch {
+  --swatch-width: 24px;
+  --swatch-height: 24px;
+
+  flex: none;
+  margin: 5px;
+  border-radius: 50%;
+  outline: 1px solid var(--color-input-border);
+  outline-offset: 4px;
+}
+
+.dev1-product.dev1-product .variant-option__button-label--has-swatch:has(.dev1-swatch-label):hover .swatch {
+  outline-color: var(--color-variant-hover-border);
+}
+
+.dev1-product.dev1-product .variant-option__button-label--has-swatch:has(.dev1-swatch-label):has(:checked) .swatch {
+  outline-color: var(--color-primary-button-background);
+}
+
+.dev1-product.dev1-product .variant-option__button-label--has-swatch:has(.dev1-swatch-label):has(:focus-visible) .swatch {
+  outline: var(--focus-outline-width) solid var(--color-foreground);
+}
+
+.dev1-product .dev1-swatch-label {
+  color: var(--color-foreground-muted);
+  font-family: var(--font-body--family);
+  font-size: var(--font-size--2xs);
+  line-height: calc(20 / 12);
+  white-space: nowrap;
+}
+
+.dev1-product .variant-option__button-label:has(input:checked) .dev1-swatch-label {
+  color: var(--color-foreground);
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+}
+
+/* Purchase row: quantity pill (right) beside the full-width add to cart button (left), 12px apart */
+.dev1-product.dev1-product .product-form-buttons {
+  align-items: center;
+  gap: 12px;
+}
+
+.dev1-product.dev1-product .product-form-buttons .add-to-cart-button {
+  min-block-size: 58px;
+  border-radius: 12px;
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--md);
+  line-height: calc(26 / 16);
+}
+
+/* Native accelerated checkout (not in Figma) on its own full-width line below the quantity + add row. */
+.dev1-product.dev1-product .product-form-buttons > .accelerated-checkout-block {
+  flex-basis: 100%;
+}
+
+/* Figma's button has no icon. */
+.dev1-product.dev1-product .product-form-buttons .add-to-cart-button .add-to-cart-icon {
+  display: none;
+}
+
+/* Quantity: geometry stays − value + (Figma) in every direction; white pill, 1.5px light border, soft shadow */
+.dev1-product.dev1-product .quantity-selector {
+  direction: ltr;
+  align-items: center;
+  block-size: 50px;
+  padding-inline: 6px;
+  border: 1.5px solid var(--color-input-border);
+  border-radius: 999px;
+  background-color: var(--color-background);
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--color-primary-button-background) 7%, transparent);
+}
+
+.dev1-product.dev1-product .quantity-selector :is(.quantity-minus, .quantity-plus) {
+  inline-size: 34px;
+  block-size: 34px;
+  border-radius: 50%;
+  color: var(--color-primary-button-background);
+}
+
+.dev1-product.dev1-product .quantity-selector input {
+  inline-size: 38px;
+  color: var(--color-foreground);
+  font-family: var(--font-accent--family);
+  font-weight: 700;
+  font-size: 1.0625rem; /* Figma 17px — no theme token */
+  text-align: center;
+}
+
+/* Routine rows (Product row): thumbnail right, title + supporting text, blue price, round add button left;
+   tint → white gradient toward the add button (Figma "to right"; the row is always RTL, so physical). */
+.dev1-product.dev1-product .dev1-reel-product {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto 38px;
+  grid-template-areas:
+    'thumb title price add'
+    'thumb subtitle price add';
+  align-items: center;
+  column-gap: 12px;
+  row-gap: 1px;
+  inline-size: 100%;
+  padding-block: 10px;
+  padding-inline: 14px 10px;
+  border: 1px solid var(--color-input-border);
+  border-radius: 18px;
+  background-image: linear-gradient(
+    to right,
+    var(--dev1-reel-background, var(--dev1-product-tint, var(--color-background))),
+    var(--color-background)
+  );
+}
+
+.dev1-product.dev1-product .dev1-reel-product__info {
+  display: contents;
+}
+
+.dev1-product.dev1-product .dev1-reel-product__thumb {
+  grid-area: thumb;
+  inline-size: 56px;
+  block-size: 56px;
+  border-radius: 14px;
+  background-color: var(--color-background);
+}
+
+.dev1-product.dev1-product .dev1-reel-product .dev1-reel-product__title {
+  grid-area: title;
+  align-self: end;
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--md);
+  line-height: calc(27 / 16);
+}
+
+.dev1-product.dev1-product .dev1-reel-product:not(:has(.dev1-reel-product__subtitle)) .dev1-reel-product__title {
+  grid-row: 1 / span 2;
+  align-self: center;
+}
+
+.dev1-product .dev1-reel-product__subtitle {
+  grid-area: subtitle;
+  align-self: start;
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--color-foreground-muted);
+  font-size: var(--font-size--2xs);
+  line-height: calc(20 / 12);
+}
+
+.dev1-product.dev1-product .dev1-reel-product .dev1-reel-product__price {
+  grid-area: price;
+  font-family: var(--font-heading--family);
+  font-weight: 700;
+  font-size: var(--font-size--md);
+  line-height: calc(27 / 16);
+  white-space: nowrap;
+}
+
+.dev1-product.dev1-product .dev1-reel-product__add {
+  grid-area: add;
+  display: grid;
+  place-items: center;
+  inline-size: 38px;
+  block-size: 38px;
+}
+
+/* The quick-add form is an inline-size container (zero intrinsic width): give the chain the button's size. */
+.dev1-product.dev1-product .dev1-reel-product__add :is(quick-add-component, product-form-component, .shopify-product-form) {
+  display: grid;
+  place-items: center;
+  inline-size: 38px;
+  block-size: 38px;
+  container-type: normal;
+}
+
+/* The native quick-add form, shown as Figma's 38px round button (visible text kept as its accessible name). */
+.dev1-product.dev1-product .dev1-reel-product__add .quick-add {
+  --quick-add-foreground: var(--color-primary-button-text);
+
+  position: static;
+  inset: auto;
+  pointer-events: auto;
+}
+
+/* Flex with no gap: the button's hidden text (font-size 0) is a zero-size item, so the icon stays centered */
+.dev1-product.dev1-product .dev1-reel-product__add :is(button.quick-add__button, .dev1-reel-product__add-link) {
+  position: relative;
+  inset: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  inline-size: 38px;
+  block-size: 38px;
+  min-inline-size: 38px;
+  max-inline-size: none;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  opacity: 1;
+  background: var(--color-primary-button-background);
+  color: var(--color-primary-button-text);
+  font-size: 0;
+  box-shadow: 0 8px 8px color-mix(in srgb, var(--color-primary-button-background) 30%, transparent);
+  backdrop-filter: none;
+}
+
+.dev1-product.dev1-product .dev1-reel-product__add button.quick-add__button:is(:hover, :focus-visible) {
+  inline-size: 38px;
+  padding: 0;
+  background: var(--color-primary-button-hover-background);
+}
+
+.dev1-product.dev1-product .dev1-reel-product__add button.quick-add__button:disabled {
+  opacity: var(--opacity-muted-text);
+}
+
+.dev1-product.dev1-product .dev1-reel-product__add :is(.add-to-cart-icon, .dev1-reel-product__add-icon) {
+  display: block;
+  inline-size: 22px;
+  block-size: 22px;
+}
+
+.dev1-product.dev1-product .dev1-reel-product__add :is(.add-to-cart-icon, .dev1-reel-product__add-icon) svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.dev1-product.dev1-product .dev1-reel-product__add .add-to-cart__added {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+/* Description and policies: separate cards 10px apart — white, 1px light border, 14px radius; tinted while
+   open. Spacing on the summary and the content, never on <details> (accordion-custom, theme T15). */
+.dev1-product.dev1-product .accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dev1-product.dev1-product .accordion .details {
+  border: 1px solid var(--color-input-border);
+  border-radius: 14px;
+  background-color: var(--color-background);
+  transition: background-color var(--animation-speed) var(--animation-easing);
+}
+
+.dev1-product.dev1-product .accordion .details[open] {
+  background-color: var(--dev1-product-tint, var(--color-background));
+}
+
+.dev1-product.dev1-product .accordion .details__header {
+  gap: 12px;
+  padding: 14px 16px;
+  color: var(--color-foreground);
+  font-family: var(--font-accent--family);
+  font-style: var(--font-accent--style);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--font-size--md);
+  line-height: calc(27 / 16);
+  text-transform: none;
+  text-align: start;
+}
+
+.dev1-product.dev1-product .accordion .details__header > .icon-caret {
+  flex-shrink: 0;
+  margin-inline-start: auto;
+  inline-size: 18px;
+  block-size: 18px;
+  color: var(--color-primary-button-background);
+}
+
+.dev1-product .dev1-accordion-icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 32px;
+  block-size: 32px;
+  margin: 0;
+  border-radius: 10px;
+  background-color: var(--dev1-product-tint, transparent);
+  color: var(--color-primary-button-background);
+}
+
+.dev1-product .dev1-accordion-icon svg {
+  display: block;
+  inline-size: 18px;
+  block-size: 18px;
+}
+
+.dev1-product.dev1-product .accordion .details-content {
+  padding-inline: 16px;
+}
+
+.dev1-product.dev1-product .accordion .details[open] .details-content {
+  padding-block-end: 14px;
+}
+
+/* Product description inside the first row: Figma 14 / 40 bold headings, 14 / 28 secondary text */
+.dev1-product.dev1-product .accordion .details-content .rte {
+  color: var(--color-foreground-muted);
+  font-size: var(--font-size--sm);
+  line-height: calc(28 / 14);
+}
+
+.dev1-product.dev1-product .accordion .details-content .rte :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+  color: var(--color-foreground);
+  font-family: var(--font-heading--family);
+  font-weight: 700;
+  font-size: var(--font-size--sm);
+  line-height: calc(40 / 14);
+}
+
+.dev1-product.dev1-product .accordion .details-content .rte p {
+  margin-block: 0;
+}
+
+/* -- Mobile (< 750px): Figma 190:10914 -- */
+@media screen and (max-width: 749px) {
+  .dev1-product media-gallery {
+    --dev1-thumb-size: 66px;
+    --dev1-thumb-gap: 8px;
+    --dev1-thumb-offset: 16px;
+    --dev1-thumb-radius: 12px;
+    --dev1-stage-radius: 22px;
+  }
+
+  .dev1-product.dev1-product media-gallery slideshow-slide.product-media-container {
+    aspect-ratio: 352 / 364;
+  }
+
+  .dev1-product .dev1-gallery-overlay {
+    padding-block: 19px 23px;
+  }
+
+  .dev1-product .dev1-gallery-overlay__zoom {
+    margin-inline-start: 0;
+  }
+
+  /* Buy box: 14px between items */
+  .dev1-product.dev1-product .product-details > .group-block > .group-block-content,
+  .dev1-product.dev1-product .product-details .group-block-content:has(> product-price) {
+    gap: 14px;
+  }
+
+  .dev1-product.dev1-product .product-details .text-block.h1 > * {
+    font-size: var(--font-size--2xl);
+    line-height: calc(38 / 24);
+  }
+
+  .dev1-product.dev1-product product-price .price {
+    font-size: 1.625rem; /* Figma 26px — no theme token */
+  }
+
+  /* Offer banner: full width, 6px block padding */
+  .dev1-product.dev1-product .product-details > .group-block > .group-block-content > .dev2-spec-badge:not(.dev2-spec-badge--row) {
+    align-self: stretch;
+    inline-size: 100%;
+    padding-block: 6px;
+  }
+
+  .dev1-product.dev1-product .dev2-spec-badge.dev2-spec-badge--row .dev2-spec-badge__icon {
+    inline-size: 20px;
+    block-size: 20px;
+  }
+
+  .dev1-product.dev1-product .dev2-spec-badge.dev2-spec-badge--row .dev2-spec-badge__label {
+    font-size: 0.84375rem; /* Figma 13.5px — no theme token */
+  }
+
+  /* Colors: Figma 10px block padding around the swatch row */
+  .dev1-product.dev1-product .variant-option--swatches {
+    padding-block: 10px;
+  }
+
+  .dev1-product.dev1-product .product-form-buttons {
+    gap: 10px;
+  }
+
+  .dev1-product.dev1-product .quantity-selector {
+    block-size: 46px;
+    padding-inline: 5px;
+  }
+
+  .dev1-product.dev1-product .quantity-selector :is(.quantity-minus, .quantity-plus) {
+    inline-size: 30px;
+    block-size: 30px;
+  }
+
+  .dev1-product.dev1-product .quantity-selector .quantity-plus {
+    background-color: var(--dev1-product-tint, transparent);
+  }
+
+  .dev1-product.dev1-product .quantity-selector input {
+    inline-size: 32px;
+    font-size: 0.9375rem; /* Figma 15px — no theme token */
+  }
+
+  /* Trust badges: 38px pills, 10px gaps, 10.5px text, 16px icons */
+  .dev1-product.dev1-product .group-block-content:has(> .dev2-spec-badge:not(.dev2-spec-badge--row) + .dev2-spec-badge) {
+    gap: 10px;
+  }
+
+  .dev1-product.dev1-product .group-block-content:has(> .dev2-spec-badge:not(.dev2-spec-badge--row) + .dev2-spec-badge) > .dev2-spec-badge {
+    min-block-size: 38px;
+    padding-block: 4px;
+    padding-inline: 6px 8px;
+  }
+
+  .dev1-product.dev1-product .group-block-content:has(> .dev2-spec-badge:not(.dev2-spec-badge--row) + .dev2-spec-badge) .dev2-spec-badge__icon svg {
+    inline-size: 16px;
+    block-size: 16px;
+  }
+
+  .dev1-product.dev1-product .group-block-content:has(> .dev2-spec-badge:not(.dev2-spec-badge--row) + .dev2-spec-badge) .dev2-spec-badge__label {
+    font-size: 0.65625rem; /* Figma 10.5px — no theme token */
+  }
+
+  .dev1-product.dev1-product .dev1-reel-product .dev1-reel-product__title {
+    font-size: var(--font-size--sm);
+  }
+
+  .dev1-product .dev1-reel-product__subtitle {
+    font-size: var(--font-size--3xs);
+  }
+
+  .dev1-product.dev1-product .accordion .details__header {
+    padding-inline: 20px;
+  }
+
+  .dev1-product.dev1-product .accordion .details-content {
+    padding-inline: 20px;
+  }
+}
+
 

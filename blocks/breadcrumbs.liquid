@@ -1,0 +1,90 @@
+<!-- breadcrumbs.liquid -->
+{%- doc -%}
+  Breadcrumb trail: home → collection → current page. The collection is the one the visitor came
+  through (collection URL context) or, on a direct product URL, the product's first collection; it is
+  left out when neither exists. The last item is the current page and is not a link.
+  Separators are drawn in CSS. Styles: assets/dev1.css (.dev1-breadcrumbs).
+{%- enddoc -%}
+
+{%- liquid
+  assign block_settings = block.settings
+  assign crumb_product = closest.product
+  assign crumb_collection = collection
+
+  if crumb_collection == blank and crumb_product != blank
+    assign crumb_collection = crumb_product.collections.first
+  endif
+
+  assign home_label = block_settings.home_label
+  if home_label == blank
+    assign home_label = 'dev1_product.breadcrumb_home' | t
+  endif
+
+  assign current_title = ''
+  if crumb_product != blank
+    assign current_title = crumb_product.title
+  elsif template.name == 'collection' and collection != blank
+    assign current_title = collection.title
+    assign crumb_collection = blank
+  elsif page != blank
+    assign current_title = page.title
+  endif
+-%}
+
+{%- if current_title != blank -%}
+  <nav
+    class="dev1-breadcrumbs"
+    aria-label="{{ 'dev1_product.breadcrumb' | t }}"
+    {% if block_settings.text_color != blank %}
+      style="--dev1-breadcrumbs-color: {{ block_settings.text_color }};"
+    {% endif %}
+    {{ block.shopify_attributes }}
+  >
+    <ol class="dev1-breadcrumbs__list">
+      <li class="dev1-breadcrumbs__item">
+        <a class="dev1-breadcrumbs__link" href="{{ routes.root_url }}">{{ home_label | escape }}</a>
+      </li>
+      {%- if block_settings.show_collection and crumb_collection != blank -%}
+        <li class="dev1-breadcrumbs__item">
+          <a class="dev1-breadcrumbs__link" href="{{ crumb_collection.url }}">{{ crumb_collection.title | escape }}</a>
+        </li>
+      {%- endif -%}
+      <li class="dev1-breadcrumbs__item">
+        <span class="dev1-breadcrumbs__current" aria-current="page">{{ current_title | escape }}</span>
+      </li>
+    </ol>
+  </nav>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:dev1_settings.breadcrumbs",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "home_label",
+      "label": "t:dev1_settings.home_label",
+      "info": "t:dev1_settings.home_label_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection",
+      "label": "t:dev1_settings.show_collection",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:dev1_settings.text_color",
+      "default": "{{ settings.color_palette.color1 }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:dev1_settings.breadcrumbs",
+      "category": "t:categories.links"
+    }
+  ]
+}
+{% endschema %}

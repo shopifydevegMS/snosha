@@ -87,3 +87,53 @@ class Dev1CarouselProgress extends HTMLElement {
 if (!customElements.get('dev1-carousel-progress')) {
   customElements.define('dev1-carousel-progress', Dev1CarouselProgress);
 }
+
+/* ==== dev1-discount-sync — Product Hero (product-information, Design 1) ==== */
+/* The native <product-price> swaps only its price container when the variant changes. This wrapper
+   (blocks/price.liquid) swaps the discount badge next to it from the same section HTML the theme
+   fetched for the new variant, so the badge always matches the selected variant. It listens exactly
+   like product-price.js (product select event on the closest section) and never changes the price. */
+class Dev1DiscountSync extends HTMLElement {
+  #section = null;
+  #eventName = '';
+
+  connectedCallback() {
+    this.#section = this.closest('.shopify-section, dialog');
+    if (!this.#section) return;
+    // Dynamic import keeps the rest of this file working if the events module is unavailable.
+    import('@shopify/events')
+      .then(({ StandardEvents }) => {
+        if (!this.isConnected || !this.#section || this.#eventName) return;
+        this.#eventName = StandardEvents.productSelect;
+        this.#section.addEventListener(this.#eventName, this.#onProductSelect);
+      })
+      .catch(() => {});
+  }
+
+  disconnectedCallback() {
+    if (this.#section && this.#eventName) {
+      this.#section.removeEventListener(this.#eventName, this.#onProductSelect);
+    }
+    this.#section = null;
+    this.#eventName = '';
+  }
+
+  #onProductSelect = (event) => {
+    if (!(event.target instanceof Element) || event.target.closest('product-card')) return;
+    if (!event.promise) return;
+
+    event.promise
+      .then(({ detail } = {}) => {
+        const html = detail?.html;
+        if (!html || !this.isConnected) return;
+        const next = html.querySelector(`dev1-discount-sync[data-block-id="${this.dataset.blockId}"]`);
+        if (!next) return;
+        this.innerHTML = next.innerHTML;
+      })
+      .catch(() => {});
+  };
+}
+
+if (!customElements.get('dev1-discount-sync')) {
+  customElements.define('dev1-discount-sync', Dev1DiscountSync);
+}

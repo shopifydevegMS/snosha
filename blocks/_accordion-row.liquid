@@ -15,15 +15,27 @@
     {% if section.settings.design == 'dev2' %}
       name="dev2-faq-{{ section.id }}"
     {% endif %}
+    {%- comment -%}
+      dev1: product information "Design 1" (Product Hero) with "Keep only one accordion row open" —
+      the rows of the section share one name, so the browser keeps one row open at a time.
+    {%- endcomment -%}
+    {% if section.settings.design == 'dev1' and section.settings.dev1_single_open %}
+      name="dev1-accordion-{{ section.id }}"
+    {% endif %}
     {{ block.shopify_attributes }}
   >
     <summary class="details__header">
+      {%- comment -%} dev1: "Design 1" icon tile from the row's SVG code; empty keeps the native icon {%- endcomment -%}
+      {% if section.settings.design == 'dev1' and block_settings.dev1_icon_svg != blank %}
+        <span class="details__icon dev1-accordion-icon" aria-hidden="true">{{ block_settings.dev1_icon_svg }}</span>
+      {% else %}
       {% render 'icon-or-image',
         icon: block_settings.icon,
         image_upload: block_settings.image_upload,
         width: block_settings.width,
         class_name: 'details__icon'
       %}
+      {% endif %}
       {{ block_settings.heading }}
       <span class="svg-wrapper icon-caret icon-animated">
         {{- 'icon-caret.svg' | inline_asset_content -}}
@@ -331,6 +343,13 @@
       "step": 2,
       "unit": "px",
       "default": 20
+    },
+    {
+      "type": "html",
+      "id": "dev1_icon_svg",
+      "label": "t:dev1_settings.icon_svg",
+      "info": "t:dev1_settings.icon_svg_info",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
     }
   ],
   "presets": [
