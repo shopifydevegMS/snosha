@@ -16,6 +16,7 @@
   @param {boolean} [disable_controls] - Whether to disable controls. If true, only play/pause will be usable.
   @param {object} video - The Shopify video object or a string containing a YouTube ID or Vimeo ID
   @param {object} [block] - The block object
+  @param {boolean} [dev3_sound_on_play] - dev3: start an uploaded video unmuted after the poster click (default: muted, native)
 
   Video from URL:
 
@@ -113,6 +114,9 @@
         | external_video_url: autoplay: true, loop: video_loop, muted: '1', controls: controls, api: enable_js_api
         | external_video_tag: data-video-type: 'vimeo'
       }}
+    {% elsif dev3_sound_on_play and video_preview_image != blank and video_autoplay != true %}
+      {%- comment -%} dev3: only reached on a poster click (a user gesture), so the browser allows sound {%- endcomment -%}
+      {{ video | video_tag: image_size: '2500x', autoplay: true, loop: video_loop, muted: false, controls: controls }}
     {% else %}
       {{ video | video_tag: image_size: '2500x', autoplay: true, loop: video_loop, muted: true, controls: controls }}
     {% endif %}

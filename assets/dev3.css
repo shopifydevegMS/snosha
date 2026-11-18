@@ -1191,3 +1191,115 @@
     inline-size: auto;
   }
 }
+
+/* ==== dev3-howto — product "05 How To Use Video" (sections/section.liquid Design 6 + native text and video blocks) ==== */
+
+/* Heading — Figma 32/52 SemiBold desktop, 22/52 mobile. Centered by the native text alignment setting. */
+.dev3-howto.dev3-howto .text-block {
+  direction: rtl;
+  unicode-bidi: isolate;
+  font-family: var(--font-body--family);
+  font-size: 32px;
+  line-height: 52px;
+  font-weight: 600;
+}
+
+.dev3-howto.dev3-howto .text-block > * {
+  margin: 0;
+  font: inherit;
+}
+
+/* Video frame — native deferred-media (poster button + click-to-load video), portrait 9:16, Figma 400px wide */
+.dev3-howto.dev3-howto deferred-media {
+  display: block;
+  width: min(400px, 100%);
+  height: auto;
+  min-height: 0; /* stops the poster's own ratio from stretching the 9:16 frame */
+  aspect-ratio: 9 / 16;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+/* Poster button carries an inline --video-aspect-ratio from the file; the frame stays 9:16 */
+.dev3-howto.dev3-howto deferred-media > .deferred-media__poster-button {
+  display: block;
+  aspect-ratio: auto;
+  height: 100%;
+}
+
+/* Native gives the poster and the video the file's own ratio (--size-style-aspect-ratio); the 9:16 frame sizes them instead */
+.dev3-howto.dev3-howto deferred-media :is(.deferred-media__poster-image, .deferred-media__poster-button ~ video) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
+.dev3-howto.dev3-howto deferred-media .deferred-media__poster-image {
+  object-position: 39% 50%; /* Figma desktop crop of the 3:2 poster */
+}
+
+/* Centered play disc — the native icon inside the native poster button */
+.dev3-howto.dev3-howto deferred-media .deferred-media__poster-icon {
+  inline-size: 88px;
+  block-size: 88px;
+  background-color: var(--dev3-howto-button);
+  color: var(--dev3-howto-icon);
+  box-shadow: 0 14px 34px rgb(var(--dev3-howto-shade-rgb) / 0.4);
+  transition: transform 0.2s ease;
+}
+
+.dev3-howto.dev3-howto deferred-media .deferred-media__poster-icon svg {
+  width: 34px;
+  height: 34px;
+  color: var(--dev3-howto-icon);
+  filter: none;
+}
+
+.dev3-howto.dev3-howto deferred-media .deferred-media__poster-button:hover .deferred-media__poster-icon {
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dev3-howto.dev3-howto deferred-media .deferred-media__poster-icon {
+    transition: none;
+  }
+}
+
+/* Mobile — Figma 22px heading, 14px gap, 300px frame with 16px radius, 56px disc, no poster shade */
+@media screen and (max-width: 749px) {
+  .dev3-howto.dev3-howto .text-block {
+    font-size: 22px;
+  }
+
+  .dev3-howto.dev3-howto .layout-panel-flex {
+    gap: 14px;
+  }
+
+  .dev3-howto.dev3-howto deferred-media {
+    width: min(300px, 100%);
+    border-radius: 16px;
+  }
+
+  .dev3-howto.dev3-howto deferred-media .deferred-media__poster-image {
+    object-position: 45% 50%; /* Figma mobile crop */
+  }
+
+  .dev3-howto.dev3-howto deferred-media .deferred-media__poster-icon {
+    inline-size: 56px;
+    block-size: 56px;
+  }
+}
+
+/* Desktop and tablet — Figma's translucent shade on the poster only. It lives inside the poster button,
+   so it fades out with the button when the video loads and never covers the native controls. */
+@media screen and (min-width: 750px) {
+  .dev3-howto.dev3-howto deferred-media .deferred-media__poster-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgb(var(--dev3-howto-shade-rgb) / 0.2);
+    pointer-events: none;
+  }
+}
