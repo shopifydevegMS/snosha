@@ -94,7 +94,12 @@
             {{ option_id_attribute }}
           >
             <legend>
-              {{ product_option.name | escape -}}
+              {%- comment -%} dev1: product information "Design 1" — the block's own name for the swatch option (e.g. اللون); empty keeps the product's option name {%- endcomment -%}
+              {%- if section.settings.design == 'dev1' and variant_style == 'swatch' and block_settings.dev1_swatch_option_label != blank -%}
+                {{ block_settings.dev1_swatch_option_label | escape -}}
+              {%- else -%}
+                {{ product_option.name | escape -}}
+              {%- endif -%}
               {%- if variant_style == 'swatch' -%}
                 <span class="variant-option__swatch-value">{{ product_option.selected_value }}</span>
               {%- endif %}

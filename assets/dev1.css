@@ -1348,8 +1348,10 @@
   outline-color: var(--color-variant-hover-border);
 }
 
+/* Selected: 2px brand-blue ring, offset 3px so the ring keeps Figma's 34px outer size */
 .dev1-product.dev1-product .variant-option__button-label--has-swatch:has(.dev1-swatch-label):has(:checked) .swatch {
-  outline-color: var(--color-primary-button-background);
+  outline: 2px solid var(--color-primary-button-background);
+  outline-offset: 3px;
 }
 
 .dev1-product.dev1-product .variant-option__button-label--has-swatch:has(.dev1-swatch-label):has(:focus-visible) .swatch {

@@ -43,6 +43,13 @@
       "default": true
     },
     {
+      "type": "text",
+      "id": "dev1_swatch_option_label",
+      "label": "t:dev1_settings.swatch_option_label",
+      "info": "t:dev1_settings.swatch_option_label_info",
+      "visible_if": "{{ section.settings.design == 'dev1' and block.settings.show_swatches }}"
+    },
+    {
       "type": "header",
       "content": "t:content.appearance"
     },
