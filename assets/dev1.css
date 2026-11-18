@@ -752,3 +752,104 @@
   }
 }
 
+/* ==== dev1-why — 10 Why SNOSHA (sections/section.liquid, Design 3) ==== */
+/* Figma 190:4024 (desktop) / 190:4361 (mobile). Native section → heading group (2 text blocks) +
+   feature group holding benefit-item blocks (dev4's block, used as-is; restyled only inside .dev1-why). */
+
+/* Arabic content: one direction boundary, so items run right → left in every locale. */
+.dev1-why .section-content-wrapper {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Feature grid: the group whose children are benefit items. Wrapping flex rows keep any number of
+   items centred: 4 per row on desktop (32px gaps), 2 per row below 990px (12px gaps). */
+.dev1-why.dev1-why .group-block-content:has(> .dev4-benefit) {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 12px; /* Figma mobile */
+}
+
+.dev1-why.dev1-why .dev4-benefit {
+  --dev4-benefit-tile-size: 96px;
+  --dev4-benefit-icon-size: 64px;
+  --dev1-why-columns: 2;
+  --dev1-why-gap: 12px;
+
+  flex: 0 0 auto;
+  inline-size: calc((100% - var(--dev1-why-gap) * (var(--dev1-why-columns) - 1)) / var(--dev1-why-columns));
+  flex-direction: column;
+  align-items: center;
+  gap: 14px; /* Figma */
+  text-align: center;
+}
+
+@media screen and (min-width: 990px) {
+  .dev1-why.dev1-why .group-block-content:has(> .dev4-benefit) {
+    gap: 32px; /* Figma desktop */
+  }
+
+  .dev1-why.dev1-why .dev4-benefit {
+    --dev1-why-columns: 4;
+    --dev1-why-gap: 32px;
+  }
+}
+
+/* Icon tile: 96px, radius 26, white → section tint, 1px border, white inner highlight, soft blue shadow. */
+.dev1-why.dev1-why .dev4-benefit__tile {
+  border-radius: 26px;
+  background-image: linear-gradient(
+    to bottom,
+    var(--dev4-benefit-tile, var(--color-background)),
+    var(--color-background)
+  );
+  box-shadow:
+    inset 0 0 0 1px var(--dev4-benefit-tile-border, var(--color-border)),
+    inset 0 2px 2px color-mix(in srgb, var(--dev4-benefit-tile, var(--color-background)) 90%, transparent),
+    0 10px 11px color-mix(in srgb, var(--color-primary-button-background) 8%, transparent);
+}
+
+.dev1-why.dev1-why .dev4-benefit__text {
+  flex: 0 0 auto;
+  inline-size: 100%;
+  align-items: center;
+  gap: 6px; /* Figma */
+}
+
+.dev1-why.dev1-why .dev4-benefit__title {
+  color: var(--dev1-why-title, var(--color-foreground));
+  font-size: var(--font-size--lg);
+  line-height: calc(30 / 18);
+}
+
+.dev1-why.dev1-why .dev4-benefit__description {
+  font-size: var(--font-size--xs);
+  line-height: calc(22 / 13);
+}
+
+@media screen and (max-width: 749px) {
+  /* Figma mobile: 60px / 48px padding (settings; 0 = native scaling). */
+  .dev1-why.dev1-why .section-content-wrapper {
+    padding-block-start: calc(var(--dev1-padding-mobile-top, var(--padding-block-start)) + var(--section-top-offset, 0px));
+    padding-block-end: var(--dev1-padding-mobile-bottom, var(--padding-block-end));
+  }
+
+  /* Figma mobile 190:4361 stacks the rows in reverse (items 3–4 on top, items 1–2 below), each row
+     still right → left. wrap-reverse flips the cross axis, so flex-end here = top of each row. */
+  .dev1-why.dev1-why .group-block-content:has(> .dev4-benefit) {
+    flex-wrap: wrap-reverse;
+    align-items: flex-end;
+  }
+
+  /* Description: Figma mobile is 13/22 and starts at the right edge (not centred). */
+  .dev1-why.dev1-why .text-block.h5,
+  .dev1-why.dev1-why .text-block.h5 > * {
+    font-size: var(--font-size--xs);
+    line-height: calc(22 / 13);
+    text-align: start;
+  }
+}
+
+
