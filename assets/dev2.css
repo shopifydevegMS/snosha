@@ -1454,14 +1454,17 @@
   display: none;
 }
 
-/* Product image: above the table, its centre 25px inside the table's right edge (Figma). */
+/* Product image, sized for the Figma brush export (transparent margins, ~4:7): Figma frame 804px
+   tall, 138px above the table, centred 6px outside the table's right edge. Transparent margins
+   overlap the criteria column, so the box lets clicks through. */
 .dev2-cmp__product {
   z-index: 3;
-  inset-block-start: -7.232cqi;
-  inset-inline-start: 2.232cqi;
-  block-size: 63.929cqi;
-  aspect-ratio: 245 / 1400;
+  inset-block-start: -12.321cqi;
+  inset-inline-start: -0.5cqi;
+  block-size: 71.759cqi;
+  aspect-ratio: 4 / 7;
   translate: 50% 0;
+  pointer-events: none;
 }
 
 .dev2-cmp__product-image {
@@ -1480,8 +1483,8 @@
 
 .dev2-cmp__floor {
   z-index: 0;
-  inset-block-end: -0.714cqi;
-  inset-inline-start: calc(50% - 1.161cqi);
+  inset-block-end: 2.027cqi;
+  inset-inline-start: calc(50% + 1.571cqi);
   inline-size: 21.429cqi;
   block-size: 3.571cqi;
   translate: 50% 0;
@@ -1598,19 +1601,19 @@
 
   /* Small product image at the top right, beside the heading and partly behind the glass table
      (Figma draws the table over it). */
-  /* Centre 38px inside the table's right edge (Figma 390); moves toward the edge on narrower
-     screens so it never runs into the centred heading. */
+  /* Figma 390: 160px tall, top 127px above the table, centre 39px inside the table's right edge;
+     moves toward the edge on narrower screens so it never runs into the centred heading. */
   .dev2-cmp__product {
     z-index: -1;
-    inset-block-start: -117px;
-    inset-inline-start: clamp(10px, calc(100cqi - 312px), 38px);
-    block-size: 146px;
+    inset-block-start: -127px;
+    inset-inline-start: clamp(10px, calc(100cqi - 311px), 39px);
+    block-size: 160px;
   }
 
   .dev2-cmp__product-glow {
     display: block;
     z-index: 0;
-    inset-block-start: calc(50% + 27px);
+    inset-block-start: calc(50% + 30px);
     inset-inline-start: calc(50% - 16px);
     inline-size: 150px;
     block-size: 220px;
