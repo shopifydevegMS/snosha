@@ -1623,3 +1623,18 @@
     filter: blur(30px);
   }
 }
+
+/* ==== dev2-reviews — product "08 Reviews" (sections/section.liquid Design 9) ====
+   Native section: heading text block (h2 preset, 32/52 desktop) + the Judge.me app block.
+   Judge.me renders its own widget markup; styling for it is added once the block is placed. */
+.dev2-reviews.dev2-reviews .shopify-app-block {
+  inline-size: 100%;
+}
+
+@media (max-width: 749px) {
+  /* Figma 390: 22px / 52px (no 22px token in the type scale). */
+  .dev2-reviews.dev2-reviews :is(.text-block.h2, .text-block.h2 > *) {
+    font-size: 1.375rem;
+    line-height: 52px;
+  }
+}

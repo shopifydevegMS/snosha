@@ -140,7 +140,10 @@
           {% endif %}
           <span class="add-to-cart-text__content">
             <span>
-              {%- if current_variant.available -%}
+              {%- if current_variant.available and section.settings.dev2_sticky_label != blank -%}
+                {%- # dev2: merchant label for the sticky bar; blank keeps the theme text -%}
+                {{- section.settings.dev2_sticky_label | escape -}}
+              {%- elsif current_variant.available -%}
                 {{- 'products.product.add_to_cart' | t -}}
               {%- elsif current_variant == blank -%}
                 {{- 'products.product.unavailable' | t -}}
@@ -487,6 +490,13 @@
       "id": "enable_sticky_add_to_cart",
       "label": "t:settings.enable_sticky_add_to_cart",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "dev2_sticky_label",
+      "label": "t:dev2_settings.sticky_label",
+      "info": "t:dev2_settings.sticky_label_info",
+      "visible_if": "{{ section.settings.enable_sticky_add_to_cart }}"
     },
     {
       "type": "color",
