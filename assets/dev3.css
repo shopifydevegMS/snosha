@@ -1303,3 +1303,58 @@
     pointer-events: none;
   }
 }
+
+/* ==== dev3-recs — product "Related Products" (sections/product-recommendations.liquid, Design 1) ==== */
+/* Figma 190:10816 (desktop) / 190:11593 (mobile). The section uses dev1's shared "Design 1" look
+   (.dev1-featured + the global .dev1-card product card); this file adds only what the product-list
+   version doesn't have: Figma's always-visible carousel arrows and the two-cards-plus-peek mobile size.
+   Colours arrive as --dev3-recs-* palette variables from the section's gated inline style. */
+
+/* Desktop arrows: Figma's 52px white circles with a hairline border, soft shadow and blue chevron,
+   shown without hover. Native behaviour stays: disabled ends are hidden, focus/keyboard and RTL
+   mirroring are native. Touch devices keep the native clipped (tap-through) controls. */
+@media screen and (min-width: 750px) and (hover: hover) {
+  .dev3-recs.dev3-recs .resource-list__carousel > slideshow-container > slideshow-arrows .slideshow-control {
+    inline-size: 52px;
+    block-size: 52px;
+    min-inline-size: 52px;
+    min-block-size: 52px;
+    padding: 0;
+    opacity: 1;
+    animation: none;
+    background-color: var(--dev3-recs-arrow-background, var(--color-background));
+    color: var(--dev3-recs-arrow-icon, var(--color-primary-button-background));
+    box-shadow:
+      inset 0 0 0 1px var(--dev3-recs-arrow-border, transparent),
+      0 2px 6px rgb(var(--dev3-recs-arrow-shadow-rgb, var(--color-foreground-rgb)) / 0.12),
+      0 10px 26px rgb(var(--dev3-recs-arrow-shadow-rgb, var(--color-foreground-rgb)) / 0.3);
+  }
+
+  .dev3-recs.dev3-recs .resource-list__carousel > slideshow-container > slideshow-arrows .slideshow-control svg {
+    inline-size: 26px;
+    block-size: 26px;
+  }
+}
+
+/* Tablet: the 4 desktop columns are too narrow at 750–989px; the section's "Tablet columns" setting
+   (dev1_columns_tablet, the same setting the product-list version has) sets the visible cards. */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .dev3-recs.dev3-recs .resource-list__carousel {
+    --column-count: var(--dev1-columns-tablet, 3);
+  }
+}
+
+/* Mobile: two whole cards and a peek of the next one (Figma 165px cards, 12px gaps, 12px peek), from
+   the carousel's own width rather than a fixed card width. */
+@container resource-list-carousel (max-width: 749px) {
+  .dev3-recs.dev3-recs .resource-list__carousel .resource-list__slide {
+    --slide-width: calc((100cqw - var(--page-margin) - 3 * var(--resource-list-column-gap)) / 2);
+  }
+}
+
+/* Mobile heading: Figma uses Cairo Bold (700); desktop keeps the h2 preset's SemiBold. */
+@media screen and (max-width: 749px) {
+  .dev3-recs.dev3-recs .section-resource-list__content .text-block :is(h1, h2, h3, h4, h5, h6, p) {
+    font-weight: 700;
+  }
+}
