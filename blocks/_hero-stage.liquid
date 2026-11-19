@@ -1,9 +1,9 @@
 <!-- _hero-stage.liquid -->
 {%- comment -%}
   dev3 — product stage of the hero (Figma "Hero Stage" 190:3791 / 335:3961).
-  The decorative highlight is drawn with CSS (assets/dev3.css); the rings are part of the
-  merchant's product image, so they aren't drawn here. The product composition is a merchant
-  image (desktop + optional mobile override); optional spec chips are nested _hero-chip blocks.
+  The decorative highlight and the three rings are drawn with CSS (assets/dev3.css); the product
+  composition is a merchant image (desktop + optional mobile override) without rings or chips;
+  the spec chips are nested _hero-chip blocks, placed like the bundle hotspots (percent of the stage).
 {%- endcomment -%}
 {%- liquid
   assign image = block.settings.image
@@ -17,9 +17,14 @@
   endif
 -%}
 
-<div class="dev3-hero-stage" {{ block.shopify_attributes }}>
+<div class="dev3-hero-stage{% if block.settings.show_rings %} dev3-hero-stage--rings{% endif %}" {{ block.shopify_attributes }}>
   <div class="dev3-hero-stage__decor" aria-hidden="true">
     <span class="dev3-hero-stage__highlight"></span>
+    {%- if block.settings.show_rings -%}
+      <span class="dev3-hero-stage__ring dev3-hero-stage__ring--1"></span>
+      <span class="dev3-hero-stage__ring dev3-hero-stage__ring--2"></span>
+      <span class="dev3-hero-stage__ring dev3-hero-stage__ring--3"></span>
+    {%- endif -%}
   </div>
 
   <div class="dev3-hero-stage__media">
@@ -68,13 +73,20 @@
       "type": "image_picker",
       "id": "image",
       "label": "Product image",
-      "info": "Transparent PNG of the full product composition. About 1540 × 1020px."
+      "info": "Transparent PNG of the product composition only (no rings or spec chips — they're drawn by the theme). Figma \"Hero Product Photo\", about 1456 × 1188px."
     },
     {
       "type": "image_picker",
       "id": "image_mobile",
       "label": "Mobile product image",
       "info": "Optional. Used below 990px. Falls back to the product image."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rings",
+      "label": "Show rings",
+      "info": "Draws the three thin circles behind the product and fits a clean product photo (no rings or spec chips in the image) to Figma's photo box. Turn off for an image that already contains them.",
+      "default": true
     }
   ]
 }

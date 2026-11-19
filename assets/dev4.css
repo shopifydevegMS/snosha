@@ -367,6 +367,16 @@ dev4-comparison-slider {
   .dev4-before-after.dev4-before-after .section-content-wrapper {
     direction: ltr;
   }
+
+  /* Heading on one line on desktop (Figma 557px column, 32px): the size follows the content column
+     (~17.4em of text) between the theme's xl and 3xl sizes; longer merchant text still wraps. */
+  .dev4-before-after.dev4-before-after .section-content-wrapper > .group-block {
+    container-type: inline-size;
+  }
+
+  .dev4-before-after.dev4-before-after .section-content-wrapper > .group-block .text-block.h2 :is(h1, h2, h3, h4, h5, h6) {
+    font-size: clamp(var(--font-size--xl), 5.6cqi, var(--font-size--3xl));
+  }
 }
 
 /* Tablet and mobile: one stacked column (slider, then content) — same DOM, no squeezed columns. */

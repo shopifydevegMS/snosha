@@ -131,10 +131,17 @@
   --dev3-stage-highlight-y: 23.94%;
   --dev3-stage-highlight-w: 70.18%;
   --dev3-stage-highlight-h: 54.55%;
+  /* Image box for a full-stage composition (rings and chips inside the image) */
   --dev3-stage-media-x: 6.55%;
   --dev3-stage-media-y: 16.33%;
   --dev3-stage-media-w: 98.92%;
   --dev3-stage-media-h: 76.03%;
+  /* Rings 335:3963–3965: one centre (171, 175), diameters 240 / 348 / 456 as % of the stage width */
+  --dev3-stage-ring-x: 50%;
+  --dev3-stage-ring-y: 53.03%;
+  --dev3-stage-ring-1: 70.18%;
+  --dev3-stage-ring-2: 101.75%;
+  --dev3-stage-ring-3: 133.33%;
 
   position: relative;
   z-index: var(--layer-base);
@@ -157,8 +164,32 @@
     --dev3-stage-media-y: -2.94%;
     --dev3-stage-media-w: 94.47%;
     --dev3-stage-media-h: 104.8%;
+    /* Rings 190:3793–3795: one centre (324, 250), diameters 440 / 600 / 760 as % of the stage width */
+    --dev3-stage-ring-x: 43.26%;
+    --dev3-stage-ring-y: 50%;
+    --dev3-stage-ring-1: 58.74%;
+    --dev3-stage-ring-2: 80.11%;
+    --dev3-stage-ring-3: 101.47%;
 
     max-inline-size: none;
+  }
+}
+
+/* "Show rings" on: the theme draws rings + spec chips, so the image is the clean product photo and fills
+   Figma's "Hero Product Photo" box (mobile 335:3966: -3, 37, 348 × 284.4; desktop 190:3796: -9, -50, 728 × 594). */
+.dev3-hero-stage.dev3-hero-stage--rings {
+  --dev3-stage-media-x: -0.88%;
+  --dev3-stage-media-y: 11.21%;
+  --dev3-stage-media-w: 101.75%;
+  --dev3-stage-media-h: 86.18%;
+}
+
+@media screen and (min-width: 990px) {
+  .dev3-hero-stage.dev3-hero-stage--rings {
+    --dev3-stage-media-x: -1.2%;
+    --dev3-stage-media-y: -10%;
+    --dev3-stage-media-w: 97.2%;
+    --dev3-stage-media-h: 118.8%;
   }
 }
 
@@ -176,6 +207,29 @@
   border-radius: var(--style-border-radius-50);
   background-color: rgb(var(--dev3-hero-on-brand-rgb) / 0.35);
   filter: blur(55px);
+}
+
+/* Rings (Figma: 1.5px strokes in the on-brand colour at 18% / 12% / 8%), centred on one point and
+   sized from the stage width so they scale with it. They may run past the stage; the hero clips them. */
+.dev3-hero-stage__ring {
+  position: absolute;
+  inset-inline-start: var(--dev3-stage-ring-x);
+  inset-block-start: var(--dev3-stage-ring-y);
+  inline-size: var(--dev3-stage-ring-1);
+  aspect-ratio: 1;
+  border: 1.5px solid rgb(var(--dev3-hero-on-brand-rgb) / 0.18);
+  border-radius: var(--style-border-radius-50);
+  translate: -50% -50%;
+}
+
+.dev3-hero-stage__ring--2 {
+  inline-size: var(--dev3-stage-ring-2);
+  border-color: rgb(var(--dev3-hero-on-brand-rgb) / 0.12);
+}
+
+.dev3-hero-stage__ring--3 {
+  inline-size: var(--dev3-stage-ring-3);
+  border-color: rgb(var(--dev3-hero-on-brand-rgb) / 0.08);
 }
 
 .dev3-hero-stage__media {
