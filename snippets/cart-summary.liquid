@@ -3,6 +3,7 @@
 
   @param {string} [accelerated_checkout_buttons_layout] - { 'vertical' } Forced layout of the additional checkout buttons, instead of relying on platform's layout.
   @param {string} [section_id] - The section ID for cart discount component.
+  @param {boolean} [dev1_drawer] - dev1: cart drawer "Design 1" (subtotal label, savings line, checkout label); omit for native output
 {%- enddoc -%}
 
 {% render 'text-component-shimmer-styles' %}
@@ -220,6 +221,22 @@
     else
       assign total_price = cart.total_price | money
     endif
+
+    # dev1: cart drawer "Design 1" — what the cart would cost at compare-at prices, and how much is saved
+    # (compare-at savings plus any discounts). Only computed when the drawer asks for it.
+    assign dev1_savings = 0
+    if dev1_drawer
+      assign dev1_compare_total = 0
+      for item in cart.items
+        if item.variant.compare_at_price > item.original_price
+          assign dev1_line_compare = item.variant.compare_at_price | times: item.quantity
+        else
+          assign dev1_line_compare = item.original_line_price
+        endif
+        assign dev1_compare_total = dev1_compare_total | plus: dev1_line_compare
+      endfor
+      assign dev1_savings = dev1_compare_total | minus: cart.total_price
+    endif
   -%}
 
   <div class="cart-totals__container{% if settings.show_installments %} cart-totals__container--has-installments{% endif %}">
@@ -227,7 +244,9 @@
       class="cart-totals__item cart-totals__total"
       role="status"
     >
-      <span class="cart-totals__total-label cart-primary-typography">{{ 'content.cart_estimated_total' | t }}</span>
+      <span class="cart-totals__total-label cart-primary-typography">
+        {%- if dev1_drawer -%}{{ 'dev1_cart.subtotal' | t }}{%- else -%}{{ 'content.cart_estimated_total' | t }}{%- endif -%}
+      </span>
       <text-component
         ref="cartTotal"
         value="{{ total_price | strip_html }}"
@@ -239,6 +258,17 @@
         <bdi>{{ total_price }}</bdi>
       </text-component>
     </span>
+    {%- if dev1_drawer and dev1_savings > 0 and settings.dev1_savings_text != blank -%}
+      {%- comment -%} dev1: "You saved …" line with the compare-at total struck through {%- endcomment -%}
+      {%- capture dev1_savings_amount -%}<bdi>{{ dev1_savings | money }}</bdi>{%- endcapture -%}
+      <span class="cart-totals__item dev1-cart-savings">
+        <span class="dev1-cart-savings__text">
+          {{- settings.dev1_savings_text | escape | replace: '[amount]', dev1_savings_amount -}}
+        </span>
+        <span class="visually-hidden">{{ 'content.price_regular' | t }}</span>
+        <s class="dev1-cart-savings__compare"><bdi>{{ dev1_compare_total | money }}</bdi></s>
+      </span>
+    {%- endif -%}
     {% if settings.show_installments %}
       <span class="cart-totals__item cart-totals__installments">
         {% form 'cart', cart %}
@@ -264,7 +294,11 @@
     form="cart-form"
   >
     <span class="button-text">
-      {{ 'content.checkout' | t }}
+      {% if dev1_drawer and settings.dev1_checkout_label != blank %}
+        {{ settings.dev1_checkout_label | escape }}
+      {% else %}
+        {{ 'content.checkout' | t }}
+      {% endif %}
     </span>
   </button>
 

@@ -60,8 +60,12 @@
         </template>
 
         <div
-          class="cart-drawer__inner{% if cart.empty? %} cart-drawer--empty{% endif %}"
+          class="cart-drawer__inner{% if cart.empty? %} cart-drawer--empty{% endif %}{% if settings.dev1_cart_design == 'dev1' %} dev1-cart{% endif %}"
           data-hydration-key="cart-drawer-inner"
+          {%- if settings.dev1_cart_design == 'dev1' %}
+            {%- comment -%} dev1: "Cart drawer design: Design 1" — palette colors for assets/dev1.css {%- endcomment %}
+            style="--dev1-cart-accent: {{ settings.color_palette.snosha_deep_blue | default: settings.color_palette.foreground }}; --dev1-cart-muted: {{ settings.color_palette.color1 | default: settings.color_palette.foreground }}; --dev1-cart-tint: {{ settings.color_palette.snosha_pale_tint | default: settings.color_palette.background }}; --dev1-cart-line: {{ settings.color_palette.color2 | default: settings.color_palette.foreground }};"
+          {%- endif %}
         >
           {%- if cart.empty? -%}
             <div class="theme-drawer__header">
@@ -115,7 +119,11 @@
                 </scroll-hint>
 
                 <div class="cart-drawer__summary">
-                  {% render 'cart-summary', section_id: 'cart-drawer-section' %}
+                  {%- if settings.dev1_cart_design == 'dev1' -%}
+                    {% render 'cart-summary', section_id: 'cart-drawer-section', dev1_drawer: true %}
+                  {%- else -%}
+                    {% render 'cart-summary', section_id: 'cart-drawer-section' %}
+                  {%- endif -%}
                 </div>
               </scroll-hint>
             {%- endif -%}

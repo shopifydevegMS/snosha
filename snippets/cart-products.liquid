@@ -410,6 +410,11 @@
                   role="cell"
                   headers="productTotal"
                 >
+                  {%- if context == 'drawer' and settings.dev1_cart_design == 'dev1' and item.variant.compare_at_price > item.final_price -%}
+                    {%- comment -%} dev1: cart drawer "Design 1" — line compare-at price above the price {%- endcomment -%}
+                    <span class="visually-hidden">{{ 'content.price_regular' | t }}</span>
+                    <s class="dev1-cart-item__compare"><bdi>{{ item.variant.compare_at_price | times: item.quantity | money }}</bdi></s>
+                  {%- endif -%}
                   <text-component value="{{ price | strip_html }}"
                     ><bdi>{{ price }}</bdi></text-component
                   >

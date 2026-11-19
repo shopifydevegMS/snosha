@@ -2062,6 +2062,36 @@
         "step": 1,
         "unit": "px",
         "default": 0
+      },
+      {
+        "type": "select",
+        "id": "dev1_cart_design",
+        "label": "t:dev1_settings.cart_design",
+        "options": [
+          {
+            "value": "default",
+            "label": "t:dev1_settings.design_default"
+          },
+          {
+            "value": "dev1",
+            "label": "t:dev1_settings.design_dev1"
+          }
+        ],
+        "default": "default"
+      },
+      {
+        "type": "text",
+        "id": "dev1_checkout_label",
+        "label": "t:dev1_settings.checkout_label",
+        "info": "t:dev1_settings.checkout_label_info",
+        "visible_if": "{{ settings.dev1_cart_design == 'dev1' }}"
+      },
+      {
+        "type": "text",
+        "id": "dev1_savings_text",
+        "label": "t:dev1_settings.savings_text",
+        "info": "t:dev1_settings.savings_text_info",
+        "visible_if": "{{ settings.dev1_cart_design == 'dev1' }}"
       }
     ]
   },
