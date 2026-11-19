@@ -1,0 +1,362 @@
+<!-- contact-banner.liquid -->
+{%- comment -%}
+  dev4: "14 Contact" banner (product page, styles: assets/dev4.css → dev4-contact-card).
+  Gradient card with decorative rings, dots and sparkles (aria-hidden, behind the content), a logo
+  (image picker first, then Theme settings → Logo: inverse logo, then logo), nested text blocks (heading + description)
+  and two contact links:
+  - WhatsApp: the complete URL from the merchant, opened in a new tab; empty URL = no link.
+  - Email: a plain address turned into mailto:; an empty or invalid address = no link.
+  In the Theme Editor a missing destination shows a non-interactive placeholder so the button stays editable.
+{%- endcomment -%}
+
+{%- liquid
+  assign bs = block.settings
+
+  # Logo: block image → Theme settings inverse logo (for dark backgrounds) → Theme settings logo.
+  assign logo_image = bs.logo | default: settings.logo_inverse | default: settings.logo
+
+  assign logo_alt = bs.logo_alt | strip
+  if logo_alt == blank and logo_image != blank
+    assign logo_alt = logo_image.alt
+  endif
+  if logo_alt == blank
+    assign logo_alt = shop.name
+  endif
+
+  assign whatsapp_label = bs.whatsapp_label | strip
+  assign whatsapp_url = bs.whatsapp_url
+
+  assign email_label = bs.email_label | strip
+  assign email = bs.email | strip | remove: 'mailto:' | remove: 'MAILTO:'
+  assign email_valid = false
+  if email != blank and email contains '@'
+    assign email_parts = email | split: '@'
+    unless email contains ' ' or email_parts.size != 2 or email_parts.first == blank or email_parts.last == blank
+      assign email_valid = true
+    endunless
+  endif
+
+  assign show_whatsapp = false
+  if whatsapp_label != blank
+    if whatsapp_url != blank or request.design_mode
+      assign show_whatsapp = true
+    endif
+  endif
+
+  assign show_email = false
+  if email_label != blank
+    if email_valid or request.design_mode
+      assign show_email = true
+    endif
+  endif
+-%}
+
+{%- capture text_blocks -%}
+  {% content_for 'blocks' %}
+{%- endcapture -%}
+
+<div
+  class="dev4-contact-card"
+  style="
+    --dev4-contact-logo-width: {{ bs.logo_width }}px;
+    --dev4-contact-logo-width-mobile: {{ bs.logo_width_mobile }}px;
+    {%- if bs.gradient_start != blank %}--dev4-contact-start: {{ bs.gradient_start }};{% endif -%}
+    {%- if bs.gradient_middle != blank %}--dev4-contact-middle: {{ bs.gradient_middle }};{% endif -%}
+    {%- if bs.gradient_end != blank %}--dev4-contact-end: {{ bs.gradient_end }};{% endif -%}
+    {%- if bs.border_color != blank %}--dev4-contact-border: {{ bs.border_color }};{% endif -%}
+    {%- if bs.shadow_color != blank %}--dev4-contact-shadow: {{ bs.shadow_color }};{% endif -%}
+    {%- if bs.accent_color != blank %}--dev4-contact-accent: {{ bs.accent_color }};{% endif -%}
+    {%- if bs.text_color != blank %}--dev4-contact-text: {{ bs.text_color }};{% endif -%}
+    {%- if bs.primary_button_background != blank %}--dev4-contact-primary-bg: {{ bs.primary_button_background }};{% endif -%}
+    {%- if bs.primary_button_text != blank %}--dev4-contact-primary-text: {{ bs.primary_button_text }};{% endif -%}
+  "
+  {{ block.shopify_attributes }}
+>
+  <span class="dev4-contact-card__decor" aria-hidden="true">
+    <span class="dev4-contact-card__ring dev4-contact-card__ring--dashed"></span>
+    <span class="dev4-contact-card__ring dev4-contact-card__ring--solid"></span>
+    <span class="dev4-contact-card__dot dev4-contact-card__dot--1"></span>
+    <span class="dev4-contact-card__dot dev4-contact-card__dot--2"></span>
+    <span class="dev4-contact-card__dot dev4-contact-card__dot--3"></span>
+    {%- if bs.sparkle_svg != blank -%}
+      {%- for i in (1..4) -%}
+        <span class="dev4-contact-card__sparkle dev4-contact-card__sparkle--{{ i }}">{{ bs.sparkle_svg }}</span>
+      {%- endfor -%}
+    {%- endif -%}
+  </span>
+
+  <div class="dev4-contact-card__content">
+    {%- if bs.show_logo and logo_image != blank -%}
+      <div class="dev4-contact-card__logo">
+        {{-
+          logo_image
+          | image_url: width: 600
+          | image_tag:
+            alt: logo_alt,
+            widths: '200, 300, 400, 600',
+            sizes: '(min-width: 750px) 300px, 200px',
+            loading: 'lazy'
+        -}}
+      </div>
+    {%- endif -%}
+
+    {{ text_blocks }}
+
+    {%- if show_whatsapp or show_email -%}
+      <div class="dev4-contact-card__actions">
+        {%- if show_whatsapp -%}
+          {%- if whatsapp_url != blank -%}
+            <a
+              class="dev4-contact-card__button dev4-contact-card__button--primary"
+              href="{{ whatsapp_url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+          {%- else -%}
+            <span class="dev4-contact-card__button dev4-contact-card__button--primary dev4-contact-card__button--placeholder">
+          {%- endif -%}
+          {%- if bs.whatsapp_icon_svg != blank -%}
+            <span class="dev4-contact-card__icon" aria-hidden="true">{{ bs.whatsapp_icon_svg }}</span>
+          {%- endif -%}
+          <span class="dev4-contact-card__label">{{ whatsapp_label | escape }}</span>
+          {%- if whatsapp_url != blank -%}
+            <span class="visually-hidden">{{ 'accessibility.new_window' | t }}</span>
+            </a>
+          {%- else -%}
+            </span>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if show_email -%}
+          {%- if email_valid -%}
+            <a
+              class="dev4-contact-card__button dev4-contact-card__button--secondary"
+              href="mailto:{{ email | escape }}"
+            >
+          {%- else -%}
+            <span class="dev4-contact-card__button dev4-contact-card__button--secondary dev4-contact-card__button--placeholder">
+          {%- endif -%}
+          {%- if bs.email_icon_svg != blank -%}
+            <span class="dev4-contact-card__icon" aria-hidden="true">{{ bs.email_icon_svg }}</span>
+          {%- endif -%}
+          <span class="dev4-contact-card__label">{{ email_label | escape }}</span>
+          {%- if email_valid -%}
+            </a>
+          {%- else -%}
+            </span>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:dev4_settings.contact_banner",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "text"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:dev4_settings.contact_logo_header"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_logo",
+      "label": "t:dev4_settings.contact_show_logo",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:dev4_settings.contact_logo",
+      "info": "t:dev4_settings.contact_logo_info",
+      "visible_if": "{{ block.settings.show_logo }}"
+    },
+    {
+      "type": "text",
+      "id": "logo_alt",
+      "label": "t:dev4_settings.contact_logo_alt",
+      "default": "SNOSHA",
+      "visible_if": "{{ block.settings.show_logo }}"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "t:dev4_settings.contact_logo_width",
+      "min": 80,
+      "max": 280,
+      "step": 2,
+      "unit": "px",
+      "default": 178,
+      "visible_if": "{{ block.settings.show_logo }}"
+    },
+    {
+      "type": "range",
+      "id": "logo_width_mobile",
+      "label": "t:dev4_settings.contact_logo_width_mobile",
+      "min": 80,
+      "max": 280,
+      "step": 2,
+      "unit": "px",
+      "default": 178,
+      "visible_if": "{{ block.settings.show_logo }}"
+    },
+    {
+      "type": "header",
+      "content": "t:dev4_settings.contact_whatsapp_header"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_label",
+      "label": "t:dev4_settings.contact_button_label",
+      "info": "t:dev4_settings.contact_label_info"
+    },
+    {
+      "type": "url",
+      "id": "whatsapp_url",
+      "label": "t:dev4_settings.contact_whatsapp_url",
+      "info": "t:dev4_settings.contact_whatsapp_url_info"
+    },
+    {
+      "type": "html",
+      "id": "whatsapp_icon_svg",
+      "label": "t:dev4_settings.contact_whatsapp_icon_svg",
+      "info": "t:dev4_settings.icon_svg_info",
+      "default": "<svg viewBox=\"0 0 22 22\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M11 1.83C5.94 1.83 1.83 5.94 1.83 11c0 1.62.42 3.14 1.17 4.46L1.83 20.17l4.85-1.13A9.1 9.1 0 0 0 11 20.17c5.06 0 9.17-4.11 9.17-9.17S16.06 1.83 11 1.83Zm0 16.69c-1.47 0-2.84-.4-4.03-1.09l-.29-.16-2.88.67.69-2.81-.18-.29A7.4 7.4 0 0 1 3.48 11c0-4.14 3.38-7.52 7.52-7.52s7.52 3.38 7.52 7.52-3.38 7.52-7.52 7.52Z\" fill=\"#25D366\"/><path d=\"M15.18 12.82c-.23-.11-1.35-.66-1.56-.74-.21-.07-.36-.11-.51.12-.15.23-.59.73-.72.89-.13.15-.27.16-.5.05-.23-.11-.96-.36-1.83-1.13a6.8 6.8 0 0 1-1.27-1.58c-.13-.23-.02-.35.1-.47.1-.1.23-.27.34-.4.11-.14.15-.23.23-.39.07-.15.04-.28-.02-.4-.06-.11-.51-1.23-.7-1.69-.18-.44-.37-.38-.51-.38h-.44c-.15 0-.4.05-.6.28-.21.23-.8.78-.8 1.9s.82 2.2.93 2.36c.11.15 1.6 2.45 3.88 3.43.54.24.96.38 1.29.48.54.17 1.04.15 1.43.09.44-.06 1.35-.55 1.53-1.08.19-.53.19-.98.14-1.08-.06-.09-.21-.15-.44-.26Z\" fill=\"#25D366\"/></svg>"
+    },
+    {
+      "type": "header",
+      "content": "t:dev4_settings.contact_email_header"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "t:dev4_settings.contact_button_label",
+      "info": "t:dev4_settings.contact_label_info"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "t:dev4_settings.contact_email",
+      "info": "t:dev4_settings.contact_email_info",
+      "placeholder": "support@example.com"
+    },
+    {
+      "type": "html",
+      "id": "email_icon_svg",
+      "label": "t:dev4_settings.contact_email_icon_svg",
+      "info": "t:dev4_settings.icon_svg_info",
+      "default": "<svg viewBox=\"0 0 22 22\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.56\" stroke-linecap=\"round\" stroke-linejoin=\"round\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M5.5 4.58h11a2.75 2.75 0 0 1 2.75 2.75v7.34a2.75 2.75 0 0 1-2.75 2.75h-11a2.75 2.75 0 0 1-2.75-2.75V7.33A2.75 2.75 0 0 1 5.5 4.58Z\"/><path d=\"M2.75 6.42 11 11.92l8.25-5.5\"/></svg>"
+    },
+    {
+      "type": "header",
+      "content": "t:dev4_settings.contact_decor_header"
+    },
+    {
+      "type": "html",
+      "id": "sparkle_svg",
+      "label": "t:dev4_settings.contact_sparkle_svg",
+      "info": "t:dev4_settings.icon_svg_info",
+      "default": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 2.09c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10 5.4-.6 9.4-4.6 10-10Z\" fill=\"currentColor\"/></svg>"
+    },
+    {
+      "type": "header",
+      "content": "t:dev4_settings.contact_colors_header"
+    },
+    {
+      "type": "color",
+      "id": "gradient_start",
+      "label": "t:dev4_settings.contact_gradient_start",
+      "default": "#0E3B6B"
+    },
+    {
+      "type": "color",
+      "id": "gradient_middle",
+      "label": "t:dev4_settings.contact_gradient_middle",
+      "default": "#12568D"
+    },
+    {
+      "type": "color",
+      "id": "gradient_end",
+      "label": "t:dev4_settings.contact_gradient_end",
+      "default": "#0A2E55"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "t:dev4_settings.contact_border",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "shadow_color",
+      "label": "t:dev4_settings.contact_shadow",
+      "info": "t:dev4_settings.contact_shadow_info",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "t:dev4_settings.contact_accent",
+      "info": "t:dev4_settings.contact_accent_info",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:dev4_settings.contact_text",
+      "info": "t:dev4_settings.contact_text_info",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_background",
+      "label": "t:dev4_settings.contact_primary_background",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_text",
+      "label": "t:dev4_settings.contact_primary_text",
+      "placeholder": "t:settings.default"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:dev4_settings.contact_banner",
+      "category": "t:categories.text",
+      "settings": {
+        "whatsapp_label": "WhatsApp",
+        "email_label": "Email"
+      },
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>Contact us</h2>",
+            "type_preset": "h2",
+            "alignment": "center",
+            "width": "100%"
+          }
+        },
+        "description": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our team is ready to help.</p>",
+            "type_preset": "paragraph",
+            "alignment": "center",
+            "width": "100%"
+          }
+        }
+      },
+      "block_order": ["heading", "description"]
+    }
+  ]
+}
+{% endschema %}

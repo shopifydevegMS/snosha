@@ -38,6 +38,7 @@
   class="dev4-ld-group dev4-ld-group--{{ bs.layout }} dev4-ld-group--m-{{ bs.mobile_layout }} dev4-ld-group--v-{{ bs.vertical_alignment }}"
   style="
     --dev4-ld-copy-max: {{ bs.copy_max_width }}px;
+    {%- if bs.text_max_width > 0 %} --dev4-ld-text-max: {{ bs.text_max_width }}px;{% endif %}
     --dev4-ld-media-max: {{ bs.image_max_width }}px;
     --dev4-ld-media-max-mobile: {{ bs.image_max_width_mobile }}px;
     --dev4-ld-media-justify: {{ media_justify }};
@@ -267,6 +268,17 @@
       "step": 10,
       "unit": "px",
       "default": 420
+    },
+    {
+      "type": "range",
+      "id": "text_max_width",
+      "label": "t:dev4_settings.ld_text_max_width",
+      "info": "t:dev4_settings.ld_text_max_width_info",
+      "min": 0,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "default": 0
     },
     {
       "type": "range",
