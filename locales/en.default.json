@@ -392,6 +392,15 @@
     "breadcrumb_home": "Home",
     "tab_empty": "This tab has no bullet items yet, so it is hidden on the store. Add bullet items to show it."
   },
+  "dev1_collection": {
+    "product_count": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} products"
+    }
+  },
+  "dev1_cart": {
+    "subtotal": "Subtotal"
+  },
   "dev3_product_card": {
     "best_seller": "Best seller"
   }

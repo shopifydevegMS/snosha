@@ -392,6 +392,19 @@
     "breadcrumb_home": "الرئيسية",
     "tab_empty": "لا توجد نقاط في هذا التبويب بعد، لذلك لا يظهر في المتجر. أضف نقاطًا لإظهاره."
   },
+  "dev1_collection": {
+    "product_count": {
+      "zero": "{{ count }} منتج",
+      "one": "منتج واحد",
+      "two": "منتجان",
+      "few": "{{ count }} منتجات",
+      "many": "{{ count }} منتجًا",
+      "other": "{{ count }} منتج"
+    }
+  },
+  "dev1_cart": {
+    "subtotal": "المجموع الفرعي"
+  },
   "dev3_product_card": {
     "best_seller": "الأكثر مبيعًا"
   }

@@ -112,7 +112,14 @@
             "padding-inline-start": 0,
             "padding-inline-end": 0,
             "facets_margin_bottom": 8,
-            "facets_margin_right": 20
+            "facets_margin_right": 20,
+            "dev1_toolbar_border": true,
+            "dev1_toolbar_border_color": "{{ settings.color_palette.color2 }}",
+            "dev1_filters_toggle": true,
+            "dev1_filters_icon_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M16.895 13.753a3.142 3.142 0 1 0 0 6.284 3.142 3.142 0 0 0 0-6.284M11.753 16.895a5.142 5.142 0 1 1 10.284 0 5.142 5.142 0 0 1-10.284 0M7.105 3.963a3.142 3.142 0 1 0 0 6.284 3.142 3.142 0 0 0 0-6.284M1.963 7.105a5.142 5.142 0 1 1 10.284 0 5.142 5.142 0 0 1-10.284 0M20.038 16.895a1 1 0 0 1 1-1h2.259a1 1 0 1 1 0 2h-2.259a1 1 0 0 1-1-1M-.297 7.105a1 1 0 0 1 1-1h2.259a1 1 0 1 1 0 2H.703a1 1 0 0 1-1-1M-.297 16.895a1 1 0 0 1 1-1h12.05a1 1 0 1 1 0 2H.703a1 1 0 0 1-1-1M10.247 7.105a1 1 0 0 1 1-1h12.05a1 1 0 1 1 0 2h-12.05a1 1 0 0 1-1-1\"/></svg>",
+            "dev1_show_filters_label": "إظهار الفلاتر",
+            "dev1_hide_filters_label": "إخفاء الفلاتر",
+            "dev1_sort_label": "الترتيب حسب:"
           },
           "blocks": {}
         },
@@ -120,13 +127,15 @@
           "type": "_product-card",
           "static": true,
           "settings": {
-            "product_card_gap": 4,
-            "border": "none",
+            "product_card_gap": 6,
+            "background_color": "",
+            "border": "solid",
             "border_width": 1,
             "border_opacity": 100,
-            "border_radius": 0,
+            "border_color": "#efeded",
+            "border_radius": 20,
             "padding-block-start": 0,
-            "padding-block-end": 0,
+            "padding-block-end": 18,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
@@ -134,13 +143,16 @@
             "card-gallery": {
               "type": "_product-card-gallery",
               "settings": {
-                "image_ratio": "adapt",
+                "image_ratio": "square",
+                "dev3_hide_bestseller_badge": false,
+                "dev1_badge_position": "right",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
+                "border_color": "",
                 "border_radius": 0,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
+                "padding-block-end": 8,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
@@ -154,19 +166,57 @@
                 "max_width": "normal",
                 "alignment": "left",
                 "type_preset": "rte",
+                "font": "var(--font-accent--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 12,
+                "padding-inline-end": 12
+              },
+              "blocks": {}
+            },
+            "dev1_card_description": {
+              "type": "text",
+              "settings": {
+                "text": "{{ closest.product.description }}",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.color1 }}",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
-                "padding-block-start": 4,
+                "padding-block-start": 0,
                 "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-start": 12,
+                "padding-inline-end": 12
+              },
+              "blocks": {}
+            },
+            "dev1_card_rating": {
+              "type": "review",
+              "settings": {
+                "stars_style": "outline",
+                "show_number": false,
+                "text_color": "{{ settings.color_palette.snosha_primary_blue }}",
+                "type_preset": "h5",
+                "width": "100%",
+                "alignment": "left"
               },
               "blocks": {}
             },
@@ -184,10 +234,24 @@
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
-                "padding-block-start": 0,
+                "text_color": "{{ settings.color_palette.snosha_deep_blue }}",
+                "dev1_show_discount": true,
+                "dev1_discount_background": "{{ settings.color_palette.snosha_pale_tint }}",
+                "dev1_discount_border": "{{ settings.color_palette.color2 }}",
+                "dev1_discount_text": "{{ settings.color_palette.snosha_secondary_blue }}",
+                "padding-block-start": 4,
                 "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-start": 12,
+                "padding-inline-end": 12
+              },
+              "blocks": {}
+            },
+            "dev1_card_link": {
+              "type": "_product-card-link",
+              "settings": {
+                "label": "عرض المنتج",
+                "icon_svg": "<svg viewbox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19 12H5M11 18L5 12L11 6\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg>",
+                "text_color": "{{ settings.color_palette.snosha_secondary_blue }}"
               },
               "blocks": {}
             }
@@ -195,11 +259,23 @@
           "block_order": [
             "card-gallery",
             "product_title_4nY4eT",
-            "price_EzJzMm"
+            "dev1_card_description",
+            "dev1_card_rating",
+            "price_EzJzMm",
+            "dev1_card_link"
           ]
         }
       },
       "settings": {
+        "design": "dev1",
+        "dev1_add_to_cart_label": "أضف إلى السلة",
+        "dev1_cart_icon_svg": "<svg viewbox=\"0 0 18 18\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M2.25 3h1.5l1.8 8.25h8.25l1.5-5.25H5.25\" stroke=\"currentColor\" stroke-width=\"1.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path><circle cx=\"6.75\" cy=\"14.25\" r=\"1.125\" stroke=\"currentColor\" stroke-width=\"1.2\"></circle><circle cx=\"12.75\" cy=\"14.25\" r=\"1.125\" stroke=\"currentColor\" stroke-width=\"1.2\"></circle></svg>",
+        "dev1_discount_label": "خصم [percent]%",
+        "dev1_rating_label": "التقييمات",
+        "dev1_discount_background": "{{ settings.color_palette.snosha_pale_tint }}",
+        "dev1_discount_border": "{{ settings.color_palette.color2 }}",
+        "dev1_discount_text": "{{ settings.color_palette.snosha_secondary_blue }}",
+        "dev1_shadow_color": "#0f64a859",
         "layout_type": "grid",
         "product_card_size": "medium",
         "mobile_product_card_size": "small",
@@ -210,13 +286,61 @@
         "padding-inline-start": 0,
         "padding-inline-end": 0,
         "background_color": "{{ settings.color_palette.background }}",
-        "padding-block-start": 0,
+        "padding-block-start": 20,
         "padding-block-end": 32
+      }
+    },
+    "dev1_breadcrumbs": {
+      "type": "section",
+      "name": "Breadcrumbs",
+      "blocks": {
+        "dev1_breadcrumbs_trail": {
+          "type": "breadcrumbs",
+          "settings": {
+            "home_label": "الرئيسية",
+            "show_collection": true,
+            "separator": "arrow",
+            "text_color": "{{ settings.color_palette.color1 }}"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "dev1_breadcrumbs_trail"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "full-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "{{ settings.color_palette.snosha_pale_tint }}",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 20,
+        "padding-block-end": 20
       }
     }
   },
   "order": [
     "section",
+    "dev1_breadcrumbs",
     "main"
   ]
 }

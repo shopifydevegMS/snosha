@@ -19,6 +19,10 @@
 
 {% capture children %}
   {% unless product == blank %}
+    {%- if dev3_bestseller and block.settings.dev1_badge_position == 'right' -%}
+      {%- comment -%} dev1: "Best seller badge position: Right" — marker read by assets/dev1.css; default (left) renders nothing {%- endcomment -%}
+      <span class="dev1-card-badge-right" hidden></span>
+    {%- endif -%}
     {%- if dev3_bestseller -%}
       <div class="dev1-card-badge">{{ 'dev3_product_card.best_seller' | t }}</div>
     {%- elsif section.settings.design == 'dev1' and section.settings.dev1_card_badge != blank and product.available -%}
@@ -105,6 +109,24 @@
       "label": "t:dev3_settings.hide_bestseller_badge",
       "info": "t:dev3_settings.hide_bestseller_badge_info",
       "default": false
+    },
+    {
+      "type": "select",
+      "id": "dev1_badge_position",
+      "label": "t:dev1_settings.card_badge_position",
+      "info": "t:dev1_settings.card_badge_position_info",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:dev1_settings.position_left"
+        },
+        {
+          "value": "right",
+          "label": "t:dev1_settings.position_right"
+        }
+      ],
+      "default": "left",
+      "visible_if": "{{ block.settings.dev3_hide_bestseller_badge == false }}"
     },
     {
       "type": "header",
