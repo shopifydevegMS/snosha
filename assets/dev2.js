@@ -3,9 +3,12 @@
  * Loaded as a module only by sections that use a dev2 design option (inside that condition).
  */
 
+import { DialogComponent, DialogCloseEvent } from '@theme/dialog';
+
 /**
- * <dev2-carousel-progress>: visual-only scroll indicator for the "Choose your care" carousel
- * (sections/carousel.liquid, Design 3). It reads the native <slideshow-slides> scroller of its own
+ * <dev2-carousel-progress>: visual-only scroll indicator for the carousel section's dev2 designs
+ * (sections/carousel.liquid: Design 3 "Choose your care", Design 4 "Reviews · Screenshots").
+ * It reads the native <slideshow-slides> scroller of its own
  * section and never handles input: no clicks, drags or focus (aria-hidden in the markup).
  *
  * Exposes on itself:
@@ -40,7 +43,7 @@ class Dev2CarouselProgress extends HTMLElement {
   #connect = () => {
     if (this.#scroller || !this.isConnected) return;
 
-    const scroller = this.closest('.dev2-care')?.querySelector('slideshow-slides');
+    const scroller = this.closest('.dev2-care, .dev2-shots')?.querySelector('slideshow-slides');
     if (!(scroller instanceof HTMLElement)) {
       if (this.#attempts++ < 60) this.#frame = requestAnimationFrame(this.#connect);
       return;
@@ -107,6 +110,67 @@ class Dev2CarouselProgress extends HTMLElement {
 
 if (!customElements.get('dev2-carousel-progress')) {
   customElements.define('dev2-carousel-progress', Dev2CarouselProgress);
+}
+
+/**
+ * <dev2-shots-lightbox>: full-image viewer for the "Reviews · Screenshots" carousel
+ * (sections/carousel.liquid, Design 4). Built on the theme's DialogComponent (@theme/dialog):
+ * a modal <dialog> (background inert, focus kept inside), Escape and outside-click close, scroll lock.
+ *
+ * Opens from any `[data-dev2-shot]` button in its own section (rendered by blocks/_card.liquid):
+ * shows `data-full-src` uncropped with the screenshot's alt text, and returns focus to that button
+ * on close. A click that ends a carousel drag never reaches the button (slideshow.js swallows it).
+ */
+class Dev2ShotsLightbox extends DialogComponent {
+  requiredRefs = ['dialog', 'image'];
+
+  /** @type {HTMLElement | null} */
+  #scope = null;
+  /** @type {HTMLElement | null} */
+  #trigger = null;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.#scope = this.closest('.dev2-shots');
+    this.#scope?.addEventListener('click', this.#handleTrigger);
+    this.addEventListener(DialogCloseEvent.eventName, this.#restoreFocus);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.#scope?.removeEventListener('click', this.#handleTrigger);
+    this.removeEventListener(DialogCloseEvent.eventName, this.#restoreFocus);
+    this.#scope = null;
+    this.#trigger = null;
+  }
+
+  /** @param {MouseEvent} event */
+  #handleTrigger = (event) => {
+    const target = /** @type {Element | null} */ (event.target);
+    const trigger = target?.closest('[data-dev2-shot]');
+    if (!(trigger instanceof HTMLElement) || !this.#scope?.contains(trigger)) return;
+
+    const { image } = this.refs;
+    const src = trigger.dataset.fullSrc;
+    if (!(image instanceof HTMLImageElement) || !src) return;
+
+    this.#trigger = trigger;
+    image.alt = trigger.dataset.alt || '';
+    if (trigger.dataset.width) image.width = Number(trigger.dataset.width);
+    if (trigger.dataset.height) image.height = Number(trigger.dataset.height);
+    image.src = src;
+    this.showDialog();
+  };
+
+  #restoreFocus = () => {
+    const trigger = this.#trigger;
+    this.#trigger = null;
+    if (trigger?.isConnected) trigger.focus({ preventScroll: true });
+  };
+}
+
+if (!customElements.get('dev2-shots-lightbox')) {
+  customElements.define('dev2-shots-lightbox', Dev2ShotsLightbox);
 }
 
 /**

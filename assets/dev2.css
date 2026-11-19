@@ -1981,3 +1981,285 @@
     inset-inline-start: 54%;
   }
 }
+
+/* ==== dev2-shots — product "08 Reviews · Screenshots" (sections/carousel.liquid Design 4) ====
+   Native carousel section: header group (heading text block + native `review` block as the rating
+   pill) and _carousel-content with one _card per screenshot (blocks/_card.liquid Design 4 branch).
+   Figma desktop 190:10779, mobile 190:11550. Colors: --dev2-shots-* from the palette (carousel.liquid). */
+.dev2-shots.dev2-shots {
+  row-gap: 20px;
+}
+
+@media screen and (min-width: 990px) {
+  /* Figma 104px bottom (the native padding range stops at 100). */
+  .dev2-shots.dev2-shots {
+    padding-block-end: 104px;
+  }
+}
+
+/* Rating pill — Figma: white, 1px #DCF2FB, fully rounded, 10/22 padding, 14px gap, soft blue shadow.
+   RTL order: score · stars · count; the score is its own LTR run ("4.8 / 5"). */
+.dev2-shots.dev2-shots .rating-wrapper {
+  gap: 14px;
+  padding: 9px 21px;
+  background: var(--dev2-shots-surface);
+  border: 1px solid var(--dev2-shots-border);
+  border-radius: var(--style-border-radius-pills);
+  box-shadow: 0 10px 12px rgb(var(--dev2-shots-shadow-rgb) / var(--opacity-10));
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.dev2-shots.dev2-shots .rating-wrapper .rating {
+  gap: 4px;
+}
+
+.dev2-shots.dev2-shots .rating-wrapper .stars {
+  block-size: 22px;
+  inline-size: 22px;
+}
+
+.dev2-shots__score {
+  color: var(--color-foreground);
+  font-size: var(--font-size--2xl);
+  line-height: 40px;
+  font-weight: 600;
+  white-space: nowrap;
+  unicode-bidi: isolate;
+}
+
+.dev2-shots__count {
+  color: var(--dev2-shots-muted);
+  font-size: var(--font-size--sm);
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+/* Track — Figma 20px above / 30px below the cards inside the scroller, so their shadows aren't clipped. */
+.dev2-shots.dev2-shots .carousel-content slideshow-slides {
+  padding-block: 20px 30px;
+}
+
+/* Screenshot card — Figma 429×292 (same ratio on mobile 238×162), radius 22, blue shadow. */
+.dev2-shots.dev2-shots .carousel-content slideshow-slides > .dev2-shots__card {
+  aspect-ratio: 429 / 292;
+  block-size: auto;
+  border-radius: 22px;
+  box-shadow:
+    0 22px 44px -8px rgb(var(--dev2-shots-shadow-rgb) / var(--opacity-15)),
+    0 3px 8px 0 rgb(var(--dev2-shots-shadow-rgb) / var(--opacity-8));
+}
+
+.dev2-shots__trigger {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: none;
+  cursor: zoom-in;
+}
+
+.dev2-shots__trigger:focus-visible {
+  outline: 2px solid var(--dev2-shots-accent);
+  outline-offset: -4px;
+}
+
+.dev2-shots__image {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* Editor-only empty slot (Figma: pale tint, 5px dashed white border). */
+.dev2-shots__card--empty {
+  background: var(--dev2-shots-tint);
+  border: 5px dashed var(--dev2-shots-surface);
+}
+
+.dev2-shots__placeholder {
+  inline-size: 100%;
+  block-size: 100%;
+  fill: var(--dev2-shots-accent);
+  opacity: var(--opacity-50);
+}
+
+/* From 750px: Figma's track is inset 20px inside the container and shows whole cards (no peek). */
+@media screen and (min-width: 750px) {
+  .dev2-shots.dev2-shots .carousel-content {
+    --gutter-slide-width: calc(var(--util-page-margin-offset) + 20px);
+    --peek-next-slide-size: 0px;
+  }
+}
+
+/* Arrows (native slideshow controls) — Figma 56px white circles, 1px #DCF2FB, 26px blue arrow,
+   overlapping the outer card edges; always visible from 750px, hidden below (swipe). */
+.dev2-shots.dev2-shots slideshow-arrows .slideshow-control {
+  opacity: 1;
+  inline-size: 56px;
+  block-size: 56px;
+  padding: 0;
+  justify-content: center;
+  color: var(--dev2-shots-accent);
+  background: var(--dev2-shots-surface);
+  border: 1px solid var(--dev2-shots-border);
+  border-radius: 50%;
+  box-shadow:
+    0 2px 3px rgb(var(--dev2-shots-shadow-rgb) / var(--opacity-10)),
+    0 12px 14px rgb(var(--dev2-shots-shadow-rgb) / var(--opacity-30));
+  animation: none;
+}
+
+.dev2-shots.dev2-shots slideshow-arrows .slideshow-control .svg-wrapper {
+  inline-size: 26px;
+  block-size: 26px;
+}
+
+.dev2-shots.dev2-shots slideshow-arrows .slideshow-control:focus-visible {
+  outline: 2px solid var(--dev2-shots-accent);
+  outline-offset: 3px;
+}
+
+/* Progress (mobile only, visual): track #DCF2FB, gradient fill, synced by <dev2-carousel-progress>. */
+.dev2-shots .dev2-shots__progress {
+  display: none;
+}
+
+/* Viewer — native modal <dialog> (top layer). The image keeps its natural ratio; tall chat screenshots
+   scroll inside the dialog instead of being cropped or shrunk. */
+.dev2-shots__lightbox {
+  display: contents;
+}
+
+.dev2-shots .dev2-shots__dialog {
+  inline-size: min(92vw, 560px);
+  max-inline-size: none;
+  max-block-size: 92dvh;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: var(--dev2-shots-surface);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.dev2-shots .dev2-shots__dialog::backdrop {
+  background: rgb(var(--dev2-shots-shadow-rgb) / var(--opacity-80));
+}
+
+.dev2-shots__full {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.dev2-shots__close {
+  position: fixed;
+  inset-block-start: 16px;
+  inset-inline-end: 16px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  inline-size: 44px;
+  block-size: 44px;
+  color: var(--dev2-shots-accent);
+  background: var(--dev2-shots-surface);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgb(var(--dev2-shots-shadow-rgb) / var(--opacity-20));
+}
+
+.dev2-shots__close .svg-wrapper {
+  inline-size: 20px;
+  block-size: 20px;
+}
+
+.dev2-shots__close:focus-visible {
+  outline: 2px solid var(--dev2-shots-accent);
+  outline-offset: 3px;
+}
+
+/* Tablet: two screenshots per view (three would be ~220px wide). */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .dev2-shots.dev2-shots .carousel-content slideshow-slides > .dev2-shots__card {
+    width: calc((100% - var(--carousel-gap, 24px)) / 2);
+  }
+}
+
+/* Mobile — Figma 390: 40px padding, 12px between groups, 238px cards (68% of the 350px track) 12px apart
+   with the next one peeking, 8px track padding, compact pill, progress bar, no arrows. */
+@media screen and (max-width: 749px) {
+  .dev2-shots.dev2-shots {
+    row-gap: 12px;
+    padding-block: 40px;
+  }
+
+  .dev2-shots.dev2-shots .group-block-content {
+    gap: 12px;
+  }
+
+  .dev2-shots.dev2-shots :is(.text-block.h2, .text-block.h2 > *) {
+    font-size: 1.125rem;
+    line-height: 52px;
+  }
+
+  .dev2-shots.dev2-shots .rating-wrapper {
+    inline-size: fit-content;
+    min-inline-size: 256px;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 5px 13px;
+  }
+
+  .dev2-shots.dev2-shots .rating-wrapper .rating {
+    gap: 3px;
+  }
+
+  .dev2-shots.dev2-shots .rating-wrapper .stars {
+    block-size: 14px;
+    inline-size: 14px;
+  }
+
+  .dev2-shots__score {
+    font-size: 0.875rem;
+    line-height: 27px;
+  }
+
+  .dev2-shots__count {
+    font-size: 0.59375rem;
+    line-height: 24px;
+  }
+
+  .dev2-shots.dev2-shots .carousel-content slideshow-slides {
+    --carousel-gap: 12px;
+    padding-block: 8px;
+  }
+
+  .dev2-shots.dev2-shots .carousel-content slideshow-slides > .dev2-shots__card {
+    width: 68%;
+  }
+
+  .dev2-shots.dev2-shots slideshow-arrows {
+    display: none;
+  }
+
+  .dev2-shots .dev2-shots__progress[data-overflow='true'] {
+    position: relative;
+    display: block;
+    block-size: 4px;
+    border-radius: var(--style-border-radius-pills);
+    background-color: var(--dev2-shots-border);
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .dev2-shots .dev2-shots__progress-fill {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: calc((100% - var(--dev2-progress-size, 1) * 100%) * var(--dev2-progress-position, 0));
+    inline-size: calc(var(--dev2-progress-size, 1) * 100%);
+    border-radius: inherit;
+    background-image: linear-gradient(to right, var(--dev2-shots-fill-start), var(--dev2-shots-fill-end));
+  }
+}

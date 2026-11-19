@@ -16,6 +16,49 @@
   endif
 %}
 
+{%- if section.settings.design == 'dev2_shots' -%}
+  {%- comment -%}
+    dev2: carousel Design 4 (product 08 Reviews · Screenshots) — one customer screenshot per card:
+    the card's image, cropped to the card (focal point respected), as a button that opens the full image
+    in <dev2-shots-lightbox> (assets/dev2.js). No image: an editor-only placeholder; nothing on the storefront.
+  {%- endcomment -%}
+  {%- assign dev2_shot = block_settings.background_image -%}
+  {%- if dev2_shot != blank or request.design_mode -%}
+    <div
+      class="card dev2-shots__card{% if dev2_shot == blank %} dev2-shots__card--empty{% endif %}"
+      ref="slides[]"
+      data-carousel-card
+      {{ block.shopify_attributes }}
+    >
+      {%- if dev2_shot != blank -%}
+        <button
+          type="button"
+          class="dev2-shots__trigger"
+          data-dev2-shot
+          data-full-src="{{ dev2_shot | image_url: width: 2048 }}"
+          data-width="{{ dev2_shot.width }}"
+          data-height="{{ dev2_shot.height }}"
+          data-alt="{{ dev2_shot.alt | escape }}"
+          aria-haspopup="dialog"
+        >
+          <span class="visually-hidden">{{ 'actions.zoom' | t }}{% if dev2_shot.alt != blank %}: {{ dev2_shot.alt | escape }}{% endif %}</span>
+          {{
+            dev2_shot
+            | image_url: width: 1280
+            | image_tag:
+              class: 'dev2-shots__image',
+              widths: '240, 360, 480, 720, 960, 1280',
+              sizes: '(min-width: 990px) 440px, (min-width: 750px) 50vw, 240px',
+              loading: 'lazy',
+              alt: ''
+          }}
+        </button>
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'dev2-shots__placeholder' }}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+{%- else -%}
 <div
   class="card{% if block_settings.background_color != blank %} color-custom-{{ block.id }}{% endif %}"
   ref="slides[]"
@@ -112,6 +155,7 @@
     </div>
   </div>
 </div>
+{%- endif -%}
 
 {% stylesheet %}
   .card {
