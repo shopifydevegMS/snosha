@@ -389,6 +389,10 @@
   "dev1_product": {
     "discount_badge": "Save {{ percent }}%",
     "breadcrumb": "Breadcrumb",
-    "breadcrumb_home": "Home"
+    "breadcrumb_home": "Home",
+    "tab_empty": "This tab has no bullet items yet, so it is hidden on the store. Add bullet items to show it."
+  },
+  "dev3_product_card": {
+    "best_seller": "Best seller"
   }
 }

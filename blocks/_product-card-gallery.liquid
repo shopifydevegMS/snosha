@@ -1,12 +1,28 @@
 
 
 {% assign product = closest.product %}
+{%- liquid
+  # dev3: "Best seller" badge on products tagged "bestseller" (or "best-seller", any case), on every product card
+  # unless this block's "Hide best seller badge" is on. Text: storefront locale dev3_product_card.best_seller.
+  assign dev3_bestseller = false
+  # "Choose your care" (carousel Design dev2) draws this badge in its product card block, at Figma's position.
+  if product != blank and product.available and block.settings.dev3_hide_bestseller_badge != true and section.settings.design != 'dev2'
+    for dev3_tag in product.tags
+      assign dev3_tag_handle = dev3_tag | handle
+      if dev3_tag_handle == 'bestseller' or dev3_tag_handle == 'best-seller'
+        assign dev3_bestseller = true
+        break
+      endif
+    endfor
+  endif
+-%}
 
 {% capture children %}
   {% unless product == blank %}
-    {%- if section.settings.design == 'dev1' and section.settings.dev1_card_badge != blank and product.available -%}
-      {%- comment -%} dev1: product list "Design 1" promo badge (the discount shows in the price row instead) {%- endcomment -%}
-      <div class="dev1-card-badge">{{ section.settings.dev1_card_badge | escape }}</div>
+    {%- if dev3_bestseller -%}
+      <div class="dev1-card-badge">{{ 'dev3_product_card.best_seller' | t }}</div>
+    {%- elsif section.settings.design == 'dev1' and section.settings.dev1_card_badge != blank and product.available -%}
+      {%- comment -%} dev1 "Design 1": no native "Sale" badge on available products — the discount shows in the price row {%- endcomment -%}
     {%- elsif product.available == false or product.compare_at_price > product.price -%}
       <div
         class="product-badges product-badges--{{ settings.badge_position }}"
@@ -82,6 +98,13 @@
       "default": "portrait",
       "label": "t:settings.aspect_ratio",
       "info": "t:info.aspect_ratio_adjusted"
+    },
+    {
+      "type": "checkbox",
+      "id": "dev3_hide_bestseller_badge",
+      "label": "t:dev3_settings.hide_bestseller_badge",
+      "info": "t:dev3_settings.hide_bestseller_badge_info",
+      "default": false
     },
     {
       "type": "header",

@@ -2,10 +2,24 @@
 
 {% liquid
   assign block_settings = block.settings
+  assign dev2_page_product = product
   assign product = closest.product
+  # dev2: carousel Design 4 sits outside a product context; use the product page's own product
+  if product == blank and section.settings.design == 'dev2_shots'
+    assign product = dev2_page_product
+  endif
   assign rating = product.metafields.reviews.rating.value.rating
   assign scale_max = product.metafields.reviews.rating.value.scale_max
   assign rating_count = product.metafields.reviews.rating_count
+
+  # dev3: Snosha product cards (Design 1 sections with a "Rating label") keep Figma's rating row for a product
+  # without reviews: 5 empty stars and the label. No score is invented; real ratings fill the stars as usual.
+  assign dev3_no_reviews = false
+  if rating == blank and product != blank and section.settings.design == 'dev1' and section.settings.dev1_rating_label != blank
+    assign dev3_no_reviews = true
+    assign rating = 0
+    assign scale_max = 5
+  endif
 
   if request.visual_preview_mode and product == blank
     assign product = collections.all.products.first
@@ -69,10 +83,12 @@
     </svg>
     {%- # dev2: section Design 9 (product 08 Reviews) — score before the stars, "(count)" after them -%}
     {%- if section.settings.design == 'dev2_reviews' -%}<span class="dev2-reviews__score" aria-hidden="true">{{ rating | round: 1 }}</span>{%- endif -%}
+    {%- # dev2: carousel Design 4 (product 08 Reviews · Screenshots) — "4.8 / 5" score (LTR isolate), count text after the stars -%}
+    {%- if section.settings.design == 'dev2_shots' -%}<span class="dev2-shots__score" dir="ltr" aria-hidden="true">{{ rating | round: 1 }} / {{ scale_max | default: 5 | round }}</span>{%- endif -%}
     <div
       class="rating"
       style="--star-size: calc(var(--font-{{ block_settings.type_preset }}--size) * 1.1);"
-      aria-label="{{ 'accessibility.rating' | t: rating: rating }}"
+      aria-label="{% if dev3_no_reviews %}0 {{ 'content.reviews' | t }}{% else %}{{ 'accessibility.rating' | t: rating: rating }}{% endif %}"
     >
       {% if block_settings.stars_style == 'single' %}
         <svg
@@ -100,6 +116,14 @@
       {% endif %}
     </div>{% if section.settings.design == 'dev1' and section.settings.dev1_rating_label != blank %}<span class="dev1-rating-label">{{ section.settings.dev1_rating_label | escape }}</span>{% endif %}{% if section.settings.design == 'dev1' and section.settings.dev1_show_rating_value %}<span class="dev1-rating-value" aria-hidden="true">{{ rating | round: 1 }}</span>{% endif %}
     {%- if section.settings.design == 'dev2_reviews' -%}<span class="dev2-reviews__count">({{ rating_count }}<span class="visually-hidden"> {{ 'content.reviews' | t }}</span>)</span>{%- endif -%}
+    {%- if section.settings.design == 'dev2_shots' -%}
+      {%- assign dev2_count_text = section.settings.dev2_shots_count_label | escape -%}
+      {%- if dev2_count_text contains '[count]' -%}
+        <span class="dev2-shots__count" dir="auto">{{ dev2_count_text | replace: '[count]', rating_count }}</span>
+      {%- else -%}
+        <span class="dev2-shots__count" dir="auto">({{ rating_count }}<span class="visually-hidden"> {{ 'content.reviews' | t }}</span>)</span>
+      {%- endif -%}
+    {%- endif -%}
 
     {%- if block_settings.show_number or block_settings.stars_style == 'single' -%}
       <p class="rating-count {{ block_settings.type_preset }}">

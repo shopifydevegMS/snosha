@@ -285,13 +285,21 @@
       "type": "text",
       "id": "dev1_badge_text",
       "label": "t:dev1_settings.badge_text",
-      "visible_if": "{{ section.settings.design == 'dev1' }}"
+      "visible_if": "{{ section.settings.design == 'dev1_card_badge_retired' }}"
     },
     {
       "type": "text",
       "id": "dev1_badge_tag",
       "label": "t:dev1_settings.badge_tag",
       "info": "t:dev1_settings.badge_tag_info",
+      "visible_if": "{{ section.settings.design == 'dev1_card_badge_retired' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "dev3_hide_bestseller_badge",
+      "label": "t:dev3_settings.hide_bestseller_badge",
+      "info": "t:dev3_settings.hide_bestseller_badge_info",
+      "default": false,
       "visible_if": "{{ section.settings.design == 'dev1' }}"
     },
     {

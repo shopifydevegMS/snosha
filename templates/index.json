@@ -2402,7 +2402,8 @@
                     "padding-block-end": 24,
                     "padding-inline-start": 24,
                     "padding-inline-end": 24,
-                    "dev2_badge": "الأكثر مبيعًا"
+                    "dev2_badge": "الأكثر مبيعًا",
+                    "dev3_hide_bestseller_badge": true
                   },
                   "blocks": {
                     "dev2_care_tongue_gallery": {
@@ -2890,7 +2891,8 @@
                     "padding-block-end": 24,
                     "padding-inline-start": 24,
                     "padding-inline-end": 24,
-                    "dev2_badge": ""
+                    "dev2_badge": "",
+                    "dev3_hide_bestseller_badge": true
                   },
                   "blocks": {
                     "dev2_care_f1_gallery": {

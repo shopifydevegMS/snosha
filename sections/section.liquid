@@ -46,6 +46,14 @@
   if section.settings.design == 'dev1_results'
     assign section_class = 'dev1-results'
   endif
+  # dev1: Design 11 (product 10 Storage & Care) scope class for assets/dev1.css
+  if section.settings.design == 'dev1_care'
+    assign section_class = 'dev1-care'
+  endif
+  # dev4: Design 12 (product 14 Contact) scope class for assets/dev4.css
+  if section.settings.design == 'dev4_contact'
+    assign section_class = 'dev4-contact'
+  endif
 -%}
 
 {%- if section.settings.design == 'dev3' -%}
@@ -80,7 +88,7 @@
   <script src="{{ 'dev4.js' | asset_url }}" type="module"></script>
 {%- endif -%}
 
-{%- if section.settings.design == 'dev1' or section.settings.design == 'dev1_results' -%}
+{%- if section.settings.design == 'dev1' or section.settings.design == 'dev1_results' or section.settings.design == 'dev1_care' -%}
   {%- comment -%} dev1: per-instance values for assets/dev1.css (Design 3 — 10 Why SNOSHA; Design 10 — product 09 Before After) {%- endcomment -%}
   {%- style -%}
     #shopify-section-{{ section.id }} {
@@ -245,6 +253,14 @@
         {
           "value": "dev1_results",
           "label": "t:dev1_settings.design_10"
+        },
+        {
+          "value": "dev1_care",
+          "label": "t:dev1_settings.design_11"
+        },
+        {
+          "value": "dev4_contact",
+          "label": "t:dev4_settings.design_12"
         }
       ],
       "default": "default"
@@ -751,7 +767,7 @@
       "step": 1,
       "unit": "px",
       "default": 0,
-      "visible_if": "{{ section.settings.design == 'dev1' or section.settings.design == 'dev1_results' }}"
+      "visible_if": "{{ section.settings.design == 'dev1' or section.settings.design == 'dev1_results' or section.settings.design == 'dev1_care' }}"
     },
     {
       "type": "range",
@@ -763,7 +779,7 @@
       "step": 1,
       "unit": "px",
       "default": 0,
-      "visible_if": "{{ section.settings.design == 'dev1' or section.settings.design == 'dev1_results' }}"
+      "visible_if": "{{ section.settings.design == 'dev1' or section.settings.design == 'dev1_results' or section.settings.design == 'dev1_care' }}"
     },
     {
       "type": "header",

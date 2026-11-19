@@ -60,6 +60,21 @@
     }
   {% endstyle %}
   <script src="{{ 'dev2.js' | asset_url }}" type="module"></script>
+{%- endif -%}{% if section.settings.design == 'dev2_shots' %}
+  {%- comment -%} dev2: "Design 4" (product 08 Reviews · Screenshots) — palette colors for assets/dev2.css {%- endcomment -%}
+  {% style %}
+    #shopify-section-{{ section.id }} {
+      --dev2-shots-surface: {{ settings.color_palette.background }};
+      --dev2-shots-accent: {{ settings.color_palette.snosha_secondary_blue | default: settings.color_palette.foreground }};
+      --dev2-shots-border: {{ settings.color_palette.color2 | default: settings.color_palette.foreground }};
+      --dev2-shots-shadow-rgb: {{ settings.color_palette.snosha_deep_blue.rgb | default: settings.color_palette.foreground.rgb }};
+      --dev2-shots-muted: {{ settings.color_palette.color1 | default: settings.color_palette.foreground }};
+      --dev2-shots-tint: {{ settings.color_palette.snosha_pale_tint | default: settings.color_palette.background }};
+      --dev2-shots-fill-start: {{ settings.color_palette.snosha_gradient_start | default: settings.color_palette.foreground }};
+      --dev2-shots-fill-end: {{ settings.color_palette.snosha_gradient_end | default: settings.color_palette.foreground }};
+    }
+  {% endstyle %}
+  <script src="{{ 'dev2.js' | asset_url }}" type="module"></script>
 {%- endif -%}
 
 <div
@@ -73,7 +88,7 @@
     section-carousel
     spacing-style
     gap-style
-    {% if section.settings.design == 'dev4' %}dev4-collections{% endif %}{% if section.settings.design == 'dev1' %}dev1-reels{% endif %}{% if section.settings.design == 'dev2' %}dev2-care{% endif %}
+    {% if section.settings.design == 'dev4' %}dev4-collections{% endif %}{% if section.settings.design == 'dev1' %}dev1-reels{% endif %}{% if section.settings.design == 'dev2' %}dev2-care{% endif %}{% if section.settings.design == 'dev2_shots' %}dev2-shots{% endif %}
   "
   style="
     {% render 'spacing-style', settings: section.settings %}
@@ -100,6 +115,24 @@
     <dev2-carousel-progress class="dev2-care__progress" aria-hidden="true">
       <span class="dev2-care__progress-fill"></span>
     </dev2-carousel-progress>
+  {%- endif -%}{% if section.settings.design == 'dev2_shots' %}
+    {%- comment -%} dev2: visual-only mobile progress + full-image viewer for the screenshots (assets/dev2.js) {%- endcomment -%}
+    <dev2-carousel-progress class="dev2-shots__progress" aria-hidden="true">
+      <span class="dev2-shots__progress-fill"></span>
+    </dev2-carousel-progress>
+    <dev2-shots-lightbox class="dev2-shots__lightbox">
+      <dialog ref="dialog" class="dev2-shots__dialog" aria-label="{{ 'actions.zoom' | t }}">
+        <button
+          type="button"
+          class="dev2-shots__close button-unstyled"
+          on:click="/closeDialog"
+          aria-label="{{ 'accessibility.close_dialog' | t }}"
+        >
+          <span class="svg-wrapper" aria-hidden="true">{{- 'icon-close.svg' | inline_asset_content -}}</span>
+        </button>
+        <img ref="image" class="dev2-shots__full" src="data:," alt="" decoding="async">
+      </dialog>
+    </dev2-shots-lightbox>
   {%- endif -%}
 </div>
 
@@ -130,6 +163,10 @@
         {
           "value": "dev2",
           "label": "t:dev2_settings.design_3"
+        },
+        {
+          "value": "dev2_shots",
+          "label": "t:dev2_settings.design_4"
         }
       ],
       "default": "default"
@@ -476,6 +513,19 @@
       "label": "t:dev2_settings.background_end",
       "info": "t:dev2_settings.background_end_info",
       "visible_if": "{{ section.settings.design == 'dev2' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:dev2_settings.shots_header",
+      "visible_if": "{{ section.settings.design == 'dev2_shots' }}"
+    },
+    {
+      "type": "text",
+      "id": "dev2_shots_count_label",
+      "label": "t:dev2_settings.shots_count_label",
+      "info": "t:dev2_settings.shots_count_label_info",
+      "default": "Based on ([count] reviews)",
+      "visible_if": "{{ section.settings.design == 'dev2_shots' }}"
     }
   ],
   "presets": [

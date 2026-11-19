@@ -423,11 +423,17 @@
     {%- endcomment -%}
     {%- if section.settings.design == 'dev1' and sorted_media.size > 0 -%}
       {%- liquid
+        # dev3: same "Best seller" rule as the product cards — tag "bestseller" or "best-seller" (any case),
+        # text from the storefront locale dev3_product_card.best_seller; the block's checkbox hides it.
         assign dev1_show_badge = false
-        if block_settings.dev1_badge_text != blank and block_settings.dev1_badge_tag != blank
-          if selected_product.tags contains block_settings.dev1_badge_tag
-            assign dev1_show_badge = true
-          endif
+        if block_settings.dev3_hide_bestseller_badge != true
+          for dev3_tag in selected_product.tags
+            assign dev3_tag_handle = dev3_tag | handle
+            if dev3_tag_handle == 'bestseller' or dev3_tag_handle == 'best-seller'
+              assign dev1_show_badge = true
+              break
+            endif
+          endfor
         endif
         assign dev1_show_zoom = false
         if block_settings.zoom and block_settings.dev1_zoom_icon_svg != blank
@@ -437,7 +443,7 @@
       {%- if dev1_show_badge or dev1_show_zoom -%}
         <div class="dev1-gallery-overlay">
           {%- if dev1_show_badge -%}
-            <span class="dev1-gallery-overlay__badge">{{ block_settings.dev1_badge_text | escape }}</span>
+            <span class="dev1-gallery-overlay__badge">{{ 'dev3_product_card.best_seller' | t }}</span>
           {%- endif -%}
           {%- if dev1_show_zoom -%}
             <span class="dev1-gallery-overlay__zoom" aria-hidden="true">{{ block_settings.dev1_zoom_icon_svg }}</span>

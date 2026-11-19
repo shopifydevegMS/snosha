@@ -14,8 +14,17 @@
       endif
     endif
 
-    # Badge: only this card's own "Badge" setting (empty = no badge).
-    assign dev2_badge = block.settings.dev2_badge
+    # Badge (dev3 "Best seller" rule, shared by every product card): the product's "bestseller" / "best-seller"
+    # tag, text from the storefront locale dev3_product_card.best_seller; this card's checkbox hides it.
+    if product != blank and product.available and block.settings.dev3_hide_bestseller_badge != true
+      for dev3_tag in product.tags
+        assign dev3_tag_handle = dev3_tag | handle
+        if dev3_tag_handle == 'bestseller' or dev3_tag_handle == 'best-seller'
+          assign dev2_badge = 'dev3_product_card.best_seller' | t
+          break
+        endif
+      endfor
+    endif
   endif
 -%}
 
@@ -277,6 +286,14 @@
       "label": "t:dev2_settings.card_badge",
       "info": "t:dev2_settings.card_badge_info",
       "default": "الأكثر مبيعًا",
+      "visible_if": "{{ section.settings.design == 'dev1_card_badge_retired' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "dev3_hide_bestseller_badge",
+      "label": "t:dev3_settings.hide_bestseller_badge",
+      "info": "t:dev3_settings.hide_bestseller_badge_info",
+      "default": false,
       "visible_if": "{{ section.settings.design == 'dev2' }}"
     }
   ],

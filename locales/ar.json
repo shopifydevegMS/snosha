@@ -389,6 +389,10 @@
   "dev1_product": {
     "discount_badge": "خصم {{ percent }}%",
     "breadcrumb": "مسار التنقل",
-    "breadcrumb_home": "الرئيسية"
+    "breadcrumb_home": "الرئيسية",
+    "tab_empty": "لا توجد نقاط في هذا التبويب بعد، لذلك لا يظهر في المتجر. أضف نقاطًا لإظهاره."
+  },
+  "dev3_product_card": {
+    "best_seller": "الأكثر مبيعًا"
   }
 }
