@@ -8,6 +8,8 @@
   @param {string} [sort_position] - { 'desktop' | 'mobile' } Used in a data-testID selector for automated testing
   @param {boolean} should_use_select_on_mobile - Whether to use a select element for the sorting component on mobile
   @param {string} section_id - The section ID
+  @param {string} [label] - dev1: text of the sort button label; empty = the theme's "Sort"
+  @param {boolean} [show_status_on_desktop] - dev1: also show the selected option on desktop, in a box (assets/dev1.css)
 {%- enddoc -%}
 
 <sorting-filter-component
@@ -88,10 +90,14 @@
           class="facets__label"
           id="sort-label-{{ section_id }}"
         >
-          {{- 'actions.sort' | t -}}
+          {%- if label != blank -%}
+            {{- label | escape -}}
+          {%- else -%}
+            {{- 'actions.sort' | t -}}
+          {%- endif -%}
         </span>
         <span
-          class="facets__status h6 desktop:hidden"
+          class="facets__status h6{% if show_status_on_desktop %} dev1-sort__value{% else %} desktop:hidden{% endif %}"
         >
           {{- status -}}
         </span>

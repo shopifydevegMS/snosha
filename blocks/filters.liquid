@@ -97,6 +97,23 @@
   if block_settings.background_color != blank or block_settings.text_color != blank
     assign has_custom_color = true
   endif
+
+  # dev1: collection "Design 1" (sections/main-collection.liquid) — bar options of the horizontal style.
+  # Off for every other section, design or filter style, so those render exactly as before.
+  assign dev1_bar = false
+  assign dev1_filters_toggle = false
+  assign dev1_sort_label = blank
+  assign dev1_sort_box = false
+  if section.settings.design == 'dev1' and block_settings.filter_style == 'horizontal'
+    assign dev1_bar = true
+    if block_settings.dev1_filters_toggle and block_settings.enable_filtering
+      assign dev1_filters_toggle = true
+    endif
+    if block_settings.dev1_sort_label != blank
+      assign dev1_sort_label = block_settings.dev1_sort_label
+      assign dev1_sort_box = true
+    endif
+  endif
 -%}
 
 {% render 'contrast-override',
@@ -167,8 +184,11 @@
       {{ facets_margin_style }}
       --facets-inner-padding-block: {{ block_settings.padding-block-start }}px {{ block_settings.padding-block-end }}px;
       --facets-inner-padding-inline: var(--padding-lg);
+      {%- if dev1_bar and block_settings.dev1_toolbar_border_color != blank %} --dev1-toolbar-border: {{ block_settings.dev1_toolbar_border_color }};{% endif %}
     "
     {{ block.shopify_attributes }}
+    {%- if dev1_bar and block_settings.dev1_toolbar_border %} data-dev1-toolbar-border{% endif %}
+    {%- if dev1_filters_toggle %} data-dev1-filters-toggle{% endif %}
   >
     <div
       class="facets facets--{{ block_settings.filter_style }} spacing-style"
@@ -278,6 +298,26 @@
               {% endif %}
             {% endif %}
             {% if block_settings.filter_style == 'horizontal' %}
+              {%- if dev1_filters_toggle -%}
+                {%- comment -%} dev1: show / hide filters button (assets/dev1.js → dev1-filters-toggle) {%- endcomment -%}
+                {%- liquid
+                  assign dev1_show_label = 'actions.show_filters' | t
+                  if block_settings.dev1_show_filters_label != blank
+                    assign dev1_show_label = block_settings.dev1_show_filters_label
+                  endif
+                  assign dev1_hide_label = block_settings.dev1_hide_filters_label | default: dev1_show_label
+                -%}
+                <script src="{{ 'dev1.js' | asset_url }}" type="module"></script>
+                <dev1-filters-toggle data-active-filters="{% if total_active_values > 0 %}true{% else %}false{% endif %}">
+                  <button type="button" class="dev1-filters-toggle__button" aria-expanded="false">
+                    {%- if block_settings.dev1_filters_icon_svg != blank -%}
+                      <span class="dev1-filters-toggle__icon" aria-hidden="true">{{ block_settings.dev1_filters_icon_svg }}</span>
+                    {%- endif -%}
+                    <span class="dev1-filters-toggle__show">{{ dev1_show_label | escape }}</span>
+                    <span class="dev1-filters-toggle__hide">{{ dev1_hide_label | escape }}</span>
+                  </button>
+                </dev1-filters-toggle>
+              {%- endif -%}
               <div
                 class="products-count-wrapper"
                 data-testid="products-count"
@@ -285,6 +325,8 @@
                 <span role="status">
                   {% if products_count > 25000 %}
                     {{- 'content.item_count_cutoff' | t: count: 25000 -}}
+                  {% elsif dev1_bar %}
+                    {{- 'dev1_collection.product_count' | t: count: products_count -}}
                   {% else %}
                     {{- 'content.item_count' | t: count: products_count -}}
                   {% endif %}
@@ -299,7 +341,9 @@
                   suffix: 'desktop',
                   sort_position: 'desktop',
                   should_use_select_on_mobile: false,
-                  section_id: section.id
+                  section_id: section.id,
+                  label: dev1_sort_label,
+                  show_status_on_desktop: dev1_sort_box
                 %}
               {% endif %}
 
@@ -1475,6 +1519,60 @@
       "unit": "px",
       "default": 20,
       "visible_if": "{{ block.settings.filter_style == 'vertical' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:dev1_settings.dev1_design_header",
+      "visible_if": "{{ section.settings.design == 'dev1' and block.settings.filter_style == 'horizontal' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "dev1_toolbar_border",
+      "label": "t:dev1_settings.toolbar_border",
+      "default": false,
+      "visible_if": "{{ section.settings.design == 'dev1' and block.settings.filter_style == 'horizontal' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_toolbar_border_color",
+      "label": "t:dev1_settings.toolbar_border_color",
+      "default": "{{ settings.color_palette.color2 }}",
+      "visible_if": "{{ section.settings.design == 'dev1' and block.settings.filter_style == 'horizontal' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "dev1_filters_toggle",
+      "label": "t:dev1_settings.filters_toggle",
+      "info": "t:dev1_settings.filters_toggle_info",
+      "default": false,
+      "visible_if": "{{ section.settings.design == 'dev1' and block.settings.filter_style == 'horizontal' and block.settings.enable_filtering }}"
+    },
+    {
+      "type": "html",
+      "id": "dev1_filters_icon_svg",
+      "label": "t:dev1_settings.filters_icon_svg",
+      "info": "t:dev1_settings.icon_svg_info",
+      "default": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'><path d='M16.895 13.753a3.142 3.142 0 1 0 0 6.284 3.142 3.142 0 0 0 0-6.284M11.753 16.895a5.142 5.142 0 1 1 10.284 0 5.142 5.142 0 0 1-10.284 0M7.105 3.963a3.142 3.142 0 1 0 0 6.284 3.142 3.142 0 0 0 0-6.284M1.963 7.105a5.142 5.142 0 1 1 10.284 0 5.142 5.142 0 0 1-10.284 0M20.038 16.895a1 1 0 0 1 1-1h2.259a1 1 0 1 1 0 2h-2.259a1 1 0 0 1-1-1M-.297 7.105a1 1 0 0 1 1-1h2.259a1 1 0 1 1 0 2H.703a1 1 0 0 1-1-1M-.297 16.895a1 1 0 0 1 1-1h12.05a1 1 0 1 1 0 2H.703a1 1 0 0 1-1-1M10.247 7.105a1 1 0 0 1 1-1h12.05a1 1 0 1 1 0 2h-12.05a1 1 0 0 1-1-1'/></svg>",
+      "visible_if": "{{ section.settings.design == 'dev1' and block.settings.dev1_filters_toggle }}"
+    },
+    {
+      "type": "text",
+      "id": "dev1_show_filters_label",
+      "label": "t:dev1_settings.show_filters_label",
+      "visible_if": "{{ section.settings.design == 'dev1' and block.settings.dev1_filters_toggle }}"
+    },
+    {
+      "type": "text",
+      "id": "dev1_hide_filters_label",
+      "label": "t:dev1_settings.hide_filters_label",
+      "visible_if": "{{ section.settings.design == 'dev1' and block.settings.dev1_filters_toggle }}"
+    },
+    {
+      "type": "text",
+      "id": "dev1_sort_label",
+      "label": "t:dev1_settings.sort_label",
+      "info": "t:dev1_settings.sort_label_info",
+      "visible_if": "{{ section.settings.design == 'dev1' and block.settings.filter_style == 'horizontal' and block.settings.enable_sorting }}"
     }
   ]
 }

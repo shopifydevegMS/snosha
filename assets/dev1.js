@@ -250,3 +250,74 @@ class Dev1Tabs extends HTMLElement {
 if (!customElements.get('dev1-tabs')) {
   customElements.define('dev1-tabs', Dev1Tabs);
 }
+
+/* ==== dev1-filters-toggle — collection filter bar (blocks/filters.liquid, main-collection Design 1) ==== */
+/* "Show / hide filters" button: opens and closes the row of native filter pills under the bar by setting
+   data-dev1-filters-open on the filters wrapper (CSS in assets/dev1.css). Filtering itself stays native.
+   The theme re-renders the filters after every change and resets attributes it doesn't know, so the
+   chosen state is kept here (and per page in sessionStorage) and put back whenever it is reset.
+   Initial state: last choice on this page, otherwise open when a filter is active. */
+class Dev1FiltersToggle extends HTMLElement {
+  #scope = null;
+  #button = null;
+  #observer = null;
+  #open = false;
+
+  get #storageKey() {
+    return `dev1-filters-open:${window.location.pathname}`;
+  }
+
+  connectedCallback() {
+    this.#scope = this.closest('.facets-block-wrapper');
+    this.#button = this.querySelector(':scope > button');
+    if (!this.#scope || !this.#button) return;
+
+    let stored = null;
+    try {
+      stored = window.sessionStorage.getItem(this.#storageKey);
+    } catch {
+      stored = null;
+    }
+    this.#open = stored === null ? this.dataset.activeFilters === 'true' : stored === 'true';
+
+    this.#button.addEventListener('click', this.#onClick);
+    this.#observer = new MutationObserver(() => this.#apply());
+    this.#observer.observe(this.#scope, { attributes: true, attributeFilter: ['data-dev1-filters-open'] });
+    this.#observer.observe(this.#button, { attributes: true, attributeFilter: ['aria-expanded'] });
+    this.#apply();
+  }
+
+  disconnectedCallback() {
+    this.#button?.removeEventListener('click', this.#onClick);
+    this.#observer?.disconnect();
+    this.#observer = null;
+    this.#scope = null;
+    this.#button = null;
+  }
+
+  // Only writes when something differs, so the observer never loops.
+  #apply() {
+    if (!this.#scope || !this.#button) return;
+    if (this.#scope.hasAttribute('data-dev1-filters-open') !== this.#open) {
+      this.#scope.toggleAttribute('data-dev1-filters-open', this.#open);
+    }
+    const expanded = String(this.#open);
+    if (this.#button.getAttribute('aria-expanded') !== expanded) {
+      this.#button.setAttribute('aria-expanded', expanded);
+    }
+  }
+
+  #onClick = () => {
+    this.#open = !this.#open;
+    try {
+      window.sessionStorage.setItem(this.#storageKey, String(this.#open));
+    } catch {
+      /* storage unavailable: the state still applies on this page view */
+    }
+    this.#apply();
+  };
+}
+
+if (!customElements.get('dev1-filters-toggle')) {
+  customElements.define('dev1-filters-toggle', Dev1FiltersToggle);
+}

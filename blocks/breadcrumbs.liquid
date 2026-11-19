@@ -33,7 +33,7 @@
 
 {%- if current_title != blank -%}
   <nav
-    class="dev1-breadcrumbs"
+    class="dev1-breadcrumbs{% if block_settings.separator == 'arrow' %} dev1-breadcrumbs--arrow{% endif %}"
     aria-label="{{ 'dev1_product.breadcrumb' | t }}"
     {% if block_settings.text_color != blank %}
       style="--dev1-breadcrumbs-color: {{ block_settings.text_color }};"
@@ -72,6 +72,22 @@
       "id": "show_collection",
       "label": "t:dev1_settings.show_collection",
       "default": true
+    },
+    {
+      "type": "select",
+      "id": "separator",
+      "label": "t:dev1_settings.breadcrumb_separator",
+      "options": [
+        {
+          "value": "slash",
+          "label": "t:dev1_settings.separator_slash"
+        },
+        {
+          "value": "arrow",
+          "label": "t:dev1_settings.separator_arrow"
+        }
+      ],
+      "default": "slash"
     },
     {
       "type": "color",

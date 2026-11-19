@@ -31,12 +31,24 @@
 
 {% render 'collection-wrapper-styles' %}
 
+{%- if section.settings.design == 'dev1' -%}
+  {%- comment -%} dev1: "Design 1" (collection page) — product card colors for the global .dev1-card look (assets/dev1.css) {%- endcomment -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} {
+      {%- if section.settings.dev1_discount_background != blank %} --dev1-discount-background: {{ section.settings.dev1_discount_background }};{% endif %}
+      {%- if section.settings.dev1_discount_border != blank %} --dev1-discount-border: {{ section.settings.dev1_discount_border }};{% endif %}
+      {%- if section.settings.dev1_discount_text != blank %} --dev1-discount-text: {{ section.settings.dev1_discount_text }};{% endif %}
+      {%- if section.settings.dev1_shadow_color != blank %} --dev1-shadow-color: {{ section.settings.dev1_shadow_color }};{% endif %}
+    }
+  {%- endstyle -%}
+{%- endif -%}
+
 <div
   class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
 ></div>
 <collection-component view-event-payload="{{ collection | standard_event_data: 'view' | escape }}">
   <results-list
-    class="section product-grid-container{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
+    class="section product-grid-container{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}{% if section.settings.design == 'dev1' %} dev1-collection{% endif %}"
     style="--padding-block-start: {{ section.settings.padding-block-start }}px; --padding-block-end: {{ section.settings.padding-block-end }}px;"
     section-id="{{ section.id }}"
     infinite-scroll="{{ section.settings.enable_infinite_scroll }}"
@@ -98,6 +110,22 @@
     "templates": ["collection"]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "design",
+      "label": "t:dev1_settings.design",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:dev1_settings.design_default"
+        },
+        {
+          "value": "dev1",
+          "label": "t:dev1_settings.design_dev1"
+        }
+      ],
+      "default": "default"
+    },
     {
       "type": "select",
       "id": "layout_type",
@@ -267,6 +295,71 @@
       "step": 1,
       "unit": "px",
       "default": 8
+    },
+    {
+      "type": "header",
+      "content": "t:dev1_settings.dev1_design_header",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "text",
+      "id": "dev1_add_to_cart_label",
+      "label": "t:dev1_settings.add_to_cart_label",
+      "info": "t:dev1_settings.add_to_cart_label_info",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "html",
+      "id": "dev1_cart_icon_svg",
+      "label": "t:dev1_settings.cart_icon_svg",
+      "info": "t:dev1_settings.cart_icon_svg_info",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "text",
+      "id": "dev1_discount_label",
+      "label": "t:dev1_settings.discount_label",
+      "info": "t:dev1_settings.discount_label_info",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "text",
+      "id": "dev1_rating_label",
+      "label": "t:dev1_settings.rating_label",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:dev1_settings.colors_header",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_discount_background",
+      "label": "t:dev1_settings.discount_background",
+      "default": "{{ settings.color_palette.snosha_pale_tint }}",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_discount_border",
+      "label": "t:dev1_settings.discount_border",
+      "default": "{{ settings.color_palette.color2 }}",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_discount_text",
+      "label": "t:dev1_settings.discount_text",
+      "default": "{{ settings.color_palette.snosha_secondary_blue }}",
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
+    },
+    {
+      "type": "color",
+      "id": "dev1_shadow_color",
+      "label": "t:dev1_settings.shadow_color",
+      "alpha": true,
+      "visible_if": "{{ section.settings.design == 'dev1' }}"
     }
   ],
   "presets": []

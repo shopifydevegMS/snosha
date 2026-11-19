@@ -313,6 +313,15 @@
   pointer-events: none;
 }
 
+/* "Best seller badge position: Right" (product card image block): a hidden marker rendered just before the
+   badge moves it to the top-right on desktop too (mobile is already top-right). Default (left) is unchanged. */
+@media screen and (min-width: 750px) {
+  .dev1-card .dev1-card-badge-right ~ .dev1-card-badge {
+    left: auto;
+    right: var(--padding-md);
+  }
+}
+
 /* Native quick add, restyled: Figma "AddToCart" bar, revealed on hover by the native rule. */
 .dev1-card.dev1-card .quick-add__button {
   inset-inline: var(--padding-lg);
@@ -885,6 +894,14 @@
 /* Decorative separator; the empty alt text keeps it out of the accessible name. */
 .dev1-breadcrumbs__item + .dev1-breadcrumbs__item::before {
   content: '/' / '';
+}
+
+/* "Arrow" separator setting: "<" kept as typed (an isolated LTR run, so RTL text doesn't mirror it). */
+.dev1-breadcrumbs--arrow .dev1-breadcrumbs__item + .dev1-breadcrumbs__item::before {
+  content: '<' / '';
+  display: inline-block;
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 .dev1-breadcrumbs .dev1-breadcrumbs__link {
@@ -2157,6 +2174,363 @@ dev1-tabs:not(:has([role='tabpanel'])) {
     --dev1-tabs-panel-pad-inline: 14px;
     --dev1-tabs-item-size: var(--font-size--xs);
   }
+}
+
+/* ==== dev1-collection — collection page (sections/main-collection.liquid, Design 1) ==== */
+/* Reference: developer's photos (no Figma frame). Product cards use the global .dev1-card look; the section
+   only sends the card colors (style tag in main-collection.liquid). The filter bar (blocks/filters.liquid,
+   horizontal style, desktop) becomes a grid:
+     row 1 — bordered bar: show/hide filters button | product count …… grid density, "Sort by:" [selected]
+     row 2 — native filter pills + "clear all" (shown/hidden by the button, assets/dev1.js)
+     row 3 — native active-filter chips
+   Mobile keeps the native filters button + drawer. */
+@media screen and (min-width: 750px) {
+  .dev1-collection.dev1-collection .facets--horizontal .facets__form {
+    --dev1-bar-pad: 32px;
+
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr) auto auto;
+    grid-template-rows: minmax(68px, auto);
+    grid-template-areas:
+      'toggle count . density sort'
+      'filters filters filters filters clear'
+      'chips chips chips chips chips';
+    align-items: center;
+    column-gap: var(--gap-md);
+    padding-inline: var(--dev1-bar-pad);
+  }
+
+  /* Bar border: drawn on row 1 only (setting "Border around the bar"). */
+  .dev1-collection .facets-block-wrapper[data-dev1-toolbar-border] .facets--horizontal .facets__form::before {
+    content: '';
+    grid-area: 1 / 1 / 2 / -1;
+    align-self: stretch;
+    margin-inline: calc(-1 * var(--dev1-bar-pad));
+    border: 1px solid var(--dev1-toolbar-border, var(--color-border));
+    border-radius: 16px;
+    pointer-events: none;
+  }
+
+  .dev1-collection.dev1-collection .facets--horizontal dev1-filters-toggle {
+    grid-area: toggle;
+  }
+
+  .dev1-collection.dev1-collection .facets--horizontal .products-count-wrapper {
+    grid-area: count;
+    margin-inline-start: 0;
+    color: var(--color-foreground);
+  }
+
+  /* "|" between the button and the count */
+  .dev1-collection.dev1-collection .facets--horizontal dev1-filters-toggle + .products-count-wrapper {
+    block-size: 24px;
+    padding-inline-start: var(--gap-md);
+    border-inline-start: 1px solid var(--dev1-toolbar-border, var(--color-border));
+  }
+
+  .dev1-collection.dev1-collection .facets--horizontal .column-options-wrapper {
+    grid-area: density;
+  }
+
+  .dev1-collection.dev1-collection .facets--horizontal sorting-filter-component {
+    grid-area: sort;
+  }
+
+  .dev1-collection.dev1-collection .facets--horizontal .facets__filters-wrapper {
+    grid-area: filters;
+    max-width: none;
+    margin-block-start: 12px;
+  }
+
+  .dev1-collection.dev1-collection .facets--horizontal .facets-horizontal-remove {
+    grid-area: clear;
+    margin-block-start: 12px;
+  }
+
+  /* Filter pills (photo): white rounded pills with the bar's border color, label + caret inside. */
+  .dev1-collection.dev1-collection .facets--horizontal .facets__filters-wrapper .facets__summary {
+    gap: var(--gap-lg);
+    height: auto;
+    min-block-size: 60px;
+    padding-inline: 20px 18px;
+    border: 1px solid var(--dev1-toolbar-border, var(--color-border));
+    border-radius: 999px;
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-size: var(--font-size--xl);
+  }
+
+  .dev1-collection.dev1-collection .facets--horizontal .facets__filters-wrapper .facets__summary .facets__label {
+    margin: 0;
+  }
+
+  /* Open filter: dark pill outline (photo) */
+  .dev1-collection.dev1-collection .facets--horizontal .facets__filters-wrapper .facets__panel[open] > .facets__summary {
+    border-color: var(--color-foreground);
+  }
+
+  /* List filter dropdowns (e.g. availability; the price dropdown stays native): a little more room around and
+     between the options, and a line height that fits Cairo so the labels aren't cut at the bottom. */
+  .dev1-collection.dev1-collection .facets--horizontal .facets__filters-wrapper .facets__inputs-wrapper:has(.facets__inputs-list) {
+    padding: 18px 20px;
+  }
+
+  .dev1-collection.dev1-collection .facets--horizontal .facets__filters-wrapper .facets__inputs-list {
+    gap: 12px;
+  }
+
+  .dev1-collection.dev1-collection .facets--horizontal .facets__filters-wrapper .facets__inputs-list .checkbox__label {
+    align-items: center;
+    line-height: normal;
+  }
+
+  .dev1-collection.dev1-collection .facets--horizontal .facets__filters-wrapper .facets__inputs-list .checkbox__label-text {
+    line-height: normal;
+  }
+
+  .dev1-collection.dev1-collection .facets--horizontal .facets-remove {
+    grid-area: chips;
+  }
+
+  /* Button on and closed: no pills row. */
+  .dev1-collection .facets-block-wrapper[data-dev1-filters-toggle]:not([data-dev1-filters-open])
+    :is(.facets__filters-wrapper, .facets-horizontal-remove) {
+    display: none;
+  }
+}
+
+/* Show / hide filters button: filter icon + label, the label swapping with aria-expanded. */
+.dev1-filters-toggle__button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-xs);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-foreground);
+  font-family: var(--font-body--family);
+  font-size: var(--font-size--md);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.dev1-filters-toggle__icon {
+  display: block;
+  flex: none;
+  inline-size: 18px;
+  block-size: 18px;
+}
+
+.dev1-filters-toggle__icon svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: visible;
+}
+
+.dev1-filters-toggle__button[aria-expanded='true'] .dev1-filters-toggle__show,
+.dev1-filters-toggle__button:not([aria-expanded='true']) .dev1-filters-toggle__hide {
+  display: none;
+}
+
+.dev1-filters-toggle__button:focus-visible {
+  outline: var(--focus-outline-width) solid var(--color-foreground);
+  outline-offset: var(--focus-outline-offset);
+}
+
+/* Sort: "Sort by:" label, then a select-style box with the selected option and the caret inside it.
+   The native listbox (sorting snippet) still opens on click. */
+.dev1-collection.dev1-collection .sorting-filter__horizontal .facets__summary:has(.dev1-sort__value) {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+}
+
+.dev1-collection.dev1-collection .sorting-filter__horizontal .facets__summary:has(.dev1-sort__value) .facets__label {
+  margin: 0;
+  color: var(--color-foreground-muted, var(--color-foreground));
+  font-size: var(--font-size--md);
+}
+
+.dev1-collection.dev1-collection .sorting-filter__horizontal .dev1-sort__value {
+  display: inline-flex;
+  align-items: center;
+  min-inline-size: 228px;
+  min-block-size: 50px;
+  padding-inline: var(--padding-lg) 44px;
+  border: 1px solid var(--dev1-toolbar-border, var(--color-border));
+  border-radius: 12px;
+  background: var(--color-background);
+  color: var(--color-primary-button-background);
+  font-family: var(--font-body--family);
+  font-size: var(--font-size--md);
+  font-weight: var(--font-body--weight);
+  white-space: nowrap;
+}
+
+/* Caret drawn inside the box's end padding. */
+.dev1-collection.dev1-collection .sorting-filter__horizontal .facets__summary:has(.dev1-sort__value) .icon-caret {
+  margin-inline-start: calc(-1 * (var(--gap-sm) + 30px));
+  pointer-events: none;
+}
+
+/* ==== dev1-cart — cart drawer (Theme settings → Cart → "Cart drawer design: Design 1") ==== */
+/* Reference: developer's photos. .dev1-cart is on .cart-drawer__inner (snippets/cart-drawer.liquid), which also
+   sends the palette colors: --dev1-cart-accent (deep blue), --dev1-cart-muted, --dev1-cart-tint, --dev1-cart-line.
+   Line item: image (tinted, rounded) | blue title, variant, quantity pill | trash, struck compare-at, blue price. */
+
+.dev1-cart.dev1-cart .cart-items__table-row {
+  position: relative;
+  grid-template-columns: 120px minmax(0, 1fr) auto;
+  grid-template-rows: min-content min-content 1fr;
+  grid-template-areas:
+    'media details price'
+    'media variants price'
+    'media quantity price'
+    'media error error';
+  column-gap: 20px;
+}
+
+.dev1-cart.dev1-cart .cart-items__details {
+  display: contents;
+}
+
+.dev1-cart.dev1-cart .cart-items__product-info {
+  grid-area: details;
+}
+
+.dev1-cart.dev1-cart .cart-items__variants-wrapper {
+  grid-area: variants;
+  color: var(--dev1-cart-muted, var(--color-foreground));
+  font-size: var(--font-size--sm);
+}
+
+/* The price column shows the line compare-at + price, so the per-unit duplicate is not needed. */
+.dev1-cart.dev1-cart .cart-items__unit-price-wrapper {
+  display: none;
+}
+
+.dev1-cart .cart-items__media-container {
+  aspect-ratio: 2 / 3;
+  border-radius: 12px;
+  background: var(--dev1-cart-tint, transparent);
+}
+
+.dev1-cart .cart-items__media-container .cart-items__media-image {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  border-radius: 0;
+}
+
+.dev1-cart.dev1-cart .cart-items__title {
+  color: var(--dev1-cart-accent, var(--color-foreground));
+  font-size: var(--font-size--md);
+  line-height: 1.75;
+  text-decoration: none;
+}
+
+/* Quantity: same white pill as the product page — − value + geometry, blue buttons */
+.dev1-cart.dev1-cart .cart-items__quantity {
+  margin-block-start: var(--margin-sm);
+}
+
+.dev1-cart.dev1-cart .cart-items__quantity .quantity-selector {
+  direction: ltr;
+  align-items: center;
+  block-size: 50px;
+  padding-inline: 6px;
+  border: 1.5px solid var(--dev1-cart-line, var(--color-border));
+  border-radius: 999px;
+  background-color: var(--color-background);
+  box-shadow: 0 6px 14px color-mix(in srgb, var(--color-primary-button-background) 7%, transparent);
+}
+
+.dev1-cart.dev1-cart .cart-items__quantity .quantity-selector :is(.quantity-minus, .quantity-plus) {
+  inline-size: 34px;
+  block-size: 34px;
+  border-radius: 50%;
+  color: var(--color-primary-button-background);
+}
+
+.dev1-cart.dev1-cart .cart-items__quantity .quantity-selector input {
+  inline-size: 38px;
+  color: var(--color-foreground);
+  font-family: var(--font-accent--family);
+  font-weight: 700;
+  font-size: var(--font-size--md);
+  text-align: center;
+}
+
+/* Trash: top corner of the price column */
+.dev1-cart.dev1-cart .cart-items__remove {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+}
+
+.dev1-cart.dev1-cart .cart-items__remove svg {
+  inline-size: 26px;
+  block-size: 26px;
+}
+
+.dev1-cart.dev1-cart .cart-items__price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  padding-block-start: 52px;
+  color: var(--dev1-cart-accent, var(--color-foreground));
+  font-weight: 700;
+  font-size: var(--font-size--md);
+}
+
+.dev1-cart .dev1-cart-item__compare {
+  color: var(--dev1-cart-muted, var(--color-foreground));
+  font-weight: 400;
+  font-size: var(--font-size--sm);
+}
+
+/* Summary: "Subtotal" + blue total, then "You saved …" (blue) + struck compare-at total, then a pill button */
+.dev1-cart.dev1-cart .cart-totals__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--gap-md);
+}
+
+.dev1-cart.dev1-cart .cart-totals__total-label {
+  color: var(--color-foreground);
+  font-weight: 400;
+  font-size: var(--font-size--xl);
+}
+
+.dev1-cart.dev1-cart .cart-totals__total-value {
+  color: var(--dev1-cart-accent, var(--color-foreground));
+  font-weight: 700;
+  font-size: var(--font-size--xl);
+}
+
+.dev1-cart .dev1-cart-savings {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--gap-md);
+}
+
+.dev1-cart .dev1-cart-savings__text {
+  color: var(--color-primary-button-background);
+  font-size: var(--font-size--sm);
+}
+
+.dev1-cart .dev1-cart-savings__compare {
+  color: var(--dev1-cart-muted, var(--color-foreground));
+  font-size: var(--font-size--sm);
+}
+
+.dev1-cart.dev1-cart .cart__checkout-button {
+  min-block-size: 56px;
+  border-radius: 999px;
 }
 
 
