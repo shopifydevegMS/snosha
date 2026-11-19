@@ -1625,10 +1625,261 @@
 }
 
 /* ==== dev2-reviews — product "08 Reviews" (sections/section.liquid Design 9) ====
-   Native section: heading text block (h2 preset, 32/52 desktop) + the Judge.me app block.
-   Judge.me renders its own widget markup; styling for it is added once the block is placed. */
+   Native section: heading text block (h2 preset, 32/52 desktop) + native `review` block (score,
+   stars, "(count)" from the reviews.rating metafields Judge.me syncs) + the Judge.me app block.
+   Judge.me "Reviews widget" (review_widget, minimal header) renders its own markup; it is restyled
+   here. Colors come from the palette through --dev2-reviews-* (sections/section.liquid). */
 .dev2-reviews.dev2-reviews .shopify-app-block {
   inline-size: 100%;
+}
+
+/* No reviews yet → hide the whole section on the storefront (Judge.me shows its empty state). */
+.dev2-reviews.dev2-reviews:has(.jm-no-reviews-state) {
+  display: none;
+}
+
+/* Summary row (native review block) — Figma: score 24/40 SemiBold, 5 × 22px stars 4px apart,
+   count 14/24 muted, 14px between the three. */
+.dev2-reviews.dev2-reviews .rating-wrapper {
+  gap: var(--gap-md);
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.dev2-reviews.dev2-reviews .rating-wrapper .rating {
+  gap: 4px;
+}
+
+.dev2-reviews.dev2-reviews .rating-wrapper .stars {
+  block-size: 1.375rem;
+  inline-size: 1.375rem;
+}
+
+.dev2-reviews__score {
+  color: var(--color-foreground);
+  font-size: var(--font-size--2xl);
+  line-height: 40px;
+  font-weight: 600;
+}
+
+.dev2-reviews__count {
+  color: rgb(var(--dev2-reviews-muted-rgb));
+  font-size: var(--font-size--sm);
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+/* Judge.me header: replaced by the section heading + summary row above. Its own summary only
+   shows as a fallback when the rating metafields are empty. The write-review button, sort and
+   filter are hidden (not in Figma). */
+.dev2-reviews.dev2-reviews:has(.rating-wrapper) .jm-review-widget__header,
+.dev2-reviews.dev2-reviews .jm-review-widget-minimal-header__filter-container {
+  display: none;
+}
+
+/* Card stars: Figma #176BB0 (palette snosha_secondary_blue). Judge.me sets this variable inline on
+   the widget and again on every review item; !important only beats those inline values. */
+.dev2-reviews.dev2-reviews :is(.jm-review-widget, .jm-review-item) {
+  --jm-review-widget-star-and-histogram-color: var(--dev2-reviews-star) !important;
+}
+
+/* Judge.me writes `max-width: 1200px` inline; Figma's track spans the full content width.
+   !important is needed only to beat that inline style. */
+.dev2-reviews.dev2-reviews .jdgm-widget {
+  max-width: none !important;
+}
+
+/* Fallback header: the section heading replaces Judge.me's own title; summary centered. */
+.dev2-reviews.dev2-reviews .jm-review-widget-minimal-header > .jm-cluster {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-lg);
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Figma: 14px from heading to summary and from summary to cards (the section gap). */
+.dev2-reviews.dev2-reviews .jm-review-widget {
+  padding-block-start: 0;
+}
+
+.dev2-reviews.dev2-reviews .jdgm-review-list {
+  padding-block-start: 0;
+}
+
+/* Hidden: Judge.me's own title (the section heading replaces it) and its photo strip
+   (Figma has none; every photo stays in its review card). */
+.dev2-reviews.dev2-reviews .jm-review-widget-minimal-header__title,
+.dev2-reviews.dev2-reviews .jm-review-widget__header .jm-media-preview {
+  display: none;
+}
+
+/* Fallback summary row — Figma: score 24/40, count 14/24, 14px apart. */
+.dev2-reviews.dev2-reviews .jm-average-rating-display--minimal-header .jm-cluster {
+  align-items: center;
+  gap: var(--gap-md);
+}
+
+.dev2-reviews.dev2-reviews .jm-average-rating-display--minimal-header .jm-cluster > :first-child {
+  font-size: var(--font-size--2xl);
+  line-height: 40px;
+  font-weight: var(--font-heading--weight);
+}
+
+.dev2-reviews.dev2-reviews .jm-average-rating-display--minimal-header .jm-cluster > :last-child {
+  font-size: var(--font-size--sm);
+  line-height: 24px;
+}
+
+/* Review list → card grid: 4 per row from 990px (Figma 316px cards, 24px gap), 3 on tablet. */
+.dev2-reviews.dev2-reviews .jdgm-review-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--padding-2xl);
+  align-items: stretch;
+}
+
+.dev2-reviews.dev2-reviews .jdgm-review-list > * {
+  margin: 0;
+}
+
+/* Figma card: white, 1px #DCF2FB (palette color2), radius 20 (14 on mobile), soft blue shadow. */
+.dev2-reviews.dev2-reviews .jdgm-review-list > .jm-review-item {
+  padding: 0 0 1.125rem;
+  overflow: hidden;
+  background: var(--color-background);
+  border: var(--style-border-width) solid var(--dev2-reviews-border);
+  border-radius: 20px;
+  box-shadow:
+    0 18px 38px -6px rgb(var(--dev2-reviews-shadow-rgb) / var(--opacity-10)),
+    0 2px 8px 0 rgb(var(--dev2-reviews-shadow-rgb) / var(--opacity-5));
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Card = [photo row, text]. Judge.me renders the photo row after the text; Figma puts the image
+   edge to edge on top (316×250, mobile 160×130). Only the first photo shows; all stay clickable in
+   Judge.me's lightbox. */
+.dev2-reviews.dev2-reviews .jm-review-item > .jm-stack {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+}
+
+.dev2-reviews.dev2-reviews .jm-review-item > .jm-stack > * {
+  margin: 0;
+}
+
+/* Text pad — Figma: 18 / 20 / 20, items 10px apart, in the order text → stars → name → product. */
+.dev2-reviews.dev2-reviews .jm-review-item > .jm-stack > .jm-review-item__body {
+  position: relative;
+  padding: 1.125rem 1.25rem 1.25rem;
+}
+
+.dev2-reviews.dev2-reviews .jm-review-item .jm-review-item__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  inline-size: 100%;
+}
+
+.dev2-reviews.dev2-reviews .jm-review-item .jm-review-item__content > * {
+  margin: 0;
+}
+
+.dev2-reviews.dev2-reviews .jm-review-item .jm-review-item__content > .jm-review-content {
+  order: 1;
+  align-self: stretch;
+}
+
+.dev2-reviews.dev2-reviews .jm-review-item .jm-review-item__content > .jm-cluster:not(.jm-reviewer-info) {
+  order: 2;
+}
+
+.dev2-reviews.dev2-reviews .jm-review-item .jm-review-item__content > .jm-reviewer-info {
+  order: 3;
+}
+
+.dev2-reviews.dev2-reviews .jm-review-item .jm-review-content__body {
+  color: var(--color-foreground);
+  font-size: 1rem;
+  line-height: 28px;
+}
+
+/* Stars — Figma 16px, 3px apart. !important only beats Judge.me's inline `font-size: 1.5em`. */
+.dev2-reviews.dev2-reviews .jm-review-item .jm-star-rating__font-icon {
+  font-size: 1rem !important;
+  margin-inline-end: 3px;
+}
+
+/* Reviewer: no avatar, no date — name (Bold 16/27) then the product line (12/20, muted 75%). */
+.dev2-reviews.dev2-reviews .jm-review-item .jm-reviewer-avatar,
+.dev2-reviews.dev2-reviews .jm-review-item .jm-reviewer-info__details > :not(:first-child) {
+  display: none;
+}
+
+.dev2-reviews.dev2-reviews .jm-review-item .jm-reviewer-info__details {
+  gap: 10px;
+}
+
+.dev2-reviews.dev2-reviews .jm-review-item .jm-reviewer-info__name {
+  color: var(--color-foreground);
+  font-size: 1rem;
+  line-height: 27px;
+  font-weight: 700;
+}
+
+.dev2-reviews.dev2-reviews .jm-review-item .jm-reviewer-info__details::after {
+  content: var(--dev2-reviews-product);
+  color: rgb(var(--dev2-reviews-muted-rgb) / 0.75);
+  font-size: 0.75rem;
+  line-height: 20px;
+}
+
+/* Decorative quote mark — Figma: Cairo Bold 52px, #63CDFF at 30%, 10px from the pad's left, -2px top. */
+.dev2-reviews.dev2-reviews .jm-review-item > .jm-stack > .jm-review-item__body::before {
+  content: '\22' / '';
+  position: absolute;
+  inset-block-start: -2px;
+  inset-inline-end: 10px;
+  color: rgb(var(--dev2-reviews-quote-rgb) / var(--opacity-30));
+  font-size: 52px;
+  font-weight: 700;
+  line-height: normal;
+  pointer-events: none;
+}
+
+.dev2-reviews.dev2-reviews .jm-review-item > .jm-stack > .jm-cluster:not(.jm-review-item__body) {
+  order: -1;
+  flex-wrap: nowrap;
+  gap: 0;
+  overflow: hidden;
+}
+
+.dev2-reviews.dev2-reviews .jm-review-item > .jm-stack > .jm-cluster:not(.jm-review-item__body) > * {
+  flex: 0 0 100%;
+  margin: 0;
+}
+
+.dev2-reviews.dev2-reviews .jm-review-item .jm-media-thumbnail-list__thumbnail {
+  inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 316 / 250;
+  border-radius: 0;
+}
+
+.dev2-reviews.dev2-reviews .jm-review-item .jm-media-thumbnail-list__thumbnail img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 750px) and (max-width: 989px) {
+  .dev2-reviews.dev2-reviews .jdgm-review-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 749px) {
@@ -1636,5 +1887,97 @@
   .dev2-reviews.dev2-reviews :is(.text-block.h2, .text-block.h2 > *) {
     font-size: 1.375rem;
     line-height: 52px;
+  }
+
+  /* Swipeable row: Figma cards 160px of 370px (≈44%) with a 12px gap. */
+  .dev2-reviews.dev2-reviews .jdgm-review-list {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .dev2-reviews.dev2-reviews .jdgm-review-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dev2-reviews.dev2-reviews .jdgm-review-list > .jm-review-item {
+    flex: 0 0 44%;
+    scroll-snap-align: start;
+  }
+
+  /* Figma 390 card: radius 14, photo 160×130, text 10/22, name 11, product 9.5, quote 35px at -10px. */
+  .dev2-reviews.dev2-reviews .jdgm-review-list > .jm-review-item {
+    border-radius: 14px;
+  }
+
+  .dev2-reviews.dev2-reviews .jm-review-item .jm-media-thumbnail-list__thumbnail {
+    aspect-ratio: 160 / 130;
+  }
+
+  .dev2-reviews.dev2-reviews .jm-review-item .jm-review-content__body {
+    font-size: 0.625rem;
+    line-height: 22px;
+  }
+
+  .dev2-reviews.dev2-reviews .jm-review-item .jm-reviewer-info__name {
+    font-size: 0.6875rem;
+  }
+
+  .dev2-reviews.dev2-reviews .jm-review-item .jm-reviewer-info__details::after {
+    font-size: 0.59375rem;
+  }
+
+  .dev2-reviews.dev2-reviews .jm-review-item > .jm-stack > .jm-review-item__body::before {
+    inset-block-start: -10px;
+    font-size: 35px;
+  }
+
+  /* Visual-only progress bar (Figma 350×4, fill 160px), driven by the row's scroll position.
+     Browsers without scroll-driven animations simply don't show it. Hidden when ≤ 2 reviews fit. */
+  @supports (animation-timeline: scroll()) {
+    .dev2-reviews.dev2-reviews .jm-review-widget__body {
+      position: relative;
+      timeline-scope: --dev2-reviews-row;
+    }
+
+    .dev2-reviews.dev2-reviews .jm-review-widget__body:has(.jm-review-item:nth-child(3)) {
+      padding-block-end: 1.25rem;
+    }
+
+    .dev2-reviews.dev2-reviews .jdgm-review-list {
+      scroll-timeline: --dev2-reviews-row x;
+    }
+
+    .dev2-reviews.dev2-reviews .jm-review-widget__body:has(.jm-review-item:nth-child(3))::before,
+    .dev2-reviews.dev2-reviews .jm-review-widget__body:has(.jm-review-item:nth-child(3))::after {
+      content: '';
+      position: absolute;
+      inset-block-end: 0;
+      block-size: 4px;
+      border-radius: var(--style-border-radius-pills);
+      pointer-events: none;
+    }
+
+    .dev2-reviews.dev2-reviews .jm-review-widget__body:has(.jm-review-item:nth-child(3))::before {
+      inset-inline: 0;
+      background: var(--dev2-reviews-border);
+    }
+
+    .dev2-reviews.dev2-reviews .jm-review-widget__body:has(.jm-review-item:nth-child(3))::after {
+      inset-inline-start: 0;
+      inline-size: 46%;
+      background: linear-gradient(to right, var(--dev2-reviews-fill-start), var(--dev2-reviews-fill-end));
+      animation: dev2-reviews-progress linear both;
+      animation-timeline: --dev2-reviews-row;
+    }
+  }
+}
+
+@keyframes dev2-reviews-progress {
+  to {
+    inset-inline-start: 54%;
   }
 }

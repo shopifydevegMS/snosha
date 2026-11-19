@@ -150,6 +150,26 @@
   {%- endstyle -%}
 {%- endif -%}
 
+{%- if section.settings.design == 'dev2_reviews' -%}
+  {%- comment -%} dev2: palette colors + product title for the Judge.me cards in assets/dev2.css (Design 9 — 08 Reviews) {%- endcomment -%}
+  {%- liquid
+    assign dev2_reviews_product = closest.product.title | default: product.title
+    assign dev2_reviews_product = dev2_reviews_product | replace: '\', '\\' | replace: '"', '\22 ' | replace: '<', '\3c ' | strip_newlines
+  -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} {
+      --dev2-reviews-star: {{ settings.color_palette.snosha_secondary_blue | default: settings.color_palette.foreground }};
+      --dev2-reviews-border: {{ settings.color_palette.color2 | default: settings.color_palette.foreground }};
+      --dev2-reviews-shadow-rgb: {{ settings.color_palette.snosha_deep_blue.rgb | default: settings.color_palette.foreground.rgb }};
+      --dev2-reviews-quote-rgb: {{ settings.color_palette.snosha_gradient_start.rgb | default: settings.color_palette.foreground.rgb }};
+      --dev2-reviews-muted-rgb: {{ settings.color_palette.color1.rgb | default: settings.color_palette.foreground.rgb }};
+      --dev2-reviews-fill-start: {{ settings.color_palette.snosha_gradient_start | default: settings.color_palette.foreground }};
+      --dev2-reviews-fill-end: {{ settings.color_palette.snosha_gradient_end | default: settings.color_palette.foreground }};
+      {%- if dev2_reviews_product != blank %} --dev2-reviews-product: "{{ dev2_reviews_product }}";{% endif %}
+    }
+  {%- endstyle -%}
+{%- endif -%}
+
 {% render 'section',
   section: section,
   children: children,

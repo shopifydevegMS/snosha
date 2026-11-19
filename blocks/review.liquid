@@ -67,6 +67,8 @@
         </symbol>
       </defs>
     </svg>
+    {%- # dev2: section Design 9 (product 08 Reviews) — score before the stars, "(count)" after them -%}
+    {%- if section.settings.design == 'dev2_reviews' -%}<span class="dev2-reviews__score" aria-hidden="true">{{ rating | round: 1 }}</span>{%- endif -%}
     <div
       class="rating"
       style="--star-size: calc(var(--font-{{ block_settings.type_preset }}--size) * 1.1);"
@@ -97,6 +99,7 @@
         {%- endfor -%}
       {% endif %}
     </div>{% if section.settings.design == 'dev1' and section.settings.dev1_rating_label != blank %}<span class="dev1-rating-label">{{ section.settings.dev1_rating_label | escape }}</span>{% endif %}{% if section.settings.design == 'dev1' and section.settings.dev1_show_rating_value %}<span class="dev1-rating-value" aria-hidden="true">{{ rating | round: 1 }}</span>{% endif %}
+    {%- if section.settings.design == 'dev2_reviews' -%}<span class="dev2-reviews__count">({{ rating_count }}<span class="visually-hidden"> {{ 'content.reviews' | t }}</span>)</span>{%- endif -%}
 
     {%- if block_settings.show_number or block_settings.stars_style == 'single' -%}
       <p class="rating-count {{ block_settings.type_preset }}">

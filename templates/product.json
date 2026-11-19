@@ -2999,6 +2999,18 @@
           },
           "blocks": {}
         },
+        "dev2_reviews_rating": {
+          "type": "review",
+          "settings": {
+            "stars_style": "shaded",
+            "show_number": false,
+            "text_color": "{{ settings.color_palette.snosha_secondary_blue }}",
+            "type_preset": "paragraph",
+            "width": "fit-content",
+            "alignment": "center"
+          },
+          "blocks": {}
+        },
         "judge_me_reviews_review_widget_hAp4GM": {
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
@@ -3011,6 +3023,7 @@
       },
       "block_order": [
         "dev2_reviews_heading",
+        "dev2_reviews_rating",
         "judge_me_reviews_review_widget_hAp4GM"
       ],
       "name": "Reviews",
