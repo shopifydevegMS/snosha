@@ -1,0 +1,30 @@
+<!-- _tab-item.liquid -->
+{%- doc -%}
+  One bullet line inside a tab panel (blocks/_tab.liquid). The bullet dot is drawn in CSS
+  (assets/dev1.css → .dev1-tabs__item). Empty text renders nothing on the store.
+{%- enddoc -%}
+
+{%- if block.settings.text != blank -%}
+  <li class="dev1-tabs__item" {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</li>
+{%- elsif request.design_mode -%}
+  <li class="dev1-tabs__item" {{ block.shopify_attributes }}></li>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:dev1_settings.tab_item",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "t:dev1_settings.item_text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:dev1_settings.tab_item"
+    }
+  ]
+}
+{% endschema %}

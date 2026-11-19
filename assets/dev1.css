@@ -1972,4 +1972,191 @@
   }
 }
 
+/* ==== dev1-care — 10 Storage & Care, product page (sections/section.liquid, Design 11) ==== */
+/* Figma 190:10753 (desktop) / 190:11511 (mobile). Native section (column, centred) → heading text block +
+   tabs block (blocks/tabs.liquid). The tabs themselves are styled below under dev1-tabs. */
+
+/* Content column: Figma 1336px wide (1376px container minus 20px gutters), centred. */
+.dev1-care.dev1-care .section-content-wrapper {
+  inline-size: 100%;
+  max-inline-size: 1336px;
+  justify-self: center;
+}
+
+.dev1-care .section-content-wrapper > .text-block {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Heading: Figma 32 / 52 bold (22 / 52 on mobile). */
+.dev1-care.dev1-care .section-content-wrapper > .text-block.h2 > * {
+  font-size: var(--font-size--3xl);
+  font-weight: 700;
+  line-height: calc(52 / 32);
+}
+
+.dev1-care.dev1-care .section-content-wrapper > .dev1-tabs {
+  inline-size: 100%;
+}
+
+@media screen and (max-width: 749px) {
+  /* Figma mobile: 40px / 40px padding (settings; 0 = native scaling) and 14px under the heading. */
+  .dev1-care.dev1-care .section-content-wrapper {
+    gap: 14px;
+    padding-block-start: calc(var(--dev1-padding-mobile-top, var(--padding-block-start)) + var(--section-top-offset, 0px));
+    padding-block-end: var(--dev1-padding-mobile-bottom, var(--padding-block-end));
+  }
+
+  .dev1-care.dev1-care .section-content-wrapper > .text-block.h2 > * {
+    font-size: 1.375rem; /* Figma 22px — no theme token */
+    line-height: calc(52 / 22);
+  }
+}
+
+/* ==== dev1-tabs — tabs block (blocks/tabs.liquid → _tab.liquid → _tab-item.liquid) ==== */
+/* Pill tabs above one bordered panel of bullet items. Colors come from the block settings
+   (palette defaults) as --dev1-tabs-* variables on the element. Arabic content: the row runs
+   right → left and the bullets sit on the right in every locale. */
+.dev1-tabs {
+  --dev1-tabs-gap: 22px;
+  --dev1-tabs-row-gap: 10px;
+  --dev1-tabs-pad-block: 10px;
+  --dev1-tabs-pad-inline: 24px;
+  --dev1-tabs-font-size: var(--font-size--md);
+  --dev1-tabs-panel-pad-inline: 28px;
+  --dev1-tabs-item-size: var(--font-size--md);
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--dev1-tabs-gap);
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+/* Tab row: centred. No overflow clipping, so the selected tab's shadow shows in full; on a screen too
+   narrow for the labels the row wraps onto a second line instead (never page overflow). */
+.dev1-tabs__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--dev1-tabs-row-gap);
+  max-inline-size: 100%;
+}
+
+.dev1-tabs__tab {
+  flex: none;
+  padding: var(--dev1-tabs-pad-block) var(--dev1-tabs-pad-inline);
+  border: 1px solid var(--dev1-tabs-border, var(--color-border));
+  border-radius: 999px;
+  background: var(--color-background);
+  color: var(--dev1-tabs-text, var(--color-foreground));
+  font-family: var(--font-accent--family);
+  font-weight: var(--font-accent--weight);
+  font-size: var(--dev1-tabs-font-size);
+  line-height: normal;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.dev1-tabs__tab[aria-selected='true'] {
+  border-color: transparent;
+  /* Figma gradient runs left → right on screen (light to deep blue), whatever the direction */
+  background: linear-gradient(to right, var(--dev1-tabs-active-start), var(--dev1-tabs-active-end)) border-box;
+  color: var(--dev1-tabs-active-text, var(--color-background));
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--dev1-tabs-active-end) 30%, transparent);
+}
+
+.dev1-tabs__tab:focus-visible {
+  outline: var(--focus-outline-width) solid var(--color-foreground);
+  outline-offset: var(--focus-outline-offset);
+}
+
+/* Panel: white card, 1px border, 16px radius, soft shadow; height from its content. */
+.dev1-tabs__panel {
+  padding-block: 24px 26px;
+  padding-inline: var(--dev1-tabs-panel-pad-inline);
+  border: 1px solid var(--dev1-tabs-border, var(--color-border));
+  border-radius: 16px;
+  background: var(--color-background);
+  /* Figma 0 8px 18px rgba(13, 64, 128, 0.06) — the color comes from the block's "Panel shadow" setting */
+  box-shadow: 0 8px 18px var(--dev1-tabs-panel-shadow, transparent);
+}
+
+.dev1-tabs__panel[hidden] {
+  display: none;
+}
+
+/* Before the script builds the buttons (or without it): only the first panel shows, and the empty tab row
+   keeps one tab's height (Cairo's normal line height ≈ 1.875em) so nothing jumps when the buttons appear. */
+dev1-tabs:not([data-ready]) .dev1-tabs__panel ~ .dev1-tabs__panel {
+  display: none;
+}
+
+dev1-tabs:not([data-ready]) .dev1-tabs__list {
+  min-block-size: calc(var(--dev1-tabs-font-size) * 1.875 + var(--dev1-tabs-pad-block) * 2 + 2px);
+}
+
+/* No tab has items (store view): nothing to show. */
+dev1-tabs:not(:has([role='tabpanel'])) {
+  display: none;
+}
+
+.dev1-tabs__panel:focus-visible {
+  outline: var(--focus-outline-width) solid var(--color-foreground);
+  outline-offset: var(--focus-outline-offset);
+}
+
+.dev1-tabs__items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Bullet: Figma 7px dot, 10px before the text, centred on the first 28px line (stays there when text wraps). */
+.dev1-tabs__item {
+  position: relative;
+  padding-inline-start: 17px;
+  color: var(--dev1-tabs-item-text, var(--color-foreground));
+  font-family: var(--font-body--family);
+  font-weight: var(--font-body--weight);
+  font-size: var(--dev1-tabs-item-size);
+  line-height: 28px;
+  text-align: start;
+}
+
+.dev1-tabs__item::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 10.5px;
+  inset-inline-start: 0;
+  inline-size: 7px;
+  block-size: 7px;
+  border-radius: 50%;
+  background: var(--dev1-tabs-bullet, currentColor);
+  pointer-events: none;
+}
+
+.dev1-tabs__empty {
+  margin: 0;
+  color: var(--dev1-tabs-item-text, var(--color-foreground));
+  font-size: var(--font-size--sm);
+  font-style: italic;
+}
+
+@media screen and (max-width: 749px) {
+  .dev1-tabs {
+    --dev1-tabs-gap: 16px;
+    --dev1-tabs-row-gap: 6px;
+    --dev1-tabs-pad-block: 6px;
+    --dev1-tabs-pad-inline: 10px;
+    --dev1-tabs-font-size: 0.71875rem; /* Figma 11.5px — no theme token */
+    --dev1-tabs-panel-pad-inline: 14px;
+    --dev1-tabs-item-size: var(--font-size--xs);
+  }
+}
+
 

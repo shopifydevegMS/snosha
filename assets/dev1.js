@@ -137,3 +137,116 @@ class Dev1DiscountSync extends HTMLElement {
 if (!customElements.get('dev1-discount-sync')) {
   customElements.define('dev1-discount-sync', Dev1DiscountSync);
 }
+
+/* ==== dev1-tabs — 10 Storage & Care (blocks/tabs.liquid, _tab.liquid, _tab-item.liquid) ==== */
+/* WAI-ARIA tabs with automatic activation. Theme blocks can't read their children's settings, so each
+   panel (blocks/_tab.liquid) carries its label and the id for its button; this element builds the tab
+   buttons from the panels in block order. Button and panel share the tab block's own id, so reordering
+   blocks never mixes up labels and content. Arrow keys follow the visual order of the tab row (RTL aware),
+   Home / End jump to the first / last tab. Before this runs, only the first panel shows (assets/dev1.css). */
+class Dev1Tabs extends HTMLElement {
+  #list = null;
+
+  connectedCallback() {
+    this.#list = this.querySelector(':scope > .dev1-tabs__list');
+    if (!this.#list) return;
+    this.#build();
+    this.#list.addEventListener('click', this.#onClick);
+    this.#list.addEventListener('keydown', this.#onKeydown);
+    document.addEventListener('shopify:block:select', this.#onBlockSelect);
+
+    this.#select(this.#tabs()[0], false);
+    this.dataset.ready = '';
+  }
+
+  #build() {
+    const panels = [...this.querySelectorAll(':scope > .dev1-tabs__panels > [role="tabpanel"]')];
+    const buttons = panels.map((panel, index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'dev1-tabs__tab';
+      button.id = panel.dataset.dev1TabId || `${panel.id}-tab`;
+      button.setAttribute('role', 'tab');
+      button.setAttribute('aria-controls', panel.id);
+      button.textContent = panel.dataset.dev1TabLabel || String(index + 1);
+      panel.setAttribute('aria-labelledby', button.id);
+      return button;
+    });
+    this.#list.replaceChildren(...buttons);
+  }
+
+  disconnectedCallback() {
+    this.#list?.removeEventListener('click', this.#onClick);
+    this.#list?.removeEventListener('keydown', this.#onKeydown);
+    document.removeEventListener('shopify:block:select', this.#onBlockSelect);
+    this.#list = null;
+  }
+
+  /** @returns {HTMLElement[]} */
+  #tabs() {
+    return this.#list ? [...this.#list.querySelectorAll(':scope > [role="tab"]')] : [];
+  }
+
+  #panelFor(tab) {
+    const id = tab?.getAttribute('aria-controls');
+    return id ? this.querySelector(`#${CSS.escape(id)}`) : null;
+  }
+
+  #select(tab, focus) {
+    if (!tab) return;
+    for (const item of this.#tabs()) {
+      const selected = item === tab;
+      item.setAttribute('aria-selected', String(selected));
+      item.tabIndex = selected ? 0 : -1;
+      const panel = this.#panelFor(item);
+      if (panel) panel.hidden = !selected;
+    }
+    if (focus) tab.focus();
+  }
+
+  #onClick = (event) => {
+    const tab = event.target instanceof Element ? event.target.closest('[role="tab"]') : null;
+    if (tab && this.#list?.contains(tab)) this.#select(tab, false);
+  };
+
+  #onKeydown = (event) => {
+    const tabs = this.#tabs();
+    const index = tabs.indexOf(/** @type {HTMLElement} */ (event.target));
+    if (index === -1) return;
+
+    // The row runs right → left when its direction is rtl, so "next" is then the left arrow.
+    const rtl = getComputedStyle(this.#list).direction === 'rtl';
+    let next = -1;
+    switch (event.key) {
+      case 'ArrowRight':
+        next = rtl ? index - 1 : index + 1;
+        break;
+      case 'ArrowLeft':
+        next = rtl ? index + 1 : index - 1;
+        break;
+      case 'Home':
+        next = 0;
+        break;
+      case 'End':
+        next = tabs.length - 1;
+        break;
+      default:
+        return;
+    }
+    event.preventDefault();
+    this.#select(tabs[(next + tabs.length) % tabs.length], true);
+  };
+
+  // Theme editor: selecting a tab block (its panel) or a bullet inside it shows that tab.
+  #onBlockSelect = (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    const panel = target?.closest('[role="tabpanel"]');
+    if (!panel || !this.contains(panel)) return;
+    const tab = this.#tabs().find((item) => item.getAttribute('aria-controls') === panel.id);
+    this.#select(tab, false);
+  };
+}
+
+if (!customElements.get('dev1-tabs')) {
+  customElements.define('dev1-tabs', Dev1Tabs);
+}

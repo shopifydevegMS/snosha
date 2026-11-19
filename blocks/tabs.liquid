@@ -1,0 +1,165 @@
+<!-- tabs.liquid -->
+{%- doc -%}
+  Tabs: a row of pill tab buttons above one panel per tab (blocks/_tab.liquid), each panel a list of
+  bullet items (blocks/_tab-item.liquid). Theme blocks can't read their children's settings, so each
+  panel carries its tab label (data-dev1-tab-label) and <dev1-tabs> (assets/dev1.js) builds the tab
+  buttons into the tablist from the panels, linked by each tab block's own id. The first panel is
+  selected on load. Styles: assets/dev1.css (.dev1-tabs).
+{%- enddoc -%}
+
+{%- liquid
+  assign block_settings = block.settings
+
+  capture tabs_style
+    if block_settings.tab_text_color != blank
+      echo '--dev1-tabs-text: ' | append: block_settings.tab_text_color | append: ';'
+    endif
+    if block_settings.border_color != blank
+      echo ' --dev1-tabs-border: ' | append: block_settings.border_color | append: ';'
+    endif
+    if block_settings.active_start != blank
+      echo ' --dev1-tabs-active-start: ' | append: block_settings.active_start | append: ';'
+    endif
+    if block_settings.active_end != blank
+      echo ' --dev1-tabs-active-end: ' | append: block_settings.active_end | append: ';'
+    endif
+    if block_settings.active_text != blank
+      echo ' --dev1-tabs-active-text: ' | append: block_settings.active_text | append: ';'
+    endif
+    if block_settings.item_text_color != blank
+      echo ' --dev1-tabs-item-text: ' | append: block_settings.item_text_color | append: ';'
+    endif
+    if block_settings.bullet_color != blank
+      echo ' --dev1-tabs-bullet: ' | append: block_settings.bullet_color | append: ';'
+    endif
+    if block_settings.panel_shadow != blank
+      echo ' --dev1-tabs-panel-shadow: ' | append: block_settings.panel_shadow | append: ';'
+    endif
+  endcapture
+-%}
+
+{%- if block.blocks.size > 0 -%}
+  <script src="{{ 'dev1.js' | asset_url }}" type="module"></script>
+  <dev1-tabs
+    class="dev1-tabs"
+    {% if tabs_style != blank %}
+      style="{{ tabs_style | strip }}"
+    {% endif %}
+    {{ block.shopify_attributes }}
+  >
+    <div class="dev1-tabs__list" role="tablist"></div>
+    <div class="dev1-tabs__panels">
+      {%- content_for 'blocks' -%}
+    </div>
+  </dev1-tabs>
+{%- elsif request.design_mode -%}
+  <div class="dev1-tabs" {{ block.shopify_attributes }}>
+    <p class="dev1-tabs__empty">{{ 'dev1_product.tab_empty' | t }}</p>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:dev1_settings.tabs",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_tab"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:dev1_settings.colors_header"
+    },
+    {
+      "type": "color",
+      "id": "tab_text_color",
+      "label": "t:dev1_settings.tab_text_color",
+      "default": "{{ settings.color_palette.foreground }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "t:dev1_settings.tab_border_color",
+      "default": "{{ settings.color_palette.color2 }}"
+    },
+    {
+      "type": "color",
+      "id": "active_start",
+      "label": "t:dev1_settings.active_tab_start",
+      "default": "{{ settings.color_palette.foreground }}"
+    },
+    {
+      "type": "color",
+      "id": "active_end",
+      "label": "t:dev1_settings.active_tab_end",
+      "default": "{{ settings.color_palette.foreground }}"
+    },
+    {
+      "type": "color",
+      "id": "active_text",
+      "label": "t:dev1_settings.active_tab_text",
+      "default": "{{ settings.color_palette.background }}"
+    },
+    {
+      "type": "color",
+      "id": "item_text_color",
+      "label": "t:dev1_settings.text_color",
+      "default": "{{ settings.color_palette.foreground }}"
+    },
+    {
+      "type": "color",
+      "id": "bullet_color",
+      "label": "t:dev1_settings.bullet_color",
+      "default": "{{ settings.color_palette.foreground }}"
+    },
+    {
+      "type": "color",
+      "id": "panel_shadow",
+      "label": "t:dev1_settings.panel_shadow",
+      "alpha": true,
+      "default": "#0d40800f"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:dev1_settings.tabs",
+      "category": "t:categories.layout",
+      "blocks": {
+        "tab_1": {
+          "type": "_tab",
+          "settings": {
+            "label": "Tab 1"
+          },
+          "blocks": {
+            "item_1": {
+              "type": "_tab-item",
+              "settings": {
+                "text": "Bullet item"
+              }
+            }
+          },
+          "block_order": ["item_1"]
+        },
+        "tab_2": {
+          "type": "_tab",
+          "settings": {
+            "label": "Tab 2"
+          },
+          "blocks": {
+            "item_1": {
+              "type": "_tab-item",
+              "settings": {
+                "text": "Bullet item"
+              }
+            }
+          },
+          "block_order": ["item_1"]
+        }
+      },
+      "block_order": ["tab_1", "tab_2"]
+    }
+  ]
+}
+{% endschema %}

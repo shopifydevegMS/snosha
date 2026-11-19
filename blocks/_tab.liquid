@@ -1,0 +1,55 @@
+<!-- _tab.liquid -->
+{%- doc -%}
+  One tab of the tabs block (blocks/tabs.liquid): renders its panel with the bullet items
+  (blocks/_tab-item.liquid) and carries its label; <dev1-tabs> (assets/dev1.js) builds the tab button
+  from it. Button and panel are linked through this block's own id, so reordering never mixes them up.
+  A tab without items is not rendered on the store (so it gets no button either);
+  the theme editor shows a short note instead.
+{%- enddoc -%}
+
+{%- if block.blocks.size > 0 or request.design_mode -%}
+  <div
+    class="dev1-tabs__panel"
+    id="dev1-tabpanel-{{ block.id }}"
+    role="tabpanel"
+    aria-labelledby="dev1-tab-{{ block.id }}"
+    tabindex="0"
+    data-dev1-tab-id="dev1-tab-{{ block.id }}"
+    data-dev1-tab-label="{{ block.settings.label | escape }}"
+    {{ block.shopify_attributes }}
+  >
+    {%- if block.blocks.size > 0 -%}
+      <ul class="dev1-tabs__items" role="list">
+        {%- content_for 'blocks' -%}
+      </ul>
+    {%- else -%}
+      <p class="dev1-tabs__empty">{{ 'dev1_product.tab_empty' | t }}</p>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:dev1_settings.tab",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_tab-item"
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:dev1_settings.tab_label",
+      "info": "t:dev1_settings.tab_label_info",
+      "default": "Tab"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:dev1_settings.tab"
+    }
+  ]
+}
+{% endschema %}
